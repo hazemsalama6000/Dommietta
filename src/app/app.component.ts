@@ -7,7 +7,7 @@ import {locale as esLang} from './modules/i18n/vocabs/es';
 import {locale as jpLang} from './modules/i18n/vocabs/jp';
 import {locale as deLang} from './modules/i18n/vocabs/de';
 import {locale as frLang} from './modules/i18n/vocabs/fr';
-
+import { locale as arLang } from './modules/i18n/vocabs/ar';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'body[root]',
@@ -24,9 +24,15 @@ export class AppComponent implements OnInit {
       esLang,
       jpLang,
       deLang,
-      frLang
+      frLang,
+	  arLang
     );
-  }
+  
+}
 
-  ngOnInit() {}
+  ngOnInit() {
+	  // set lang Using Lang Id 
+	this.translationService.setLanguage('ar');
+
+  }
 }
