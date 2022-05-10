@@ -45,6 +45,7 @@ setDirection()
 
   ngOnInit(){
 	this.setDirection();
+	this.direction=this.translationService.getHtmlDirection();
             }
 
 

@@ -20,8 +20,8 @@ const LOCALIZATION_LOCAL_STORAGE_KEY = 'language';
 })
 export class TranslationService {
   // Private properties
-  private langIds: any = [];
-  CurrentLangInfo:ICurrentLangInfo={Currentlang:'',CurrentLangImage:''};
+   private langIds: any = [];
+   CurrentLangInfo:ICurrentLangInfo={Currentlang:'',CurrentLangImage:''};
    subject = new Subject<string>(); // a subject to notify
    myObservable = this.subject.asObservable();
 
@@ -64,6 +64,7 @@ getHtmlDirection(){
 	let lang:string = this.getSelectedLanguage();	
 	let Dir = lang =='ar' ? 'rtl':'ltr';
 	this.subject.next(Dir);
+	return Dir;
 }
 
   setLanguage(lang: string) {
@@ -71,6 +72,7 @@ getHtmlDirection(){
       this.translate.use(this.translate.getDefaultLang());
       this.translate.use(lang);
       localStorage.setItem(LOCALIZATION_LOCAL_STORAGE_KEY, lang);
+	  let Dir = lang =='ar' ? 'rtl':'ltr';
     }
   }
 
