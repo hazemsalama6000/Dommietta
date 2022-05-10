@@ -46,6 +46,7 @@ export class TranslationService {
       this.translate.use(this.translate.getDefaultLang());
       this.translate.use(lang);
       localStorage.setItem(LOCALIZATION_LOCAL_STORAGE_KEY, lang);
+	  console.log('set'+localStorage.getItem(LOCALIZATION_LOCAL_STORAGE_KEY));
     }
   }
 
@@ -53,6 +54,7 @@ export class TranslationService {
    * Returns selected language
    */
   getSelectedLanguage(): any {
+	  console.log('sss'+localStorage.getItem(LOCALIZATION_LOCAL_STORAGE_KEY));
     return (
       localStorage.getItem(LOCALIZATION_LOCAL_STORAGE_KEY) ||
       this.translate.getDefaultLang()

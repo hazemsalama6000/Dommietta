@@ -31,8 +31,6 @@ export class AppComponent implements OnInit {
 }
 
   ngOnInit() {
-	  // set lang Using Lang Id 
-	this.translationService.setLanguage('ar');
 
   }
 }
