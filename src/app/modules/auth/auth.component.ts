@@ -8,23 +8,34 @@ import { TranslationService } from '../i18n';
 })
 export class AuthComponent implements OnInit, OnDestroy {
   today: Date = new Date();
-  Currentlang:'عربى'|'English';
+  Currentlang:string;
   CurrentLangImage:string;
 
   constructor(private TranslationService:TranslationService) {}
 
+  setDirection()
+  {
+	  this.TranslationService.getHtmlDirection();
+  }
+
   changeLang(lang:'ar'|'en'){
-	 this.Currentlang = lang=='ar'?'عربى':'English';
-	 this.CurrentLangImage = lang=='ar'?'https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg':'https://cdn-icons-png.flaticon.com/512/197/197374.png';
-	 this.TranslationService.setLanguage(lang);
-	}
+	  //set language selected
+    this.TranslationService.changeLang(lang);
+      //get language that selected
+	let CurrentLangInfoObject = this.TranslationService.getCurrentLangInfo();
+    this.Currentlang=CurrentLangInfoObject.Currentlang;
+	this.CurrentLangImage=CurrentLangInfoObject.CurrentLangImage; 
+	this.setDirection();
+	                        }
 
   ngOnInit(): void {
     document.body.classList.add('bg-white');
-	let lang:string = this.TranslationService.getSelectedLanguage();
-	this.Currentlang= lang =='ar' ?'عربى':'English';
-	this.CurrentLangImage = lang =='ar'?'https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg':'https://cdn-icons-png.flaticon.com/512/197/197374.png';
-  }
+    
+	//get language that selected
+	let CurrentLangInfoObject = this.TranslationService.getCurrentLangInfo();
+    this.Currentlang=CurrentLangInfoObject.Currentlang;
+	this.CurrentLangImage=CurrentLangInfoObject.CurrentLangImage; 
+ }
 
   ngOnDestroy() {
     document.body.classList.remove('bg-white');

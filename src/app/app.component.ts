@@ -16,6 +16,9 @@ import { locale as arLang } from './modules/i18n/vocabs/ar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+	
+  direction:string;
+
   constructor(private translationService: TranslationService) {
     // register translations
     this.translationService.loadTranslations(
@@ -30,7 +33,19 @@ export class AppComponent implements OnInit {
   
 }
 
-  ngOnInit() {
+setDirection()
+{
+	this.translationService.myObservable.subscribe(
+		(data)=>{
+			this.direction=data;
+		}
+	);
+}
 
-  }
+
+  ngOnInit(){
+	this.setDirection();
+            }
+
+
 }
