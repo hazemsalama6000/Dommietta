@@ -6,9 +6,10 @@ import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../models/auth.model';
 import { ILoginData } from '../../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../../models/ICompanyConfigResponse.interface';
+import { HttpPaths } from '../../Enums/HttpPaths.enum';
 
-const API_USERS_URL = `${environment.apiUrl}/api/v1/identity/login`;
-const API_COMPANYCONFIG_URL = `${environment.apiUrl}/api/v1/identity/CompanyConfiguration`;
+const API_USERS_URL = `${environment.apiUrl}${HttpPaths.API_LOGIN_URL}`;
+const API_COMPANYCONFIG_URL = `${environment.apiUrl}${HttpPaths.API_COMPANYCONFIG_URL}`;
 
 @Injectable({
   providedIn: 'root',
