@@ -6,6 +6,9 @@ import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { ILoginData } from '../models/ILoginData.interface';
+import { ICompanyConfigResponse } from '../models/ICompanyConfigResponse.interface';
+import { ILoginInterface } from '../models/ILoginResponse.interface';
 
 export type UserType = UserModel | undefined;
 
@@ -45,13 +48,15 @@ export class AuthService implements OnDestroy {
   }
 
   // public methods
-  login(email: string, password: string): Observable<UserType> {
+  login(LoginData:ILoginData): Observable<UserType> {
+
     this.isLoadingSubject.next(true);
-    return this.authHttpService.login(email, password).pipe(
-      map((auth: AuthModel) => {
+
+    return this.authHttpService.login(LoginData).pipe(
+      map((auth: ICompanyConfigResponse) => {
         console.log(auth)
-        const result = this.setAuthFromLocalStorage(auth);
-        return result;
+      //  const result = this.setAuthFromLocalStorage(auth);
+     //   return result;
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
@@ -94,7 +99,7 @@ export class AuthService implements OnDestroy {
   }
 
   // need create new user then login
-  registration(user: UserModel): Observable<any> {
+/*  registration(user: UserModel): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.authHttpService.createUser(user).pipe(
       map(() => {
@@ -107,7 +112,7 @@ export class AuthService implements OnDestroy {
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
-  }
+  }*/
 
   forgotPassword(email: string): Observable<boolean> {
     this.isLoadingSubject.next(true);
@@ -117,7 +122,7 @@ export class AuthService implements OnDestroy {
   }
 
   // private methods
-  private setAuthFromLocalStorage(auth: AuthModel): boolean {
+  private setAuthFromLocalStorage(auth: ILoginInterface): boolean {
     // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
     if (auth && auth.token) {
       localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));

@@ -4,8 +4,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserModel } from '../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../models/auth.model';
+import { ILoginData } from '../../models/ILoginData.interface';
+import { ICompanyConfigResponse } from '../../models/ICompanyConfigResponse.interface';
 
-const API_USERS_URL = `${environment.apiUrl}/auth`;
+const API_USERS_URL = `${environment.apiUrl}/api/v1/identity/login`;
+const API_COMPANYCONFIG_URL = `${environment.apiUrl}/api/v1/identity/CompanyConfiguration`;
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +17,14 @@ export class AuthHTTPService {
   constructor(private http: HttpClient) {}
 
   // public methods
-  login(email: string, password: string): Observable<any> {
+  login(LoginData : ILoginData): Observable<any> {
    
-    return this.http.post<AuthModel>(`${API_USERS_URL}/token`, {
-      email,
-      password,
+    return this.http.post<ICompanyConfigResponse>(`${API_COMPANYCONFIG_URL}`, {
+		companyCode:LoginData.companyCode,
+        password:LoginData.password,
+		userName:LoginData.userName
     });
+
   }
 
   // CREATE =>  POST: add a new user to the server

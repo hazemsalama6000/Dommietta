@@ -4,7 +4,7 @@
   [formGroup]="loginForm"
   novalidate="novalidate"
   id="kt_login_signin_form"
-  (ngSubmit)="submit()"
+  (ngSubmit)="submit(loginForm.value)"
 >
   <!--begin::Heading-->
   <div class="text-center mb-10">
@@ -44,66 +44,111 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-10">
-    <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+    <label class="form-label fs-6 fw-bolder text-dark">{{"AUTH.INPUT.COMPANYCODE" | translate}}</label>
     <input
       class="form-control form-control-lg form-control-solid"
-      type="email"
-      name="email"
-      formControlName="email"
+      type="text"
+      name="companyCode"
+      formControlName="companyCode"
       autocomplete="off"
       [ngClass]="{
-        'is-invalid': loginForm.controls['email'].invalid,
-        'is-valid': loginForm.controls['email'].valid
+        'is-invalid': loginForm.controls['companyCode'].invalid,
+        'is-valid': loginForm.controls['companyCode'].valid
       }"
     />
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Email is required',
-        control: loginForm.controls['email']
+        message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'AUTH.INPUT.COMPANYCODE' | translate},
+        control: loginForm.controls['companyCode']
       }"
     ></ng-container>
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
-        validation: 'email',
-        message: 'Email is invalid',
-        control: loginForm.controls['email']
+        validation: 'minlength',
+        message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'AUTH.INPUT.COMPANYCODE' | translate , min:3},
+        control: loginForm.controls['companyCode']
       }"
     ></ng-container>
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
-        validation: 'minLength',
-        message: 'Email should have at least 3 symbols',
-        control: loginForm.controls['email']
-      }"
-    ></ng-container>
-    <ng-container
-      [ngTemplateOutlet]="formError"
-      [ngTemplateOutletContext]="{
-        validation: 'maxLength',
-        message: 'Email should have maximum 360 symbols',
-        control: loginForm.controls['email']
+        validation: 'maxlength',
+        message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'AUTH.INPUT.COMPANYCODE' | translate , max:20},
+        control: loginForm.controls['companyCode']
       }"
     ></ng-container>
   </div>
   <!--end::Form group-->
 
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-10">
+    <label class="form-label fs-6 fw-bolder text-dark">{{"AUTH.INPUT.USERNAME" | translate}}</label>
+    <input
+      class="form-control form-control-lg form-control-solid"
+      type="text"
+      name="userName"
+      formControlName="userName"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': loginForm.controls['userName'].invalid,
+        'is-valid': loginForm.controls['userName'].valid
+      }"
+    />
+
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'AUTH.INPUT.USERNAME' | translate},
+        control: loginForm.controls['userName']
+      }"
+    ></ng-container>
+  
+
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxlength',
+        message: 'AUTH.VALIDATION.MAX_LENGTH' | translate :{name:'AUTH.INPUT.USERNAME' | translate , max:20},
+        control: loginForm.controls['userName']
+      }"
+    ></ng-container>
+
+
+	<ng-container
+	[ngTemplateOutlet]="formError"
+	[ngTemplateOutletContext]="{
+		validation:'minlength',
+		message:'AUTH.VALIDATION.MIN_LENGTH' | translate :{name:'AUTH.INPUT.USERNAME' | translate , min:3} ,
+		control:loginForm.controls['userName']
+	}"
+	></ng-container>
+
+
+  </div>
+  <!--end::Form group-->
+
+
   <!--begin::Form group-->
   <div class="fv-row mb-10">
     <div class="d-flex justify-content-between mt-n5">
       <div class="d-flex flex-stack mb-2">
-        <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+        <label class="form-label fw-bolder text-dark fs-6 mb-0">{{"AUTH.INPUT.PASSWORD" | translate}}</label>
         <a
           routerLink="/auth/forgot-password"
           class="link-primary fs-6 fw-bolder"
           id="kt_login_forgot"
           [style.margin-left]="'5px'"
         >
-          Forgot Password ?
-        </a>
+
+	</a>
       </div>
     </div>
 
@@ -118,30 +163,34 @@
         'is-valid': loginForm.controls['password'].valid
       }"
     />
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'Password is required',
+        message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'AUTH.INPUT.PASSWORD' | translate},
         control: loginForm.controls['password']
       }"
     ></ng-container>
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'Password should have at least 3 symbols',
+        message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : { name:'AUTH.INPUT.PASSWORD' | translate , min:3},
         control: loginForm.controls['password']
       }"
     ></ng-container>
+
     <ng-container
       [ngTemplateOutlet]="formError"
       [ngTemplateOutletContext]="{
-        validation: 'maxLength',
-        message: 'Password should have maximum 100 symbols',
+        validation: 'maxlength',
+        message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'AUTH.INPUT.PASSWORD'|translate , max:20},
         control: loginForm.controls['password']
       }"
     ></ng-container>
+
   </div>
   <!--end::Form group-->
 
@@ -166,27 +215,6 @@
       </ng-container>
     </button>
 
-    <!-- begin::Separator  -->
-    <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div>
-    <!-- end::Separator  -->
-
-    <a
-      class="
-        btn btn-flex
-        flex-center
-        btn-light btn-lg
-        w-100
-        mb-5
-        cursor-pointer
-      "
-    >
-      <img
-        class="h-20px me-3"
-        src="./assets/media/svg/brand-logos/google-icon.svg"
-      />
-
-      Continue with Google
-    </a>
   </div>
   <!--end::Action-->
 </form>

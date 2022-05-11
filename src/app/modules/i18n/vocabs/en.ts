@@ -45,7 +45,8 @@ export const locale = {
         FULLNAME: 'Fullname',
         PASSWORD: 'Password',
         CONFIRM_PASSWORD: 'Confirm Password',
-        USERNAME: 'Username'
+        USERNAME: 'Username',
+		COMPANYCODE:'Company Code'
       },
       VALIDATION: {
         INVALID: '{{name}} is not valid',

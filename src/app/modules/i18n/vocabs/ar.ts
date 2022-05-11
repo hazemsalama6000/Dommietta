@@ -43,14 +43,16 @@ export const locale = {
       INPUT: {
         EMAIL: 'Email',
         FULLNAME: 'Fullname',
-        PASSWORD: 'Password',
+        PASSWORD: 'الرقم السرى',
         CONFIRM_PASSWORD: 'Confirm Password',
-        USERNAME: 'Username'
+        USERNAME: 'المستخدم',
+		COMPANYCODE:'كود الشركة'
       },
       VALIDATION: {
         INVALID: '{{name}} is not valid',
-        REQUIRED: '{{name}} is required',
-        MIN_LENGTH: '{{name}} minimum length is {{min}}',
+        REQUIRED: '{{name}} مطلوب',
+        MIN_LENGTH: '{{name}} اقل عدد حروف {{min}}',
+		MAX_LENGTH: '{{name}} اكبر عدد حروف {{max}}',
         AGREEMENT_REQUIRED: 'Accepting terms & conditions are required',
         NOT_FOUND: 'The requested {{name}} is not found',
         INVALID_LOGIN: 'The login detail is incorrect',
