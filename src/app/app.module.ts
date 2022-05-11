@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,6 +13,10 @@ import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
+import { AuthInterceptor } from './modules/auth/Interceptors/AuthInterceptor.interceptor';
+import { LoggingInterceptor } from './modules/auth/Interceptors/LoggingInterceptor.interceptor';
+import { CachingInterceptor } from './modules/auth/Interceptors/CachingInterceptor.interceptor';
+import { ErrorInterceptor } from './modules/auth/Interceptors/ErrorInterceptor.interceptor';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -51,6 +55,27 @@ function appInitializer(authService: AuthService) {
       multi: true,
       deps: [AuthService],
     },
+	{
+		provide:HTTP_INTERCEPTORS,
+		useClass:AuthInterceptor,
+		multi:true
+	  }
+	  ,
+	   {
+		 provide:HTTP_INTERCEPTORS,
+		 useClass:LoggingInterceptor,
+		 multi:true
+	   },
+	  {
+	  provide:HTTP_INTERCEPTORS,
+	  useClass:CachingInterceptor,
+	  multi:true
+	  },
+	  {
+		provide:HTTP_INTERCEPTORS,
+		useClass:ErrorInterceptor,
+		multi:true
+	  }
   ],
   bootstrap: [AppComponent],
 })
