@@ -25,6 +25,7 @@ export const locale = {
         PRIVACY: 'Privacy',
         LEGAL: 'Legal',
         CONTACT: 'Contact',
+		SIGNIN_BUTTON:'دخول'
       },
       LOGIN: {
         TITLE: 'حساب الدخول',

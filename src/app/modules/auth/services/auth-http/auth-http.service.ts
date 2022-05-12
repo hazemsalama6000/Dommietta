@@ -7,8 +7,9 @@ import { AuthModel } from '../../models/auth.model';
 import { ILoginData } from '../../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../../models/ICompanyConfigResponse.interface';
 import { HttpPaths } from '../../Enums/HttpPaths.enum';
+import {  ILoginResponseInterface } from '../../models/ILoginResponse.interface';
 
-const API_USERS_URL = `${environment.apiUrl}${HttpPaths.API_LOGIN_URL}`;
+const API_USERS_URL = `${HttpPaths.API_LOGIN_URL}`;
 const API_COMPANYCONFIG_URL = `${environment.apiUrl}${HttpPaths.API_COMPANYCONFIG_URL}`;
 
 @Injectable({
@@ -18,15 +19,25 @@ export class AuthHTTPService {
   constructor(private http: HttpClient) {}
 
   // public methods
-  login(LoginData : ILoginData): Observable<any> {
+  CheckCompanyExistance(LoginData : ILoginData): Observable<any> 
+  {
    
-    return this.http.post<ICompanyConfigResponse>(`${API_COMPANYCONFIG_URL}`, {
-		companyCode:LoginData.companyCode,
-        password:LoginData.password,
-		userName:LoginData.userName
-    });
+    return this.http.post<ICompanyConfigResponse>(`${API_COMPANYCONFIG_URL}${LoginData.companyCode}`, {});
 
   }
+
+  login( LoginData : ILoginData , url:string )
+  {
+    
+	return this.http.post<ILoginResponseInterface>
+	(
+	 `${url}${API_USERS_URL}`
+	 , {userName:LoginData.userName,companyCode:LoginData.companyCode,password:LoginData.password}
+	  );
+
+  }
+
+
 
   // CREATE =>  POST: add a new user to the server
   createUser(user: UserModel): Observable<UserModel> {

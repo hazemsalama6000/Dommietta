@@ -6,6 +6,8 @@ import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILoginData } from '../../models/ILoginData.interface';
+import { ICompanyConfigResponse } from '../../models/ICompanyConfigResponse.interface';
+import { ILoginResponseInterface } from '../../models/ILoginResponse.interface';
 
 @Component({
 	selector: 'app-login',
@@ -85,20 +87,29 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
 
-	submit(LoginData:ILoginData) {
+	submit(LoginData: ILoginData) {
 
 		this.hasError = false;
+		            
+		//check Company Validation 
 		const loginSubscr = this.authService
-
-			.login(LoginData)
+			.CheckCompanyExistance(LoginData)
 			.pipe(first())
-			.subscribe((user: UserModel | undefined) => {
-				this.router.navigate([this.returnUrl]);
-			/*	if (user) {
-					this.router.navigate([this.returnUrl]);
-				} else {
-					this.hasError = true;
-				}*/
+			.subscribe((CompanyConfigResponse: ICompanyConfigResponse) => {
+            
+				//Inner Request To check User Validation
+				this.authService.
+					Login(LoginData, CompanyConfigResponse.companyLink)
+					.subscribe((LoginResponse: ILoginResponseInterface) => {
+						console.log(LoginResponse);
+						this.router.navigate(['']);
+					});
+
+				/*	if (user) {
+						this.router.navigate([this.returnUrl]);
+					} else {
+						this.hasError = true;
+					}*/
 			});
 		this.unsubscribe.push(loginSubscr);
 	}

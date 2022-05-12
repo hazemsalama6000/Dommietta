@@ -7,7 +7,7 @@
   (ngSubmit)="submit(loginForm.value)"
 >
   <!--begin::Heading-->
-  <div class="text-center mb-10">
+  <!--<div class="text-center mb-10">
     <h1 class="text-dark mb-3">Sign In to Metronic</h1>
     <div class="text-gray-400 fw-bold fs-4">
       New Here?
@@ -18,18 +18,18 @@
         >{{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}</a
       >
     </div>
-  </div>
+  </div>-->
   <!--end::Heading-->
 
   <!-- begin::Alert info-->
-  <ng-container *ngIf="!hasError">
+  <!--<ng-container *ngIf="!hasError">
     <div class="mb-10 bg-light-info p-8 rounded">
       <div class="text-info">
         Use account <strong>{{ defaultAuth.email }}</strong> and password
         <strong>{{ defaultAuth.password }}</strong> to continue.
       </div>
     </div>
-  </ng-container>
+  </ng-container>-->
   <!-- end::Alert info-->
 
   <!-- begin::Alert error-->
@@ -211,7 +211,7 @@
         </span>
       </ng-container>
       <ng-container *ngIf="!(isLoading$ | async)">
-        <span class="indicator-label">Continue</span>
+        <span class="indicator-label">{{'AUTH.GENERAL.SIGNIN_BUTTON' | translate}}</span>
       </ng-container>
     </button>
 

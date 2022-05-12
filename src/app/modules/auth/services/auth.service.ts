@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { ILoginData } from '../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../models/ICompanyConfigResponse.interface';
-import { ILoginInterface } from '../models/ILoginResponse.interface';
+import { ILoginResponseInterface } from '../models/ILoginResponse.interface';
 
 export type UserType = UserModel | undefined;
 
@@ -43,29 +43,48 @@ export class AuthService implements OnDestroy {
     this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
-    const subscr = this.getUserByToken().subscribe();
-    this.unsubscribe.push(subscr);
+/*    const subscr = this.getUserByToken().subscribe();
+*/  //  this.unsubscribe.push(subscr);
   }
 
+
+
+
   // public methods
-  login(LoginData:ILoginData): Observable<UserType> {
+  CheckCompanyExistance(LoginData:ILoginData): Observable<ICompanyConfigResponse> {
 
     this.isLoadingSubject.next(true);
 
-    return this.authHttpService.login(LoginData).pipe(
-      map((auth: ICompanyConfigResponse) => {
-        console.log(auth)
+    return this.authHttpService.CheckCompanyExistance(LoginData).pipe(
+
+      map((data:any) => {
+	    let	CompanyConfig: ICompanyConfigResponse;
+        CompanyConfig=data.data;
+		console.log(CompanyConfig);
+		return CompanyConfig;
       //  const result = this.setAuthFromLocalStorage(auth);
      //   return result;
       }),
-      switchMap(() => this.getUserByToken()),
-      catchError((err) => {
-        console.error('err', err);
-        return of(undefined);
-      }),
       finalize(() => this.isLoadingSubject.next(false))
+
     );
+
   }
+
+
+  Login(LoginData : ILoginData , url:string )
+  {
+    return this.authHttpService.login( LoginData , url ).pipe(
+
+		map((LoginResponse:ILoginResponseInterface)=>{
+			console.log(LoginResponse);
+		    return LoginResponse;
+		})
+
+	);
+  }
+
+
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
@@ -122,7 +141,7 @@ export class AuthService implements OnDestroy {
   }
 
   // private methods
-  private setAuthFromLocalStorage(auth: ILoginInterface): boolean {
+  private setAuthFromLocalStorage(auth: ILoginResponseInterface): boolean {
     // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
     if (auth && auth.token) {
       localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
