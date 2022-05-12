@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.isLoading$ = this.authService.isLoading$;
 		// redirect to home if already logged in
 		// TODO check token existance
-
+           localStorage.removeItem(this.TOKENIN_LOCALSTORAGE);
 		if (localStorage.getItem(this.TOKENIN_LOCALSTORAGE)) {
 			this.router.navigate(['/']);
 		}

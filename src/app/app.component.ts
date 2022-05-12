@@ -28,6 +28,7 @@ setDirection()
 	this.translationService.myObservable.subscribe(
 		(data)=>{
 			this.direction=data;
+			document.dir = this.direction;
 		}
 	);
 }
