@@ -6,32 +6,6 @@
   id="kt_login_signin_form"
   (ngSubmit)="submit(loginForm.value)"
 >
-  <!--begin::Heading-->
-  <!--<div class="text-center mb-10">
-    <h1 class="text-dark mb-3">Sign In to Metronic</h1>
-    <div class="text-gray-400 fw-bold fs-4">
-      New Here?
-      <a
-        routerLink="/auth/registration"
-        id="kt_login_signup"
-        class="link-primary fw-bolder"
-        >{{ "AUTH.GENERAL.SIGNUP_BUTTON" | translate }}</a
-      >
-    </div>
-  </div>-->
-  <!--end::Heading-->
-
-  <!-- begin::Alert info-->
-  <!--<ng-container *ngIf="!hasError">
-    <div class="mb-10 bg-light-info p-8 rounded">
-      <div class="text-info">
-        Use account <strong>{{ defaultAuth.email }}</strong> and password
-        <strong>{{ defaultAuth.password }}</strong> to continue.
-      </div>
-    </div>
-  </ng-container>-->
-  <!-- end::Alert info-->
-
   <!-- begin::Alert error-->
   <ng-container *ngIf="hasError">
     <div class="mb-lg-15 alert alert-danger">

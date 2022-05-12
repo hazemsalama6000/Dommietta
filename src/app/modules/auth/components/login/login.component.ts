@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILoginData } from '../../models/ILoginData.interface';
@@ -15,6 +14,8 @@ import { ILoginResponseInterface } from '../../models/ILoginResponse.interface';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
+	 TOKENIN_LOCALSTORAGE="token";
+
 	// KeenThemes mock, change it to:
 	defaultAuth: any = {
 		email: 'admin@demo.com',
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 	) {
 		this.isLoading$ = this.authService.isLoading$;
 		// redirect to home if already logged in
-		if (this.authService.currentUserValue) {
+		// TODO check token existance
+
+		if (localStorage.getItem(this.TOKENIN_LOCALSTORAGE)) {
 			this.router.navigate(['/']);
 		}
 	}
@@ -102,6 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 					Login(LoginData, CompanyConfigResponse.companyLink)
 					.subscribe((LoginResponse: ILoginResponseInterface) => {
 						console.log(LoginResponse);
+						localStorage.setItem(this.TOKENIN_LOCALSTORAGE,LoginResponse.token);
 						this.router.navigate(['']);
 					});
 

@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { UserModel } from '../models/user.model';
 import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
@@ -10,7 +9,6 @@ import { ILoginData } from '../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../models/ICompanyConfigResponse.interface';
 import { ILoginResponseInterface } from '../models/ILoginResponse.interface';
 
-export type UserType = UserModel | undefined;
 
 @Injectable({
   providedIn: 'root',
@@ -22,26 +20,17 @@ export class AuthService implements OnDestroy {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   // public fields
-  currentUser$: Observable<UserType>;
   isLoading$: Observable<boolean>;
-  currentUserSubject: BehaviorSubject<UserType>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-  get currentUserValue(): UserType {
-    return this.currentUserSubject.value;
-  }
-
-  set currentUserValue(user: UserType) {
-    this.currentUserSubject.next(user);
-  }
+ 
 
   constructor(
     private authHttpService: AuthHTTPService,
     private router: Router
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
-    this.currentUser$ = this.currentUserSubject.asObservable();
+   
     this.isLoading$ = this.isLoadingSubject.asObservable();
 /*    const subscr = this.getUserByToken().subscribe();
 */  //  this.unsubscribe.push(subscr);
@@ -93,7 +82,7 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  getUserByToken(): Observable<UserType> {
+  getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
    
     
@@ -103,10 +92,10 @@ export class AuthService implements OnDestroy {
 
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token,auth.userId).pipe(
-      map((user: UserType) => {
+      map((user: any) => {
         if (user) {
-          this.currentUserSubject.next(user);
-        } else {
+
+		} else {
           this.logout();
         }
         console.log(user);

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { UserModel } from '../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../models/auth.model';
 import { ILoginData } from '../../models/ILoginData.interface';
@@ -39,11 +38,11 @@ export class AuthHTTPService {
 
 
 
-  // CREATE =>  POST: add a new user to the server
+/*  // CREATE =>  POST: add a new user to the server
   createUser(user: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(API_USERS_URL, user);
   }
-
+*/
   // Your server should check email => If email exists send link to the user and return true | If email doesn't exist return false
   forgotPassword(email: string): Observable<boolean> {
     return this.http.post<boolean>(`${API_USERS_URL}/forgot-password`, {
@@ -51,13 +50,13 @@ export class AuthHTTPService {
     });
   }
 
-  getUserByToken(token: string,userId:string): Observable<UserModel> {
+  getUserByToken(token: string,userId:string): Observable<any> {
     
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
     const params = new HttpParams().append('userId',userId);
-    return this.http.get<UserModel>(`${API_USERS_URL}/getUser`, {
+    return this.http.get<any>(`${API_USERS_URL}/getUser`, {
      
       headers: httpHeaders,
       params:params
