@@ -37,7 +37,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              
+              "src/styles.scss",
+			  {
+				  "input": "./src/assets/sass/style.bundle.rtl.css",
+				  "bundleName": "rtlStyleSheet",
+				  "inject": false
+			  }
             ],
             "scripts": []
           },
