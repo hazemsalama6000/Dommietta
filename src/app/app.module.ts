@@ -17,6 +17,7 @@ import { AuthInterceptor } from './modules/auth/Interceptors/AuthInterceptor.int
 import { LoggingInterceptor } from './modules/auth/Interceptors/LoggingInterceptor.interceptor';
 import { CachingInterceptor } from './modules/auth/Interceptors/CachingInterceptor.interceptor';
 import { ErrorInterceptor } from './modules/auth/Interceptors/ErrorInterceptor.interceptor';
+import { SharedModule } from './shared-module/shared-module.module';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -36,6 +37,7 @@ function appInitializer(authService: AuthService) {
     TranslateModule.forRoot(),
     HttpClientModule,
     ClipboardModule,
+	SharedModule,
     // #fake-start#
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
