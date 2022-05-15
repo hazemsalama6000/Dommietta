@@ -8,13 +8,16 @@ import { Router } from '@angular/router';
 import { ILoginData } from '../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../models/ICompanyConfigResponse.interface';
 import { ILoginResponseInterface } from '../models/ILoginResponse.interface';
+import { CommonHttpService } from 'src/app/core-module/CommonHttpService.service';
+import { HttpPaths } from '../Enums/HttpPaths.enum';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
-  
+	 API_USERS_URL = `${HttpPaths.API_LOGIN_URL}`;
+	 API_COMPANYCONFIG_URL = `${environment.apiUrl}${HttpPaths.API_COMPANYCONFIG_URL}`;
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
@@ -27,7 +30,8 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
-    private router: Router
+    private router: Router,
+    private CommonHttp:CommonHttpService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
    
@@ -63,7 +67,8 @@ export class AuthService implements OnDestroy {
 
   Login(LoginData : ILoginData , url:string )
   {
-    return this.authHttpService.login( LoginData , url ).pipe(
+
+    return this.CommonHttp.CommonPostRequests( LoginData ,`${url}${this.API_USERS_URL}`).pipe(
 
 		map((LoginResponse:ILoginResponseInterface)=>{
 			console.log(LoginResponse);
