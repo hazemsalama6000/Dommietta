@@ -37,7 +37,6 @@
               "src/assets"
             ],
             "styles": [
-              
               "src/styles.scss",
 			  {
 				  "input": "./src/assets/sass/style.bundle.rtl.css",
@@ -45,7 +44,7 @@
 				  "inject": false
 			  }
             ],
-            "scripts": []
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
