@@ -18,11 +18,14 @@ export class TopbarComponent implements OnInit {
 
   constructor(private layout: LayoutService,private router:Router) {}
 
+  logoutLogo:boolean=false;
+
   ngOnInit(): void {
     this.headerLeft = this.layout.getProp('header.left') as string;
   }
 
-  logout(){
+  logout = ()=>
+         {
 	  localStorage.removeItem(this.TOKENIN_LOCALSTORAGE);
 	  this.router.navigate(['/auth']);
           }

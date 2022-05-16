@@ -13,12 +13,13 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   constructor(private TranslationService:TranslationService) {}
 
-  setDirection()
+  setDirection=()=>
   {
 	  this.TranslationService.getHtmlDirection();
   }
 
-  changeLang(lang:'ar'|'en'){
+  changeLang = (lang:'ar'|'en')=>
+  {
 	  //set language selected
     this.TranslationService.changeLang(lang);
       //get language that selected
@@ -26,7 +27,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.Currentlang=CurrentLangInfoObject.Currentlang;
 	this.CurrentLangImage=CurrentLangInfoObject.CurrentLangImage; 
 	this.setDirection();
-	                        }
+  }
 
   ngOnInit(): void {
     document.body.classList.add('bg-white');

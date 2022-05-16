@@ -20,22 +20,7 @@
   <app-search-result-inner></app-search-result-inner>
 </div>
 
-<!-- Activities -->
-<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
-  <!-- begin::Drawer toggle -->
-  <div
-    class="btn btn-icon btn-active-light-primary"
-    [ngClass]="toolbarButtonHeightClass"
-    id="kt_activities_toggle"
-  >
-    <span
-      [inlineSVG]="'./assets/media/icons/duotune/general/gen032.svg'"
-      class="svg-icon"
-      [ngClass]="toolbarButtonIconSizeClass"
-    ></span>
-  </div>
-  <!-- end::Drawer toggle -->
-</div>
+
 
 <!-- NOTIFICATIONS -->
 <div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
@@ -111,6 +96,8 @@
   [ngClass]="toolbarButtonMarginClass"
   id="kt_header_user_menu_toggle"
 >
+
+
   <!-- begin::Toggle -->
   <div
     class="cursor-pointer symbol"
@@ -127,32 +114,11 @@
 </div>
 <!-- end::User -->
 
-<ng-container *ngIf="headerLeft === 'menu'">
-  <div
-    class="d-flex align-items-center d-lg-none ms-2 me-n3"
-    title="Show header menu"
-  >
-    <div
-      class="
-        btn btn-icon btn-active-light-primary
-        w-30px
-        h-30px
-        w-md-40px
-        h-md-40px
-      "
-      id="kt_header_menu_mobile_toggle"
-    >
-      <span
-        [inlineSVG]="'./assets/media/icons/duotune/text/txt001.svg'"
-        class="svg-icon svg-icon-1"
-      ></span>
-    </div>
-  </div>
-</ng-container>
+
 
 
 <div class="d-flex justify-content-center align-content-center">
 	<span class="btn" (click)="logout()">
-	<i class="bi bi-box-arrow-up" style="font-size: 30px;"></i>
+	<i (mouseenter)="logoutLogo=true" (mouseleave)="logoutLogo=false" [ngClass]="{'bi bi-box-arrow-up':logoutLogo,'bi bi-tablet':!logoutLogo }" style="font-size: 30px;"></i>
 	</span>
 </div>
