@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, of, Subscription, EMPTY } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
@@ -51,6 +51,9 @@ export class AuthService implements OnDestroy {
     return this.authHttpService.CheckCompanyExistance(LoginData).pipe(
 
       map((data:any) => {
+
+		  console.log('sss' + data);
+
 	    let	CompanyConfig: ICompanyConfigResponse;
         CompanyConfig=data.data;
 		console.log(CompanyConfig);
@@ -71,8 +74,10 @@ export class AuthService implements OnDestroy {
     return this.CommonHttp.CommonPostRequests( LoginData ,`${url}${this.API_USERS_URL}`).pipe(
 
 		map((LoginResponse:ILoginResponseInterface)=>{
-			console.log(LoginResponse);
 		    return LoginResponse;
+		}),catchError((err)=>{
+			let LoginResponse:ILoginResponseInterface={success:"false",token:''};
+			return of(LoginResponse);
 		})
 
 	);

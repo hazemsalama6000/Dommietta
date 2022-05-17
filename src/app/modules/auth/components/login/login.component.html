@@ -10,10 +10,20 @@
   <ng-container *ngIf="hasError">
     <div class="mb-lg-15 alert alert-danger">
       <div class="alert-text font-weight-bold">
-        The login details are incorrect
+        {{"AUTH.VALIDATION.INVALID_COMPANY" | translate}}
       </div>
     </div>
   </ng-container>
+
+
+  <div *ngIf="hasErrorInCredentials">
+    <div class="mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        {{"AUTH.VALIDATION.INVALID_CREDENTIALS" | translate}}
+      </div>
+    </div>
+  </div>
+
   <!-- end::Alert error-->
 
   <!--begin::Form group-->

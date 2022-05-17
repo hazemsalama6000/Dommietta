@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subscription, Observable, of, EMPTY } from 'rxjs';
+import { catchError, first } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ILoginData } from '../../models/ILoginData.interface';
@@ -14,8 +14,8 @@ import { ILoginResponseInterface } from '../../models/ILoginResponse.interface';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-	 TOKENIN_LOCALSTORAGE="token";
-
+	TOKENIN_LOCALSTORAGE = "token";
+	message: string;
 	// KeenThemes mock, change it to:
 	defaultAuth: any = {
 		email: 'admin@demo.com',
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	loginForm: FormGroup;
 	hasError: boolean;
+	hasErrorInCredentials: boolean;
 	returnUrl: string;
 	isLoading$: Observable<boolean>;
 
@@ -92,28 +93,37 @@ export class LoginComponent implements OnInit, OnDestroy {
 	submit(LoginData: ILoginData) {
 
 		this.hasError = false;
-		            
+		this.hasErrorInCredentials = false;
+
+         let label=0;
 		//check Company Validation 
 		const loginSubscr = this.authService
-			.CheckCompanyExistance(LoginData)
-			.pipe(first())
-			.subscribe((CompanyConfigResponse: ICompanyConfigResponse) => {
-            
-				//Inner Request To check User Validation
-				this.authService.
-					Login(LoginData, CompanyConfigResponse.companyLink)
-					.subscribe((LoginResponse: ILoginResponseInterface) => {
-						console.log(LoginResponse);
-						localStorage.setItem(this.TOKENIN_LOCALSTORAGE,LoginResponse.token);
-						this.router.navigate(['']);
-					});
+			.CheckCompanyExistance(LoginData).pipe(
+				catchError((err) => {
+					this.hasError = true;
+					return EMPTY;
+				}))
+			.subscribe(
+				(CompanyConfigResponse: ICompanyConfigResponse) => {
 
-				/*	if (user) {
-						this.router.navigate([this.returnUrl]);
-					} else {
-						this.hasError = true;
-					}*/
-			});
+					//Inner Request To check User Validation
+					this.authService.
+						Login(LoginData, CompanyConfigResponse.companyLink)
+						.subscribe((LoginResponse: ILoginResponseInterface) => {
+							if (LoginResponse.success=="false") {
+								this.hasErrorInCredentials = true;
+								console.log(this.hasErrorInCredentials);
+							}
+							else {
+								console.log(LoginResponse);
+								localStorage.setItem(this.TOKENIN_LOCALSTORAGE, LoginResponse.token);
+								this.router.navigate(['']);
+							}
+
+						});
+
+				
+				});
 		this.unsubscribe.push(loginSubscr);
 	}
 
