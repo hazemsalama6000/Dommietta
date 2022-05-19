@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 // #fake-start#
-import { FakeAPIService } from './_fake/fake-api.service';
 import { AuthInterceptor } from './modules/auth/Interceptors/AuthInterceptor.interceptor';
 import { LoggingInterceptor } from './modules/auth/Interceptors/LoggingInterceptor.interceptor';
 import { CachingInterceptor } from './modules/auth/Interceptors/CachingInterceptor.interceptor';
@@ -38,14 +37,7 @@ function appInitializer(authService: AuthService) {
     HttpClientModule,
     ClipboardModule,
 	SharedModule,
-    // #fake-start#
-    environment.isMockEnabled
-      ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
-          passThruUnknownUrl: true,
-          dataEncapsulation: false,
-        })
-      : [],
-    // #fake-end#
+   
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
