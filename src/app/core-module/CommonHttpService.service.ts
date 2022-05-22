@@ -21,8 +21,8 @@ export class CommonHttpService {
 	}
 
 	//used to search by Id
-	CommonGetRequests(id: number, url: string): Observable<any> {
-		return this.http.get<any>(`${url}?id=${id}`);
+	CommonGetRequests(url: string): Observable<any> {
+		return this.http.get<any>(`${url}`);
 	}
 
 	//used to delete by Id

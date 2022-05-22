@@ -1,7 +1,7 @@
 <section style="width:100%;">
 
-	<upsert></upsert>
+	<upsert [Editmodel]="model"></upsert>
 
-	<list_content></list_content>
+	<list_content (edit)="edit($event)"></list_content>
 	
 </section>

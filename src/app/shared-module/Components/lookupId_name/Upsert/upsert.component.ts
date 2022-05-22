@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
@@ -13,8 +13,14 @@ export class UpsertComponent {
 
 	toggleAddEditButton: boolean;
 	UpsertForm: FormGroup;
+	@Input() set Editmodel(value: any) {
+		if (value) {
+			this.UpsertForm.setValue({ Id: value.id, Name: value.name });
+			this.toggleAddEditButton=false;
+		}
+	}
 
-	constructor(private fb: FormBuilder ,private toaster : toasterService) {}
+	constructor(private fb: FormBuilder, private toaster: toasterService) { }
 
 	ngOnInit(): void {
 		this.toggleAddEditButton = true;
@@ -32,15 +38,16 @@ export class UpsertComponent {
 
 	}
 
+
 	closeEdit() {
 		this.toggleAddEditButton = true;
-		console.log(this.toggleAddEditButton);
 	}
 
-	Submit(model : LookUpModel)
-	{
+//for Insert And Delete
+// TODO Save Data here
+	Submit(model: LookUpModel) {
 		this.toaster.openSuccessSnackBar("close me");
-        console.log(model);
+		console.log(model);
 	}
 
 

@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 export interface PeriodicElement {
 	id:number;
@@ -20,6 +21,8 @@ export interface PeriodicElement {
 
 export class ListContentComponent implements AfterViewInit{
 
+    @Output() edit : EventEmitter<LookUpModel> = new EventEmitter();
+
 	displayedColumns: string[] = ['name','action'];
 	dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -34,4 +37,8 @@ export class ListContentComponent implements AfterViewInit{
 	  this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 	
+    Edit(model:LookUpModel){
+        this.edit.emit(model);
+	}
+
 }
