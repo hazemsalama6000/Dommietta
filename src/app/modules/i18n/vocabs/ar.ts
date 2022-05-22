@@ -14,6 +14,21 @@ export const locale = {
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
     },
+HR:{
+    INPUTS:{
+     NAME:"الاسم",
+	 FILTER:"بحث"
+	},
+	BUTTONS:{
+		ADD:"اضافة",
+		CLOSE:"غلق",
+		EDIT:"تعديل"
+	},
+	TITLES:{
+		ADDORUPDATE:"اضافة او تعديل",
+	}
+},
+
     AUTH: {
       GENERAL: {
         OR: 'Or',

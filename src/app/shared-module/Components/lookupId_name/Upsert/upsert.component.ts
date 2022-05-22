@@ -7,5 +7,14 @@ import { Component } from "@angular/core";
 })
 
 export class UpsertComponent {
+	toggleAddEditButton:boolean;
+	
+	ngOnInit(): void {
+		this.toggleAddEditButton=false;
+	}
 
+	closeEdit(){
+		this.toggleAddEditButton=true;
+		console.log(this.toggleAddEditButton);
+	}
 }

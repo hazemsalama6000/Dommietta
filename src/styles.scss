@@ -5,11 +5,48 @@
 //@import "./assets/sass/style.dark";
 
 @import "./assets/sass/style.angular.scss";
+
+
 body{
 font-family: 'Cairo' !important;font-size: 22px !important;
 }
-
  
 
+.fullWidth{
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
 
-    
+
+button,mat-form-field{
+	width: 100%;
+	font-family: 'Cairo' !important;font-size: 14px !important;
+}
+
+input{
+	font-family: 'Cairo' !important;font-size: 14px !important;
+}
+th{
+	font-family: 'Cairo' !important;font-size: 14px !important;
+}
+/* Structure */
+table {
+	width: 100%;
+  }
+  
+  .mat-form-field {
+	font-size: 14px;
+	width: 100%;
+  }
+
+.fontsection
+{
+	font-family: 'Cairo' !important;font-size: 22px !important;
+}
+.fontForInputs
+{
+	font-family: 'Cairo' !important;font-size: 14px !important;
+}
+
+
