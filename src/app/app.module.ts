@@ -60,11 +60,11 @@ function appInitializer(authService: AuthService) {
 		 useClass:LoggingInterceptor,
 		 multi:true
 	   },
-	  {
+	/*  {
 	  provide:HTTP_INTERCEPTORS,
 	  useClass:CachingInterceptor,
 	  multi:true
-	  },
+	  },*/
 	  {
 		provide:HTTP_INTERCEPTORS,
 		useClass:ErrorInterceptor,

@@ -1,4 +1,6 @@
 export class LookUpModel{
-	Id:string;
+	Id:number;
 	Name:string;
+	company_Id: number
+
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, retry } from "rxjs";
+import { catchError, Observable, retry, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { HttpPaths } from "../modules/auth/Enums/HttpPaths.enum";
 
@@ -15,9 +15,19 @@ export class CommonHttpService {
 	
 	constructor(private http: HttpClient) { }
 
+	handleerror(error:any){
+        console.log(error);
+		return throwError(error.message || "server error");
+		}
 	//used For Any insert , Update , Search
 	CommonPostRequests(model: any, url: string): Observable<any> {
-		return this.http.post<any>(`${url}`, model);
+		return this.http.post<any>(`${url}`, model).pipe( catchError(this.handleerror ) );
+		;
+	}
+
+	//used to search by Id
+	CommonPutRequests(model: any, url: string): Observable<any> {
+		return this.http.put<any>(`${url}`, model);
 	}
 
 	//used to search by Id
@@ -26,8 +36,8 @@ export class CommonHttpService {
 	}
 
 	//used to delete by Id
-	CommonDeleteRequest( id:number , url:string ):Observable<any>{
-        return this.http.delete<any>(`${url}?id=${id}}`);
+	CommonDeleteRequest( url:string ):Observable<any>{
+        return this.http.delete<any>(`${url}`);
 	}
 
 
