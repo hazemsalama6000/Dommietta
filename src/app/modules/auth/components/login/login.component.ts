@@ -107,8 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe(
 				(CompanyConfigResponse: ICompanyConfigResponse) => {
                       
-					environment.companyLink=CompanyConfigResponse.companyLink;
-					localStorage.setItem("companyLink",environment.companyLink)
+					localStorage.setItem("companyLink",CompanyConfigResponse.companyLink)
 					//Inner Request To check User Validation
 					this.authService.
 						Login(LoginData, CompanyConfigResponse.companyLink)

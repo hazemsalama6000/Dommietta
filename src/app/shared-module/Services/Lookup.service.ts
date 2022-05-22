@@ -18,7 +18,7 @@ export class LookupService
     
 	getLookupData():Observable<LookUpModel[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_GETALL}`)
-			.pipe( tap(data=>console.log(data) ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
 	}
 
 

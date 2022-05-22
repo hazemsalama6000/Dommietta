@@ -15,7 +15,7 @@ export class UpsertComponent {
 	UpsertForm: FormGroup;
 	@Input() set Editmodel(value: any) {
 		if (value) {
-			this.UpsertForm.setValue({ Id: value.id, Name: value.name });
+			this.UpsertForm.setValue(value);
 			this.toggleAddEditButton=false;
 		}
 	}

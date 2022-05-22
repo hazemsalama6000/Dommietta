@@ -4,15 +4,6 @@ import { MatTableDataSource } from "@angular/material/table";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
-export interface PeriodicElement {
-	id: number;
-	name: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-	{ id: 1, name: 'Hydrogen' },
-	{ id: 2, name: 'Helium' },
-];
 
 @Component({
 	selector: 'list_content',
@@ -53,10 +44,11 @@ export class ListContentComponent implements AfterViewInit , OnInit{
 
 	getallData(){
 	  	this.service.getLookupData().subscribe(
-		/*	(data: LookUpModel[]) =>{ 
-			this.dataSource	= new MatTableDataSource(data)
-			}*/
-			data=>console.log(data)
+			(data: LookUpModel[]) =>{ 
+				console.log(data);
+			    this.dataSource	= new MatTableDataSource(data)
+			}
+		
 			);
 	}
 
