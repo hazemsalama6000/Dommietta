@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ILoginData } from '../../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../../models/ICompanyConfigResponse.interface';
 import { ILoginResponseInterface } from '../../models/ILoginResponse.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-login',
@@ -105,7 +106,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 				}))
 			.subscribe(
 				(CompanyConfigResponse: ICompanyConfigResponse) => {
-
+                      
+					environment.companyLink=CompanyConfigResponse.companyLink;
+					localStorage.setItem("companyLink",environment.companyLink)
 					//Inner Request To check User Validation
 					this.authService.
 						Login(LoginData, CompanyConfigResponse.companyLink)

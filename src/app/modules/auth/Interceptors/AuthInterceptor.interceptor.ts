@@ -24,6 +24,7 @@ constructor(){}
         return request.clone({
             setHeaders: {
 				'Content-Type': 'application/json',
+				'Authorization':`Bearer ${localStorage.getItem('token')}`,
 				"Platform": "api",
 				"sequence":"123",
 				"Cache-Control":"no-cache",
