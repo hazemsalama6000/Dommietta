@@ -27,9 +27,12 @@ button,mat-form-field{
 input{
 	font-family: 'Cairo' !important;font-size: 14px !important;
 }
-th{
+
+th
+{
 	font-family: 'Cairo' !important;font-size: 14px !important;
 }
+
 /* Structure */
 table {
 	width: 100%;
@@ -49,4 +52,18 @@ table {
 	font-family: 'Cairo' !important;font-size: 14px !important;
 }
 
+.Success.mat-snack-bar-container{
+	background-color: rgb(98, 255, 98) ;
+	color: white;
+}
+
+.Error.mat-snack-bar-container{
+	background-color: rgb(255, 10, 10) ;
+	color: white;
+}
+
+.Warning.mat-snack-bar-container{
+	background-color: rgb(253, 75, 200) ;
+	color: white;
+}
 

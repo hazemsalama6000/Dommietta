@@ -5,6 +5,8 @@ import { UpsertComponent } from './Components/lookupId_name/Upsert/upsert.compon
 import { ListContentComponent } from './Components/lookupId_name/list_content/list_content.component';
 import { LookupIdNameComponent } from './Components/lookupId_name/lookupId_name.component';
 import { TranslationModule } from '../modules/i18n';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -17,7 +19,10 @@ import { TranslationModule } from '../modules/i18n';
   imports: [
 	  MaterialsModules,
       CommonModule
-	  ,TranslationModule
+	  ,TranslationModule,
+	  FormsModule,
+	  ReactiveFormsModule,
+	  HttpClientModule,
   ],
   exports:[
 	  MaterialsModules,

@@ -16,11 +16,16 @@ export const locale = {
     },
 	HR:{
 		INPUTS:{
-		 NAME:"الاسم"
+		 NAME:"الاسم",
+		 FILTER:"بحث"
 		},
 		BUTTONS:{
+			ADD:"اضافة",
 			CLOSE:"غلق",
 			EDIT:"تعديل"
+		},
+		TITLES:{
+			ADDORUPDATE:"اضافة او تعديل",
 		}
 	},
     AUTH: {
