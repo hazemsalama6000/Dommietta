@@ -6,7 +6,12 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
- 
+  {
+	  path:'hr',
+	  loadChildren:()=> 
+	      import('../modules/hr/hr.module').then((m)=>m.HrModule)
+  }
+ ,
   {
     path: '',
     redirectTo: '/dashboard',
