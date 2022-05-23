@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } fro
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
+import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
@@ -11,7 +12,7 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 	styleUrls: ['./list_content.component.scss']
 })
 
-export class ListContentComponent implements AfterViewInit, OnInit {
+export class ListContentComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
@@ -21,33 +22,22 @@ export class ListContentComponent implements AfterViewInit, OnInit {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	LookUpData: LookUpModel[] = [];
-
 	constructor(private service: LookupService, private toaster: toasterService) {
+//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
 	}
 
-	ngOnInit(): void {
-			
-	}
-
-	ngAfterViewInit(): void {
-	}
-
-	applyFilter(event: Event) {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-	}
-
+//emit model to upsert component for updating
 	Edit(model: LookUpModel) {
 		this.edit.emit(model);
 	}
 
+
 	Remove(model: LookUpModel){
 		this.service.DeleteLookupData(model.Id).subscribe(
-			(data: any) => {
+			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
@@ -56,7 +46,7 @@ export class ListContentComponent implements AfterViewInit, OnInit {
 			 });
 	}
 
-
+// getting data and initialize data Source and Paginator
 	getallData() {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
@@ -67,5 +57,10 @@ export class ListContentComponent implements AfterViewInit, OnInit {
 		);
 	}
 
+//filter from search Box
+	applyFilter(event: Event) {
+		const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
 
 }

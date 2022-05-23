@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Tab } from "bootstrap";
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
 import { AnyCatcher } from "rxjs/internal/AnyCatcher";
-import { CommonHttpService } from "src/app/core-module/CommonHttpService.service";
+import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { environment } from "src/environments/environment";
@@ -37,7 +37,7 @@ export class LookupService
 		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_UPDATE}${model.Id}`);
 	  }
 
-	 selectFromStore():Observable<any> {
+	selectFromStore():Observable<any> {
 		return this.bSubject.asObservable();
 	 }
 

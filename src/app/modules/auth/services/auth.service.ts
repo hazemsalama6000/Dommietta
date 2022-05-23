@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ILoginData } from '../models/ILoginData.interface';
 import { ICompanyConfigResponse } from '../models/ICompanyConfigResponse.interface';
 import { ILoginResponseInterface } from '../models/ILoginResponse.interface';
-import { CommonHttpService } from 'src/app/core-module/CommonHttpService.service';
+import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { HttpPaths } from '../Enums/HttpPaths.enum';
 
 
@@ -39,9 +39,6 @@ export class AuthService implements OnDestroy {
 /*    const subscr = this.getUserByToken().subscribe();
 */  //  this.unsubscribe.push(subscr);
   }
-
-
-
 
   // public methods
   CheckCompanyExistance(LoginData:ILoginData): Observable<ICompanyConfigResponse> {

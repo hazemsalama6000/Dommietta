@@ -28,6 +28,7 @@ export class UpsertComponent {
 
 	UpsertForm: FormGroup;
 
+//setter for binded model to update
 	@Input() set Editmodel(value: any) {
 		if (value) {
 			this.UpsertForm.setValue(value);
@@ -37,33 +38,26 @@ export class UpsertComponent {
 
 	constructor(private fb: FormBuilder, private toaster: toasterService, private service: LookupService, private ErrorService: ErrorResponse) { }
 
+
 	ngOnInit(): void {
 		this.messageErrors = "";
 		this.toggleAddEditButton = true;
-
 		this.initForm();
-
 		this.ErrorService.SubscribeToError().subscribe((data: any) => {
 			if (data) {
-				//console.log(data);
 				this.messageErrors = data;
-
-				//this.toaster.openErrorSnackBar(data);
 			}
 		});
-
-
 	}
 
+// initialize Form With Validations
 	initForm() {
-
 		this.UpsertForm = this.fb.group({
 			Id: [''],
 			Name: ['', Validators.compose([
 				Validators.required
 			])]
 		});
-
 	}
 
 
@@ -73,28 +67,32 @@ export class UpsertComponent {
 	}
 
 
-	//for Insert And Delete
-	// TODO Save Data here
+// for Insert And Delete distingush them with model.id
+
 	Submit(model: LookUpModel) {
+
 		model.company_Id = 1;
 
-
 		if (model.Id == 0) {
-			model.Id = 0;
 
 			this.service.PostLookupData(model).
 				subscribe(
-					(data: any) => {
-						console.log(data);
-						this.toaster.openSuccessSnackBar(data.message);
-						this.service.bSubject.next(true);
+					(data: HttpReponseModel) => {
+
+						if(data.isSuccess){
+							this.toaster.openSuccessSnackBar(data.message);
+							this.service.bSubject.next(true);	
+						}
+						else if(data.isExists){
+							this.toaster.openWarningSnackBar(data.message);
+						}
 						this.messageErrors="";
 					},
 					(error: any) => {
-						console.log('error');
 						console.log(error);
 					},
-					() => {
+					() => 
+					{
 						console.log('complete');
 					}
 				);
@@ -112,9 +110,6 @@ export class UpsertComponent {
 				});
 
 		}
-
-
-
 
 	}
 
