@@ -1,4 +1,8 @@
   
+
+Please Follow Any Rules Written By me Here .......
+
+
 tokens:
 -----------
 
@@ -7,8 +11,9 @@ tokens:
 ( companyLink ) setted in LoginComponent
 
 -----------
+
 ( CommonHttpService ) use this service for any request
 
 ( HttpReponseModel ) use this model to recieve any response with 200  
 
-( ErrorResponse ) subscribe observable to return any response with 400 and display : look at 
+( ErrorResponse ) subscribe observable to return any response with 400 and display : look at LookupIdNameComponent Please
