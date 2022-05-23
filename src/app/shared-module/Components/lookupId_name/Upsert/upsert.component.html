@@ -29,7 +29,7 @@
 			<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 			
 			<mat-hint> 
-				
+				{{messageErrors}}
 				<ng-container
 				[ngTemplateOutlet]="formError"
 				[ngTemplateOutletContext]="{
@@ -41,16 +41,10 @@
 
 			</mat-hint>
 
-
-			
-
-
 		  </mat-form-field>
-
 
 	  </div>
 
-       
 	  <div class="col-md-1" *ngIf="toggleAddEditButton">
 		<button type="submit" mat-raised-button [disabled]="!UpsertForm.valid" color="primary" class="mt-3">{{"HR.BUTTONS.ADD" | translate}}</button>
 	  </div>
@@ -64,6 +58,7 @@
 	  </div>
 
 	</div>
+
 
 </form>
 

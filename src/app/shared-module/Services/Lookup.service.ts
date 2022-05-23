@@ -33,7 +33,6 @@ export class LookupService
       return this.http.CommonPostRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_ADD}`);
 	}
 
-	
 	UpdateLookupData(model:LookUpModel):Observable<any>{
 		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_UPDATE}${model.Id}`);
 	  }
