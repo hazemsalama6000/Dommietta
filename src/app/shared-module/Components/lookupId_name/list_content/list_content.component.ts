@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } fro
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
+import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
@@ -22,7 +23,7 @@ export class ListContentComponent implements AfterViewInit, OnInit {
 
 	LookUpData: LookUpModel[] = [];
 
-	constructor(private service: LookupService) {
+	constructor(private service: LookupService, private toaster: toasterService) {
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
@@ -43,17 +44,18 @@ export class ListContentComponent implements AfterViewInit, OnInit {
 	Edit(model: LookUpModel) {
 		this.edit.emit(model);
 	}
-/*
+
 	Remove(model: LookUpModel){
-		this.service.(model).subscribe(
+		this.service.DeleteLookupData(model.Id).subscribe(
 			(data: any) => {
+				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
 			(error:any) => {
 				console.log(error);
 			 });
 	}
-*/
+
 
 	getallData() {
 		this.service.getLookupData().subscribe(

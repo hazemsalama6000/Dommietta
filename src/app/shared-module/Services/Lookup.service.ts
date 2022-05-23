@@ -25,8 +25,8 @@ export class LookupService
 			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
 	}
 
-	DeleteLookupData():Observable<any>{
-		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_ADD}`);
+	DeleteLookupData(id:number):Observable<any>{
+		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_DELETE}${id}`);
 	}
 	
 	PostLookupData(model:LookUpModel):Observable<any>{
