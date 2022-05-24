@@ -9,16 +9,16 @@ import { EMPTY, from, Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from 'src/app/core-module/httpServices/ErrorResponse.service';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
+import { AuthService } from '../services/auth.service';
 import { LoggingService } from '../services/Logging.service';
 
 //500 get model Of response 
-//400 get dotnet Core Model
-//Error in angular when return throw ite gives another response 401 unAuthorized without model to return 
+//400 Bad Request get dotnet Core Model
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-	constructor(private Logging: LoggingService) { }
+	constructor(private Logging: LoggingService ,private authService:AuthService) { }
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -34,6 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 						summary: `HTTP Error - ${requestError.status}`,
 						detail: error && error.message,
 					});
+					this.authService.logout();
 				}
 
 				if (requestError.status == 400) {
