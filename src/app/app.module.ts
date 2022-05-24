@@ -17,60 +17,66 @@ import { LoggingInterceptor } from './modules/auth/Interceptors/LoggingIntercept
 import { CachingInterceptor } from './modules/auth/Interceptors/CachingInterceptor.interceptor';
 import { ErrorInterceptor } from './modules/auth/Interceptors/ErrorInterceptor.interceptor';
 import { SharedModule } from './shared-module/shared-module.module';
+import { RetryInterceptor } from './modules/auth/Interceptors/RetryInterceptor.interceptor';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
-  return () => {
-    return new Promise((resolve) => {
-      //@ts-ignore
-      authService.getUserByToken().subscribe().add(resolve);
-    });
-  };
+	return () => {
+		return new Promise((resolve) => {
+			//@ts-ignore
+			authService.getUserByToken().subscribe().add(resolve);
+		});
+	};
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot(),
-    HttpClientModule,
-    ClipboardModule,
-	SharedModule,
-   
-    AppRoutingModule,
-    InlineSVGModule.forRoot(),
-    NgbModule,
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializer,
-      multi: true,
-      deps: [AuthService],
-    },
-	{
-		provide:HTTP_INTERCEPTORS,
-		useClass:AuthInterceptor,
-		multi:true
-	  },
-	 
-	   {
-		 provide:HTTP_INTERCEPTORS,
-		 useClass:LoggingInterceptor,
-		 multi:true
-	   },
-	/*  {
-	  provide:HTTP_INTERCEPTORS,
-	  useClass:CachingInterceptor,
-	  multi:true
-	  },*/
-	  {
-		provide:HTTP_INTERCEPTORS,
-		useClass:ErrorInterceptor,
-		multi:true
-	  }
-  ],
-  bootstrap: [AppComponent],
+	declarations: [AppComponent],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		TranslateModule.forRoot(),
+		HttpClientModule,
+		ClipboardModule,
+		SharedModule,
+
+		AppRoutingModule,
+		InlineSVGModule.forRoot(),
+		NgbModule,
+	],
+	providers: [
+		{
+			provide: APP_INITIALIZER,
+			useFactory: appInitializer,
+			multi: true,
+			deps: [AuthService],
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		},
+
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: LoggingInterceptor,
+			multi: true
+		},
+		/*  {
+		  provide:HTTP_INTERCEPTORS,
+		  useClass:CachingInterceptor,
+		  multi:true
+		  },*/
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterceptor,
+			multi: true
+		}/*,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: RetryInterceptor,
+			multi: true
+		}*/
+	],
+	bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
