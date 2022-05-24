@@ -22,7 +22,8 @@ import { LoggingService } from '../services/Logging.service';
           next: (event) =>
             (ok = event instanceof HttpResponse ? 'succeeded' : ''),
           error: (error) => (ok = 'failed'),
-        }),
+        })
+		,
   
         finalize(() => {
           const elapsed = Date.now() - started;

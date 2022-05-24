@@ -15,12 +15,12 @@ interface ClientError {
 }
 
 @Component({
-	selector: 'upsert',
-	templateUrl: './upsert.component.html',
-	styleUrls: ['./upsert.component.scss']
+	selector: 'state-upsert',
+	templateUrl: './state-upsert.component.html',
+	styleUrls: ['./state-upsert.component.scss']
 })
 
-export class UpsertComponent {
+export class StateUpsertComponent {
 
 	messageErrors: string;
 

@@ -15,14 +15,9 @@ export class CommonHttpService {
 	
 	constructor(private http: HttpClient) { }
 
-	handleerror(error:any){
-        console.log(error);
-		return throwError(error.message || "server error");
-		}
 	//used For Any insert , Update , Search
 	CommonPostRequests(model: any, url: string): Observable<any> {
-		return this.http.post<any>(`${url}`, model).pipe( catchError(this.handleerror ) );
-		;
+		return this.http.post<any>(`${url}`, model);
 	}
 
 	//used to search by Id

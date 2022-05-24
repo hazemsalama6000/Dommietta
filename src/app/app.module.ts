@@ -53,8 +53,8 @@ function appInitializer(authService: AuthService) {
 		provide:HTTP_INTERCEPTORS,
 		useClass:AuthInterceptor,
 		multi:true
-	  }
-	  ,
+	  },
+	 
 	   {
 		 provide:HTTP_INTERCEPTORS,
 		 useClass:LoggingInterceptor,

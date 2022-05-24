@@ -10,6 +10,11 @@ const Routing: Routes = [
 	  path:'hr',
 	  loadChildren:()=> 
 	      import('../modules/hr/hr.module').then((m)=>m.HrModule)
+  },
+  {
+	  path:'share',
+	  loadChildren:()=>
+	      import('../modules/share/share.module').then((m)=>m.shareModule)
   }
  ,
   {
