@@ -2,12 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 @Component({
-	selector:"state",
-	templateUrl:'./state.component.html',
-	styleUrls:['./state.component.scss']
+	selector:"region",
+	templateUrl:'./region.component.html',
+	styleUrls:['./region.component.scss']
 })
 
-export class StateComponent 
+export class RegionComponent 
 {
 	
 	title:string;
@@ -16,10 +16,6 @@ export class StateComponent
 
 	edit(model:LookUpModel){
           this.model=model;
-	}
-
-	StateEmit(model:LookUpModel){
-	
 	}
 
 }

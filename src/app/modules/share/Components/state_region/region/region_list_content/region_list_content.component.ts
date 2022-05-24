@@ -7,15 +7,15 @@ import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
-	selector: 'state_list_content',
-	templateUrl: './state_list_content.component.html',
-	styleUrls: ['./state_list_content.component.scss']
+	selector: 'region_list_content',
+	templateUrl: './region_list_content.component.html',
+	styleUrls: ['./region_list_content.component.scss']
 })
 
-export class StateListContentComponent {
+export class RegionListContentComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
-
+	
 	displayedColumns: string[] = ['name', 'action'];
 
 	dataSource:any;
@@ -45,13 +45,6 @@ export class StateListContentComponent {
 				console.log(error);
 			 });
 	}
-
-
-    ShowRegion(model: LookUpModel){
-		console.log(model);
-	   // TODO create observable in service and emit id of state
-	}
-
 
 // getting data and initialize data Source and Paginator
 	getallData() {

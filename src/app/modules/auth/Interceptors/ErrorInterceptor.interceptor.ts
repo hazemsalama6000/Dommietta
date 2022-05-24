@@ -19,9 +19,9 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 		return next.handle(request).pipe(
 
-			catchError((error) => {
+			catchError((requestError) => {
 
-				if (error) {
+				/*if (error) {
 					switch (error.status) {
 						
 						case 400:
@@ -62,13 +62,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 					}
 
-				}
+				}*/
 
-				console.log('error');
+			/*	console.log('error');
 				return throwError(()=>new Error(error));
+*/
 
-
-				/*const { error } = requestError;
+				const { error } = requestError;
 
 				if (requestError.status == 401) {
 					this.Logging.LogRequestError({
@@ -93,10 +93,23 @@ export class ErrorInterceptor implements HttpInterceptor {
 				   //return throwError(() => new Error(error.errors.Name));
 				   return  EMPTY;
 				}
-
+				if (requestError.status == 500) {
+	
+					this.Logging.LogRequestError({
+						severity: 'error',
+						summary: `HTTP Error - ${requestError.status}`,
+						detail: error.errors.Name
+					});
+					
+					this.ErrorService.Subject.next(error.message);
+					
+				   // console.log(error.errors.Name);
+				   //return throwError(() => new Error(error.errors.Name));
+				   return  EMPTY;
+				}
 				else{
 					return EMPTY;
-				}*/
+				}
 
 
 			})

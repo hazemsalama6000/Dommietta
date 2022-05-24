@@ -10,8 +10,11 @@ import { StateRegionComponent } from './Components/state_region/state_region.com
 
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { StateListContentComponent } from './Components/state_region/state/state_list_content/state_list_content.component';
-import { StateUpsertComponent } from './Components/state_region/state/stateUpsert/state-upsert.component';
+import { StateUpsertComponent } from './Components/state_region/state/state_Upsert/state-upsert.component';
 import { StateComponent } from './Components/state_region/state/state.component';
+import { RegionComponent } from './Components/state_region/region/region.component';
+import { RegionUpsertComponent } from './Components/state_region/region/region_Upsert/region-upsert.component';
+import { RegionListContentComponent } from './Components/state_region/region/region_list_content/region_list_content.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { StateComponent } from './Components/state_region/state/state.component'
 	StateRegionComponent,
 	StateComponent,
 	StateUpsertComponent,
-	StateListContentComponent
+	StateListContentComponent,
+	RegionComponent,
+	RegionUpsertComponent,
+	RegionListContentComponent
   ],
   imports: [
     CommonModule,

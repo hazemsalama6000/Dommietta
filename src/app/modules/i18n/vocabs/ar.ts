@@ -28,6 +28,21 @@ HR:{
 		ADDORUPDATE:"اضافة او تعديل",
 	}
 },
+SHARE:{
+    INPUTS:{
+     NAME:"الاسم",
+	 FILTER:"بحث"
+	},
+	BUTTONS:{
+		ADD:"اضافة",
+		CLOSE:"غلق",
+		EDIT:"تعديل"
+	},
+	TITLES:{
+		ADDORUPDATESTATE:" اضافة او تعديل المحافظة",
+		ADDORUPDATEREGION:" اضافة او تعديل المنطقة",
+	}
+},
 
     AUTH: {
       GENERAL: {

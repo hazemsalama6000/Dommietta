@@ -24,17 +24,17 @@ constructor(){}
         return request.clone({
             setHeaders: {
 				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-
 				'Authorization':`Bearer ${localStorage.getItem('token')}`,
-				"Platform": "api",
-				"sequence":"123",
-				"Cache-Control":"no-cache",
-				"api-version":"1.0",
-				"ApiKey": "uqtfggwvbolwhphwjkhtewfqawyslnka",
-				"Source":"121",
-				"Source-Version": "1.0.23",
 				"Accept-Language": "ar-EG"
+
+		//		"Platform": "api",
+		//		"sequence":"123",
+		//		"Cache-Control":"no-cache",
+		//		"api-version":"1.0",
+		//		"ApiKey": "uqtfggwvbolwhphwjkhtewfqawyslnka",
+		//		"Source":"121",
+		//		"Source-Version": "1.0.23",
+
 
                 //'Access-Control-Allow-Origin': '*',
                 //'Access-Control-Allow-Credentials': 'true',

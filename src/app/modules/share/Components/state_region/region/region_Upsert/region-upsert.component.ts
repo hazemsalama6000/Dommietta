@@ -15,12 +15,12 @@ interface ClientError {
 }
 
 @Component({
-	selector: 'upsert',
-	templateUrl: './upsert.component.html',
-	styleUrls: ['./upsert.component.scss']
+	selector: 'region-upsert',
+	templateUrl: './region-upsert.component.html',
+	styleUrls: ['./region-upsert.component.scss']
 })
 
-export class UpsertComponent {
+export class RegionUpsertComponent {
 
 	messageErrors: string;
 
@@ -74,7 +74,7 @@ export class UpsertComponent {
 		model.company_Id = 1;
 
 		if (model.Id == 0) {
-			model.Id=0;
+
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {
@@ -90,7 +90,7 @@ export class UpsertComponent {
 					},
 					(error: any) => {
 						console.log('errrorr');
-						console.log(error);
+						console.log(error.error.errors);
 					},
 					() => 
 					{
