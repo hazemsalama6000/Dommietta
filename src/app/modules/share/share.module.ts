@@ -7,10 +7,11 @@ import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StateRegionComponent } from './Components/state_region/state_region.component';
-import { StateComponent } from './Components/state_region/lookupId_name/state.component';
-import { StateUpsertComponent } from './Components/state_region/lookupId_name/stateUpsert/state-upsert.component';
+
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
-import { StateListContentComponent } from './Components/state_region/lookupId_name/state_list_content/state_list_content.component';
+import { StateListContentComponent } from './Components/state_region/state/state_list_content/state_list_content.component';
+import { StateUpsertComponent } from './Components/state_region/state/stateUpsert/state-upsert.component';
+import { StateComponent } from './Components/state_region/state/state.component';
 
 
 @NgModule({
