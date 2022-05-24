@@ -5,6 +5,7 @@ import { catchError, EMPTY, throwError } from "rxjs";
 import { ErrorResponse } from "src/app/core-module/httpServices/ErrorResponse.service";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
@@ -36,18 +37,14 @@ export class StateUpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: LookupService, private ErrorService: ErrorResponse) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: StatesService) { }
 
 
 	ngOnInit(): void {
 		this.messageErrors = "";
 		this.toggleAddEditButton = true;
 		this.initForm();
-		this.ErrorService.SubscribeToError().subscribe((data: any) => {
-			if (data) {
-				this.messageErrors = data;
-			}
-		});
+		
 	}
 
 // initialize Form With Validations

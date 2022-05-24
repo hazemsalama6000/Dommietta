@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
@@ -22,7 +23,7 @@ export class StateListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService) {
+	constructor(private service: StatesService, private toaster: toasterService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();

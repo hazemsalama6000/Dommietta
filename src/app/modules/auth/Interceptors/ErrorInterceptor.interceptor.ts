@@ -8,12 +8,17 @@ import { Injectable } from '@angular/core';
 import { EMPTY, from, Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from 'src/app/core-module/httpServices/ErrorResponse.service';
+import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LoggingService } from '../services/Logging.service';
+
+//500 get model Of response 
+//400 get dotnet Core Model
+//Error in angular when return throw ite gives another response 401 unAuthorized without model to return 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-	constructor(private Logging: LoggingService, private ErrorService: ErrorResponse) { }
+	constructor(private Logging: LoggingService, private ErrorService: ErrorResponse,private toaster:toasterService) { }
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -21,7 +26,70 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 			catchError((requestError) => {
 
-				/*if (error) {
+				const { error } = requestError;
+
+				if (requestError.status == 401) {
+					this.Logging.LogRequestError({
+						severity: 'error',
+						summary: `HTTP Error - ${requestError.status}`,
+						detail: error && error.message,
+					});
+				//	return throwError(() => new Error(error));
+				}
+				  
+				if (requestError.status == 400) {
+	
+					this.Logging.LogRequestError({
+						severity: 'error',
+						summary: `HTTP Error - ${requestError.status}`,
+						detail: error.errors.Name
+					});
+
+					this.toaster.openWarningSnackBar(error.errors.Name);
+
+					//this.ErrorService.Subject.next(error.errors.Name);
+
+				   // console.log(error.errors.Name);
+				   //return throwError(() => new Error(error.errors.Name));
+				   return  EMPTY;
+				}
+
+
+				if (requestError.status == 500) {
+	
+					this.Logging.LogRequestError({
+						severity: 'error',
+						summary: `HTTP Error - ${requestError.status}`,
+						detail: error.message
+					});
+
+				    this.toaster.openWarningSnackBar(error.message);
+
+					//this.ErrorService.Subject.next(error.message);
+					
+				   // console.log(error.errors.Name);
+				  // return throwError(() => new Error(error.errors.Name));
+				   return  EMPTY;
+				}
+				else{
+					return EMPTY;
+				}
+
+
+			})
+		);
+
+	}
+
+}
+
+
+
+
+/*
+ this Code Under catchError ()
+ -----------------------------
+/*if (error) {
 					switch (error.status) {
 						
 						case 400:
@@ -68,53 +136,3 @@ export class ErrorInterceptor implements HttpInterceptor {
 				return throwError(()=>new Error(error));
 */
 
-				const { error } = requestError;
-
-				if (requestError.status == 401) {
-					this.Logging.LogRequestError({
-						severity: 'error',
-						summary: `HTTP Error - ${requestError.status}`,
-						detail: error && error.message,
-					});
-					return throwError(() => new Error(error));
-				}
-				  
-				if (requestError.status == 400) {
-	
-					this.Logging.LogRequestError({
-						severity: 'error',
-						summary: `HTTP Error - ${requestError.status}`,
-						detail: error.errors.Name
-					});
-					
-					this.ErrorService.Subject.next(error.errors.Name);
-
-				   // console.log(error.errors.Name);
-				   //return throwError(() => new Error(error.errors.Name));
-				   return  EMPTY;
-				}
-				if (requestError.status == 500) {
-	
-					this.Logging.LogRequestError({
-						severity: 'error',
-						summary: `HTTP Error - ${requestError.status}`,
-						detail: error.errors.Name
-					});
-					
-					this.ErrorService.Subject.next(error.message);
-					
-				   // console.log(error.errors.Name);
-				   //return throwError(() => new Error(error.errors.Name));
-				   return  EMPTY;
-				}
-				else{
-					return EMPTY;
-				}
-
-
-			})
-		);
-
-	}
-
-}
