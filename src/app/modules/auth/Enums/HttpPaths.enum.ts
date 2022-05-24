@@ -11,11 +11,10 @@ export enum HttpPaths
    
 	//State APIS
 
-	API_STATE_ADD="/api/v1/hr/addjob",
-	API_STATE_UPDATE="/api/v1/hr/updatejob/",
+	API_STATE_ADD="/api/v1/shared/addstate",
+	API_STATE_UPDATE="/api/v1/shared/updatestate/",
 	API_STATE_GETALL="/api/v1/shared/getstates",
-	API_STATE_DELETE="/api/v1/hr/deletejob/",
+	API_STATE_DELETE="/api/v1/shared/deletestate/",
    
-
 
 }
