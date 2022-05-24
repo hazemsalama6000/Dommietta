@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, retry } from "rxjs";
+import { catchError, Observable, retry, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable()
@@ -10,14 +10,11 @@ constructor(){}
 
         return next.handle(this.AddAuthToHeader(req)).pipe(
             catchError(
-                (requestError: HttpErrorResponse) => {
-                    // Log Here Response Error
-                    // requestError.message
-                    return next.handle(req);
+                (error: any) => {
+					return throwError(() => new Error(error)) as Observable<HttpEvent<any>>;
                 }
             )
         );
-
     }
 
     AddAuthToHeader(request: HttpRequest<any>) {

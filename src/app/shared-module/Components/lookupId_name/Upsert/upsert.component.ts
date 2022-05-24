@@ -85,12 +85,7 @@ export class UpsertComponent {
 						this.messageErrors="";
 					},
 					(error: any) => {
-						console.log('errrorr');
-						console.log(error);
-					},
-					() => 
-					{
-						console.log('complete');
+						this.toaster.openWarningSnackBar(error);
 					}
 				);
 
@@ -103,7 +98,7 @@ export class UpsertComponent {
 					this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					console.log(error);
+					this.toaster.openWarningSnackBar(error);
 				});
 
 		}

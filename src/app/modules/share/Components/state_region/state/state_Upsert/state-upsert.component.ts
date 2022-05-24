@@ -86,12 +86,7 @@ export class StateUpsertComponent {
 						this.messageErrors="";
 					},
 					(error: any) => {
-						console.log('errrorr');
-						console.log(error.error.errors);
-					},
-					() => 
-					{
-						console.log('complete');
+						this.toaster.openWarningSnackBar(error);
 					}
 				);
 
@@ -104,7 +99,7 @@ export class StateUpsertComponent {
 					this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					console.log(error);
+					this.toaster.openWarningSnackBar(error);
 				});
 
 		}

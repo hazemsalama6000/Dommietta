@@ -18,7 +18,7 @@ import { LoggingService } from '../services/Logging.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-	constructor(private Logging: LoggingService, private ErrorService: ErrorResponse,private toaster:toasterService) { }
+	constructor(private Logging: LoggingService) { }
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -34,44 +34,32 @@ export class ErrorInterceptor implements HttpInterceptor {
 						summary: `HTTP Error - ${requestError.status}`,
 						detail: error && error.message,
 					});
-				//	return throwError(() => new Error(error));
 				}
-				  
+
 				if (requestError.status == 400) {
-	
+
 					this.Logging.LogRequestError({
 						severity: 'error',
 						summary: `HTTP Error - ${requestError.status}`,
 						detail: error.errors.Name
 					});
 
-					this.toaster.openWarningSnackBar(error.errors.Name);
-
-					//this.ErrorService.Subject.next(error.errors.Name);
-
-				   // console.log(error.errors.Name);
-				   //return throwError(() => new Error(error.errors.Name));
-				   return  EMPTY;
+					return throwError(() => new Error(error.errors.Name));
 				}
 
 
-				if (requestError.status == 500) {
-	
+				else if (requestError.status == 500) {
+
 					this.Logging.LogRequestError({
 						severity: 'error',
 						summary: `HTTP Error - ${requestError.status}`,
 						detail: error.message
 					});
 
-				    this.toaster.openWarningSnackBar(error.message);
-
-					//this.ErrorService.Subject.next(error.message);
-					
-				   // console.log(error.errors.Name);
-				  // return throwError(() => new Error(error.errors.Name));
-				   return  EMPTY;
+					return throwError(() => new Error(error.message));
 				}
-				else{
+
+				else {
 					return EMPTY;
 				}
 
@@ -132,7 +120,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 				}*/
 
-			/*	console.log('error');
-				return throwError(()=>new Error(error));
+/*	console.log('error');
+	return throwError(()=>new Error(error));
 */
 
