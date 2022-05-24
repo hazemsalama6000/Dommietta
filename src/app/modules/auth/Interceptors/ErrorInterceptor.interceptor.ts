@@ -5,10 +5,8 @@ import {
 	HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, from, Observable, of, throwError } from 'rxjs';
+import { EMPTY,  Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorResponse } from 'src/app/core-module/httpServices/ErrorResponse.service';
-import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from '../services/auth.service';
 import { LoggingService } from '../services/Logging.service';
 
