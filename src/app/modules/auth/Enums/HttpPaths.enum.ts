@@ -17,4 +17,12 @@ export enum HttpPaths
 	API_STATE_DELETE="/api/v1/shared/deletestate/",
    
 
+	//Region APIS
+
+	API_REGION_ADD="/api/v1/shared/addregion",
+	API_REGION_UPDATE="/api/v1/shared/updateregion/",
+	API_REGION_GETALL="/api/v1/shared/getregions/",
+	API_REGION_DELETE="/api/v1/shared/deleteregion/",
+
+
 }

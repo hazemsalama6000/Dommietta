@@ -1,12 +1,11 @@
-import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { catchError, EMPTY, throwError } from "rxjs";
-import { ErrorResponse } from "src/app/core-module/httpServices/ErrorResponse.service";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { IRegion } from "src/app/modules/share/models/IRegion.interface";
+import { RegionService } from "src/app/modules/share/Services/region.service";
+import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
 
 interface ClientError {
@@ -21,6 +20,8 @@ interface ClientError {
 })
 
 export class RegionUpsertComponent {
+	
+	currentStateId:number;
 
 	messageErrors: string;
 
@@ -36,21 +37,26 @@ export class RegionUpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: LookupService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: RegionService ,private StatesService:StatesService) { }
 
 
 	ngOnInit(): void {
 		this.messageErrors = "";
 		this.toggleAddEditButton = true;
 		this.initForm();
+
+		this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
+			this.currentStateId=data.Id;
+		});
 		
 	}
 
 // initialize Form With Validations
 	initForm() {
 		this.UpsertForm = this.fb.group({
-			Id: [''],
-			Name: ['', Validators.compose([
+			id: [0],
+			state_Id:[0],
+			name: ['', Validators.compose([
 				Validators.required
 			])]
 		});
@@ -59,17 +65,15 @@ export class RegionUpsertComponent {
 
 	closeEdit() {
 		this.toggleAddEditButton = true;
-		this.UpsertForm.setValue({ Id: 0, Name: '' });
+		this.UpsertForm.setValue({ id: 0, name: '' ,state_Id:0});
 	}
 
 
 // for Insert And Delete distingush them with model.id
 
-	Submit(model: LookUpModel) {
-
-		model.company_Id = 1;
-
-		if (model.Id == 0) {
+	Submit(model: IRegion) {
+model.state_Id=this.currentStateId;
+		if (model.id == 0) {
 
 			this.service.PostLookupData(model).
 				subscribe(

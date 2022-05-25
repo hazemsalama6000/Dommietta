@@ -4,9 +4,11 @@ import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { IRegion } from "src/app/modules/share/models/IRegion.interface";
+import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
+
 @Component({
 	selector: 'region_list_content',
 	templateUrl: './region_list_content.component.html',
@@ -17,7 +19,7 @@ export class RegionListContentComponent {
 
 	currentStateId=0;
 
-	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
+	@Output() edit: EventEmitter<IRegion> = new EventEmitter();
 	
 	displayedColumns: string[] = ['name', 'action'];
 
@@ -25,7 +27,7 @@ export class RegionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService ,private StatesService:StatesService) {
+	constructor(private service: RegionService, private toaster: toasterService ,private StatesService:StatesService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentStateId);
@@ -33,33 +35,35 @@ export class RegionListContentComponent {
 
         this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
 			this.currentStateId=data.Id;
+			console.log(this.currentStateId);
 			this.getallData(this.currentStateId);
 		});
 
 	}
 
 //emit model to upsert component for updating
-	Edit(model: LookUpModel) {
+	Edit(model: IRegion) {
+		model.state_Id=this.currentStateId;
 		this.edit.emit(model);
 	}
 
 
-	Remove(model: LookUpModel){
-		this.service.DeleteLookupData(model.Id).subscribe(
+	Remove(model: IRegion){
+		this.service.DeleteLookupData(model.id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData(this.currentStateId);
 			},
 			(error:any) => {
-				console.log(error);
+				this.toaster.openErrorSnackBar(error);
 			 });
 	}
 
 // getting data and initialize data Source and Paginator
 	getallData(stateId:number) {
-		this.service.getLookupData().subscribe(
-			(data: LookUpModel[]) => {
-				this.dataSource = new MatTableDataSource<LookUpModel>(data);
+		this.service.getLookupData(this.currentStateId).subscribe(
+			(data: IRegion[]) => {
+				this.dataSource = new MatTableDataSource<IRegion>(data);
 				this.dataSource.paginator = this.paginator;	
 			}
 

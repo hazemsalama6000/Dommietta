@@ -17,15 +17,16 @@
 
 <form [formGroup]="UpsertForm" (ngSubmit)="Submit(UpsertForm.value)">
 
-	<input type="hidden" formControlName="Id" name="Id">
-	
+	<input type="hidden" formControlName="id" name="id">
+	<input type="hidden" formControlName="state_Id" name="state_Id">
+
 	<div class="row mt-7">
 
 	  <div class="col-md-8">
 
 		  <mat-form-field appearance="outline">
 			<mat-label class="fontForInputs"> {{"SHARE.INPUTS.NAME" | translate}}</mat-label>
-			<input matInput formControlName="Name" name="Name">
+			<input matInput formControlName="name" name="name">
 			<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 			
 			<mat-hint> 
@@ -35,7 +36,7 @@
 				[ngTemplateOutletContext]="{
 				  validation: 'required',
 				  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'SHARE.INPUTS.NAME' | translate},
-				  control: UpsertForm.controls['Name']
+				  control: UpsertForm.controls['name']
 				}"
 			  ></ng-container>
 

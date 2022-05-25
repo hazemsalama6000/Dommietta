@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { IRegion } from "../../../models/IRegion.interface";
 
 @Component({
 	selector:"region",
@@ -12,10 +13,10 @@ export class RegionComponent
 	
 	title:string;
 	icon:string;
-    model:LookUpModel;
+    model:IRegion;
 
-	edit(model:LookUpModel){
-          this.model=model;
+	edit(model:IRegion){
+          this.model = model;
 	}
 
 }

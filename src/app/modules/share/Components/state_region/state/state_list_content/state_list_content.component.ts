@@ -15,6 +15,8 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
 export class StateListContentComponent {
 
+    currentSelected:LookUpModel;
+
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
 	displayedColumns: string[] = ['name', 'action'];
@@ -23,17 +25,16 @@ export class StateListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
+
 	constructor(private service: StatesService, private toaster: toasterService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
+
+		this.currentSelected={Id:0,Name:'',company_Id:0};
 	}
 
-//emit model to upsert component for updating
-	Edit(model: LookUpModel) {
-		this.edit.emit(model);
-	}
 
 
 	Remove(model: LookUpModel){
@@ -43,16 +44,19 @@ export class StateListContentComponent {
 				this.getallData();
 			},
 			(error:any) => {
-				console.log(error);
+				this.toaster.openErrorSnackBar(error);
 			 });
 	}
 
 
-    ShowRegion(model: LookUpModel){
+	rowClicked(model:LookUpModel){
+		this.currentSelected = model;
+		this.edit.emit(model);
 		this.service.emitStateIdSubject.next(model);
 	}
 
 
+	
 // getting data and initialize data Source and Paginator
 	getallData() {
 		this.service.getLookupData().subscribe(
@@ -60,9 +64,11 @@ export class StateListContentComponent {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;	
 			}
-
 		);
 	}
+
+
+
 
 //filter from search Box
 	applyFilter(event: Event) {
