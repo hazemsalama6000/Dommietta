@@ -1,13 +1,8 @@
-import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Tab } from "bootstrap";
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
-import { AnyCatcher } from "rxjs/internal/AnyCatcher";
+import { BehaviorSubject, map, Observable } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
-import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { environment } from "src/environments/environment";
 
 @Injectable({
 	providedIn:'root'
@@ -15,6 +10,8 @@ import { environment } from "src/environments/environment";
 
 export class StatesService 
 {
+
+	emitStateIdSubject = new BehaviorSubject<LookUpModel>({Id:0,company_Id:0,Name:''});
     
     bSubject = new BehaviorSubject(true); 
 
@@ -37,7 +34,12 @@ export class StatesService
 		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_UPDATE}${model.Id}`);
 	  }
 
-	selectFromStore():Observable<any> {
+
+    getStateIdObservable ():Observable<any>{
+		return this.emitStateIdSubject.asObservable();
+	}
+
+	selectFromStore () : Observable<any> {
 		return this.bSubject.asObservable();
 	 }
 

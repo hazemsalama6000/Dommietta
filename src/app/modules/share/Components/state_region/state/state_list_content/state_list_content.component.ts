@@ -49,8 +49,7 @@ export class StateListContentComponent {
 
 
     ShowRegion(model: LookUpModel){
-		console.log(model);
-	   // TODO create observable in service and emit id of state
+		this.service.emitStateIdSubject.next(model);
 	}
 
 

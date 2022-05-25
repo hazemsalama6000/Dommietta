@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
@@ -14,6 +15,8 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
 export class RegionListContentComponent {
 
+	currentStateId=0;
+
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	
 	displayedColumns: string[] = ['name', 'action'];
@@ -22,11 +25,17 @@ export class RegionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService) {
+	constructor(private service: LookupService, private toaster: toasterService ,private StatesService:StatesService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
-			this.getallData();
+			this.getallData(this.currentStateId);
 		});
+
+        this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
+			this.currentStateId=data.Id;
+			this.getallData(this.currentStateId);
+		});
+
 	}
 
 //emit model to upsert component for updating
@@ -39,7 +48,7 @@ export class RegionListContentComponent {
 		this.service.DeleteLookupData(model.Id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData();
+				this.getallData(this.currentStateId);
 			},
 			(error:any) => {
 				console.log(error);
@@ -47,7 +56,7 @@ export class RegionListContentComponent {
 	}
 
 // getting data and initialize data Source and Paginator
-	getallData() {
+	getallData(stateId:number) {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
