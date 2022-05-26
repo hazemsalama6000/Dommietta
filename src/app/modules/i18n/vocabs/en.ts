@@ -41,6 +41,8 @@ export const locale = {
 		TITLES:{
 			ADDORUPDATESTATE:" Add Or Edit State",
 			ADDORUPDATEREGION:" Add Or Edit Region",
+			ADDORUPDATESECTION:" Add Or Edit Section",
+			ADDORUPDATEDEPARTMENTN:"Add Or Edit Department",
 		}
 	},
     AUTH: {

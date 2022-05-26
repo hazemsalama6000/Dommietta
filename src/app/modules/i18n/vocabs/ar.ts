@@ -41,6 +41,9 @@ SHARE:{
 	TITLES:{
 		ADDORUPDATESTATE:" اضافة او تعديل المحافظة",
 		ADDORUPDATEREGION:" اضافة او تعديل المنطقة",
+		ADDORUPDATESECTION:" اضافة او تعديل القسم",
+		ADDORUPDATEDEPARTMENTN:" اضافة او تعديل الفرع",
+
 	}
 },
 
