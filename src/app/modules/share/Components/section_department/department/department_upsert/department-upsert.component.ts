@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
@@ -33,7 +34,7 @@ export class DepartmentUpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: StatesService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: DepartmentService) { }
 
 
 	ngOnInit(): void {

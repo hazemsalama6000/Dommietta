@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { IRegion } from "src/app/modules/share/models/IRegion.interface";
-import { RegionService } from "src/app/modules/share/Services/region.service";
-import { StatesService } from "src/app/modules/share/Services/state.service";
+import { ISection } from "src/app/modules/share/models/ISection.interface";
+import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
+import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 @Component({
@@ -17,9 +17,9 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 export class SectionListContentComponent {
 
-	currentStateId=0;
+	currentDepartmentId=0;
 
-	@Output() edit: EventEmitter<IRegion> = new EventEmitter();
+	@Output() edit: EventEmitter<ISection> = new EventEmitter();
 	
 	displayedColumns: string[] = ['name', 'action'];
 
@@ -27,23 +27,23 @@ export class SectionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: RegionService, private toaster: toasterService ,private StatesService:StatesService) {
+	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
-			this.getallData(this.currentStateId);
+			this.getallData(this.currentDepartmentId);
 		});
 
-        this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
-			this.currentStateId=data.Id;
-			console.log(this.currentStateId);
-			this.getallData(this.currentStateId);
+        this.DepartmentService.getDepartmentIdObservable().subscribe((data:LookUpModel) => {
+			this.currentDepartmentId=data.Id;
+			console.log(this.currentDepartmentId);
+			this.getallData(this.currentDepartmentId);
 		});
 
 	}
 
 //emit model to upsert component for updating
-	Edit(model: IRegion) {
-		model.state_Id=this.currentStateId;
+	Edit(model: ISection) {
+		model.department_Id=this.currentDepartmentId;
 		this.edit.emit(model);
 	}
 
@@ -52,7 +52,7 @@ export class SectionListContentComponent {
 		this.service.DeleteLookupData(model.id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData(this.currentStateId);
+				this.getallData(this.currentDepartmentId);
 			},
 			(error:any) => {
 				this.toaster.openErrorSnackBar(error);
@@ -61,9 +61,9 @@ export class SectionListContentComponent {
 
 // getting data and initialize data Source and Paginator
 	getallData(stateId:number) {
-		this.service.getLookupData(this.currentStateId).subscribe(
-			(data: IRegion[]) => {
-				this.dataSource = new MatTableDataSource<IRegion>(data);
+		this.service.getLookupData(this.currentDepartmentId).subscribe(
+			(data: ISection[]) => {
+				this.dataSource = new MatTableDataSource<ISection>(data);
 				this.dataSource.paginator = this.paginator;	
 			}
 

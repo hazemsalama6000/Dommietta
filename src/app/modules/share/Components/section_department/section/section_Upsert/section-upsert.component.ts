@@ -2,9 +2,9 @@ import { Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
-import { IRegion } from "src/app/modules/share/models/IRegion.interface";
-import { RegionService } from "src/app/modules/share/Services/region.service";
-import { StatesService } from "src/app/modules/share/Services/state.service";
+import { ISection } from "src/app/modules/share/models/ISection.interface";
+import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
+import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 
@@ -20,8 +20,8 @@ interface ClientError {
 })
 
 export class SectionUpsertComponent {
-	
-	currentStateId:number;
+
+	currentDepartmentId: number;
 
 	messageErrors: string;
 
@@ -29,7 +29,7 @@ export class SectionUpsertComponent {
 
 	UpsertForm: FormGroup;
 
-//setter for binded model to update
+	//setter for binded model to update
 	@Input() set Editmodel(value: any) {
 		if (value) {
 			this.UpsertForm.setValue(value);
@@ -37,7 +37,7 @@ export class SectionUpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: RegionService ,private StatesService:StatesService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: SectionService, private DepartmentService: DepartmentService) { }
 
 
 	ngOnInit(): void {
@@ -45,17 +45,17 @@ export class SectionUpsertComponent {
 		this.toggleAddEditButton = true;
 		this.initForm();
 
-		this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
-			this.currentStateId=data.Id;
+		this.DepartmentService.getDepartmentIdObservable().subscribe((data: LookUpModel) => {
+			this.currentDepartmentId = data.Id;
 		});
-		
+
 	}
 
-// initialize Form With Validations
+	// initialize Form With Validations
 	initForm() {
 		this.UpsertForm = this.fb.group({
 			id: [0],
-			state_Id:[0],
+			department_Id: [0],
 			name: ['', Validators.compose([
 				Validators.required
 			])]
@@ -65,28 +65,28 @@ export class SectionUpsertComponent {
 
 	closeEdit() {
 		this.toggleAddEditButton = true;
-		this.UpsertForm.setValue({ id: 0, name: '' ,state_Id:0});
+		this.UpsertForm.setValue({ id: 0, name: '', state_Id: 0 });
 	}
 
 
-// for Insert And Delete distingush them with model.id
+	// for Insert And Delete distingush them with model.id
 
-	Submit(model: IRegion) {
-model.state_Id=this.currentStateId;
+	Submit(model: ISection) {
+		model.department_Id = this.currentDepartmentId;
 		if (model.id == 0) {
 
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {
 
-						if(data.isSuccess){
+						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-							this.service.bSubject.next(true);	
+							this.service.bSubject.next(true);
 						}
-						else if(data.isExists){
+						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
 						}
-						this.messageErrors="";
+						this.messageErrors = "";
 					},
 					(error: any) => {
 						this.toaster.openWarningSnackBar(error);

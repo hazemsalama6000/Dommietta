@@ -24,5 +24,20 @@ export enum HttpPaths
 	API_REGION_GETALL="/api/v1/shared/getregions/",
 	API_REGION_DELETE="/api/v1/shared/deleteregion/",
 
+	
+	//Department APIS
+    
+	API_DEPARTMENT_ADD="/api/v1/hr/adddepartment",
+	API_DEPARTMENT_UPDATE="/api/v1/hr/updatedepartment/",
+	API_DEPARTMENT_GETALL="/api/v1/hr/getdepartments",
+	API_DEPARTMENT_DELETE="/api/v1/hr/deletedepartment/",
+
+	//Section APIS
+    
+	API_SECTION_ADD="/api/v1/hr/addSection",
+	API_SECTION_UPDATE="/api/v1/hr/updateSection/",
+	API_SECTION_GETALL="/api/v1/hr/getSections/",
+	API_SECTION_DELETE="/api/v1/hr/deleteSection/",
+
 
 }

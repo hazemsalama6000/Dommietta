@@ -3,6 +3,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 @Component({
@@ -24,7 +25,7 @@ export class DepartmentListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-	constructor(private service: StatesService, private toaster: toasterService) {
+	constructor(private service: DepartmentService, private toaster: toasterService) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
@@ -50,7 +51,7 @@ export class DepartmentListContentComponent {
 	rowClicked(model:LookUpModel){
 		this.currentSelected = model;
 		this.edit.emit(model);
-		this.service.emitStateIdSubject.next(model);
+		this.service.emitDepartmentIdSubject.next(model);
 	}
 
 

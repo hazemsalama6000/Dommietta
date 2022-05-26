@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IRegion } from "../../../models/IRegion.interface";
+import { ISection } from "../../../models/ISection.interface";
 
 @Component({
 	selector:"section-c",
@@ -13,9 +14,9 @@ export class SectionComponent
 	
 	title:string;
 	icon:string;
-    model:IRegion;
+    model:ISection;
 
-	edit(model:IRegion){
+	edit(model:ISection){
           this.model = model;
 	}
 
