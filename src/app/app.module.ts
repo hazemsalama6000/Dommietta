@@ -18,6 +18,8 @@ import { CachingInterceptor } from './modules/auth/Interceptors/CachingIntercept
 import { ErrorInterceptor } from './modules/auth/Interceptors/ErrorInterceptor.interceptor';
 import { SharedModule } from './shared-module/shared-module.module';
 import { RetryInterceptor } from './modules/auth/Interceptors/RetryInterceptor.interceptor';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './core-module/custom-route-reuse-strategy';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -44,6 +46,10 @@ function appInitializer(authService: AuthService) {
 		NgbModule,
 	],
 	providers: [
+		{
+			provide: RouteReuseStrategy,
+			useClass: CustomRouteReuseStrategy
+		},
 		{
 			provide: APP_INITIALIZER,
 			useFactory: appInitializer,
