@@ -15,18 +15,38 @@ import { StateComponent } from './Components/state_region/state/state.component'
 import { RegionComponent } from './Components/state_region/region/region.component';
 import { RegionUpsertComponent } from './Components/state_region/region/region_Upsert/region-upsert.component';
 import { RegionListContentComponent } from './Components/state_region/region/region_list_content/region_list_content.component';
+import { DepartmentComponent } from './Components/section_department/department/Department.component';
+import { DepartmentListContentComponent } from './Components/section_department/department/department_list_content/department_list_content.component';
+import { DepartmentSectionComponent } from './Components/section_department/department_section..component';
+import { DepartmentUpsertComponent } from './Components/section_department/department/department_upsert/department-upsert.component';
+import { SectionComponent } from './Components/section_department/section/section.component';
+import { SectionListContentComponent } from './Components/section_department/section/section_list_content/section_list_content.component';
+import { SectionUpsertComponent } from './Components/section_department/section/section_Upsert/section-upsert.component';
 
 
 @NgModule({
   declarations: [
+	
 	StateRegionComponent,
 	StateComponent,
 	StateUpsertComponent,
 	StateListContentComponent,
+	
 	RegionComponent,
 	RegionUpsertComponent,
-	RegionListContentComponent
-  ],
+	RegionListContentComponent,
+	
+	DepartmentSectionComponent,
+
+	DepartmentComponent,
+	DepartmentUpsertComponent,
+	DepartmentListContentComponent,
+
+	SectionComponent,
+	SectionListContentComponent,
+	SectionUpsertComponent
+
+],
   imports: [
     CommonModule,
     shareRoutingModule,
