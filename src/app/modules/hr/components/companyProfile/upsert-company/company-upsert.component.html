@@ -21,49 +21,170 @@
 
 		<div class="col-md-9">
 
-			<mat-card>
+			<div class="row">
 
-				<div class="row">
-					
-					<div class="col-md-4">
-						
-						<mat-form-field appearance="outline">
-							<mat-label>Outline form field</mat-label>
-							<input matInput placeholder="Placeholder">
-							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-							<mat-hint>Hint</mat-hint>
-						</mat-form-field>
-
-					</div>
-
-					<div class="col-md-4">
-						
-						<mat-form-field appearance="outline">
-							<mat-label>Outline form field</mat-label>
-							<input matInput placeholder="Placeholder">
-							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-							<mat-hint>Hint</mat-hint>
-						</mat-form-field>
-						
-					</div>
-
-					<div class="col-md-4">
-						
-						<mat-form-field appearance="outline">
-							<mat-label>Outline form field</mat-label>
-							<input matInput placeholder="Placeholder">
-							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-							<mat-hint>Hint</mat-hint>
-						</mat-form-field>
-						
-					</div>
+				<mat-accordion>
+					<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<span class="fontsection">
+									بيانات الشركة
+								</span>
+							</mat-panel-title>
 
 
-				</div>
+						</mat-expansion-panel-header>
+
+						<div class="row">
+
+							<div class="col-md-4">
+
+								<mat-form-field appearance="outline">
+									<mat-label>اسم الشركة</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+
+							</div>
+
+							<div class="col-md-8">
+
+								<mat-form-field appearance="outline">
+									<mat-label>العنوان</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+
+							</div>
+
+						</div>
+
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<mat-form-field appearance="outline">
+									<mat-label>النشاط</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+							</div>
+
+							<div class="col-md-4">
+								<span class="fontForInputs">المحافظة</span>
+								<ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+									[settings]="dropdownSettings" [data]="dropdownListDataForState"
+									[(ngModel)]="selectedItemState" (onSelect)="onItemSelect($event)"
+									(onSelectAll)="onSelectAll($event)">
+								</ng-multiselect-dropdown>
+							</div>
+
+							<div class="col-md-4">
+								<span class="fontForInputs">المنطقة</span>
+								<ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+									[settings]="dropdownSettings" [data]="dropdownListDataForRegion"
+									[(ngModel)]="selectedItemForRegion" (onSelect)="onItemSelect($event)"
+									(onSelectAll)="onSelectAll($event)">
+								</ng-multiselect-dropdown>
+							</div>
+
+						</div>
+
+						<div class="mt-8">
+
+							<span class="fontsection mt-5">
+								بيانات تواصل الشركة
+							</span>
+
+						</div>
+
+
+						<div class="row mt-5">
+
+							<div class="col-md-4">
+								<mat-form-field appearance="outline">
+									<mat-label>الايميل</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+							</div>
+
+							<div class="col-md-4">
+								<mat-form-field appearance="outline">
+									<mat-label>رقم الهاتف</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+							</div>
+
+
+							<div class="col-md-4">
+								<span class="fontForInputs">اسم المسؤول</span>
+								<ng-multiselect-dropdown [placeholder]="'custom placeholder'"
+									[settings]="dropdownSettings" [data]="dropdownListDataForResponsible"
+									[(ngModel)]="selectedItemForResponsible" (onSelect)="onItemSelect($event)"
+									(onSelectAll)="onSelectAll($event)">
+								</ng-multiselect-dropdown>
+							</div>
+
+						</div>
+
+
+						<div class="mt-8">
+							<span class="fontsection">
+								البيانات الضريبية
+							</span>
+						</div>
+
+						<div class="row  mt-5">
+
+							<div class="col-md-4">
+								<mat-form-field appearance="outline">
+									<mat-label>السجل التجارى</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+							</div>
+
+							<div class="col-md-4">
+								<mat-form-field appearance="outline">
+									<mat-label>رقم البطاقه الضريبية</mat-label>
+									<input matInput placeholder="Placeholder">
+									<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+									<mat-hint>Hint</mat-hint>
+								</mat-form-field>
+							</div>
+
+
+						</div>
 
 
 
-			</mat-card>
+
+
+
+
+
+
+					</mat-expansion-panel>
+				</mat-accordion>
+
+
+			</div>
+
+
+
+
+
+
+
+
 
 		</div>
 	</div>
