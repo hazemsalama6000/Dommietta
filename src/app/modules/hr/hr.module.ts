@@ -7,10 +7,15 @@ import { TranslationModule } from '../i18n';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CompanyComponent } from './components/companyProfile/company.component';
+import { CompanyUpsertComponent } from './components/companyProfile/upsert-company/company-upsert.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+	  CompanyComponent,
+	  CompanyUpsertComponent
+  ],
   imports: [
     CommonModule,
     HrRoutingModule,
