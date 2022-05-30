@@ -10,22 +10,23 @@
 					<mat-expansion-panel-header [ngClass]="{'bg-danger':panelOpenState==true}">
 						<mat-panel-title>
 
-								<img src="./../../../../../../../assets/media/avatars/300-1.jpg" class="rounded"
-									width="40" height="40">
+							<img src="./../../../../../../../assets/media/avatars/300-1.jpg" class="rounded" width="40"
+								height="40">
 
-								<div style="width:100%" class="text-center" [ngStyle]="{'color':panelOpenState==true ? 'white':'black'}">
+							<div style="width:100%" class="text-center"
+								[ngStyle]="{'color':panelOpenState==true ? 'white':'black'}">
 
-									<span class="fontForInputs" style="font-weight:bold ;">
-										بيانات الشركة :
-									</span>
+								<span class="fontForInputs" style="font-weight:bold ;">
+									بيانات الشركة :
+								</span>
 
-									<span class="fontForInputs">
-										{{company.companyName}}
-									</span>
+								<span class="fontForInputs">
+									{{company.companyName}}
+								</span>
 
-								</div>
+							</div>
 
-							</mat-panel-title>
+						</mat-panel-title>
 					</mat-expansion-panel-header>
 
 
@@ -44,10 +45,22 @@
 									<p class="card-text text-light"> <span class="fontForInputs"> الكود : </span>
 										{{company.code}} </p>
 
-									<a href="#" class="btn btn-primary"><span class="fontForInputs"> عرض الفروع </span>
-									</a>
-									<a href="#" class="btn btn-primary mx-2"> <span class="fontForInputs"> تعديل
-											الشركة </span> </a>
+
+									<div >
+
+										<a href="#" class="btn btn-primary">
+											<span class="fontForInputs"> عرض الفروع </span>
+										</a>
+
+										<a href="#" class="btn btn-primary mx-1">
+											<span class="fontForInputs">
+												تعديل الشركة
+											</span>
+										</a>
+
+
+									</div>
+
 
 								</div>
 							</div>
