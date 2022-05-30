@@ -5,7 +5,7 @@
 		<div class="col-md-12">
 
 			
-			<company-item></company-item>
+			<company-item  *ngFor="let x of companys" [company]="x" ></company-item>
 
 
 		</div>

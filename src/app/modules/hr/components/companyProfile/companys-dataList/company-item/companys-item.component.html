@@ -1,25 +1,128 @@
-<section id="company_list">
+<section id="company_list" class="mt-5">
 
 	<div class="row">
 
 		<div class="col-md-12">
 
 
-				<mat-accordion>
-					<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-								<span class="fontsection">
-									بيانات الشركة
-								</span>
+			<mat-accordion>
+				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+					<mat-expansion-panel-header [ngClass]="{'bg-danger':panelOpenState==true}">
+						<mat-panel-title>
+
+							
+
+								<img src="./../../../../../../../assets/media/avatars/300-1.jpg" class="rounded"
+									width="40" height="40">
+
+								<div style="width:100%" class="text-center" [ngStyle]="{'color':panelOpenState==true ? 'white':'black'}">
+
+									<span class="fontForInputs" style="font-weight:bold ;">
+										بيانات الشركة :
+									</span>
+
+									<span class="fontForInputs">
+										{{company.companyName}}
+									</span>
+
+								</div>
+
 							</mat-panel-title>
+					</mat-expansion-panel-header>
 
 
-						</mat-expansion-panel-header>
+					<div class="row p-11">
 
 
-					</mat-expansion-panel>
-				</mat-accordion>
+						<div class="col-md-6">
+
+							<div class="card bg-dark" style="width:400px">
+								<img class="card-img-top" src="./../../../../../../../assets/media/avatars/300-1.jpg"
+									width="100" height="200" alt="Card image">
+								<div class="card-body">
+
+									<h4 class="card-title text-light"> <span class="fontForInputs"> الشركة </span> :
+										{{company.companyName}} </h4>
+									<p class="card-text text-light"> <span class="fontForInputs"> الكود : </span>
+										{{company.code}} </p>
+
+									<a href="#" class="btn btn-primary"><span class="fontForInputs"> عرض الفروع </span>
+									</a>
+									<a href="#" class="btn btn-primary mx-md-2"> <span class="fontForInputs"> تعديل
+											الشركة </span> </a>
+
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-6 fontForInputs">
+
+							<table class="table">
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">العنوان</th>
+									<td style="padding: 10px;">{{company.address}}</td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">المحافظة</th>
+									<td style="padding: 10px;">{{company.state}}</td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">المنطقة</th>
+									<td style="padding: 10px;">{{company.region}} </td>
+								</tr>
+
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">التليفون</th>
+									<td style="padding: 10px;">{{company.phoneNumber}} </td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">الايميل</th>
+									<td style="padding: 10px;">{{company.email}} </td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">اسم المسؤول</th>
+									<td style="padding: 10px;">{{company.managerName}} </td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">المكان الوظيفى</th>
+									<td style="padding: 10px;">{{company.managerPosition}} </td>
+								</tr>
+
+								<tr style="border-bottom:1px dotted #5a5a5a ;">
+									<th style="padding: 10px;font-weight: bold;">نشط</th>
+									<td style="padding: 10px;">
+
+										<div *ngIf="company.isActive==true; else xcross;">
+											<i class="fa fa-check" aria-hidden="true"></i>
+
+										</div>
+
+										<ng-template #xcross>
+											<i class="fa fa-xmark" aria-hidden="true"></i>
+										</ng-template>
+
+									</td>
+								</tr>
+
+
+							</table>
+
+						</div>
+
+					</div>
+
+
+
+				</mat-expansion-panel>
+			</mat-accordion>
 
 
 

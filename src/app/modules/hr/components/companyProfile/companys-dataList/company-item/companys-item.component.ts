@@ -1,18 +1,19 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { ICompanyDisplayData } from "src/app/modules/hr/models/ICompanyDisplayData";
 @Component({
-	selector:"company-item",
-	templateUrl:'./companys-item.component.html',
-	styleUrls:['./companys-item.component.scss']
+	selector: "company-item",
+	templateUrl: './companys-item.component.html',
+	styleUrls: ['./companys-item.component.scss']
 })
 
-export class CompanyItemComponent 
-{
+export class CompanyItemComponent {
 	
+	@Input() company : ICompanyDisplayData;
 
-  panelOpenState:boolean=true;
+	panelOpenState: boolean = false;
 
-  ngOnInit() {
-   
-  }
+	ngOnInit() {
+
+	}
 
 }
