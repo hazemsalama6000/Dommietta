@@ -8,13 +8,15 @@ import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CompanyComponent } from './components/companyProfile/company.component';
-import { CompanyUpsertComponent } from './components/companyProfile/upsert-company/company-upsert.component';
+import { CompanysDataListComponent } from './components/companyProfile/companys-dataList/companys-dataList.component';
+import { CompanyItemComponent } from './components/companyProfile/companys-dataList/company-item/companys-item.component';
 
 
 @NgModule({
   declarations: [
 	  CompanyComponent,
-	  CompanyUpsertComponent
+	  CompanysDataListComponent,
+	  CompanyItemComponent
   ],
   imports: [
     CommonModule,
