@@ -22,8 +22,8 @@ export class CompanyItemComponent {
 
 		const dialogRef = this.dialog.open(CompanyUpsertComponent,
 			{
-				height: '100%',
-				width: '90%',
+				height:'800px',
+				width: '1000px',
 				data: { companyId: companyId }
 			});
 

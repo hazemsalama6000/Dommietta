@@ -11,110 +11,153 @@ import { ICompany } from "src/app/modules/hr/models/ICompany";
 	styleUrls: ['./company-upsert.component.scss']
 })
 
-export class CompanyUpsertComponent implements OnInit{
+export class CompanyUpsertComponent implements OnInit {
 
-	dropdownListDataForState :any= [];
-	selectedItemState:any = [];
-  
-	dropdownListDataForRegion :any= [];
-	selectedItemForRegion:any = [];
-  
-	dropdownListDataForResponsible :any= [];
-	selectedItemForResponsible:any = [];
-  
+	isEditable: boolean = false;
+	dropdownListDataForState: any = [];
+	selectedItemState: any = [];
+
+	dropdownListDataForRegion: any = [];
+	selectedItemForRegion: any = [];
+
+	dropdownListDataForResponsible: any = [];
+	selectedItemForResponsible: any = [];
+
 	dropdownSettings = dropdownSettings;
-  
-	panelOpenState:boolean=true;
-	
-	companyForm:FormGroup;
-	
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any , private fb : FormBuilder, private toaster: toasterService) {
-	
+
+	panelOpenState: boolean = true;
+
+	companyDataForm: FormGroup;
+	companyConnectionForm: FormGroup;
+	companyTaxForm: FormGroup;
+
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private toaster: toasterService) {
+
 		//here get data of company and put data in  the form
-		if(data.companyId){
+		if (data.companyId) {
 			console.log(data);
 		}
 
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 
-	this.initForm();
-
-
-    this.dropdownListDataForState = [
-      { id: 1, name: 'Mumbai' },
-      { id: 2, name: 'Bangaluru' },
-      { id: 3, name: 'Pune' },
-      { id: 4, name: 'Navsari' },
-      { id: 5, name: 'New Delhi' }
-    ];
-
-    this.selectedItemState = [
-      { id: 3, name: 'Pune' },
-    ];
+		this.initForm();
 
 
-	this.dropdownListDataForRegion = [
-		{ id: 1, name: 'Mumbai' },
-		{ id: 2, name: 'Bangaluru' },
-		{ id: 3, name: 'Pune' },
-		{ id: 4, name: 'Navsari' },
-		{ id: 5, name: 'New Delhi' }
-	  ];
-  
-	  this.selectedItemForRegion = [
-		{ id: 3, name: 'Pune' },
-	  ];
-  
+		this.dropdownListDataForState = [
+			{ id: 1, name: 'Mumbai' },
+			{ id: 2, name: 'Bangaluru' },
+			{ id: 3, name: 'Pune' },
+			{ id: 4, name: 'Navsari' },
+			{ id: 5, name: 'New Delhi' }
+		];
 
-  }
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+		this.selectedItemState = [
+			{ id: 3, name: 'Pune' },
+		];
 
-// initialize Form With Validations
+
+		this.dropdownListDataForRegion = [
+			{ id: 1, name: 'Mumbai' },
+			{ id: 2, name: 'Bangaluru' },
+			{ id: 3, name: 'Pune' },
+			{ id: 4, name: 'Navsari' },
+			{ id: 5, name: 'New Delhi' }
+		];
+
+		this.selectedItemForRegion = [
+			{ id: 3, name: 'Pune' },
+		];
+
+
+	}
+	onItemSelect(item: any) {
+		console.log(item);
+	}
+	onSelectAll(items: any) {
+		console.log(items);
+	}
+
+	// initialize Form With Validations
 	initForm() {
 
-		this.companyForm = this.fb.group({
-			id: [''],
-			code: ['', Validators.compose([Validators.required])] ,
-			companyName: ['' , Validators.compose([Validators.required])],
-			activity : ['',Validators.compose([Validators.required])] ,
-			address : ['',Validators.compose([Validators.required])] ,
-			phoneNumber : ['',Validators.compose([Validators.required])] ,
-			commercialRecord : ['',Validators.compose([Validators.required])] ,
-			taxCardNo : ['',Validators.compose([Validators.required])] ,
-			//taxFileNo : ['',Validators.compose([Validators.required])] ,
-		//	vatTaxNum : ['',Validators.compose([Validators.required])] ,
-			vatTax : ['',] ,
-			isValTaxActive	 : ['',] ,
-			hasDirectTransferForStocks : ['',] ,
-			wTax : ['',] ,
-			isWTaxActive : ['',] ,
-			email : ['',] ,
-			isActive : ['',] ,
-			mobileUserNumber : ['',Validators.compose([Validators.required])] ,
-			region_Id : ['',Validators.compose([Validators.required])] ,
-			managerName : ['',Validators.compose([Validators.required])] ,
-			managerPosition : ['',Validators.compose([Validators.required])] 
+		this.companyDataForm = this.fb.group({
+			id: [0],
+			code: ['', Validators.compose([Validators.required])],
+			companyName: ['', Validators.compose([Validators.required])],
+			activity: ['', Validators.compose([Validators.required])],
+			address: ['', Validators.compose([Validators.required])],
+			mobileUserNumber: ['', Validators.compose([Validators.required])],
+			region_Id: ['', Validators.compose([Validators.required])],
+			isActive: [false,],
 		});
+
+		this.companyConnectionForm = this.fb.group({
+			phoneNumber: ['', Validators.compose([Validators.required])],
+			email: ['',],
+			managerName: ['', Validators.compose([Validators.required])],
+			managerPosition: ['', Validators.compose([Validators.required])],
+		});
+
+		this.companyTaxForm = this.fb.group({
+			commercialRecord: ['', Validators.compose([Validators.required])],
+			taxCardNo: ['', Validators.compose([Validators.required])],
+			vatTax: ['',],
+			isValTaxActive: [false,],
+			hasDirectTransferForStocks: [false,],
+			wTax: ['',],
+			isWTaxActive: [false,],
+		});
+
 	}
 
 
-	closeEdit() {
+	/*closeEdit() {
 		this.companyForm.setValue({ Id: 0, Name: '' });
+	}*/
+
+
+	// for Insert And Delete distingush them with model.id
+
+	mapFormGroupsToModel(companyTaxForm: any, companyConnectionForm: any, companyDataForm: any): ICompany {
+
+		let model: any = {};
+
+		model.id = companyDataForm.id;
+		model.code = companyDataForm.code;
+		model.companyName = companyDataForm.companyName;
+		model.activity = companyDataForm.activity;
+		model.address = companyDataForm.address;
+		model.mobileUserNumber = companyDataForm.mobileUserNumber;
+		model.region_Id = companyDataForm.region_Id[0].id;
+		model.isActive = companyDataForm.isActive;
+
+		model.phoneNumber = companyConnectionForm.phoneNumber;
+		model.email = companyConnectionForm.email;
+		model.managerName = companyConnectionForm.managerName;
+		model.managerPosition = companyConnectionForm.managerPosition;
+
+		model.commercialRecord = companyTaxForm.commercialRecord;
+		model.taxCardNo = companyTaxForm.taxCardNo;
+		model.wTax = companyTaxForm.wTax;
+		model.vatTax = companyTaxForm.vatTax;
+		model.isValTaxActive = companyTaxForm.isValTaxActive;
+		model.isWTaxActive = companyTaxForm.isWTaxActive;
+		model.hasDirectTransferForStocks = companyTaxForm.hasDirectTransferForStocks;
+
+		return model;
+
 	}
-	
 
-// for Insert And Delete distingush them with model.id
 
-	Submit(model: ICompany) {
+	Submit(companyTaxForm: any, companyConnectionForm: any, companyDataForm: any) {
 
-console.log(model);
+		let model: ICompany = this.mapFormGroupsToModel(companyTaxForm, companyConnectionForm, companyDataForm);
+
+		this.isEditable = true;
+
+		console.log(model);
 		/*
 		model.company_Id = 1;
 
