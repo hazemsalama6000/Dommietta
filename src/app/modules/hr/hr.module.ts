@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { CompanyComponent } from './components/companyProfile/company.component';
 import { CompanysDataListComponent } from './components/companyProfile/companys-dataList/companys-dataList.component';
 import { CompanyItemComponent } from './components/companyProfile/companys-dataList/company-item/companys-item.component';
+import { CompanyUpsertComponent } from './components/companyProfile/companys-dataList/company-item/companys-upsert/company-upsert.component';
 
 
 @NgModule({
   declarations: [
 	  CompanyComponent,
 	  CompanysDataListComponent,
-	  CompanyItemComponent
+	  CompanyItemComponent,
+	  CompanyUpsertComponent
   ],
   imports: [
     CommonModule,

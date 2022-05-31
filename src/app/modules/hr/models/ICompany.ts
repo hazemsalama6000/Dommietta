@@ -1,4 +1,4 @@
-interface ICompany {
+export interface ICompany {
 
 	id: number,
 	code: string,
@@ -6,7 +6,7 @@ interface ICompany {
 	activity: string,
 	address: string,
 	phoneNumber: string,
-	logoPrin: string,
+	logoPrint: string,
 	logoWeb: string,
 	commercialRecord: string
 	taxCardNo: string,

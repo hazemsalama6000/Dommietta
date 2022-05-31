@@ -1,0 +1,351 @@
+<h2 mat-dialog-title> <span class="fontsection"> بيانات الشركة </span> </h2>
+
+<mat-divider></mat-divider>
+
+<form [formGroup]="companyForm" (ngSubmit)="Submit(companyForm.value)">
+
+	<mat-dialog-content class="mat-typography">
+
+
+
+		<mat-stepper linear #stepper>
+
+			<mat-step [stepControl]="companyForm" [editable]="true">
+
+				<ng-template matStepLabel>بيانات الشركة</ng-template>
+
+				<div class="col-md-5">
+
+					<div>
+
+						<span class="fontForInputs">
+							بيانات الشركة
+						</span>
+
+					</div>
+
+					<div class="row  mt-5">
+
+						<div class="col-md-4">
+
+							<mat-form-field appearance="outline">
+								<mat-label> كود </mat-label>
+								<input matInput placeholder="Placeholder" name="code" formControlName="code">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+
+						</div>
+
+						<div class="col-md-8">
+
+							<mat-form-field appearance="outline">
+								<mat-label>اسم الشركة</mat-label>
+								<input matInput placeholder="Placeholder" name="companyName"
+									formControlName="companyName">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+
+						</div>
+
+
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-4">
+
+							<mat-form-field appearance="outline">
+								<mat-label>عدد المناديب</mat-label>
+								<input matInput type="number" placeholder="Ex. 12" min="1" name="mobileUserNumber"
+									formControlName="mobileUserNumber">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+
+						</div>
+
+						<div class="col-md-8">
+
+							<mat-form-field appearance="outline">
+								<mat-label>العنوان</mat-label>
+								<input matInput placeholder="Placeholder" name="address" formControlName="address">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+
+						</div>
+
+
+					</div>
+
+
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<mat-form-field appearance="outline">
+								<mat-label>النشاط</mat-label>
+								<input matInput placeholder="Placeholder" name="activity" formControlName="activity">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+						</div>
+
+						<div class="col-md-8">
+
+							<div class="row mt-2">
+								<div class="col-md-3">
+									<label class="fontForInputs mt-5"> المحافظة </label>
+								</div>
+
+								<div class="col-md-9">
+
+									<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+										[data]="dropdownListDataForState" (onSelect)="onItemSelect($event)"
+										(onSelectAll)="onSelectAll($event)">
+									</ng-multiselect-dropdown>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="row">
+
+						<div class="col-md-4 d-flex justify-content-center align-items-center">
+							<p> <span class="mx-2 fontForInputs"> نشط </span>
+								<mat-checkbox name="isActive" formControlName="isActive"></mat-checkbox>
+							</p>
+						</div>
+
+						<div class="col-md-8">
+
+							<div class="row mt-2">
+								<div class="col-md-3">
+									<label class="fontForInputs mt-5"> المنطقة </label>
+								</div>
+
+								<div class="col-md-9">
+
+									<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+										[data]="dropdownListDataForState" name="region_Id" formControlName="region_Id"
+										(onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+									</ng-multiselect-dropdown>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+				</div>
+
+				<br>
+				<br><br><br><br><br><br><br><br><br>
+				<div>
+					<button mat-button matStepperNext>التالى</button>
+				</div>
+
+			</mat-step>
+
+
+			<mat-step [stepControl]="companyForm" [editable]="true">
+				<ng-template matStepLabel> بيانات تواصل الشركة </ng-template>
+				<mat-form-field appearance="fill">
+
+					<div class="col-md-5">
+
+	
+					<div class="row mt-5">
+	
+						<div class="col-md-6">
+							<mat-form-field appearance="outline">
+								<mat-label>اسم المسؤول</mat-label>
+								<input matInput placeholder="Placeholder" name="managerName" formControlName="managerName">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+						</div>
+	
+	
+						<div class="col-md-6">
+							<mat-form-field appearance="outline">
+								<mat-label>الوظيفة</mat-label>
+								<input matInput placeholder="Placeholder" name="managerPosition"
+									formControlName="managerPosition">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+						</div>
+	
+	
+						<div class="col-md-6">
+							<mat-form-field appearance="outline">
+								<mat-label>الايميل</mat-label>
+								<input matInput placeholder="Placeholder" name="email" formControlName="email">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+						</div>
+	
+						<div class="col-md-6">
+							<mat-form-field appearance="outline">
+								<mat-label>رقم الهاتف</mat-label>
+								<input matInput placeholder="01147785..." name="phoneNumber" formControlName="phoneNumber">
+								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+								<mat-hint>Hint</mat-hint>
+							</mat-form-field>
+						</div>
+	
+	
+	
+					</div>
+	
+				</div>
+
+
+
+				</mat-form-field>
+				<div>
+					<button mat-button matStepperPrevious>Back</button>
+					<button mat-button matStepperNext>Next</button>
+				</div>
+			</mat-step>
+
+
+
+			<mat-step [stepControl]="companyForm" [editable]="true">
+				<ng-template matStepLabel>البيانات الضريبية</ng-template>
+				<mat-form-field appearance="fill">
+				
+
+					<div class="row  mt-5">
+
+					<div class="col-md-4">
+						<mat-form-field appearance="outline">
+							<mat-label>السجل التجارى</mat-label>
+							<input matInput placeholder="Placeholder" name="commercialRecord"
+								formControlName="commercialRecord">
+							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+							<mat-hint>Hint</mat-hint>
+						</mat-form-field>
+					</div>
+		
+					<div class="col-md-4">
+						<mat-form-field appearance="outline">
+							<mat-label>رقم البطاقه الضريبية</mat-label>
+							<input matInput type="number" placeholder="Placeholder" name="taxCardNo"
+								formControlName="taxCardNo">
+							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+							<mat-hint>Hint</mat-hint>
+						</mat-form-field>
+					</div>
+		
+		
+					<div class="col-md-3 d-flex justify-content-center align-items-center">
+						<section class="example-section">
+							<span class="mx-2 fontForInputs"> تحويل مباشر بين المخازن </span>
+							<mat-slide-toggle name="hasDirectTransferForStocks" formControlName="hasDirectTransferForStocks"
+								class="example-margin" [color]="'red'">
+		
+							</mat-slide-toggle>
+						</section>
+					</div>
+		
+					<div class="col-md-2 d-flex justify-content-center align-items-center">
+						<section class="example-section">
+							<span class="mx-2 fontForInputs"> ضريبه الخصم </span>
+							<mat-slide-toggle name="isWTaxActive" formControlName="isWTaxActive" class="example-margin"
+								[color]="'red'">
+							</mat-slide-toggle>
+						</section>
+					</div>
+		
+		
+					<div class="col-md-2" *ngIf="companyForm.controls['isWTaxActive'].value">
+						<mat-form-field appearance="outline">
+							<mat-label> ضريبه الخصم</mat-label>
+							<input matInput type="number" placeholder="Placeholder" name="wTax" formControlName="wTax">
+							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+							<mat-hint>Hint</mat-hint>
+						</mat-form-field>
+					</div>
+		
+		
+					<div class="col-md-2 d-flex justify-content-center align-items-center">
+						<section class="example-section">
+							<span class="mx-2 fontForInputs"> ضريبه ق . م </span>
+							<mat-slide-toggle name="isValTaxActive" formControlName="isValTaxActive" class="example-margin"
+								[color]="'red'">
+							</mat-slide-toggle>
+						</section>
+					</div>
+		
+					<div class="col-md-2" *ngIf="companyForm.controls['isValTaxActive'].value">
+						<mat-form-field appearance="outline">
+							<mat-label>ضريبه ق . م</mat-label>
+							<input matInput type="number" placeholder="Placeholder" name="vatTax" formControlName="vatTax">
+							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+							<mat-hint>Hint</mat-hint>
+						</mat-form-field>
+					</div>
+		
+		
+		
+				</div>
+		
+
+
+
+				</mat-form-field>
+				<div>
+					<button mat-button matStepperPrevious>Back</button>
+					<button mat-button matStepperNext>Next</button>
+				</div>
+			</mat-step>
+
+			<mat-step>
+				<ng-template matStepLabel>Done</ng-template>
+				<p>You are now done.</p>
+				<div>
+					<button mat-button matStepperPrevious>Back</button>
+					<button mat-button (click)="stepper.reset()">Reset</button>
+				</div>
+			</mat-step>
+
+
+		</mat-stepper>
+
+
+
+
+
+
+
+
+
+
+
+		<input type="hidden" id="id" name="id" formControlName="id">
+
+
+		
+
+	</mat-dialog-content>
+
+	<mat-dialog-actions>
+		<div class="d-flex">
+			<button mat-raised-button type="submit" [disabled]="companyForm.invalid" color="primary">حفظ</button>
+			<button mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
+		</div>
+	</mat-dialog-actions>
+
+
+</form>

@@ -29,13 +29,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import { MatPseudoCheckboxModule } from '@angular/material/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export const MaterialsModules=[
 
-	MatPseudoCheckboxModule,
-    MatPseudoCheckboxModule,
+
+	MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
     MatAutocompleteModule,

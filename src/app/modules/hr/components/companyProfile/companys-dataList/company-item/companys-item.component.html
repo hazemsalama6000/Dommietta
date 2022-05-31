@@ -46,17 +46,17 @@
 										{{company.code}} </p>
 
 
-									<div >
+									<div class="d-flex">
 
-										<a href="#" class="btn btn-primary">
+										<button href="#" class="btn btn-primary">
 											<span class="fontForInputs"> عرض الفروع </span>
-										</a>
+										</button>
 
-										<a href="#" class="btn btn-primary mx-1">
+										<button class="btn btn-primary mx-1" (click)="openDialog(company.id)">
 											<span class="fontForInputs">
 												تعديل الشركة
 											</span>
-										</a>
+										</button>
 
 
 									</div>
