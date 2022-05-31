@@ -1,9 +1,10 @@
+
 <h2 mat-dialog-title> <span class="fontsection"> بيانات الشركة </span> </h2>
 
 <mat-divider></mat-divider>
 
 
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content style="z-index: -1;" class="mat-typography">
 
 	<mat-stepper linear>
 
@@ -115,7 +116,7 @@
 
 					<div class="row">
 
-						
+
 						<div class="col-md-8">
 
 							<mat-form-field appearance="outline">
@@ -125,7 +126,7 @@
 								<mat-hint>Hint</mat-hint>
 							</mat-form-field>
 
-						</div>						
+						</div>
 
 						<div class="col-md-4 d-flex justify-content-center align-items-center">
 							<p> <span class="mx-2 fontForInputs"> نشط </span>
@@ -139,10 +140,13 @@
 				<div>
 					<button mat-button matStepperNext class="btn btn-danger btn-sm col-md-2">التالى</button>
 				</div>
+				<br><br><br><br>
+
 			</form>
 		</mat-step>
 
-		<mat-step label="بيانات تواصل الشركة " state="chat" [stepControl]="companyConnectionForm" [editable]="isEditable">
+		<mat-step label="بيانات تواصل الشركة " state="chat" [stepControl]="companyConnectionForm"
+			[editable]="isEditable">
 			<form [formGroup]="companyConnectionForm">
 				<div class="col-md-6">
 
@@ -201,8 +205,8 @@
 		</mat-step>
 
 		<mat-step label="البيانات الضريبية" state="chat" [stepControl]="companyTaxForm" [editable]="isEditable">
-			<form [formGroup]="companyTaxForm" 
-			(ngSubmit)="Submit( companyTaxForm.value , companyConnectionForm.value , companyDataForm.value )">
+			<form [formGroup]="companyTaxForm"
+				(ngSubmit)="Submit( companyTaxForm.value , companyConnectionForm.value , companyDataForm.value )">
 				<div class="row  mt-5">
 
 					<div class="col-md-4">
@@ -292,7 +296,6 @@
 			<mat-icon>forum</mat-icon>
 		</ng-template>
 	</mat-stepper>
-
 
 
 </mat-dialog-content>
