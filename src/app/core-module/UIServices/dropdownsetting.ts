@@ -3,11 +3,12 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export const dropdownSettings : IDropdownSettings = {
 	singleSelection: true,
-	idField: 'id',
-	textField: 'name',
+	idField: 'Id',
+	textField: 'Name',
 	selectAllText: 'Select All',
 	unSelectAllText: 'UnSelect All',
-	itemsShowLimit: 3,
-	allowSearchFilter: true
+	itemsShowLimit: 5,
+	allowSearchFilter: true,
+	searchPlaceholderText:'اختر'
   };
 

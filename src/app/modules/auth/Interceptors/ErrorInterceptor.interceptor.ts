@@ -37,13 +37,24 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 				if (requestError.status == 400) {
 
+				let	messageError:string = "";
+					
+					const errors:any = {};
+
+					for(const key in error.errors){
+						if(Object.prototype.hasOwnProperty.call(error.errors , key) ){
+							errors[key] = error.errors[key];
+							messageError+=" ----- "+error.errors[key][0];
+						}
+					}
+
 					this.Logging.LogRequestError({
 						severity: 'error',
 						summary: `HTTP Error - ${requestError.status}`,
-						detail: error.errors.Name
+						detail: errors
 					});
 
-					return throwError(() => new Error(error.errors.Name));
+					return throwError(() => new Error(messageError));
 				}
 
 

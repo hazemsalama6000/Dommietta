@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { environment } from "src/environments/environment";
 import { ICompanyDisplayData } from "../../../models/ICompanyDisplayData";
 import { CompanyService } from "../../../services/company.service";
 @Component({
@@ -14,17 +15,20 @@ export class CompanysDataListComponent {
 
 	ngOnInit() {
 
-		this.companyService.getCompanyData().subscribe(
-			(data: Array<ICompanyDisplayData>) => {
-				this.companys = data;
-				console.log(this.companys);
-			}
-		);
+		this.companyService.bSubject.subscribe(data => {
 
+			this.companyService.getCompanyData().subscribe(
+				(data: Array<ICompanyDisplayData>) => {
+					this.companys = data.map(item => ({ ...item, logoWeb: `${localStorage.getItem('companyLink')}${item.logoWeb}` }) as ICompanyDisplayData);
+					console.log(this.companys);
+				}
+			);
+
+		});
 	}
 
 
-	
+
 
 
 }

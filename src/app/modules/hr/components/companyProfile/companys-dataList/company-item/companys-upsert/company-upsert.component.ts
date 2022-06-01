@@ -1,9 +1,15 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { dropdownSettings } from "src/app/core-module/UIServices/dropdownsetting";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { ICompany } from "src/app/modules/hr/models/ICompany";
+import { CompanyService } from "src/app/modules/hr/services/company.service";
+import { IRegion } from "src/app/modules/share/models/IRegion.interface";
+import { RegionService } from "src/app/modules/share/Services/region.service";
+import { StatesService } from "src/app/modules/share/Services/state.service";
+import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 @Component({
 	selector: "company-upsert",
@@ -12,6 +18,9 @@ import { ICompany } from "src/app/modules/hr/models/ICompany";
 })
 
 export class CompanyUpsertComponent implements OnInit {
+
+	logoWebFile: File;
+	logoPrintFile: File;
 
 	isEditable: boolean = false;
 	dropdownListDataForState: any = [];
@@ -31,7 +40,14 @@ export class CompanyUpsertComponent implements OnInit {
 	companyConnectionForm: FormGroup;
 	companyTaxForm: FormGroup;
 
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private toaster: toasterService) {
+	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: any,
+		private fb: FormBuilder,
+		private toaster: toasterService,
+		private stateService: StatesService,
+		private regionService: RegionService,
+		private service: CompanyService
+	) {
 
 		//here get data of company and put data in  the form
 		if (data.companyId) {
@@ -44,27 +60,18 @@ export class CompanyUpsertComponent implements OnInit {
 
 		this.initForm();
 
-
-		this.dropdownListDataForState = [
-			{ id: 1, name: 'Mumbai' },
-			{ id: 2, name: 'Bangaluru' },
-			{ id: 3, name: 'Pune' },
-			{ id: 4, name: 'Navsari' },
-			{ id: 5, name: 'New Delhi' }
-		];
+		this.stateService.getLookupData().subscribe(
+			(data: LookUpModel[]) => {
+				this.dropdownListDataForState = data;
+			}
+		);
 
 		this.selectedItemState = [
 			{ id: 3, name: 'Pune' },
 		];
 
 
-		this.dropdownListDataForRegion = [
-			{ id: 1, name: 'Mumbai' },
-			{ id: 2, name: 'Bangaluru' },
-			{ id: 3, name: 'Pune' },
-			{ id: 4, name: 'Navsari' },
-			{ id: 5, name: 'New Delhi' }
-		];
+		this.dropdownListDataForRegion = [];
 
 		this.selectedItemForRegion = [
 			{ id: 3, name: 'Pune' },
@@ -72,9 +79,17 @@ export class CompanyUpsertComponent implements OnInit {
 
 
 	}
-	onItemSelect(item: any) {
-		console.log(item);
+
+	onItemSelectState(item: any) {
+
+		this.regionService.getLookupData(item.Id).subscribe(
+			(data: IRegion[]) => {
+				this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
+			}
+		);
+
 	}
+
 	onSelectAll(items: any) {
 		console.log(items);
 	}
@@ -91,6 +106,8 @@ export class CompanyUpsertComponent implements OnInit {
 			mobileUserNumber: ['', Validators.compose([Validators.required])],
 			region_Id: ['', Validators.compose([Validators.required])],
 			isActive: [false,],
+			logoPrint: ['', Validators.compose([Validators.required])],
+			logoWeb: ['', Validators.compose([Validators.required])],
 		});
 
 		this.companyConnectionForm = this.fb.group({
@@ -103,16 +120,22 @@ export class CompanyUpsertComponent implements OnInit {
 		this.companyTaxForm = this.fb.group({
 			commercialRecord: ['', Validators.compose([Validators.required])],
 			taxCardNo: ['', Validators.compose([Validators.required])],
-			vatTax: ['',],
+			vatTax: [0,],
 			isValTaxActive: [false,],
 			hasDirectTransferForStocks: [false,],
-			wTax: ['',],
+			wTax: [0,],
 			isWTaxActive: [false,],
 		});
 
 	}
 
+	logoPrintChange(event: any) {
+		this.logoPrintFile = <File>event.target.files[0];
+	}
 
+	logoWebChange(event: any) {
+		this.logoWebFile = <File>event.target.files[0];
+	}
 	/*closeEdit() {
 		this.companyForm.setValue({ Id: 0, Name: '' });
 	}*/
@@ -130,7 +153,7 @@ export class CompanyUpsertComponent implements OnInit {
 		model.activity = companyDataForm.activity;
 		model.address = companyDataForm.address;
 		model.mobileUserNumber = companyDataForm.mobileUserNumber;
-		model.region_Id = companyDataForm.region_Id[0].id;
+		model.region_Id = companyDataForm.region_Id[0].Id;
 		model.isActive = companyDataForm.isActive;
 
 		model.phoneNumber = companyConnectionForm.phoneNumber;
@@ -158,24 +181,52 @@ export class CompanyUpsertComponent implements OnInit {
 		this.isEditable = true;
 
 		console.log(model);
-		/*
-		model.company_Id = 1;
 
-		if (model.Id == 0) {
+		if (model.id == 0) {
 
-			this.service.PostLookupData(model).
+			const fd = new FormData();
+
+			fd.append('logoPrintPhoto', this.logoPrintFile,this.logoPrintFile.name);
+			fd.append('logoWebPhoto', this.logoWebFile,this.logoWebFile.name);
+
+			fd.append('id',model.id.toString() );
+			fd.append('code',model.code );
+			fd.append('companyName',model.companyName );
+			fd.append('activity',model.activity );
+			fd.append('address',model.address );
+			fd.append('mobileUserNumber',model.mobileUserNumber.toString() );
+			fd.append('region_Id',model.region_Id.toString() );
+			fd.append('isActive',model.isActive.toString() );
+	
+			fd.append('phoneNumber',model.phoneNumber );
+			fd.append('email',model.email );
+			fd.append('managerName',model.managerName );
+			fd.append('managerPosition',model.managerPosition);
+	
+			fd.append('commercialRecord',model.commercialRecord );
+			fd.append('taxCardNo',model.taxCardNo );
+			fd.append('wTax',model.wTax.toString() );
+			fd.append('vatTax',model.vatTax.toString() );
+			fd.append('isValTaxActive',model.isValTaxActive.toString() );
+			fd.append('isWTaxActive',model.isWTaxActive.toString() );
+			fd.append('hasDirectTransferForStocks',model.hasDirectTransferForStocks.toString() );
+	
+
+			this.service.PostCompanyData(fd).
 				subscribe(
 					(data: HttpReponseModel) => {
 
-						if(data.isSuccess){
+						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-						// TODO	this.service.bSubject.next(true);	
+							console.log(data.message);
+							this.service.bSubject.next(true);	
 						}
-						else if(data.isExists){
+						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
 						}
 					},
 					(error: any) => {
+						console.log(error);
 						this.toaster.openWarningSnackBar(error);
 					}
 				);
@@ -183,17 +234,17 @@ export class CompanyUpsertComponent implements OnInit {
 		}
 
 		else {
-			this.service.UpdateLookupData(model).subscribe(
+			this.service.UpdateCompanyData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
+				    this.service.bSubject.next(true);
 				},
 				(error: any) => {
 					this.toaster.openWarningSnackBar(error);
 				});
 
 		}
-*/
+
 	}
 
 

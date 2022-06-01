@@ -20,7 +20,7 @@ constructor(){}
     AddAuthToHeader(request: HttpRequest<any>) {
         return request.clone({
             setHeaders: {
-				'Content-Type': 'application/json',
+			//	'Content-Type': 'application/json',
 				'Authorization':`Bearer ${localStorage.getItem('token')}`,
 				"Accept-Language": "ar-EG"
 

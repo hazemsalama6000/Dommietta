@@ -3,6 +3,7 @@ import { BehaviorSubject, map, Observable } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { ICompany } from "../models/ICompany";
 import { ICompanyDisplayData } from "../models/ICompanyDisplayData";
 
 @Injectable({
@@ -11,6 +12,7 @@ import { ICompanyDisplayData } from "../models/ICompanyDisplayData";
 
 export class CompanyService 
 {
+    bSubject = new BehaviorSubject(true); 
 
 	constructor(private http:CommonHttpService){}
     
@@ -37,15 +39,15 @@ export class CompanyService
 	}
 
 	DeleteCompanyData(id:number):Observable<any>{
-		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_DELETE}${id}`);
+		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_DELETE}${id}`);
 	}
 	
-	PostCompanyData(model:LookUpModel):Observable<any>{
-      return this.http.CommonPostRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_ADD}`);
+	PostCompanyData(model:any):Observable<any>{
+      return this.http.CommonPostRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_ADD}`);
 	}
 
-	UpdateCompanyData(model:LookUpModel):Observable<any>{
-		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_UPDATE}${model.Id}`);
+	UpdateCompanyData(model:ICompany):Observable<any>{
+		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_UPDATE}${model.id}`);
 	  }
 
 
