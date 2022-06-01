@@ -99,11 +99,11 @@ export class CompanyUpsertComponent implements OnInit {
 
 		this.companyDataForm = this.fb.group({
 			id: [0],
-			code: ['', Validators.compose([Validators.required])],
-			companyName: ['', Validators.compose([Validators.required])],
-			activity: ['', Validators.compose([Validators.required])],
-			address: ['', Validators.compose([Validators.required])],
-			mobileUserNumber: ['', Validators.compose([Validators.required])],
+			code: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.pattern("^[1-9][0-9]*$")])],
+			companyName: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
+			activity: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
+			address: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
+			mobileUserNumber: ['', Validators.compose([Validators.required,Validators.pattern("^[1-9][0-9]*$")])],
 			region_Id: ['', Validators.compose([Validators.required])],
 			isActive: [false,],
 			logoPrint: ['', Validators.compose([Validators.required])],
@@ -111,19 +111,19 @@ export class CompanyUpsertComponent implements OnInit {
 		});
 
 		this.companyConnectionForm = this.fb.group({
-			phoneNumber: ['', Validators.compose([Validators.required])],
-			email: ['',],
-			managerName: ['', Validators.compose([Validators.required])],
-			managerPosition: ['', Validators.compose([Validators.required])],
+			phoneNumber: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(20),Validators.pattern("^[1-9][0-9]*$")])],
+			email: ['',Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
+			managerName: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
+			managerPosition: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
 		});
 
 		this.companyTaxForm = this.fb.group({
-			commercialRecord: ['', Validators.compose([Validators.required])],
-			taxCardNo: ['', Validators.compose([Validators.required])],
-			vatTax: [0,],
+			commercialRecord: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern("^[1-9][0-9]*$")])],
+			taxCardNo: ['', Validators.compose([Validators.required,Validators.pattern("^[1-9][0-9]*$"),Validators.minLength(3),Validators.maxLength(50)])],
+			vatTax: [0,Validators.compose([Validators.pattern("^[1-9][0-9]*$"),Validators.minLength(3),Validators.maxLength(50)])],
 			isValTaxActive: [false,],
 			hasDirectTransferForStocks: [false,],
-			wTax: [0,],
+			wTax: [0,Validators.pattern("^[1-9][0-9]*$")],
 			isWTaxActive: [false,],
 		});
 
