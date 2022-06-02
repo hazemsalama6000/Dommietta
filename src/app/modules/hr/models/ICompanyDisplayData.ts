@@ -7,6 +7,7 @@ export interface ICompanyDisplayData {
     address: string,
     phoneNumber?: number,
     logoWeb?: string,
+	logoPrint?:string,
     hasDirectTransferForStocks?:boolean,
     email?: string,
     isActive?: boolean,

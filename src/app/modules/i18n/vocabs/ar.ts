@@ -39,7 +39,8 @@ export const locale = {
 				ISWTAXACTIVE:"isWTaxActive",
 				LOGOPRINT:"صورة الطباعة",
 				LOGOWEB:"صورة الموقع",
-				COMPANYDATA:"بيانات الشركة"
+				COMPANYDATA:"بيانات الشركة",
+				EMPLOYEE:"الموظف"
 
 			},
 			BUTTONS: {

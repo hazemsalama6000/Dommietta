@@ -21,7 +21,7 @@
 							{{'HR.INPUTS.COMPANYDATA' | translate}}
 						</div>-->
 
-						<div class="d-flex">
+						<div class="d-flex" *ngIf="isEdit==false">
 
 							<span class=" mx-10">
 								<label class="fontForInputs">{{'HR.INPUTS.LOGOPRINT' | translate}} </label>
@@ -124,7 +124,7 @@
 
 								<div class="col-md-9">
 
-									<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+									<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings" name="state_Id" formControlName="state_Id"
 										[data]="dropdownListDataForState" (onSelect)="onItemSelectState($event)">
 									</ng-multiselect-dropdown>
 
@@ -141,20 +141,20 @@
 
 							<mat-form-field appearance="outline">
 								<mat-label> {{'HR.INPUTS.USERCOUNTS'|translate}}</mat-label>
-								<input matInput type="number" placeholder="Ex. 12" min="1" name="mobileUserNumber"
-									formControlName="mobileUserNumber">
+								<input matInput type="number" placeholder="Ex. 12" min="1" name="mobileUsersCount"
+									formControlName="mobileUsersCount">
 								<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 								<mat-hint>
 									<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 									  validation: 'required',
 									  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.USERCOUNTS' | translate},
-									  control: companyDataForm.controls['mobileUserNumber']
+									  control: companyDataForm.controls['mobileUsersCount']
 									}"></ng-container>
 
 									<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										validation: 'pattern',
 										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.USERCOUNTS' | translate},
-										control: companyDataForm.controls['mobileUserNumber']
+										control: companyDataForm.controls['mobileUsersCount']
 									  }"></ng-container>
 
 								</mat-hint>
@@ -261,7 +261,7 @@
 				</div>
 
 				<div>
-					<button mat-button matStepperNext class="btn btn-danger btn-sm col-md-2">{{'HR.BUTTONS.NEXT' |
+					<button (click)="passingCompanyToFormConnection()" mat-button matStepperNext class="btn btn-danger btn-sm col-md-2">{{'HR.BUTTONS.NEXT' |
 						translate}}</button>
 				</div>
 				<br><br><br><br>
@@ -272,11 +272,11 @@
 		<mat-step label="بيانات تواصل الشركة " state="chat" [stepControl]="companyConnectionForm"
 			[editable]="isEditable">
 			<form [formGroup]="companyConnectionForm">
-				<div class="col-md-6">
+				<div class="col-md-12">
 
 					<div class="row mt-5">
 
-						<div class="col-md-6">
+						<div class="col-md-4" *ngIf="isEdit==false">
 							<mat-form-field appearance="outline">
 								<mat-label> {{'HR.INPUTS.MANAGERNAME' | translate}}</mat-label>
 								<input matInput placeholder="Placeholder" name="managerName"
@@ -305,7 +305,7 @@
 						</div>
 
 
-						<div class="col-md-6">
+						<div class="col-md-4" *ngIf="isEdit==false">
 							<mat-form-field appearance="outline">
 								<mat-label>{{'HR.INPUTS.MANAGERPOSITION' | translate}}</mat-label>
 								<input matInput placeholder="Placeholder" name="managerPosition"
@@ -334,7 +334,7 @@
 						</div>
 
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<mat-form-field appearance="outline">
 								<mat-label>{{'HR.INPUTS.EMAIL' | translate}}</mat-label>
 								<input matInput placeholder="Placeholder" name="email" formControlName="email">
@@ -357,7 +357,7 @@
 							</mat-form-field>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<mat-form-field appearance="outline">
 								<mat-label> {{'HR.INPUTS.PHONENUM' | translate}}</mat-label>
 								<input matInput placeholder="01147785..." name="phoneNumber"
@@ -393,16 +393,35 @@
 							</mat-form-field>
 						</div>
 
+						<div class="col-md-4" *ngIf="isEdit">
+
+							<div class="row mt-2">
+								<div class="col-md-3">
+									<label class="fontForInputs mt-5"> {{'HR.INPUTS.EMPLOYEE' | translate}} </label>
+								</div>
+
+								<div class="col-md-9">
+
+									<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+										[data]="dropdownListDataForEmployee" name="employee_Id" formControlName="employee_Id"
+										(onSelect)="onItemSelectState($event)">
+									</ng-multiselect-dropdown>
+
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 				</div>
 
 				<div class="mt-2">
-					<button mat-button matStepperNext class="btn btn-danger btn-sm col-md-2">{{'HR.BUTTONS.NEXT' |
+					<button (click)="passingCompanyToFormTax()" mat-button matStepperNext class="btn btn-danger btn-sm col-md-2">{{'HR.BUTTONS.NEXT' |
 						translate}}</button>
 					<button mat-button matStepperPrevious
 						class="btn btn-primary btn-sm col-md-2 mx-2">{{'HR.BUTTONS.BACK' | translate}}</button>
 				</div>
+				<br><br><br><br><br>
 			</form>
 		</mat-step>
 

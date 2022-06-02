@@ -42,8 +42,17 @@ export enum HttpPaths {
 	//Company APIS
 
 	API_COMPANY_ADD = "/api/v1/shared/addCompany",
-	API_COMPANY_UPDATE = "/api/v1/hr/updateSection/",
+	API_COMPANY_UPDATE = "/api/v1/shared/updateCompany/",
 	API_COMPANY_GETALL = "/api/v1/shared/getCompanies",
-	API_COMPANY_DELETE = "/api/v1/hr/deleteSection/",
+	API_COMPANY_DELETE = "/api/v1/shared/deleteSection/",
+	API_COMPANY_GETBYID = "/api/v1/shared/getcompanyprofile/",
+
+	API_COMPANY_CHANGELOGOWEB = "/api/v1/shared/ChangeLogoWeb",
+	API_COMPANY_CHANGELOGOPRINT = "/api/v1/shared/ChangeLogoPrint",
+
+
+	//Employee APIS
+
+	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/getemployees/",
 
 }

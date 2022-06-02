@@ -19,9 +19,11 @@ export interface ICompany {
 	isWTaxActive: boolean,
 	email: string,
 	isActive: boolean,
-	mobileUserNumber: number,
+	mobileUsersCount: number,
+	state_Id :number
 	region_Id: number,
 	managerName: string,
-	managerPosition: string
+	managerPosition: string,
+	employee_Id:number
 
 }

@@ -10,8 +10,8 @@
 					<mat-expansion-panel-header [ngClass]="{'bg-danger':panelOpenState==true}">
 						<mat-panel-title>
 
-							<img [src]="company.logoWeb" class="rounded" width="40"
-								height="40">
+							<img [src]="company.logoWeb" class="rounded" width="40" height="40">
+
 
 							<div style="width:100%" class="text-center"
 								[ngStyle]="{'color':panelOpenState==true ? 'white':'black'}">
@@ -24,6 +24,18 @@
 									{{company.companyName}}
 								</span>
 
+								<div class="mx-10">
+									<div *ngIf="company.isActive==true; else xcross;">
+										<i class="fa fa-check" aria-hidden="true"></i>
+
+									</div>
+
+									<ng-template #xcross>
+										<i class="fa fa-xmark" aria-hidden="true"></i>
+									</ng-template>
+								</div>
+
+
 							</div>
 
 						</mat-panel-title>
@@ -33,41 +45,104 @@
 					<div class="row p-11">
 
 
-						<div class="col-md-6">
+						<div class="col-md-7">
 
-							<div class="card bg-dark" style="width:400px">
-								<img class="card-img-top" [src]="company.logoWeb"
-									width="100" height="200" alt="Card image">
-								<div class="card-body">
+							<div class="row">
 
-									<h4 class="card-title text-light"> <span class="fontForInputs"> الشركة </span> :
-										{{company.companyName}} </h4>
-									<p class="card-text text-light"> <span class="fontForInputs"> الكود : </span>
-										{{company.code}} </p>
+								<div class="col-md-6">
 
+									<div class="card bg-dark" style="width:250px">
+										<img class="card-img-top" [src]="company.logoWeb" width="100" height="200"
+											alt="Card image">
+										<div class="card-body">
 
-									<div class="d-flex">
+											<div class="row">
 
-										<button href="#" class="btn btn-primary">
-											<span class="fontForInputs"> عرض الفروع </span>
-										</button>
-
-										<button class="btn btn-primary mx-1" (click)="openDialog(company.id)">
-											<span class="fontForInputs">
-												تعديل الشركة
-											</span>
-										</button>
+												<div class="col-md-12">
+													<h4 class="card-title text-light"> <span class="fontForInputs">
+															الشركة </span> :
+														{{company.companyName}} </h4>
+													<p class="card-text text-light"> <span class="fontForInputs"> الكود
+															: </span>
+														{{company.code}} </p>
+												</div>
 
 
+
+
+												<div class="col-md-12 mt-2">
+
+													<span class="text-light">
+														<label class="fontForInputs">{{'HR.INPUTS.LOGOWEB' | translate}}
+														</label>
+														<input type="file" class="mx-2 col-md-6"
+															(change)="logoWebChange($event)" placeholder="Placeholder" name="logoWeb">
+													</span>
+
+												</div>
+											</div>
+
+											<div class="d-flex mt-5">
+
+												<button href="#" class="btn btn-primary">
+													<span class="fontForInputs"> عرض الفروع </span>
+												</button>
+
+
+											</div>
+
+
+										</div>
 									</div>
 
 
 								</div>
+
+								<div class="col-md-6">
+
+									<div class="card bg-dark" style="width:250px">
+										<img class="card-img-top" [src]="company.logoPrint" width="100" height="200"
+											alt="Card image">
+										<div class="card-body">
+
+											<div class="row">
+
+												<div class="col-md-12">
+													<span class="text-light">
+														<label class="fontForInputs">{{'HR.INPUTS.LOGOPRINT' |
+															translate}} </label>
+															<input type="file" class="mx-2 col-md-6"
+															(change)="logoPrintChange($event)" placeholder="Placeholder" name="logoPrint">
+													</span>
+
+												</div>
+											</div>
+
+											<div class="d-flex mt-5">
+
+												<button class="btn btn-primary mx-1" (click)="openDialog(company.id)">
+													<span class="fontForInputs">
+														تعديل الشركة
+													</span>
+												</button>
+
+
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+
+
 							</div>
+
+
+
 
 						</div>
 
-						<div class="col-md-6 fontForInputs">
+						<div class="col-md-5 fontForInputs">
 
 							<table class="table">
 
