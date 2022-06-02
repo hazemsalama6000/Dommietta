@@ -126,7 +126,16 @@
 													</span>
 												</button>
 
-
+												<button class="btn btn-info mx-1" *ngIf="company.isActive==false" (click)="activeCompany()">
+													<span class="fontForInputs">
+													   تفعيل
+													</span>
+												</button>
+												<button class="btn btn-danger mx-1" *ngIf="company.isActive==true" (click)="activeCompany()">
+													<span class="fontForInputs">
+													ايقاف التفعيل
+													</span>
+												</button>
 											</div>
 
 

@@ -62,5 +62,9 @@ export class CompanyService {
 		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_CHANGELOGOPRINT}`);
 	}
 
+	activeOrNot(model: any): Observable<any> {
+		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_ACTIVEORNOT}${model.id}`);
+	}
+
 
 }

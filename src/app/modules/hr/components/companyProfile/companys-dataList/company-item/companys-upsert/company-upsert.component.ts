@@ -67,7 +67,7 @@ export class CompanyUpsertComponent implements OnInit {
 			this.isEdit = true;
 			this.companyDataForm = this.fb.group({
 				id: [0],
-				code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern("^[1-9][0-9]*$")])],
+				code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				companyName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				activity: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
@@ -91,7 +91,7 @@ export class CompanyUpsertComponent implements OnInit {
 			this.isEdit = false;
 			this.companyDataForm = this.fb.group({
 				id: [0],
-				code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern("^[1-9][0-9]*$")])],
+				code: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				companyName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				activity: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],

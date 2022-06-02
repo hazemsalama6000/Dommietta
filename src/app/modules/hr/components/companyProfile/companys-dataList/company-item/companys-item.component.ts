@@ -71,6 +71,30 @@ export class CompanyItemComponent {
 
 	}
 
+	activeCompany(){
+
+		this.service.activeOrNot(this.company).
+		subscribe(
+			(data: HttpReponseModel) => {
+
+				if (data.isSuccess) {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.company.isActive = !this.company.isActive;
+					//	this.service.bSubject.next(true);
+				}
+				else if (data.isExists) {
+					this.toaster.openWarningSnackBar(data.message);
+				}
+			},
+			(error: any) => {
+				console.log(error);
+				this.toaster.openWarningSnackBar(error);
+			}
+		);
+
+
+	}
+
 	logoWebChange(event: any) {
 		this.logoWebFile = <File>event.target.files[0];
 		const fd = new FormData();

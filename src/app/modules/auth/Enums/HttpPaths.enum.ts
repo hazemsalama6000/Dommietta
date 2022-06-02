@@ -49,6 +49,7 @@ export enum HttpPaths {
 
 	API_COMPANY_CHANGELOGOWEB = "/api/v1/shared/ChangeLogoWeb",
 	API_COMPANY_CHANGELOGOPRINT = "/api/v1/shared/ChangeLogoPrint",
+	API_COMPANY_ACTIVEORNOT = "/api/v1/shared/ActiveOrNot/",
 
 
 	//Employee APIS
