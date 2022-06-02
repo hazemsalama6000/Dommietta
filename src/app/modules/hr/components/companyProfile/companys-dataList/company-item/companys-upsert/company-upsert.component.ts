@@ -49,10 +49,7 @@ export class CompanyUpsertComponent implements OnInit {
 		private service: CompanyService
 	) {
 
-		//here get data of company and put data in  the form
-		if (data.companyId) {
-			console.log(data);
-		}
+		//here get data of company and put data in the form
 
 	}
 
@@ -97,9 +94,16 @@ export class CompanyUpsertComponent implements OnInit {
 	// initialize Form With Validations
 	initForm() {
 
+		// TODO Here
+		/*if (this.data.companyId) {
+			
+			this.service.getCompanyData()
+			
+		}*/
+
 		this.companyDataForm = this.fb.group({
 			id: [0],
-			code: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.pattern("^[1-9][0-9]*$")])],
+			code: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100),Validators.pattern("^[1-9][0-9]*$")])],
 			companyName: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
 			activity: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],
 			address: ['', Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(100)])],

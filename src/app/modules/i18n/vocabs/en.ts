@@ -17,12 +17,41 @@ export const locale = {
 	HR:{
 		INPUTS:{
 		 NAME:"Name",
-		 FILTER:"Search"
+		 FILTER:"Search",
+		 CODE:"code",
+		 COMPANYNAME:"Company Name",
+		 USERCOUNTS:"users counts",
+		 ACTIVITY:"activity",
+		 ADDRESS:"address",
+		 REGION:"Region",
+         STATE:"State",
+		 ISACTIVE:"is Active",
+		 MANAGERPOSITION:"manager Position",
+		 MANAGERNAME:"manager Name",
+		 EMAIL:"email",
+		 PHONENUM:"phone number",
+		 COMMERCIALRECORD:"commercialRecord",
+		 TAXCARDNO:"taxCardNo",
+		 VATTAX:"vatTax",
+		 ISVALTAXACTIVE:"isValTaxActive",
+		 HASDIRECTIONTRANSFERFORSTOCKS:"hasDirectTransferForStocks",
+		 WTAX:"wTax",
+		 ISWTAXACTIVE:"isWTaxActive",
+		 LOGOPRINT:"logoPrint",
+		 LOGOWEB:"logoWeb",
+		 COMPANYDATA:"company data"
+
+
+
 		},
 		BUTTONS:{
 			ADD:"Add",
 			CLOSE:"close",
-			EDIT:"edit"
+			EDIT:"edit",
+			NEXT:"Next",
+			BACK:"Back",
+
+
 		},
 		TITLES:{
 			ADDORUPDATE:"add or Edit",
