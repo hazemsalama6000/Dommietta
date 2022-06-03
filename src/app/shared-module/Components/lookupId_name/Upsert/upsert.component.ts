@@ -52,14 +52,15 @@ export class UpsertComponent {
 			Id: [''],
 			Name: ['', Validators.compose([
 				Validators.required
-			])]
+			])],
+			isActive:['',]
 		});
 	}
 
 
 	closeEdit() {
 		this.toggleAddEditButton = true;
-		this.UpsertForm.setValue({ Id: 0, Name: '' });
+		this.UpsertForm.setValue({ Id: 0, Name: '' ,isActive:true });
 	}
 
 

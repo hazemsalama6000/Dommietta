@@ -18,7 +18,8 @@
 <form [formGroup]="UpsertForm" (ngSubmit)="Submit(UpsertForm.value)">
 
 	<input type="hidden" formControlName="Id" name="Id">
-	
+	<input type="hidden" formControlName="isActive" name="isActive">
+
 	<div class="row mt-7">
 
 	  <div class="col-md-3">

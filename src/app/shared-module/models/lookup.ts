@@ -1,6 +1,7 @@
-export class LookUpModel{
-	Id:number;
-	Name:string;
-	company_Id: number
-
+export class LookUpModel {
+	Id: number;
+	Name: string;
+	company_Id: number;
+	isActive?: boolean;
+	isEdit?:boolean = false;
 }

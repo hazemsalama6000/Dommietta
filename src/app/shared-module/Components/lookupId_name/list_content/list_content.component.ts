@@ -34,6 +34,20 @@ export class ListContentComponent {
 		this.edit.emit(model);
 	}
 
+	show(model: LookUpModel){
+console.log(model);
+	}
+
+	toggleActiveDeactive(element:LookUpModel){
+		this.service.toggleActiveDeactive(element).subscribe(
+			(data: HttpReponseModel) => {
+				this.toaster.openSuccessSnackBar(data.message);
+				this.getallData();
+			},
+			(error:any) => {
+				console.log(error);
+			 });
+	}
 
 	Remove(model: LookUpModel){
 		this.service.DeleteLookupData(model.Id).subscribe(
@@ -50,6 +64,7 @@ export class ListContentComponent {
 	getallData() {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
+				console.log(data);
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;	
 			}
