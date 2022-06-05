@@ -192,6 +192,9 @@ export class CompanyUpsertComponent implements OnInit {
 				this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
 			}
 		);
+		this.selectedItemForRegion={};
+		this.companyDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
+
 
 	}
 

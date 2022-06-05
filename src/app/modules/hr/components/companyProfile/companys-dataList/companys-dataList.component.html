@@ -2,15 +2,13 @@
 
 	<div class="row">
 
-		<button (click)="openDialog()" class="btn btn-primary">
+		<button (click)="openDialog()" class="btn btn-primary col-md-2">
 			
 			{{ "HR.BUTTONS.ADD" | translate }}
 		</button>
 		<div class="col-md-12">
 
-
-			<company-item *ngFor="let x of companys" [company]="x"></company-item>
-
+			<company-item *ngFor="let x of companys"  [company]="x"></company-item>
 
 		</div>
 	</div>

@@ -7,7 +7,8 @@
 
 			<mat-accordion>
 				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-					<mat-expansion-panel-header [ngClass]="{'bg-danger':panelOpenState==true}">
+					<mat-expansion-panel-header
+						[ngClass]="{'bg-danger':panelOpenState==true ,'heiglightRowClass' : company.isActive == true}">
 						<mat-panel-title>
 
 							<img [src]="company.logoWeb" class="rounded" width="40" height="40">
@@ -20,11 +21,18 @@
 									بيانات الشركة :
 								</span>
 
-								<span class="fontForInputs">
+								<span class="fontForInputs mx-5">
 									{{company.companyName}}
 								</span>
 
-								<div class="mx-10">
+								<span class="fontForInputs" style="font-weight:bold ;">
+									الكود :
+								</span>
+
+								<span class="fontForInputs">
+									{{company.code}}
+								</span>
+								<!--<div class="mx-10">
 									<div *ngIf="company.isActive==true; else xcross;">
 										<i class="fa fa-check" aria-hidden="true"></i>
 
@@ -33,7 +41,7 @@
 									<ng-template #xcross>
 										<i class="fa fa-xmark" aria-hidden="true"></i>
 									</ng-template>
-								</div>
+								</div>-->
 
 
 							</div>
@@ -42,33 +50,21 @@
 					</mat-expansion-panel-header>
 
 
-					<div class="row p-11">
+					<div class="row p-5">
 
 
-						<div class="col-md-7">
+						<div class="col-md-12">
 
 							<div class="row">
 
-								<div class="col-md-6">
+								<div class="col-md-4">
 
 									<div class="card bg-dark" style="width:250px">
-										<img class="card-img-top" [src]="company.logoWeb" width="100" height="200"
+										<img class="card-img-top" [src]="company.logoWeb" width="80" height="80"
 											alt="Card image">
 										<div class="card-body">
 
 											<div class="row">
-
-												<div class="col-md-12">
-													<h4 class="card-title text-light"> <span class="fontForInputs">
-															الشركة </span> :
-														{{company.companyName}} </h4>
-													<p class="card-text text-light"> <span class="fontForInputs"> الكود
-															: </span>
-														{{company.code}} </p>
-												</div>
-
-
-
 
 												<div class="col-md-12 mt-2">
 
@@ -76,32 +72,18 @@
 														<label class="fontForInputs">{{'HR.INPUTS.LOGOWEB' | translate}}
 														</label>
 														<input type="file" class="mx-2 col-md-6"
-															(change)="logoWebChange($event)" placeholder="Placeholder" name="logoWeb">
+															(change)="logoWebChange($event)" placeholder="Placeholder"
+															name="logoWeb">
 													</span>
 
 												</div>
 											</div>
 
-											<div class="d-flex mt-5">
-
-												<button href="#" class="btn btn-primary">
-													<span class="fontForInputs"> عرض الفروع </span>
-												</button>
-
-
-											</div>
-
-
 										</div>
 									</div>
 
-
-								</div>
-
-								<div class="col-md-6">
-
-									<div class="card bg-dark" style="width:250px">
-										<img class="card-img-top" [src]="company.logoPrint" width="100" height="200"
+									<div class="card bg-dark mt-2" style="width:250px">
+										<img class="card-img-top" [src]="company.logoPrint" width="80" height="80"
 											alt="Card image">
 										<div class="card-body">
 
@@ -111,106 +93,126 @@
 													<span class="text-light">
 														<label class="fontForInputs">{{'HR.INPUTS.LOGOPRINT' |
 															translate}} </label>
-															<input type="file" class="mx-2 col-md-6"
-															(change)="logoPrintChange($event)" placeholder="Placeholder" name="logoPrint">
+														<input type="file" class="mx-2 col-md-6"
+															(change)="logoPrintChange($event)" placeholder="Placeholder"
+															name="logoPrint">
 													</span>
 
 												</div>
 											</div>
+										</div>
+									</div>
 
-											<div class="d-flex mt-5">
+								</div>
 
-												<button class="btn btn-primary mx-1" (click)="openDialog(company.id)">
-													<span class="fontForInputs">
-														تعديل الشركة
-													</span>
-												</button>
+								<div class="col-md-8 fontForInputs">
 
-												<button class="btn btn-info mx-1" *ngIf="company.isActive==false" (click)="activeCompany()">
-													<span class="fontForInputs">
-													   تفعيل
-													</span>
-												</button>
-												<button class="btn btn-danger mx-1" *ngIf="company.isActive==true" (click)="activeCompany()">
-													<span class="fontForInputs">
-													ايقاف التفعيل
-													</span>
-												</button>
-											</div>
+									<div class="row">
+										<div class="d-flex align-items-start justify-content-end">
+
+											<button class="btn btn-primary col-md-3 mx-1" (click)="openDialog(company.id)">
+												<span class="fontForInputs">
+													تعديل الشركة
+												</span>
+											</button>
 
 
 										</div>
 									</div>
-								</div>
 
+									<div class="row">
+										<div class="col-md-6">
+											<table class="table"  style="width:100% ;">
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">الكود</th>
+													<td style="padding: 10px;">{{company.code}}</td>
+												</tr>
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">عدد المستخدمين</th>
+													<td style="padding: 10px;">{{company.mobileUserNumber}}</td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">العنوان</th>
+													<td style="padding: 10px;">{{company.address}}</td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">المحافظة</th>
+													<td style="padding: 10px;">{{company.state}}</td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">المنطقة</th>
+													<td style="padding: 10px;">{{company.region}} </td>
+												</tr>
+											</table>
+										</div>
+
+										<div class="col-md-6">
+
+											<table class="table" style="width:100% ;">
+
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">التليفون</th>
+													<td style="padding: 10px;">{{company.phoneNumber}} </td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">الايميل</th>
+													<td style="padding: 10px;">{{company.email}} </td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">اسم المسؤول</th>
+													<td style="padding: 10px;">{{company.managerName}} </td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;"> المسمى الوظيفى</th>
+													<td style="padding: 10px;">{{company.managerPosition}} </td>
+												</tr>
+
+												<tr style="border-bottom:1px dotted #5a5a5a ;">
+													<th style="padding: 10px;font-weight: bold;">نشط</th>
+													<td style="padding: 10px;">
+
+														<div class="d-flex justify-content-center align-items-center">
+															<div *ngIf="company.isActive==true; else xcross;">
+																<i class="fa fa-check" aria-hidden="true"></i>
+															</div>
+	
+															<ng-template #xcross>
+																<i class="fa fa-xmark" aria-hidden="true"></i>
+															</ng-template>
+	
+															<span class="mx-2">
+																<section matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
+																	class="example-section">
+																	<mat-slide-toggle name="isValTaxActive" class="example-margin" [color]="'red'"
+																		(click)="activeCompany()" [checked]="company.isActive">
+																	</mat-slide-toggle>
+																</section>
+															</span>
+														</div>
+														
+													</td>
+												</tr>
+
+
+											</table>
+										</div>
+									</div>
+
+
+								</div>
 
 							</div>
 
-
-
-
 						</div>
 
-						<div class="col-md-5 fontForInputs">
 
-							<table class="table">
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">العنوان</th>
-									<td style="padding: 10px;">{{company.address}}</td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">المحافظة</th>
-									<td style="padding: 10px;">{{company.state}}</td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">المنطقة</th>
-									<td style="padding: 10px;">{{company.region}} </td>
-								</tr>
-
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">التليفون</th>
-									<td style="padding: 10px;">{{company.phoneNumber}} </td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">الايميل</th>
-									<td style="padding: 10px;">{{company.email}} </td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">اسم المسؤول</th>
-									<td style="padding: 10px;">{{company.managerName}} </td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">المكان الوظيفى</th>
-									<td style="padding: 10px;">{{company.managerPosition}} </td>
-								</tr>
-
-								<tr style="border-bottom:1px dotted #5a5a5a ;">
-									<th style="padding: 10px;font-weight: bold;">نشط</th>
-									<td style="padding: 10px;">
-
-										<div *ngIf="company.isActive==true; else xcross;">
-											<i class="fa fa-check" aria-hidden="true"></i>
-
-										</div>
-
-										<ng-template #xcross>
-											<i class="fa fa-xmark" aria-hidden="true"></i>
-										</ng-template>
-
-									</td>
-								</tr>
-
-
-							</table>
-
-						</div>
 
 					</div>
 
