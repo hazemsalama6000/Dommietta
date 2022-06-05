@@ -1,19 +1,24 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, retry, throwError } from "rxjs";
+import { catchError, finalize, Observable, retry, throwError } from "rxjs";
+import { loaderService } from "src/app/core-module/UIServices/loader.service";
 import { environment } from "src/environments/environment";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-constructor(){}
+constructor(private loadService:loaderService){}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		this.loadService.isLoading.next(true);
 
         return next.handle(this.AddAuthToHeader(req)).pipe(
             catchError(
                 (error: any) => {
 					return throwError(() => new Error(error)) as Observable<HttpEvent<any>>;
                 }
-            )
+            ),finalize(
+				()=>{
+				this.loadService.isLoading.next(false);
+			})
         );
     }
 

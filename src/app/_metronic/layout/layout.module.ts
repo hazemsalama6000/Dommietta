@@ -24,6 +24,7 @@ import { PageTitleComponent } from './components/header/page-title/page-title.co
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
 import { DrawersModule, DropdownMenusModule, ModalsModule, EngagesModule} from '../partials';
 import {EngagesComponent} from "../partials/layout/engages/engages.component";
+import { SharedModule } from 'src/app/shared-module/shared-module.module';
 
 const routes: Routes = [
   {
@@ -62,6 +63,7 @@ const routes: Routes = [
     DropdownMenusModule,
     NgbTooltipModule,
     TranslateModule,
+	SharedModule
   ],
   exports: [RouterModule],
 })
