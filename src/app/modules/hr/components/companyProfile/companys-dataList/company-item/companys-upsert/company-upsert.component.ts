@@ -276,6 +276,9 @@ export class CompanyUpsertComponent implements OnInit {
 
 	mapFormGroupsToModel(companyTaxForm: any, companyConnectionForm: any, companyDataForm: any): ICompany {
 
+		console.log(companyDataForm.region_Id[0]);
+		console.log(companyConnectionForm.employee_Id[0]);
+
 		let model: any = {};
 
 		model.id = companyDataForm.id;
@@ -317,6 +320,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 		this.isEditable = true;
 
+		console.log(model);
 
 		if (companyDataForm.id == 0) {
 
