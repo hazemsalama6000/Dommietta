@@ -19,7 +19,7 @@ export class RegionService
     
 	getLookupData(regionId:number):Observable<IRegion[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_REGION_GETALL}${regionId}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name }) as IRegion )  ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name, isActive:Item.isActive , isEdit:false }) as IRegion )  ) );
 	}
 
 	DeleteLookupData(id:number):Observable<any>{
@@ -38,5 +38,8 @@ export class RegionService
 		return this.bSubject.asObservable();
 	 }
 
+	 toggleActiveDeactive(model: IRegion): Observable<any> {
+		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_REGION_UACTIVEDEACTIVE}${model.id}`);
+	}
 
 }

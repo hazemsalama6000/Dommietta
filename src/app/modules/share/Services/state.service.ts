@@ -19,7 +19,7 @@ export class StatesService
     
 	getLookupData():Observable<LookUpModel[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_GETALL}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name,isActive:Item.isActive , isEdit:false}) as LookUpModel )  ) );
 	}
 
 	DeleteLookupData(id:number):Observable<any>{
@@ -33,6 +33,10 @@ export class StatesService
 	UpdateLookupData(model:LookUpModel):Observable<any>{
 		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_UPDATE}${model.Id}`);
 	  }
+
+	  toggleActiveDeactive(model: LookUpModel): Observable<any> {
+		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_STATE_UACTIVEDEACTIVE}${model.Id}`);
+	}
 
 
     getStateIdObservable ():Observable<any>{

@@ -48,6 +48,55 @@ export class RegionListContentComponent {
 	}
 
 
+	Submit(model: IRegion) {
+		model.state_Id=this.currentStateId;
+				if (model.id == 0) {
+		
+					this.service.PostLookupData(model).
+						subscribe(
+							(data: HttpReponseModel) => {
+		
+								if(data.isSuccess){
+									this.toaster.openSuccessSnackBar(data.message);
+									this.service.bSubject.next(true);	
+								}
+								else if(data.isExists){
+									this.toaster.openWarningSnackBar(data.message);
+								}
+							},
+							(error: any) => {
+								this.toaster.openWarningSnackBar(error);
+							}
+						);
+		
+				}
+		
+				else {
+					this.service.UpdateLookupData(model).subscribe(
+						(data: any) => {
+							this.toaster.openSuccessSnackBar(data.message);
+							this.service.bSubject.next(true);
+						},
+						(error: any) => {
+							this.toaster.openWarningSnackBar(error);
+						});
+		
+				}
+		
+			}
+
+			toggleActiveDeactive(element:IRegion){
+				this.service.toggleActiveDeactive(element).subscribe(
+					(data: HttpReponseModel) => {
+						this.toaster.openSuccessSnackBar(data.message);
+						this.getallData(this.currentStateId);
+					},
+					(error:any) => {
+						console.log(error);
+					 });
+			}
+	
+			
 	Remove(model: IRegion){
 		this.service.DeleteLookupData(model.id).subscribe(
 			(data: HttpReponseModel) => {

@@ -35,7 +35,55 @@ export class StateListContentComponent {
 		this.currentSelected={Id:0,Name:'',company_Id:0};
 	}
 
+	toggleActiveDeactive(element:LookUpModel){
+		this.service.toggleActiveDeactive(element).subscribe(
+			(data: HttpReponseModel) => {
+				this.toaster.openSuccessSnackBar(data.message);
+				this.getallData();
+			},
+			(error:any) => {
+				console.log(error);
+			 });
+	}
+	
+	Submit(model: LookUpModel) {
 
+		model.company_Id = 1;
+        model.isActive=true;
+		if (model.Id == 0) {
+			model.Id=0;
+			this.service.PostLookupData(model).
+				subscribe(
+					(data: HttpReponseModel) => {
+
+						if(data.isSuccess){
+							this.toaster.openSuccessSnackBar(data.message);
+							this.service.bSubject.next(true);	
+						}
+						else if(data.isExists){
+							this.toaster.openWarningSnackBar(data.message);
+						}
+					},
+					(error: any) => {
+						this.toaster.openWarningSnackBar(error);
+					}
+				);
+
+		}
+
+		else {
+			this.service.UpdateLookupData(model).subscribe(
+				(data: any) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.service.bSubject.next(true);
+				},
+				(error: any) => {
+					this.toaster.openWarningSnackBar(error);
+				});
+
+		}
+
+	}
 
 	Remove(model: LookUpModel){
 		this.service.DeleteLookupData(model.Id).subscribe(

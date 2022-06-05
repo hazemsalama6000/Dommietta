@@ -16,7 +16,7 @@ export enum HttpPaths {
 	API_STATE_UPDATE = "/api/v1/shared/updatestate/",
 	API_STATE_GETALL = "/api/v1/shared/getstates",
 	API_STATE_DELETE = "/api/v1/shared/deletestate/",
-
+	API_STATE_UACTIVEDEACTIVE="/api/v1/shared/changstateeactiveornot/",
 
 	//Region APIS
 
@@ -24,7 +24,7 @@ export enum HttpPaths {
 	API_REGION_UPDATE = "/api/v1/shared/updateregion/",
 	API_REGION_GETALL = "/api/v1/shared/getregions/",
 	API_REGION_DELETE = "/api/v1/shared/deleteregion/",
-
+	API_REGION_UACTIVEDEACTIVE="/api/v1/shared/changregioneactiveornot/",
 
 	//Department APIS
 

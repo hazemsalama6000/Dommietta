@@ -2,16 +2,21 @@
 
 <section class="fontsection">
 
-<mat-card>
+	<mat-expansion-panel hideToggle>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				<span class="fontsection">
+					{{"SHARE.TITLES.ADDORUPDATEREGION" | translate}}				</span>
+				<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1"
+					aria-label="Example icon button with a filter list icon">
+					<mat-icon>open_with</mat-icon>
+				</button>
+			</mat-panel-title>
 
-	<mat-card-title>
-
-		<span class="fontsection">
-          {{"SHARE.TITLES.ADDORUPDATEREGION" | translate}}
-		</span>
-		
-        
-	</mat-card-title>
+			<mat-panel-description>
+				
+			</mat-panel-description>
+		</mat-expansion-panel-header>
 
 	<mat-divider></mat-divider>
 
@@ -63,7 +68,7 @@
 
 </form>
 
-</mat-card>
+</mat-expansion-panel>
 
 </section>
 

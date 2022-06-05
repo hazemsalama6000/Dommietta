@@ -72,6 +72,8 @@ export class StateUpsertComponent {
 
 		if (model.Id == 0) {
 
+			model.Id = 0;
+
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {
