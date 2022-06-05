@@ -21,8 +21,7 @@
 					{{element.Name}}
 				</span>
 
-				<mat-form-field  [hidden]="element.isEdit == false">
-					<mat-label class="fontForInputs"> {{"HR.INPUTS.NAME" | translate}}</mat-label>
+				<mat-form-field class="col-md-5"  [hidden]="element.isEdit == false">
 					<input matInput [value]="element.Name" name="Name{{x}}" [(ngModel)]="element.Name">
 				</mat-form-field>
 
@@ -41,10 +40,10 @@
 							</span></mat-icon>
 					</button>
 
-					<button [hidden]="element.isEdit == false" matTooltip="تعديل" mat-mini-fab color="primary"
-						(click)="show(element);element.isEdit=false;" aria-label="Example icon button with a menu icon">
+					<button [hidden]="element.isEdit == false" matTooltip="حفظ" mat-mini-fab color="primary"
+						(click)="Submit(element);element.isEdit=false;" aria-label="Example icon button with a menu icon">
 						<mat-icon><span class="material-symbols-outlined">
-								Save
+							done_all
 							</span></mat-icon>
 					</button>
 

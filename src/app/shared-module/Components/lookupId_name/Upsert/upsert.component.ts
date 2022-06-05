@@ -69,7 +69,7 @@ export class UpsertComponent {
 	Submit(model: LookUpModel) {
 
 		model.company_Id = 1;
-
+        model.isActive=true;
 		if (model.Id == 0) {
 			model.Id=0;
 			this.service.PostLookupData(model).
