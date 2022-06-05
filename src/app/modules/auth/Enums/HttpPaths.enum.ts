@@ -5,7 +5,7 @@ export enum HttpPaths {
 	// Jobs APIS
 	API_JOB_ADD = "/api/v1/hr/addjob",
 	API_JOB_UPDATE = "/api/v1/hr/updatejob/",
-	API_JOB_UACTIVEDEACTIVE = "/api/v1/hr/checkjobactive/",
+	API_JOB_UACTIVEDEACTIVE = "/api/v1/hr/changejobsactiveornot/",
 
 	API_JOB_GETALL = "/api/v1/hr/getjobs",
 	API_JOB_DELETE = "/api/v1/hr/deletejob/",
@@ -16,7 +16,7 @@ export enum HttpPaths {
 	API_STATE_UPDATE = "/api/v1/shared/updatestate/",
 	API_STATE_GETALL = "/api/v1/shared/getstates",
 	API_STATE_DELETE = "/api/v1/shared/deletestate/",
-	API_STATE_UACTIVEDEACTIVE="/api/v1/shared/changstateeactiveornot/",
+	API_STATE_UACTIVEDEACTIVE="/api/v1/shared/changstateactiveornot/",
 
 	//Region APIS
 
@@ -24,7 +24,7 @@ export enum HttpPaths {
 	API_REGION_UPDATE = "/api/v1/shared/updateregion/",
 	API_REGION_GETALL = "/api/v1/shared/getregions/",
 	API_REGION_DELETE = "/api/v1/shared/deleteregion/",
-	API_REGION_UACTIVEDEACTIVE="/api/v1/shared/changregioneactiveornot/",
+	API_REGION_UACTIVEDEACTIVE="/api/v1/shared/changeregionactiveornot/",
 
 	//Department APIS
 
@@ -32,13 +32,14 @@ export enum HttpPaths {
 	API_DEPARTMENT_UPDATE = "/api/v1/hr/updatedepartment/",
 	API_DEPARTMENT_GETALL = "/api/v1/hr/getdepartments",
 	API_DEPARTMENT_DELETE = "/api/v1/hr/deletedepartment/",
-
+	API_DEPARTMENT_UACTIVEDEACTIVE="/api/v1/hr/changedepartmentactiveornot/",
 	//Section APIS
 
 	API_SECTION_ADD = "/api/v1/hr/addSection",
 	API_SECTION_UPDATE = "/api/v1/hr/updateSection/",
 	API_SECTION_GETALL = "/api/v1/hr/getSections/",
 	API_SECTION_DELETE = "/api/v1/hr/deleteSection/",
+	API_SECTION_UACTIVEDEACTIVE = "/api/v1/hr/changesectionactiveornot/",
 
 
 	//Company APIS

@@ -40,7 +40,8 @@ export const locale = {
 				LOGOPRINT:"صورة الطباعة",
 				LOGOWEB:"صورة الموقع",
 				COMPANYDATA:"بيانات الشركة",
-				EMPLOYEE:"الموظف"
+				EMPLOYEE:"الموظف",
+				STATUS : "حالة التفعيل"
 
 			},
 			BUTTONS: {
@@ -52,6 +53,8 @@ export const locale = {
 			},
 			TITLES: {
 				ADDORUPDATE: "اضافة او تعديل",
+				ACTIVE:"مفعل",
+				NOTACTIVE:"غير مفعل"
 			}
 		},
 		SHARE: {

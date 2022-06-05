@@ -21,7 +21,7 @@ export class SectionListContentComponent {
 
 	@Output() edit: EventEmitter<ISection> = new EventEmitter();
 	
-	displayedColumns: string[] = ['name', 'action'];
+	displayedColumns: string[] = ['name' , 'state' , 'action'];
 
 	dataSource:any;
 
@@ -57,6 +57,52 @@ export class SectionListContentComponent {
 			(error:any) => {
 				this.toaster.openErrorSnackBar(error);
 			 });
+	}
+	toggleActiveDeactive(element:ISection){
+		this.service.toggleActiveDeactive(element).subscribe(
+			(data: HttpReponseModel) => {
+				this.toaster.openSuccessSnackBar(data.message);
+				this.getallData(this.currentDepartmentId);
+			},
+			(error:any) => {
+				console.log(error);
+			 });
+	}
+	Submit(model: ISection) {
+		model.department_Id = this.currentDepartmentId;
+		if (model.id == 0) {
+
+			this.service.PostLookupData(model).
+				subscribe(
+					(data: HttpReponseModel) => {
+
+						if (data.isSuccess) {
+							this.toaster.openSuccessSnackBar(data.message);
+							this.service.bSubject.next(true);
+						}
+						else if (data.isExists) {
+							this.toaster.openWarningSnackBar(data.message);
+						}
+					},
+					(error: any) => {
+						this.toaster.openWarningSnackBar(error);
+					}
+				);
+
+		}
+
+		else {
+			this.service.UpdateLookupData(model).subscribe(
+				(data: any) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.service.bSubject.next(true);
+				},
+				(error: any) => {
+					this.toaster.openWarningSnackBar(error);
+				});
+
+		}
+
 	}
 
 // getting data and initialize data Source and Paginator

@@ -47,7 +47,7 @@ export class DepartmentUpsertComponent {
 // initialize Form With Validations
 	initForm() {
 		this.UpsertForm = this.fb.group({
-			Id: [''],
+			Id: [0],
 			Name: ['', Validators.compose([
 				Validators.required
 			])]
@@ -68,7 +68,7 @@ export class DepartmentUpsertComponent {
 		model.company_Id = 1;
 
 		if (model.Id == 0) {
-
+			model.Id = 0;
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {

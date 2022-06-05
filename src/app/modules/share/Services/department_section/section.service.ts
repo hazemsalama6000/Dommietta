@@ -18,8 +18,14 @@ export class SectionService
     
 	getLookupData(departmentId:number):Observable<ISection[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_SECTION_GETALL}${departmentId}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name }) as ISection )  ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name,isActive:Item.isActive , isEdit:false }) as ISection )  ) );
 	}
+
+
+	toggleActiveDeactive(model: ISection): Observable<any> {
+		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_DEPARTMENT_UACTIVEDEACTIVE}${model.id}`);
+	}
+
 
 	DeleteLookupData(id:number):Observable<any>{
 		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_SECTION_DELETE}${id}`);

@@ -21,7 +21,7 @@ export class RegionListContentComponent {
 
 	@Output() edit: EventEmitter<IRegion> = new EventEmitter();
 	
-	displayedColumns: string[] = ['name', 'action'];
+	displayedColumns: string[] = ['name','state' ,'action'];
 
 	dataSource:any;
 

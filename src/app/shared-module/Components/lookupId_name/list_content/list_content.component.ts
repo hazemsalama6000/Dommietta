@@ -16,7 +16,7 @@ export class ListContentComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
-	displayedColumns: string[] = ['name', 'action'];
+	displayedColumns: string[] = ['name', 'state' , 'action'];
 
 	dataSource:any;
 
