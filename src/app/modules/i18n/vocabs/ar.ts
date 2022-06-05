@@ -52,7 +52,7 @@ export const locale = {
 				BACK: "رجوع",
 			},
 			TITLES: {
-				ADDORUPDATE: "اضافة او تعديل",
+				ADDORUPDATE: "اضافة  ",
 				ACTIVE:"مفعل",
 				NOTACTIVE:"غير مفعل"
 			}
@@ -68,11 +68,10 @@ export const locale = {
 				EDIT: "تعديل"
 			},
 			TITLES: {
-				ADDORUPDATESTATE: " اضافة او تعديل المحافظة",
-				ADDORUPDATEREGION: " اضافة او تعديل المنطقة",
-				ADDORUPDATESECTION: " اضافة او تعديل القسم",
-				ADDORUPDATEDEPARTMENTN: " اضافة او تعديل الفرع",
-
+				ADDORUPDATESTATE: " اضافة المحافظة",
+				ADDORUPDATEREGION: " اضافة المنطقة",
+				ADDORUPDATESECTION: " اضافة القسم",
+				ADDORUPDATEDEPARTMENTN: " اضافة الفرع",
 			}
 		},
 

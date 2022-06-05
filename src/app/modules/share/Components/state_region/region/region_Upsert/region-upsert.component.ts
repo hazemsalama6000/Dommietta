@@ -62,6 +62,10 @@ export class RegionUpsertComponent {
 		});
 	}
 
+	
+	reset() {
+		this.UpsertForm.setValue({ id: 0, name: '' ,state_Id:0});
+	}
 
 	closeEdit() {
 		this.toggleAddEditButton = true;
@@ -72,7 +76,7 @@ export class RegionUpsertComponent {
 // for Insert And Delete distingush them with model.id
 
 	Submit(model: IRegion) {
-model.state_Id=this.currentStateId;
+        model.state_Id=this.currentStateId;
 		if (model.id == 0) {
 
 			this.service.PostLookupData(model).
@@ -82,6 +86,7 @@ model.state_Id=this.currentStateId;
 						if(data.isSuccess){
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);	
+							this.reset();
 						}
 						else if(data.isExists){
 							this.toaster.openWarningSnackBar(data.message);

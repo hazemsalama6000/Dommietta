@@ -63,6 +63,10 @@ export class UpsertComponent {
 		this.UpsertForm.setValue({ Id: 0, Name: '' ,isActive:true });
 	}
 
+	reset(){
+		this.UpsertForm.setValue({ Id: 0, Name: '' ,isActive:true });
+	}
+
 
 // for Insert And Delete distingush them with model.id
 

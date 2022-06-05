@@ -32,8 +32,8 @@ export class SectionUpsertComponent {
 	//setter for binded model to update
 	@Input() set Editmodel(value: any) {
 		if (value) {
-			this.UpsertForm.setValue(value);
-			this.toggleAddEditButton = false;
+			/*this.UpsertForm.setValue(value);
+			this.toggleAddEditButton = false;*/
 		}
 	}
 
@@ -65,9 +65,12 @@ export class SectionUpsertComponent {
 
 	closeEdit() {
 		this.toggleAddEditButton = true;
-		this.UpsertForm.setValue({ id: 0, name: '', state_Id: 0 });
+		this.UpsertForm.setValue({ id: 0, name: '', department_Id: 0 });
 	}
 
+	reset() {
+		this.UpsertForm.setValue({ id: 0, name: '', department_Id: 0 });
+	}
 
 	// for Insert And Delete distingush them with model.id
 
@@ -82,6 +85,7 @@ export class SectionUpsertComponent {
 						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);
+							this.reset();
 						}
 						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);

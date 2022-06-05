@@ -29,12 +29,6 @@ export class ListContentComponent {
 		});
 	}
 
-//emit model to upsert component for updating
-	Edit(model: LookUpModel) {
-		this.edit.emit(model);
-	}
-
-
 
 	Submit(model: LookUpModel) {
 		console.log(model);
