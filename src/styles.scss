@@ -86,7 +86,7 @@ table {
 }
 
 .heiglightRowClass {
-	background-color: rgb(139, 139, 139);
+	background-color: rgb(219, 219, 219);
 }
 
 
@@ -102,5 +102,9 @@ table {
     cursor: pointer;
     background-image: none;
     border-radius: 4px;
+}
+
+.mat-card{
+	padding: 10px !important;
 }
 
