@@ -13,6 +13,8 @@ export class SectionService
 
     
     bSubject = new BehaviorSubject(true); 
+	
+	addFlag = new BehaviorSubject(false);
 
 	constructor(private http:CommonHttpService){}
     

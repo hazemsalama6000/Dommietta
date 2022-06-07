@@ -44,6 +44,10 @@ export class DepartmentUpsertComponent {
 		
 	}
 
+	addNewRow(){
+		this.service.addFlag.next(true);
+	}
+	
 // initialize Form With Validations
 	initForm() {
 		this.UpsertForm = this.fb.group({

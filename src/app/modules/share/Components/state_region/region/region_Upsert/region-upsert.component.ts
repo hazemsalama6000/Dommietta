@@ -50,6 +50,9 @@ export class RegionUpsertComponent {
 		});
 		
 	}
+	addNewRow(){
+		this.service.addFlag.next(true);
+	}
 
 // initialize Form With Validations
 	initForm() {

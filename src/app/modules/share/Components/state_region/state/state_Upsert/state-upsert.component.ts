@@ -65,6 +65,9 @@ export class StateUpsertComponent {
 	reset() {
 		this.UpsertForm.setValue({ Id: 0, Name: '' });
 	}
+	addNewRow(){
+		this.service.addFlag.next(true);
+	}
 
 // for Insert And Delete distingush them with model.id
 

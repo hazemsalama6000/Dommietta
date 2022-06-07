@@ -14,6 +14,7 @@ export class StatesService
 	emitStateIdSubject = new BehaviorSubject<LookUpModel>({Id:0,company_Id:0,Name:''});
     
     bSubject = new BehaviorSubject(true); 
+	addFlag = new BehaviorSubject(false);
 
 	constructor(private http:CommonHttpService){}
     
