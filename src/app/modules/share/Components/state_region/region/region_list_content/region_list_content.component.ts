@@ -18,6 +18,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class RegionListContentComponent {
 
 	currentStateId=0;
+	currentSelected:IRegion;
 
 	@Output() edit: EventEmitter<IRegion> = new EventEmitter();
 	
@@ -28,6 +29,9 @@ export class RegionListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: RegionService, private toaster: toasterService ,private StatesService:StatesService) {
+
+		this.currentSelected={id:0,isActive:false,isEdit:false,name:"",state_Id:0}
+		
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentStateId);
@@ -39,6 +43,10 @@ export class RegionListContentComponent {
 			this.getallData(this.currentStateId);
 		});
 
+	}
+
+	rowClicked(model:IRegion){
+		this.currentSelected = model;
 	}
 
 //emit model to upsert component for updating

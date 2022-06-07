@@ -115,7 +115,12 @@
 													تعديل الشركة
 												</span>
 											</button>
-
+											<button class="btn btn-primary col-md-3 mx-1" (click)="setCompanyIdGettingBranches(company.id) ">
+												<span class="fontForInputs">
+													عرض الفروع
+												</span>
+											</button>
+											
 
 										</div>
 									</div>
@@ -213,9 +218,12 @@
 						</div>
 
 
-
 					</div>
 
+
+					<div class="row" *ngIf="companyIdForShowingBranches != 0">
+						<branchs-c [companyId] = "companyIdForShowingBranches"></branchs-c>
+					</div>
 
 
 				</mat-expansion-panel>

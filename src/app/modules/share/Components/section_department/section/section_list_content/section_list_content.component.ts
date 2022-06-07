@@ -25,9 +25,12 @@ export class SectionListContentComponent {
 
 	dataSource:any;
 
+	currentSelected:ISection;
+
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService) {
+		this.currentSelected = {department_Id:0 , id:0 , isActive:false , name:"" ,isEdit:false};
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentDepartmentId);
@@ -39,6 +42,10 @@ export class SectionListContentComponent {
 			this.getallData(this.currentDepartmentId);
 		});
 
+	}
+
+	rowClicked(model:ISection){
+		this.currentSelected = model;
 	}
 
 //emit model to upsert component for updating

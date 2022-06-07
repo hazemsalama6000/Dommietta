@@ -47,12 +47,22 @@ export enum HttpPaths {
 	API_COMPANY_ADD = "/api/v1/shared/addCompany",
 	API_COMPANY_UPDATE = "/api/v1/shared/updateCompany/",
 	API_COMPANY_GETALL = "/api/v1/shared/getCompanies",
-	API_COMPANY_DELETE = "/api/v1/shared/deleteSection/",
 	API_COMPANY_GETBYID = "/api/v1/shared/getcompanyprofile/",
 
 	API_COMPANY_CHANGELOGOWEB = "/api/v1/shared/ChangeLogoWeb",
 	API_COMPANY_CHANGELOGOPRINT = "/api/v1/shared/ChangeLogoPrint",
 	API_COMPANY_ACTIVEORNOT = "/api/v1/shared/ActiveOrNot/",
+
+	
+	//Branches APIS
+
+	API_BRANCH_ADD = "/api/v1/shared/addcompanybranch",
+	API_BRANCH_UPDATE = "/api/v1/shared/updatecompanybranch/",
+	API_BRANCH_GETALL = "/api/v1/shared/getcompanybranches/",
+	API_BRANCH_GETBYID = "/api/v1/shared/getcompanybranchprofile/",
+
+	API_BRANCH_ACTIVEORNOT = "/api/v1/shared/changebranchactiveornot/",
+	API_BRANCH_SALESPERSONLOCKUNLOCK = "/api/v1/shared/changebranchactiveornot/",
 
 
 	//Employee APIS

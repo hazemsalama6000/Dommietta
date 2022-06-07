@@ -16,6 +16,8 @@ export class ListContentComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
+	currentSelected : LookUpModel;
+
 	displayedColumns: string[] = ['name', 'state' , 'action'];
 
 	dataSource:any;
@@ -23,12 +25,18 @@ export class ListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: LookupService, private toaster: toasterService) {
+		this.currentSelected={Id:0,Name:'',company_Id:0};
+
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
 	}
 
+
+	rowClicked(model:LookUpModel){
+		this.currentSelected = model;
+	}
 
 	Submit(model: LookUpModel) {
 		console.log(model);

@@ -42,10 +42,6 @@ export class CompanyService {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_GETBYID}${id}`);
 	}
 
-	DeleteCompanyData(id: number): Observable<any> {
-		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_DELETE}${id}`);
-	}
-
 	PostCompanyData(model: any): Observable<any> {
 		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_ADD}`);
 	}

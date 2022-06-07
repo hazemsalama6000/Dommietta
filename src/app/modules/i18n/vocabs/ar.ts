@@ -41,8 +41,8 @@ export const locale = {
 				LOGOWEB:"صورة الموقع",
 				COMPANYDATA:"بيانات الشركة",
 				EMPLOYEE:"الموظف",
-				STATUS : "حالة التفعيل"
-
+				STATUS : "حالة التفعيل" , 
+				SALESSTATELOGIN:"ايقاف تسجيل الدخول للمناديب"
 			},
 			BUTTONS: {
 				ADD: "اضافة",
@@ -54,7 +54,8 @@ export const locale = {
 			TITLES: {
 				ADDORUPDATE: "اضافة  ",
 				ACTIVE:"مفعل",
-				NOTACTIVE:"غير مفعل"
+				NOTACTIVE:"غير مفعل",
+				JOBS:"الوظائف"
 			}
 		},
 		SHARE: {
@@ -68,10 +69,10 @@ export const locale = {
 				EDIT: "تعديل"
 			},
 			TITLES: {
-				ADDORUPDATESTATE: " اضافة المحافظة",
-				ADDORUPDATEREGION: " اضافة المنطقة",
-				ADDORUPDATESECTION: " اضافة القسم",
-				ADDORUPDATEDEPARTMENTN: " اضافة الفرع",
+				ADDORUPDATESTATE: " المحافظات",
+				ADDORUPDATEREGION: " المناطق",
+				ADDORUPDATESECTION: "الاقسام",
+				ADDORUPDATEDEPARTMENTN: "الفروع",
 			}
 		},
 

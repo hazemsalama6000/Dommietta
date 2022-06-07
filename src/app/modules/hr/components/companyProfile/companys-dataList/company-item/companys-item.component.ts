@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectorRef, Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
@@ -17,13 +17,23 @@ export class CompanyItemComponent {
 
 	panelOpenState: boolean = false;
 
-	constructor(private dialog: MatDialog, private toaster: toasterService, private service: CompanyService,
+	companyIdForShowingBranches:number ;
 
+	constructor(private dialog: MatDialog, private toaster: toasterService, private service: CompanyService, private cd : ChangeDetectorRef
 	) { }
 	logoWebFile: File;
 	logoPrintFile: File;
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.companyIdForShowingBranches = 0;
+		this.cd.detectChanges();
+	 }
+
+
+	setCompanyIdGettingBranches(companyId : number){
+		this.companyIdForShowingBranches = companyId;
+		this.cd.detectChanges();
+	}
 
 	openDialog(companyId: number) {
 

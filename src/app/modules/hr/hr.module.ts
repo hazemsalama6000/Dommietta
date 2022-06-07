@@ -11,6 +11,9 @@ import { CompanyComponent } from './components/companyProfile/company.component'
 import { CompanysDataListComponent } from './components/companyProfile/companys-dataList/companys-dataList.component';
 import { CompanyItemComponent } from './components/companyProfile/companys-dataList/company-item/companys-item.component';
 import { CompanyUpsertComponent } from './components/companyProfile/companys-dataList/company-item/companys-upsert/company-upsert.component';
+import { BranchComponent } from './components/branches/branch.component';
+import { BranchUpsertComponent } from './components/branches/branch_Upsert/branch-upsert.component';
+import { BranchListContentComponent } from './components/branches/branch_list_content/branch_list_content.component';
 
 
 @NgModule({
@@ -18,7 +21,11 @@ import { CompanyUpsertComponent } from './components/companyProfile/companys-dat
 	  CompanyComponent,
 	  CompanysDataListComponent,
 	  CompanyItemComponent,
-	  CompanyUpsertComponent
+	  CompanyUpsertComponent,
+	  BranchComponent,
+	  BranchUpsertComponent,
+	  BranchListContentComponent
+	  
   ],
   imports: [
     CommonModule,
