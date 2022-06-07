@@ -62,7 +62,7 @@ export enum HttpPaths {
 	API_BRANCH_GETBYID = "/api/v1/shared/getcompanybranchprofile/",
 
 	API_BRANCH_ACTIVEORNOT = "/api/v1/shared/changebranchactiveornot/",
-	API_BRANCH_SALESPERSONLOCKUNLOCK = "/api/v1/shared/changebranchactiveornot/",
+	API_BRANCH_SALESPERSONLOCKUNLOCK = "/api/v1/shared/locktechnicianslogin/",
 
 
 	//Employee APIS

@@ -36,7 +36,7 @@ export class UpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: LookupService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: LookupService ) { }
 
 
 	ngOnInit(): void {
@@ -67,6 +67,9 @@ export class UpsertComponent {
 		this.UpsertForm.setValue({ Id: 0, Name: '' ,isActive:true });
 	}
 
+	addNewRow(){
+		this.service.addFlag.next(true);
+	}
 
 // for Insert And Delete distingush them with model.id
 

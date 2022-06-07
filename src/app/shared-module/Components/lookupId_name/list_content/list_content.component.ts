@@ -15,26 +15,39 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 export class ListContentComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
+	NameForAdd: string;
+	currentSelected: LookUpModel;
 
-	currentSelected : LookUpModel;
+	displayedColumns: string[] = ['name', 'state', 'action'];
 
-	displayedColumns: string[] = ['name', 'state' , 'action'];
-
-	dataSource:any;
+	dataSource: any;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: LookupService, private toaster: toasterService) {
-		this.currentSelected={Id:0,Name:'',company_Id:0};
 
-//subscribe here to invoke when insert done in upsert component
+		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
+
+		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
+
 	}
 
+	addNewRow() {
+		let Item:Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
+		if (Item.length == 0) {
+			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
+			this.dataSource.data = [newRow, ...this.dataSource.data];
+		}
+	}
 
-	rowClicked(model:LookUpModel){
+	deleteRow() {
+		this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
+	}
+
+	rowClicked(model: LookUpModel) {
 		this.currentSelected = model;
 	}
 
@@ -44,16 +57,17 @@ export class ListContentComponent {
 		model.company_Id = 1;
 
 		if (model.Id == 0) {
-			model.Id=0;
+			model.Id = 0;
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {
 
-						if(data.isSuccess){
+						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-							this.service.bSubject.next(true);	
+							this.service.bSubject.next(true);
+							this.service.addFlag.next(false);
 						}
-						else if(data.isExists){
+						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
 						}
 					},
@@ -68,7 +82,7 @@ export class ListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
+					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
 					this.toaster.openWarningSnackBar(error);
@@ -79,41 +93,48 @@ export class ListContentComponent {
 	}
 
 
-	toggleActiveDeactive(element:LookUpModel){
+	toggleActiveDeactive(element: LookUpModel) {
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
-			(error:any) => {
+			(error: any) => {
 				console.log(error);
-			 });
+			});
 	}
 
-	Remove(model: LookUpModel){
+	Remove(model: LookUpModel) {
 		this.service.DeleteLookupData(model.Id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
-			(error:any) => {
+			(error: any) => {
 				console.log(error);
-			 });
+			});
 	}
 
-// getting data and initialize data Source and Paginator
+	// getting data and initialize data Source and Paginator
 	getallData() {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
 				console.log(data);
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
-				this.dataSource.paginator = this.paginator;	
+				this.dataSource.paginator = this.paginator;
+
+				this.service.addFlag.subscribe((data) => {
+					if (data == true) {
+						this.addNewRow();
+					}
+				});
+
 			}
 
 		);
 	}
 
-//filter from search Box
+	//filter from search Box
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();

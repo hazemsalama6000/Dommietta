@@ -4,4 +4,5 @@ export class LookUpModel {
 	company_Id: number;
 	isActive?: boolean;
 	isEdit?:boolean = false;
+	isAdd?:boolean = false;
 }

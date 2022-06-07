@@ -52,7 +52,7 @@ export class BranchListContentComponent {
 
 
 	toggleSalesPersonActiveDeactive(element:IBranch){
-		this.service.toggleActiveDeactive(element).subscribe(
+		this.service.toggleSalesActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData(this.companyId);
@@ -109,6 +109,7 @@ export class BranchListContentComponent {
 
 		this.service.getBranchData(companyId).subscribe(
 			(data: IBranch[]) => {
+				console.log(data);
 				this.dataSource = new MatTableDataSource<IBranch>(data);
 				this.dataSource.paginator = this.paginator;	
 			}

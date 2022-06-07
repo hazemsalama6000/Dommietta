@@ -18,7 +18,7 @@ export class BranchService
     
 	getBranchData(companyId:number):Observable<IBranch[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BRANCH_GETALL}${companyId}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , branchName:Item.branchName , branchAddress:Item.branchAddress , isActive:Item.isActive }) as IBranch )  ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , branchName:Item.branchName , branchAddress:Item.branchAddress , isActive:Item.isActive ,lockTechnicalsLogins:Item.lockTechnicalsLogins}) as IBranch )  ) );
 	}
 
 
