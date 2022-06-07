@@ -1,6 +1,6 @@
 <section class="fontsection">
 
-	<mat-card>
+	<mat-card class="col-md-6">
 		<div style="width:100%" class="d-flex justify-content-between align-items-center">
 
 			<span class="fontForInputs">
@@ -18,14 +18,3 @@
 
 </section>
 
-
-
-<ng-template #formError let-control="control" let-message="message" let-validation="validation">
-	<ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
-		<div class="fv-plugins-message-container">
-			<span role="alert">
-				{{ message }}
-			</span>
-		</div>
-	</ng-container>
-</ng-template>
