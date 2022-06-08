@@ -73,7 +73,7 @@ export class ListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error);
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 					}
 				);
 
@@ -86,7 +86,7 @@ export class ListContentComponent {
 					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 				});
 
 		}
@@ -112,7 +112,7 @@ export class ListContentComponent {
 				this.getallData();
 			},
 			(error: any) => {
-				console.log(error);
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 			});
 	}
 

@@ -74,7 +74,7 @@ export class RegionListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error);
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 					}
 				);
 
@@ -87,7 +87,7 @@ export class RegionListContentComponent {
 					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 				});
 
 		}
@@ -101,7 +101,7 @@ export class RegionListContentComponent {
 				this.getallData(this.currentStateId);
 			},
 			(error: any) => {
-				console.log(error);
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 			});
 	}
 
@@ -113,7 +113,7 @@ export class RegionListContentComponent {
 				this.getallData(this.currentStateId);
 			},
 			(error: any) => {
-				this.toaster.openErrorSnackBar(error);
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 			});
 	}
 

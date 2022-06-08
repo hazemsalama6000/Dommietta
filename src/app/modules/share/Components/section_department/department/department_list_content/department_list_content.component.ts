@@ -54,8 +54,8 @@ export class DepartmentListContentComponent {
 							this.toaster.openWarningSnackBar(data.message);
 						}
 					},
-					(error: any) => {
-						this.toaster.openWarningSnackBar(error);
+					(error: string) => {
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 					}
 				);
 
@@ -68,7 +68,7 @@ export class DepartmentListContentComponent {
 				//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 				});
 
 		}
@@ -106,8 +106,8 @@ export class DepartmentListContentComponent {
 				this.getallData();
 			},
 			(error:any) => {
-				this.toaster.openErrorSnackBar(error);
-			 });
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+			});
 	}
 
 

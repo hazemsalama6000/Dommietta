@@ -75,8 +75,8 @@ export class SectionListContentComponent {
 				this.getallData(this.currentDepartmentId);
 			},
 			(error:any) => {
-				this.toaster.openErrorSnackBar(error);
-			 });
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+			});
 	}
 	toggleActiveDeactive(element:ISection){
 		this.service.toggleActiveDeactive(element).subscribe(
@@ -106,7 +106,7 @@ export class SectionListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error);
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 					}
 				);
 
@@ -119,7 +119,7 @@ export class SectionListContentComponent {
 				//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
 				});
 
 		}
