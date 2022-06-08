@@ -5,6 +5,7 @@ import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
+import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 @Component({
 	selector: 'department_list_content',
@@ -26,7 +27,7 @@ export class DepartmentListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-	constructor(private service: DepartmentService, private toaster: toasterService) {
+	constructor(private service: DepartmentService, private toaster: toasterService , private confirmationDialogService: ConfirmationDialogService	) {
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
@@ -100,14 +101,23 @@ export class DepartmentListContentComponent {
 	}
 
 	Remove(model: LookUpModel){
-		this.service.DeleteLookupData(model.Id).subscribe(
-			(data: HttpReponseModel) => {
-				this.toaster.openSuccessSnackBar(data.message);
+
+			this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
+			.then((confirmed) => {
+				if (confirmed) {
+					this.service.DeleteLookupData(model.Id).subscribe(
+						(data: HttpReponseModel) => {
+							this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
-			},
-			(error:any) => {
-				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
-			});
+						},
+						(error: any) => {
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+						});
+				}
+			})
+			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+
 	}
 
 
@@ -131,7 +141,6 @@ export class DepartmentListContentComponent {
 						this.addNewRow();
 					}
 				});
-
 			}
 		);
 	}

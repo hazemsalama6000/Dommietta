@@ -131,7 +131,7 @@ export class RegionListContentComponent {
 		if (Item.length == 0) {
 			let newRow: IRegion = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, state_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-			document.getElementById("NameForAdd")?.focus();
+			document.getElementById("NameForAddd")?.focus();
 		}
 	}
 

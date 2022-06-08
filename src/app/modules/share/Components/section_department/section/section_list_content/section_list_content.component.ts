@@ -7,6 +7,7 @@ import { IRegion } from "src/app/modules/share/models/IRegion.interface";
 import { ISection } from "src/app/modules/share/models/ISection.interface";
 import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
 import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
+import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 @Component({
@@ -29,7 +30,7 @@ export class SectionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService) {
+	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService , private confirmationDialogService: ConfirmationDialogService) {
 		this.currentSelected = {department_Id:0 , id:0 , isActive:false , name:"" ,isEdit:false ,isAdd:false};
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
@@ -68,16 +69,26 @@ export class SectionListContentComponent {
 	}
 
 
-	Remove(model: IRegion){
-		this.service.DeleteLookupData(model.id).subscribe(
-			(data: HttpReponseModel) => {
-				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData(this.currentDepartmentId);
-			},
-			(error:any) => {
-				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
-			});
+	Remove(model: ISection){
+
+			this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
+			.then((confirmed) => {
+				if (confirmed) {
+					this.service.DeleteLookupData(model.id).subscribe(
+						(data: HttpReponseModel) => {
+							this.toaster.openSuccessSnackBar(data.message);
+			            	this.getallData(this.currentDepartmentId);
+						},
+						(error: any) => {
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+						});
+				}
+			})
+			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
 	}
+
+
 	toggleActiveDeactive(element:ISection){
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
