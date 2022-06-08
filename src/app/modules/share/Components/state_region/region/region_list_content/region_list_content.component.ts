@@ -123,7 +123,6 @@ export class RegionListContentComponent {
 				}
 			})
 			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
-
 	}
 
 	addNewRow() {
@@ -131,7 +130,7 @@ export class RegionListContentComponent {
 		if (Item.length == 0) {
 			let newRow: IRegion = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, state_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-			document.getElementById("NameForAddd")?.focus();
+			document.getElementById("NameForAddRegion")?.focus();
 		}
 	}
 

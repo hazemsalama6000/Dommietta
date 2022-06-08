@@ -49,7 +49,7 @@ export class SectionListContentComponent {
 		if (Item.length == 0) {
 			let newRow: ISection = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, department_Id:0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-			document.getElementById("NameForAdd")?.focus();
+			document.getElementById("NameForAddSection")?.focus();
 		}
 	}
 

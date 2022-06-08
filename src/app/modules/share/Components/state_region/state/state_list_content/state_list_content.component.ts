@@ -1,13 +1,11 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
 	selector: 'state_list_content',
 	templateUrl: './state_list_content.component.html',
@@ -41,7 +39,7 @@ export class StateListContentComponent {
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-			document.getElementById("NameForAdd")?.focus();
+			document.getElementById("NameForAddState")?.focus();
 		}
 	}
 

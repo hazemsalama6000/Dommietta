@@ -81,7 +81,7 @@ export class DepartmentListContentComponent {
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-            document.getElementById("NameForAdd")?.focus();
+            document.getElementById("NameForAddDepartment")?.focus();
 		}
 	}
 
