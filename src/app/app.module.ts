@@ -2,7 +2,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TranslateModule } from '@ngx-translate/core';
 import { InlineSVGModule } from 'ng-inline-svg-2';
@@ -10,16 +9,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './modules/auth/services/auth.service';
-import { environment } from 'src/environments/environment';
+
 // #fake-start#
 import { AuthInterceptor } from './modules/auth/Interceptors/AuthInterceptor.interceptor';
 import { LoggingInterceptor } from './modules/auth/Interceptors/LoggingInterceptor.interceptor';
-import { CachingInterceptor } from './modules/auth/Interceptors/CachingInterceptor.interceptor';
+
 import { ErrorInterceptor } from './modules/auth/Interceptors/ErrorInterceptor.interceptor';
 import { SharedModule } from './shared-module/shared-module.module';
-import { RetryInterceptor } from './modules/auth/Interceptors/RetryInterceptor.interceptor';
+
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './core-module/custom-route-reuse-strategy';
+
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -40,11 +40,10 @@ function appInitializer(authService: AuthService) {
 		HttpClientModule,
 		ClipboardModule,
 		SharedModule,
-
 		AppRoutingModule,
 		InlineSVGModule.forRoot(),
-		NgbModule,
-	],
+		NgbModule
+		],
 	providers: [
 		{
 			provide: RouteReuseStrategy,

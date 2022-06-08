@@ -7,22 +7,21 @@ import { LookupIdNameComponent } from './Components/lookupId_name/lookupId_name.
 import { TranslationModule } from '../modules/i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @NgModule({
   declarations: [
 	 UpsertComponent,
 	 ListContentComponent,
 	 LookupIdNameComponent
-],
+	],
   imports: [
 	  MaterialsModules,
       CommonModule
 	  ,TranslationModule,
 	  FormsModule,
 	  ReactiveFormsModule,
-	  HttpClientModule,
+	  HttpClientModule
   ],
   exports:[
 	  MaterialsModules,

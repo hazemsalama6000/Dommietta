@@ -11,6 +11,10 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+	popoverTitle = 'Popover title';
+	popoverMessage = 'Popover description';
+	confirmClicked = false;
+	cancelClicked = false;
 	
   direction:string;
 

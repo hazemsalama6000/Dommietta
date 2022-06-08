@@ -28,7 +28,8 @@
 					</mat-form-field>
 
 					<mat-form-field class="col-md-5" [hidden]="element.isAdd == false">
-						<input matInput autofocus="on"  id="NameForAdd" name="NameForAdd" [(ngModel)]="element.Name" #NameForAdd>
+						<input matInput autofocus="on" id="NameForAdd" name="NameForAdd" [(ngModel)]="element.Name"
+							#NameForAdd>
 					</mat-form-field>
 
 				</td>
@@ -90,13 +91,14 @@
 								<mat-icon>close</mat-icon>
 							</button>
 
+
 						</div>
 					</div>
 
 					<div [hidden]="element.isAdd == false">
-						
-						<button  matTooltip="اضافة" mat-mini-fab color="primary"
-							(click)="Submit(element)" aria-label="Example icon button with a menu icon">
+
+						<button matTooltip="اضافة" mat-mini-fab color="primary" (click)="Submit(element)"
+							aria-label="Example icon button with a menu icon">
 							<mat-icon><span class="material-symbols-outlined">
 									done_all
 								</span>
@@ -104,8 +106,8 @@
 						</button>
 
 						<button matTooltip="حذف" mat-mini-fab color="warn" (click)="deleteRow()" class="mx-md-1"
-								aria-label="Example icon button with a filter list icon">
-								<mat-icon>subdirectory_arrow_left</mat-icon>
+							aria-label="Example icon button with a filter list icon">
+							<mat-icon>subdirectory_arrow_left</mat-icon>
 						</button>
 
 					</div>

@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { catchError, EMPTY } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
+import { ConfirmDialog } from "../../confirm-dialog/confirm-dialog.component";
 @Component({
 	selector: 'list_content',
 	templateUrl: './list_content.component.html',
@@ -13,6 +14,12 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 })
 
 export class ListContentComponent {
+
+	popoverTitle = 'Popover title';
+	popoverMessage = 'Popover description';
+	confirmClicked = false;
+	cancelClicked = false;
+
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
@@ -24,7 +31,7 @@ export class ListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService) {
+	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog) {
 
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 
@@ -32,15 +39,14 @@ export class ListContentComponent {
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
-
 	}
 
 	addNewRow() {
-		let Item:Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
+		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-            document.getElementById("NameForAdd")?.focus();
+			document.getElementById("NameForAdd")?.focus();
 		}
 	}
 
@@ -73,7 +79,7 @@ export class ListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -86,7 +92,7 @@ export class ListContentComponent {
 					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}
@@ -105,15 +111,23 @@ export class ListContentComponent {
 			});
 	}
 
+
+
 	Remove(model: LookUpModel) {
-		this.service.DeleteLookupData(model.Id).subscribe(
-			(data: HttpReponseModel) => {
-				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData();
-			},
-			(error: any) => {
-				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
-			});
+
+		if (confirm("Are you sure to delete " + model.Name)) {
+
+			this.service.DeleteLookupData(model.Id).subscribe(
+				(data: HttpReponseModel) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.getallData();
+				},
+				(error: any) => {
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+				});
+
+		}
+
 	}
 
 	// getting data and initialize data Source and Paginator
