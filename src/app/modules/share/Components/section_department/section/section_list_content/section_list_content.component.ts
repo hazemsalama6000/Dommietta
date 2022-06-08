@@ -44,6 +44,7 @@ export class SectionListContentComponent {
 		});
 
 	}
+	
 	addNewRow() {
 		let Item: Array<ISection> = this.dataSource.data.filter((a: ISection) => a.id == 0);
 		if (Item.length == 0) {
