@@ -4,7 +4,6 @@
 
 		<div class="col-md-12">
 
-
 			<mat-accordion>
 				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 					<mat-expansion-panel-header
@@ -57,77 +56,89 @@
 
 							<div class="row">
 
-								<div class="col-md-4">
+								<div class="col-md-2">
 
-									<div class="card bg-dark" style="width:250px">
-										<img class="card-img-top" [src]="company.logoWeb" width="80" height="80"
-											alt="Card image">
-										<div class="card-body">
+									<div class="row text-center mt-1">
+										<span class="HintsStyles"
+											style="text-decoration:underline ;">{{"HR.INPUTS.LOGOWEB" |
+											translate}}</span>
 
-											<div class="row">
+										<div class="d-flex justify-content-center align-items-center gap-1">
+											<img class="card-img-top" [src]="company.logoWeb"
+												style="width:80px;height:80px;" alt="Card image">
+											<span>
+												<input id="file-logoWeb" type="file" class="mx-2 btn btn-danger"
+													(change)="logoWebChange($event)" placeholder="Placeholder"
+													name="logoWeb">
+												<label
+													style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;"
+													for="file-logoWeb">
+													<mat-icon style="font-size:20px ;display: inline;">edit</mat-icon>
+												</label>
 
-												<div class="col-md-12 mt-2">
-
-													<span class="text-light">
-														<label class="fontForInputs">{{'HR.INPUTS.LOGOWEB' | translate}}
-														</label>
-														<input type="file" class="mx-2 col-md-6"
-															(change)="logoWebChange($event)" placeholder="Placeholder"
-															name="logoWeb">
-													</span>
-
-												</div>
-											</div>
-
+											</span>
 										</div>
 									</div>
 
-									<div class="card bg-dark mt-2" style="width:250px">
-										<img class="card-img-top" [src]="company.logoPrint" width="80" height="80"
-											alt="Card image">
-										<div class="card-body">
 
-											<div class="row">
+									<div class="row text-center mt-5">
+										<span class="HintsStyles"
+											style="text-decoration:underline ;">{{"HR.INPUTS.LOGOPRINT" |
+											translate}}</span>
 
-												<div class="col-md-12">
-													<span class="text-light">
-														<label class="fontForInputs">{{'HR.INPUTS.LOGOPRINT' |
-															translate}} </label>
-														<input type="file" class="mx-2 col-md-6"
-															(change)="logoPrintChange($event)" placeholder="Placeholder"
-															name="logoPrint">
-													</span>
-
-												</div>
-											</div>
+										<div class="d-flex justify-content-center align-items-center gap-1">
+											<img class="card-img-top" [src]="company.logoPrint"
+												style="width:80px;height:80px ;" alt="Card image">
+											<span>
+												<input id="file-logoPrint" type="file" class="mx-2"
+													(change)="logoPrintChange($event)" placeholder="Placeholder"
+													name="logoPrint">
+												<label for="file-logoPrint"
+													style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;">
+													<mat-icon style="font-size:20px ;display: inline;">edit</mat-icon>
+												</label>
+											</span>
 										</div>
+
 									</div>
 
 								</div>
 
-								<div class="col-md-8 fontForInputs">
+								<div class="col-md-10 fontForInputs">
 
 									<div class="row">
-										<div class="d-flex align-items-start justify-content-end">
 
-											<button class="btn btn-primary col-md-3 mx-1" (click)="openDialog(company.id)">
-												<span class="fontForInputs">
-													تعديل الشركة
-												</span>
-											</button>
-											<button class="btn btn-primary col-md-3 mx-1" (click)="setCompanyIdGettingBranches(company.id) ">
-												<span class="fontForInputs">
-													عرض الفروع
-												</span>
-											</button>
-											
-
+										<div class="col-md-6">
+											<p class="fontForInputs">
+												{{company.companyName}}
+											</p>
 										</div>
+
+										<div class="col-md-6">
+											<div class="d-flex align-items-start justify-content-end">
+
+												<button class="btn btn-primary col-md-3 mx-1"
+													(click)="openDialog(company.id)">
+													<span class="fontForInputs">
+														تعديل الشركة
+													</span>
+												</button>
+												<button class="btn btn-warning col-md-3 mx-1"
+													(click)="setCompanyIdGettingBranches(company.id) ">
+													<span class="fontForInputs">
+														عرض الفروع
+													</span>
+												</button>
+
+
+											</div>
+										</div>
+
 									</div>
 
 									<div class="row">
 										<div class="col-md-6">
-											<table class="table"  style="width:100% ;">
+											<table class="table" style="width:100% ;">
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
 													<th style="padding: 10px;font-weight: bold;">الكود</th>
 													<td style="padding: 10px;">{{company.code}}</td>
@@ -187,21 +198,24 @@
 															<div *ngIf="company.isActive==true; else xcross;">
 																<i class="fa fa-check" aria-hidden="true"></i>
 															</div>
-	
+
 															<ng-template #xcross>
 																<i class="fa fa-xmark" aria-hidden="true"></i>
 															</ng-template>
-	
+
 															<span class="mx-2">
-																<section matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
+																<section
+																	matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
 																	class="example-section">
-																	<mat-slide-toggle name="isValTaxActive" class="example-margin" [color]="'red'"
-																		(click)="activeCompany()" [checked]="company.isActive">
+																	<mat-slide-toggle name="isValTaxActive"
+																		class="example-margin" [color]="'red'"
+																		(click)="activeCompany()"
+																		[checked]="company.isActive">
 																	</mat-slide-toggle>
 																</section>
 															</span>
 														</div>
-														
+
 													</td>
 												</tr>
 
@@ -222,7 +236,7 @@
 
 
 					<div class="row" *ngIf="companyIdForShowingBranches != 0">
-						<branchs-c [companyId] = "companyIdForShowingBranches"></branchs-c>
+						<branchs-c [companyId]="companyIdForShowingBranches"></branchs-c>
 					</div>
 
 
