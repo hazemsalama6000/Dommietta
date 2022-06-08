@@ -15,6 +15,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class DepartmentListContentComponent {
 
     currentSelected:LookUpModel;
+	NameForAdd: string;
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
@@ -47,6 +48,7 @@ export class DepartmentListContentComponent {
 						if(data.isSuccess){
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);	
+							this.service.addFlag.next(false);
 						}
 						else if(data.isExists){
 							this.toaster.openWarningSnackBar(data.message);
@@ -63,7 +65,7 @@ export class DepartmentListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
+				//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
 					this.toaster.openWarningSnackBar(error);
@@ -71,6 +73,19 @@ export class DepartmentListContentComponent {
 
 		}
 
+	}
+
+	addNewRow() {
+		let Item:Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
+		if (Item.length == 0) {
+			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
+			this.dataSource.data = [newRow, ...this.dataSource.data];
+            document.getElementById("NameForAdd")?.focus();
+		}
+	}
+
+	deleteRow() {
+		this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
 	}
 
 	toggleActiveDeactive(element:LookUpModel){
@@ -111,6 +126,12 @@ export class DepartmentListContentComponent {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;	
 				console.log(data);
+				this.service.addFlag.subscribe((data) => {
+					if (data == true) {
+						this.addNewRow();
+					}
+				});
+
 			}
 		);
 	}

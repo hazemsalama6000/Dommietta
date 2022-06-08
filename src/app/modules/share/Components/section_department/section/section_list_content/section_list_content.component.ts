@@ -30,7 +30,7 @@ export class SectionListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService) {
-		this.currentSelected = {department_Id:0 , id:0 , isActive:false , name:"" ,isEdit:false};
+		this.currentSelected = {department_Id:0 , id:0 , isActive:false , name:"" ,isEdit:false ,isAdd:false};
 //subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentDepartmentId);
@@ -43,6 +43,19 @@ export class SectionListContentComponent {
 		});
 
 	}
+	addNewRow() {
+		let Item: Array<ISection> = this.dataSource.data.filter((a: ISection) => a.id == 0);
+		if (Item.length == 0) {
+			let newRow: ISection = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, department_Id:0 }
+			this.dataSource.data = [newRow, ...this.dataSource.data];
+			document.getElementById("NameForAdd")?.focus();
+		}
+	}
+
+	deleteRow() {
+		this.dataSource.data = this.dataSource.data.filter((a: ISection) => a.id != 0);
+	}
+
 
 	rowClicked(model:ISection){
 		this.currentSelected = model;
@@ -86,6 +99,7 @@ export class SectionListContentComponent {
 						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);
+							this.service.addFlag.next(false);
 						}
 						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
@@ -102,7 +116,7 @@ export class SectionListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
+				//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
 					this.toaster.openWarningSnackBar(error);
@@ -118,6 +132,11 @@ export class SectionListContentComponent {
 			(data: ISection[]) => {
 				this.dataSource = new MatTableDataSource<ISection>(data);
 				this.dataSource.paginator = this.paginator;	
+				this.service.addFlag.subscribe((data) => {
+					if (data == true) {
+						this.addNewRow();
+					}
+				});
 			}
 
 		);

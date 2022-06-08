@@ -3,5 +3,6 @@ export interface IRegion{
 		name:string,
 		state_Id: number,
 		isActive:boolean,
-		isEdit:boolean
+		isEdit:boolean,
+		isAdd:boolean
 }

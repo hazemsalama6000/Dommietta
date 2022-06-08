@@ -5,5 +5,6 @@ export interface ISection {
 	name: string,
 	department_Id: number,
 	isActive:boolean,
-	isEdit:boolean
+	isEdit:boolean,
+	isAdd:boolean
 }

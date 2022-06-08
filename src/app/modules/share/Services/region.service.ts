@@ -20,7 +20,7 @@ export class RegionService
     
 	getLookupData(regionId:number):Observable<IRegion[]>{
             return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_REGION_GETALL}${regionId}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name, isActive:Item.isActive , isEdit:false }) as IRegion )  ) );
+			.pipe( map(Items=> Items.map( (Item:any) => ({id:Item.id , name:Item.name, isActive:Item.isActive , isEdit:false ,isAdd:false}) as IRegion )  ) );
 	}
 
 	DeleteLookupData(id:number):Observable<any>{
