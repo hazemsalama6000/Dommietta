@@ -15,52 +15,66 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 
 export class StateListContentComponent {
 
-    currentSelected:LookUpModel;
-
+	currentSelected: LookUpModel;
+	NameForAdd: string;
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
-	displayedColumns: string[] = ['name', 'state' , 'action'];
+	displayedColumns: string[] = ['name', 'state', 'action'];
 
-	dataSource:any;
+	dataSource: any;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
 	constructor(private service: StatesService, private toaster: toasterService) {
-//subscribe here to invoke when insert done in upsert component
+		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
 
-		this.currentSelected={Id:0,Name:'',company_Id:0};
+		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 	}
 
-	toggleActiveDeactive(element:LookUpModel){
+	addNewRow() {
+		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
+		if (Item.length == 0) {
+			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
+			this.dataSource.data = [newRow, ...this.dataSource.data];
+			document.getElementById("NameForAdd")?.focus();
+		}
+	}
+
+	deleteRow() {
+		this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
+	}
+
+	toggleActiveDeactive(element: LookUpModel) {
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
-			(error:any) => {
+			(error: any) => {
 				console.log(error);
-			 });
+			});
 	}
-	
+
 	Submit(model: LookUpModel) {
 
 		model.company_Id = 1;
-        model.isActive=true;
+		model.isActive = true;
 		if (model.Id == 0) {
-			model.Id=0;
+			model.Id = 0;
 			this.service.PostLookupData(model).
 				subscribe(
 					(data: HttpReponseModel) => {
 
-						if(data.isSuccess){
+						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-							this.service.bSubject.next(true);	
+							this.service.bSubject.next(true);
+							this.service.addFlag.next(false);
 						}
-						else if(data.isExists){
+						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
 						}
 					},
@@ -75,7 +89,7 @@ export class StateListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
+					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
 					this.toaster.openWarningSnackBar(error);
@@ -85,32 +99,37 @@ export class StateListContentComponent {
 
 	}
 
-	Remove(model: LookUpModel){
+	Remove(model: LookUpModel) {
 		this.service.DeleteLookupData(model.Id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
-			(error:any) => {
+			(error: any) => {
 				this.toaster.openErrorSnackBar(error);
-			 });
+			});
 	}
 
 
-	rowClicked(model:LookUpModel){
+	rowClicked(model: LookUpModel) {
 		this.currentSelected = model;
 		this.edit.emit(model);
 		this.service.emitStateIdSubject.next(model);
 	}
 
 
-	
-// getting data and initialize data Source and Paginator
+
+	// getting data and initialize data Source and Paginator
 	getallData() {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
-				this.dataSource.paginator = this.paginator;	
+				this.dataSource.paginator = this.paginator;
+				this.service.addFlag.subscribe((data) => {
+					if (data == true) {
+						this.addNewRow();
+					}
+				});
 			}
 		);
 	}
@@ -118,7 +137,7 @@ export class StateListContentComponent {
 
 
 
-//filter from search Box
+	//filter from search Box
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
