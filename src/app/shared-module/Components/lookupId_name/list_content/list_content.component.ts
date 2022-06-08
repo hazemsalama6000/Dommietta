@@ -5,8 +5,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
-import { ConfirmDialog } from "../../confirm-dialog/confirm-dialog.component";
 @Component({
 	selector: 'list_content',
 	templateUrl: './list_content.component.html',
@@ -14,12 +14,6 @@ import { ConfirmDialog } from "../../confirm-dialog/confirm-dialog.component";
 })
 
 export class ListContentComponent {
-
-	popoverTitle = 'Popover title';
-	popoverMessage = 'Popover description';
-	confirmClicked = false;
-	cancelClicked = false;
-
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
@@ -31,7 +25,7 @@ export class ListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog) {
+	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog, private confirmationDialogService: ConfirmationDialogService) {
 
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 
@@ -41,12 +35,13 @@ export class ListContentComponent {
 		});
 	}
 
+
 	addNewRow() {
 		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-			document.getElementById("NameForAdd")?.focus();
+			//	document.getElementById("NameForAdd")?.focus();
 		}
 	}
 
@@ -115,18 +110,20 @@ export class ListContentComponent {
 
 	Remove(model: LookUpModel) {
 
-		if (confirm("Are you sure to delete " + model.Name)) {
-
-			this.service.DeleteLookupData(model.Id).subscribe(
-				(data: HttpReponseModel) => {
-					this.toaster.openSuccessSnackBar(data.message);
-					this.getallData();
-				},
-				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-				});
-
-		}
+		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
+			.then((confirmed) => {
+				if (confirmed) {
+					this.service.DeleteLookupData(model.Id).subscribe(
+						(data: HttpReponseModel) => {
+							this.toaster.openSuccessSnackBar(data.message);
+							this.getallData();
+						},
+						(error: any) => {
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+						});
+				}
+			})
+			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
 	}
 

@@ -7,6 +7,7 @@ import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { IRegion } from "src/app/modules/share/models/IRegion.interface";
 import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
+import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 @Component({
@@ -29,7 +30,7 @@ export class RegionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: RegionService, private toaster: toasterService, private StatesService: StatesService) {
+	constructor(private service: RegionService, private toaster: toasterService, private StatesService: StatesService, private confirmationDialogService: ConfirmationDialogService) {
 
 		this.currentSelected = { id: 0, isActive: false, isEdit: false, isAdd: false, name: "", state_Id: 0 }
 
@@ -74,7 +75,7 @@ export class RegionListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -87,7 +88,7 @@ export class RegionListContentComponent {
 					//this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}
@@ -101,26 +102,34 @@ export class RegionListContentComponent {
 				this.getallData(this.currentStateId);
 			},
 			(error: any) => {
-				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 			});
 	}
 
 
 	Remove(model: IRegion) {
-		this.service.DeleteLookupData(model.id).subscribe(
-			(data: HttpReponseModel) => {
-				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData(this.currentStateId);
-			},
-			(error: any) => {
-				this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
-			});
+
+		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
+			.then((confirmed) => {
+				if (confirmed) {
+					this.service.DeleteLookupData(model.id).subscribe(
+						(data: HttpReponseModel) => {
+							this.toaster.openSuccessSnackBar(data.message);
+							this.getallData(this.currentStateId);
+						},
+						(error: any) => {
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+						});
+				}
+			})
+			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
 	}
 
 	addNewRow() {
 		let Item: Array<IRegion> = this.dataSource.data.filter((a: IRegion) => a.id == 0);
 		if (Item.length == 0) {
-			let newRow: IRegion = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, state_Id:0 }
+			let newRow: IRegion = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, state_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			document.getElementById("NameForAdd")?.focus();
 		}

@@ -7,13 +7,14 @@ import { LookupIdNameComponent } from './Components/lookupId_name/lookupId_name.
 import { TranslationModule } from '../modules/i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationDialogComponent } from './Components/confirm-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
 	 UpsertComponent,
 	 ListContentComponent,
-	 LookupIdNameComponent
+	 LookupIdNameComponent,
+	 ConfirmationDialogComponent
 	],
   imports: [
 	  MaterialsModules,
@@ -27,7 +28,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 	  MaterialsModules,
 	  UpsertComponent,
 	  ListContentComponent,
-	  LookupIdNameComponent
-]
+	  LookupIdNameComponent,
+	  ConfirmationDialogComponent
+]  ,
+entryComponents: [ ConfirmationDialogComponent ],
+
 })
 export class SharedModule { }
