@@ -1,9 +1,10 @@
-import {  Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
+import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
@@ -15,25 +16,26 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 export class DepartmentListContentComponent {
 
-    currentSelected:LookUpModel;
+	currentSelected: LookUpModel;
 	NameForAdd: string;
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 
-	displayedColumns: string[] = ['name' , 'state' , 'action'];
+	displayedColumns: string[] = ['name', 'state', 'action'];
 
-	dataSource:any;
+	dataSource: any;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-	constructor(private service: DepartmentService, private toaster: toasterService , private confirmationDialogService: ConfirmationDialogService	) {
-//subscribe here to invoke when insert done in upsert component
+	constructor(private service: DepartmentService, private toaster: toasterService,
+		 private confirmationDialogService: ConfirmationDialogService , private sectionService:SectionService) {
+		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
 
-		this.currentSelected={Id:0,Name:'',company_Id:0};
+		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 	}
 
 	Submit(model: LookUpModel) {
@@ -46,17 +48,17 @@ export class DepartmentListContentComponent {
 				subscribe(
 					(data: HttpReponseModel) => {
 
-						if(data.isSuccess){
+						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-							this.service.bSubject.next(true);	
+							this.service.bSubject.next(true);
 							this.service.addFlag.next(false);
 						}
-						else if(data.isExists){
+						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
 						}
 					},
 					(error: string) => {
-						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -66,10 +68,10 @@ export class DepartmentListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-				//	this.service.bSubject.next(true);
+					//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}
@@ -77,13 +79,17 @@ export class DepartmentListContentComponent {
 	}
 
 	addNewRow() {
-		let Item:Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
+		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: false, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
-            document.getElementById("NameForAddDepartment")?.focus();
+			document.getElementById("NameForAddDepartment")?.focus();
 			this.currentSelected = newRow;
-			this.service.emitDepartmentIdSubject.next(this.currentSelected );
+			this.service.emitDepartmentIdSubject.next(this.currentSelected);
+			this.dataSource.data.filter((a: LookUpModel) => a.Id != 0).forEach((element: LookUpModel) => {
+				element.isAdd = false;
+				element.isEdit = false;
+			});
 		}
 	}
 
@@ -91,26 +97,26 @@ export class DepartmentListContentComponent {
 		this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
 	}
 
-	toggleActiveDeactive(element:LookUpModel){
+	toggleActiveDeactive(element: LookUpModel) {
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
 			},
-			(error:any) => {
+			(error: any) => {
 				console.log(error);
-			 });
+			});
 	}
 
-	Remove(model: LookUpModel){
+	Remove(model: LookUpModel) {
 
-			this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
+		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
 			.then((confirmed) => {
 				if (confirmed) {
 					this.service.DeleteLookupData(model.Id).subscribe(
 						(data: HttpReponseModel) => {
 							this.toaster.openSuccessSnackBar(data.message);
-				this.getallData();
+							this.getallData();
 						},
 						(error: any) => {
 							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
@@ -119,28 +125,31 @@ export class DepartmentListContentComponent {
 			})
 			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
-
 	}
 
 
-	rowClicked(model:LookUpModel){
+	rowClicked(model: LookUpModel) {
+		this.sectionService.addFlag.next(false);
+		if (model.Id != 0) {
+			this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
+		}
 		this.currentSelected = model;
 		this.edit.emit(model);
 		this.service.emitDepartmentIdSubject.next(model);
-		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach( (element:LookUpModel) => {
-			element.isAdd=false;
-			element.isEdit=false;
+		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach((element: LookUpModel) => {
+			element.isAdd = false;
+			element.isEdit = false;
 		});
 	}
 
 
-	
-// getting data and initialize data Source and Paginator
+
+	// getting data and initialize data Source and Paginator
 	getallData() {
 		this.service.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
-				this.dataSource.paginator = this.paginator;	
+				this.dataSource.paginator = this.paginator;
 				console.log(data);
 				this.service.addFlag.subscribe((data) => {
 					if (data == true) {
@@ -154,7 +163,7 @@ export class DepartmentListContentComponent {
 
 
 
-//filter from search Box
+	//filter from search Box
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();

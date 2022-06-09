@@ -24,11 +24,11 @@
 					</span>
 
 					<mat-form-field class="col-md-5" [hidden]="element.isEdit == false || element.isAdd == true">
-						<input matInput [value]="element.Name" name="Name{{x}}" [(ngModel)]="element.Name">
+						<input matInput id="Name{{element.Name}}" name="Name{{element.Name}}" [(ngModel)]="element.Name">
 					</mat-form-field>
 
 					<mat-form-field class="col-md-5" [hidden]="element.isAdd == false">
-						<input matInput autofocus="on" id="NameForAdd" name="NameForAdd" [(ngModel)]="element.Name"
+						<input matInput id="NameForAdd" name="NameForAdd" 
 							#NameForAdd>
 					</mat-form-field>
 

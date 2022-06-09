@@ -24,7 +24,7 @@
 					</span>
 
 					<mat-form-field class="col-md-5" [hidden]="element.isEdit == false || element.isAdd == true">
-						<input matInput [value]="element.name" name="name{{x}}" [(ngModel)]="element.name">
+						<input matInput [value]="element.name" id="name{{element.name}}" name="name{{element.name}}" [(ngModel)]="element.name">
 					</mat-form-field>
 
 					<mat-form-field class="col-md-5" [hidden]="element.isAdd == false">

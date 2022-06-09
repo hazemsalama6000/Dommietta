@@ -39,10 +39,14 @@ export class ListContentComponent {
 	addNewRow() {
 		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
 		if (Item.length == 0) {
+			this.dataSource.data.forEach((element: LookUpModel) => {
+				element.isAdd = false;
+				element.isEdit = false;
+			});
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			this.currentSelected = newRow;
-			//	document.getElementById("NameForAdd")?.focus();
+			document.getElementById("NameForAdd")?.focus();
 		}
 	}
 
@@ -51,12 +55,17 @@ export class ListContentComponent {
 	}
 
 	rowClicked(model: LookUpModel) {
+		if (model.Id != 0) {
+			this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
+		}
+		console.log(this.dataSource.data);
 		this.currentSelected = model;
-		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach( (element:LookUpModel) => {
-			element.isAdd=false;
-			element.isEdit=false;
+		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach((element: LookUpModel) => {
+			element.isAdd = false;
+			element.isEdit = false;
 		});
 	}
+
 
 	Submit(model: LookUpModel) {
 		console.log(model);

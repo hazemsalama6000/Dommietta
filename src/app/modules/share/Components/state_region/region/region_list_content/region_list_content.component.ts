@@ -48,8 +48,11 @@ export class RegionListContentComponent {
 	}
 
 	rowClicked(model: IRegion) {
+		if (model.id != 0) {
+			this.dataSource.data = this.dataSource.data.filter((a: IRegion) => a.id != 0);
+		}
 		this.currentSelected = model;
-		this.dataSource.data.filter((a: IRegion) => a.id != model.id).forEach( (element:LookUpModel) => {
+		this.dataSource.data.filter((a: IRegion) => a.id != model.id).forEach( (element:IRegion) => {
 			element.isAdd=false;
 			element.isEdit=false;
 		});
@@ -135,6 +138,10 @@ export class RegionListContentComponent {
 			let newRow: IRegion = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, state_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			document.getElementById("NameForAddRegion")?.focus();
+			this.dataSource.data.filter((a: IRegion) => a.id != 0).forEach((element: IRegion) => {
+				element.isAdd = false;
+				element.isEdit = false;
+			});
 		}
 	}
 

@@ -3,6 +3,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
@@ -25,7 +26,8 @@ export class StateListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-	constructor(private service: StatesService, private toaster: toasterService , private confirmationDialogService: ConfirmationDialogService ) {
+	constructor(private service: StatesService, private toaster: toasterService 
+		, private confirmationDialogService: ConfirmationDialogService ,private regionService:RegionService ) {
 		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
@@ -42,7 +44,10 @@ export class StateListContentComponent {
 			document.getElementById("NameForAddState")?.focus();
 			this.currentSelected = newRow;
 			this.service.emitStateIdSubject.next(this.currentSelected );
-
+			this.dataSource.data.filter((a: LookUpModel) => a.Id != 0).forEach((element: LookUpModel) => {
+				element.isAdd = false;
+				element.isEdit = false;
+			});
 		}
 	}
 
@@ -121,6 +126,10 @@ export class StateListContentComponent {
 
 
 	rowClicked(model: LookUpModel) {
+		this.regionService.addFlag.next(false);
+		if (model.Id != 0) {
+			this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
+		}
 		this.currentSelected = model;
 		this.edit.emit(model);
 		this.service.emitStateIdSubject.next(model);

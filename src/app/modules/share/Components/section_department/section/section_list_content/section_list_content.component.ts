@@ -51,6 +51,10 @@ export class SectionListContentComponent {
 			let newRow: ISection = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, department_Id:0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			document.getElementById("NameForAddSection")?.focus();
+			this.dataSource.data.filter((a: ISection) => a.id != 0).forEach((element: ISection) => {
+				element.isAdd = false;
+				element.isEdit = false;
+			});
 		}
 	}
 
@@ -60,6 +64,9 @@ export class SectionListContentComponent {
 
 
 	rowClicked(model:ISection){
+		if (model.id != 0) {
+			this.dataSource.data = this.dataSource.data.filter((a: ISection) => a.id != 0);
+		}
 		this.currentSelected = model;
 		this.dataSource.data.filter((a: ISection) => a.id != model.id).forEach( (element:LookUpModel) => {
 			element.isAdd=false;
