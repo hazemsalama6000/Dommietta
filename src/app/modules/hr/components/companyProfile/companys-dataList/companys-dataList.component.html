@@ -1,15 +1,15 @@
 <section id="company_list">
 
+	<div id="mySidenav" class="sidenav">
+		<a  (click)="openDialog()" style="cursor: pointer;" id="about">{{ "HR.BUTTONS.ADD" | translate }}</a>
+    </div>
+
 	<div class="row">
-
-		<button (click)="openDialog()" class="btn btn-primary col-md-2">
-			
+		<!--<button (click)="openDialog()" class="btn btn-primary col-md-2">
 			{{ "HR.BUTTONS.ADD" | translate }}
-		</button>
+		</button>-->
 		<div class="col-md-12">
-
 			<company-item *ngFor="let x of companys"  [company]="x"></company-item>
-
 		</div>
 	</div>
 
