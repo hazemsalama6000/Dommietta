@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { left } from "@popperjs/core";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { ICompanyDisplayData } from "src/app/modules/hr/models/ICompanyDisplayData";
@@ -19,14 +20,21 @@ export class CompanyItemComponent {
 
 	companyIdForShowingBranches:number ;
 
+    matDialogConfig: MatDialogConfig = new MatDialogConfig();
+
 	constructor(private dialog: MatDialog, private toaster: toasterService, private service: CompanyService, private cd : ChangeDetectorRef
 	) { }
 	logoWebFile: File;
 	logoPrintFile: File;
 
 	ngOnInit() {
+		/*this.matDialogConfig.position = { left: `200px`, top: `200px` };
+		this.matDialogConfig.width = '300px';
+		this.matDialogConfig.height = '400px';
+		*/
 		this.companyIdForShowingBranches = 0;
 		this.cd.detectChanges();
+		
 	 }
 
 
@@ -44,7 +52,7 @@ export class CompanyItemComponent {
 				height: '100%',
 				width: '100%',
 				panelClass: 'full-screen-modal',
-
+				position:this.matDialogConfig.position,
 				data: { companyId: companyId }
 			});
 

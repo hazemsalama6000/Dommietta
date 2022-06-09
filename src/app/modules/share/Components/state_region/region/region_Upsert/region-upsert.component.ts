@@ -22,7 +22,7 @@ interface ClientError {
 export class RegionUpsertComponent {
 	
 	currentStateId:number;
-
+    currentStateActiveOrNot:boolean;
 	messageErrors: string;
 
 	toggleAddEditButton: boolean;
@@ -47,6 +47,7 @@ export class RegionUpsertComponent {
 
 		this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
 			this.currentStateId=data.Id;
+			this.currentStateActiveOrNot=data.isActive??false;
 		});
 		
 	}

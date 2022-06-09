@@ -22,7 +22,7 @@ interface ClientError {
 export class SectionUpsertComponent {
 
 	currentDepartmentId: number;
-
+	departmentActiveOrNot: boolean;
 	messageErrors: string;
 
 	toggleAddEditButton: boolean;
@@ -46,6 +46,7 @@ export class SectionUpsertComponent {
 		this.initForm();
 
 		this.DepartmentService.getDepartmentIdObservable().subscribe((data: LookUpModel) => {
+			this.departmentActiveOrNot = data.isActive ?? false;
 			this.currentDepartmentId = data.Id;
 		});
 
@@ -72,7 +73,7 @@ export class SectionUpsertComponent {
 		this.UpsertForm.setValue({ id: 0, name: '', department_Id: 0 });
 	}
 
-	addNewRow(){
+	addNewRow() {
 		this.service.addFlag.next(true);
 	}
 	// for Insert And Delete distingush them with model.id

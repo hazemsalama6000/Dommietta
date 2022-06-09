@@ -53,7 +53,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 						summary: `HTTP Error - ${requestError.status}`,
 						detail: errors
 					});
-
 					return throwError(messageError);
 				}
 
@@ -66,7 +65,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 						detail: error.message
 					});
 
-					return throwError(() => new Error(error.message));
+					return throwError(error.message);
 				}
 
 				else {

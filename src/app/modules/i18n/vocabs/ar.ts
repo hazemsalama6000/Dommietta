@@ -72,7 +72,7 @@ export const locale = {
 				ADDORUPDATESTATE: " المحافظات",
 				ADDORUPDATEREGION: " المناطق",
 				ADDORUPDATESECTION: "الاقسام",
-				ADDORUPDATEDEPARTMENTN: "الفروع",
+				ADDORUPDATEDEPARTMENTN: "الادارات",
 			}
 		},
 
