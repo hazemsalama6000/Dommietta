@@ -137,8 +137,34 @@
 													data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 													غير نشط
 												</a>
-											</div>
 
+												<span class="mx-2">
+													<section
+														matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
+														class="example-section">
+														<mat-slide-toggle name="isValTaxActive"
+															class="example-margin" [color]="'red'"
+															(click)="activeCompany()"
+															[checked]="company.isActive">
+														</mat-slide-toggle>
+													</section>
+												</span>
+
+											</div>
+											<div class="d-flex flex-wrap">
+												<a
+												  class="
+													d-flex
+													align-items-center
+													text-gray-400 text-hover-primary
+													HintsStyles
+													cursor-pointer
+												  "
+												>
+												عدد المستخدمين   :  {{company.mobileUserNumber}}
+												</a>
+											
+											  </div>
 
 										</div>
 
@@ -170,10 +196,6 @@
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
 													<th style="padding: 10px;font-weight: bold;">الكود</th>
 													<td style="padding: 10px;">{{company.code}}</td>
-												</tr>
-												<tr style="border-bottom:1px dotted #5a5a5a ;">
-													<th style="padding: 10px;font-weight: bold;">عدد المستخدمين</th>
-													<td style="padding: 10px;">{{company.mobileUserNumber}}</td>
 												</tr>
 
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
@@ -216,35 +238,6 @@
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
 													<th style="padding: 10px;font-weight: bold;"> المسمى الوظيفى</th>
 													<td style="padding: 10px;">{{company.managerPosition}} </td>
-												</tr>
-
-												<tr style="border-bottom:1px dotted #5a5a5a ;">
-													<th style="padding: 10px;font-weight: bold;">نشط</th>
-													<td style="padding: 10px;">
-
-														<div class="d-flex justify-content-center align-items-center">
-															<div *ngIf="company.isActive==true; else xcross;">
-																<i class="fa fa-check" aria-hidden="true"></i>
-															</div>
-
-															<ng-template #xcross>
-																<i class="fa fa-xmark" aria-hidden="true"></i>
-															</ng-template>
-
-															<span class="mx-2">
-																<section
-																	matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
-																	class="example-section">
-																	<mat-slide-toggle name="isValTaxActive"
-																		class="example-margin" [color]="'red'"
-																		(click)="activeCompany()"
-																		[checked]="company.isActive">
-																	</mat-slide-toggle>
-																</section>
-															</span>
-														</div>
-
-													</td>
 												</tr>
 
 
