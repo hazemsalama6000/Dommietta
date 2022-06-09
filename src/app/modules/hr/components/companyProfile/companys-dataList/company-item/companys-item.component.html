@@ -59,46 +59,52 @@
 								<div class="col-md-2">
 
 									<div class="row text-center mt-1">
-										<span class="HintsStyles"
-											style="text-decoration:underline ;">{{"HR.INPUTS.LOGOWEB" |
-											translate}}</span>
 
 										<div class="d-flex justify-content-center align-items-center gap-1">
-											<img class="card-img-top" [src]="company.logoWeb"
-												style="width:80px;height:80px;" alt="Card image">
-											<span>
-												<input id="file-logoWeb" type="file" class="mx-2 btn btn-danger"
-													(change)="logoWebChange($event)" placeholder="Placeholder"
-													name="logoWeb">
-												<label
-													style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;"
-													for="file-logoWeb">
-													<mat-icon style="font-size:20px ;display: inline;">edit</mat-icon>
-												</label>
-
-											</span>
+											<div class="container">
+												<img class="card-img-top" [src]="company.logoWeb"
+													style="width:80px;height:80px;" alt="Card image">
+												<div class="centered boldfont"> {{"HR.INPUTS.LOGOWEB" | translate}}
+												</div>
+												<span class="top-right">
+													<input id="file-logoWeb" type="file" class="mx-2 btn btn-danger"
+														(change)="logoWebChange($event)" placeholder="Placeholder"
+														name="logoWeb">
+													<label
+														style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;"
+														for="file-logoWeb">
+														<mat-icon style="font-size:20px ;display: inline;">edit
+														</mat-icon>
+													</label>
+												</span>
+											</div>
 										</div>
+
 									</div>
 
 
 									<div class="row text-center mt-5">
-										<span class="HintsStyles"
-											style="text-decoration:underline ;">{{"HR.INPUTS.LOGOPRINT" |
-											translate}}</span>
 
 										<div class="d-flex justify-content-center align-items-center gap-1">
-											<img class="card-img-top" [src]="company.logoPrint"
-												style="width:80px;height:80px ;" alt="Card image">
-											<span>
-												<input id="file-logoPrint" type="file" class="mx-2"
-													(change)="logoPrintChange($event)" placeholder="Placeholder"
-													name="logoPrint">
-												<label for="file-logoPrint"
-													style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;">
-													<mat-icon style="font-size:20px ;display: inline;">edit</mat-icon>
-												</label>
-											</span>
+											<div class="container">
+												<img class="card-img-top" [src]="company.logoPrint"
+													style="width:80px;height:80px ;" alt="Card image">
+												<div class="centered boldfont"> {{"HR.INPUTS.LOGOPRINT" | translate}}
+												</div>
+												<span class="top-right">
+													<input id="file-logoPrint" type="file" class="mx-2"
+														(change)="logoPrintChange($event)" placeholder="Placeholder"
+														name="logoPrint">
+													<label for="file-logoPrint"
+														style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 5px;border-radius: 20px;">
+														<mat-icon style="font-size:20px ;display: inline;">edit
+														</mat-icon>
+													</label>
+												</span>
+											</div>
 										</div>
+
+
 
 									</div>
 
@@ -109,9 +115,31 @@
 									<div class="row">
 
 										<div class="col-md-6">
-											<p class="fontForInputs">
-												{{company.companyName}}
-											</p>
+
+											<div class="d-flex align-items-center mb-2">
+												<a
+													class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">
+													{{company.companyName}}
+												</a>
+
+												<a class="cursor-pointer">
+													<span class="svg-icon svg-icon-1 svg-icon-primary"></span>
+												</a>
+
+												<a *ngIf="company.isActive== true"
+													class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+													data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+													نشط
+												</a>
+
+												<a *ngIf="company.isActive== false"
+													class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+													data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+													غير نشط
+												</a>
+											</div>
+
+
 										</div>
 
 										<div class="col-md-6">
@@ -250,5 +278,6 @@
 
 		</div>
 	</div>
+
 
 </section>
