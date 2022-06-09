@@ -49,6 +49,10 @@ export class RegionListContentComponent {
 
 	rowClicked(model: IRegion) {
 		this.currentSelected = model;
+		this.dataSource.data.filter((a: IRegion) => a.id != model.id).forEach( (element:LookUpModel) => {
+			element.isAdd=false;
+			element.isEdit=false;
+		});
 	}
 
 

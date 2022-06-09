@@ -41,6 +41,7 @@ export class ListContentComponent {
 		if (Item.length == 0) {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
+			this.currentSelected = newRow;
 			//	document.getElementById("NameForAdd")?.focus();
 		}
 	}
@@ -51,6 +52,10 @@ export class ListContentComponent {
 
 	rowClicked(model: LookUpModel) {
 		this.currentSelected = model;
+		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach( (element:LookUpModel) => {
+			element.isAdd=false;
+			element.isEdit=false;
+		});
 	}
 
 	Submit(model: LookUpModel) {

@@ -44,7 +44,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 					for(const key in error.errors){
 						if(Object.prototype.hasOwnProperty.call(error.errors , key) ){
 							errors[key] = error.errors[key];
-							messageError += " و " + error.errors[key][0];
+							messageError += " - " + error.errors[key][0];
 						}
 					}
 

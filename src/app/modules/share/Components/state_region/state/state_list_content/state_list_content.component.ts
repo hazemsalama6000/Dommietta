@@ -37,9 +37,12 @@ export class StateListContentComponent {
 	addNewRow() {
 		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
 		if (Item.length == 0) {
-			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
+			let newRow: LookUpModel = { Id: 0, Name: "", isActive: false, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			document.getElementById("NameForAddState")?.focus();
+			this.currentSelected = newRow;
+			this.service.emitStateIdSubject.next(this.currentSelected );
+
 		}
 	}
 
@@ -121,6 +124,10 @@ export class StateListContentComponent {
 		this.currentSelected = model;
 		this.edit.emit(model);
 		this.service.emitStateIdSubject.next(model);
+		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach( (element:LookUpModel) => {
+			element.isAdd=false;
+			element.isEdit=false;
+		});
 	}
 
 

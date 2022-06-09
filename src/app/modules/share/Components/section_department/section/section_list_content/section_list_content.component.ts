@@ -61,6 +61,10 @@ export class SectionListContentComponent {
 
 	rowClicked(model:ISection){
 		this.currentSelected = model;
+		this.dataSource.data.filter((a: ISection) => a.id != model.id).forEach( (element:LookUpModel) => {
+			element.isAdd=false;
+			element.isEdit=false;
+		});
 	}
 
 //emit model to upsert component for updating
