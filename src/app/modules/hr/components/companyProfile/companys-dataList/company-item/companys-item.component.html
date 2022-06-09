@@ -28,20 +28,30 @@
 									الكود :
 								</span>
 
-								<span class="fontForInputs">
+								<span class="fontForInputs mx-5">
 									{{company.code}}
 								</span>
-								<!--<div class="mx-10">
-									<div *ngIf="company.isActive==true; else xcross;">
-										<i class="fa fa-check" aria-hidden="true"></i>
 
-									</div>
+								<span class="fontForInputs" style="font-weight:bold ;">
+									عدد المستخدمين :
+								</span>
 
-									<ng-template #xcross>
-										<i class="fa fa-xmark" aria-hidden="true"></i>
-									</ng-template>
-								</div>-->
+								<span class="fontForInputs">
+									{{company.mobileUserNumber}}
+								</span>
 
+
+								<a *ngIf="company.isActive== true"
+									class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+									نشط
+								</a>
+
+								<a *ngIf="company.isActive== false"
+									class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+									غير نشط
+								</a>
 
 							</div>
 
@@ -151,6 +161,8 @@
 
 											</div>
 											<div class="d-flex flex-wrap">
+
+
 												<a class="
 													d-flex
 													align-items-center
@@ -158,7 +170,9 @@
 													HintsStyles
 													cursor-pointer
 												  ">
-													اسم المسؤول : {{company.managerName}}
+													<mat-icon>account_circle</mat-icon>
+
+													{{company.managerName}}
 												</a>
 
 												<a class="mx-2
@@ -168,8 +182,8 @@
 												HintsStyles
 												cursor-pointer
 											  ">
-												المسمى الوظيفى  : {{company.managerPosition}}
-											</a>
+													{{company.managerPosition}}
+												</a>
 
 												<a class="mx-2
 												d-flex
@@ -178,28 +192,9 @@
 												HintsStyles
 												cursor-pointer
 											  ">
-													التليفون : {{company.phoneNumber}}
-												</a>
+													<mat-icon>settings_phone</mat-icon>
 
-
-												<a class="mx-2
-													d-flex
-													align-items-center
-													text-gray-400 text-hover-primary
-													HintsStyles
-													cursor-pointer
-												  ">
-													عدد المتخدمين : {{company.mobileUserNumber}}
-												</a>
-
-												<a class="mx-2
-												  d-flex
-												  align-items-center
-												  text-gray-400 text-hover-primary
-												  HintsStyles
-												  cursor-pointer
-												">
-													العنوان : {{company.address}}
+													{{company.phoneNumber}}
 												</a>
 
 
@@ -210,7 +205,21 @@
 												  HintsStyles
 												  cursor-pointer
 												">
-													الايميل : {{company.email}}
+												<mat-icon> location_on</mat-icon>
+
+													{{company.address}}
+												</a>
+
+
+												<a class="mx-2
+												  d-flex
+												  align-items-center
+												  text-gray-400 text-hover-primary
+												  HintsStyles
+												  cursor-pointer
+												">
+												<mat-icon> email</mat-icon>
+													{{company.email}}
 												</a>
 
 											</div>
@@ -226,7 +235,7 @@
 														تعديل الشركة
 													</span>
 												</button>
-												<button class="btn btn-warning col-md-6 mx-1"
+												<button class="btn btn-danger col-md-6 mx-1"
 													(click)="setCompanyIdGettingBranches(company.id) ">
 													<span class="fontForInputs">
 														عرض الفروع
