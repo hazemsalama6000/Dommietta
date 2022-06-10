@@ -20,6 +20,8 @@ export const locale = {
 				FILTER: "بحث",
 				CODE: "الكود",
 				COMPANYNAME: "اسم الشركة",
+				BRANCHNAME: "اسم الفرع",
+				ISMAIN:"رئيسي",
 				USERCOUNTS: "عدد المستخدمين ",
 				ACTIVITY: "النشاط",
 				ADDRESS: "العنوان",
@@ -41,6 +43,7 @@ export const locale = {
 				LOGOWEB:"الموقع",
 				COMPANYDATA:"بيانات الشركة",
 				EMPLOYEE:"الموظف",
+				RESPONSIBLEEMPLOYEE:"اسم المسؤول",
 				STATUS : "حالة التفعيل" , 
 				SALESSTATELOGIN:"ايقاف تسجيل الدخول للمناديب"
 			},

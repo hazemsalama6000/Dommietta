@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
@@ -9,6 +10,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { IBranch } from "../../../models/IBranch";
 import { BranchService } from "../../../services/branch.service";
+import { BranchUpsertComponent } from "../branch_Upsert/branch-upsert.component";
 @Component({
 	selector: 'branch_list_content',
 	templateUrl: './branch_list_content.component.html',
@@ -33,10 +35,28 @@ export class BranchListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: BranchService, private toaster: toasterService) {
+	constructor(private service: BranchService, private toaster: toasterService ,private dialog: MatDialog) {
 	console.log('cocococ');
 
 		this.currentSelected={Id:0,Name:'',company_Id:0};
+	}
+
+    addNewBranch(branchId = 0){
+
+		const dialogRef = this.dialog.open(BranchUpsertComponent,
+			{
+				maxWidth: '100vw',
+				maxHeight: '100vh',
+				height: '100%',
+				width: '100%',
+				panelClass: 'full-screen-modal',
+
+				data: { branchId: branchId , companyId:this.companyId}
+			});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});
 	}
 
 	toggleActiveDeactive(element:IBranch){

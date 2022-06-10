@@ -71,7 +71,7 @@ export class CompanyUpsertComponent implements OnInit {
 				companyName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				activity: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-				mobileUsersCount: [, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$")])],
+				mobileUsersCount: [, Validators.compose([Validators.required, Validators.pattern("^[0-9]*$")])],
 				state_Id: ['', Validators.compose([Validators.required])],
 				region_Id: ['', Validators.compose([Validators.required])],
 				isActive: [false,],

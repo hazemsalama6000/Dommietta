@@ -24,8 +24,8 @@ import { BranchListContentComponent } from './components/branches/branch_list_co
 	  CompanyUpsertComponent,
 	  BranchComponent,
 	  BranchUpsertComponent,
-	  BranchListContentComponent
-	  
+	  BranchListContentComponent,
+	  BranchUpsertComponent
   ],
   imports: [
     CommonModule,
