@@ -19,6 +19,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class RegionListContentComponent {
 
 	currentStateId = 0;
+	currentState:LookUpModel;
 	currentSelected: IRegion;
 	NameForAdd: string;
 
@@ -41,6 +42,7 @@ export class RegionListContentComponent {
 
 		this.StatesService.getStateIdObservable().subscribe((data: LookUpModel) => {
 			this.currentStateId = data.Id;
+			this.currentState = data;
 			console.log(this.currentStateId);
 			this.getallData(this.currentStateId);
 		});
