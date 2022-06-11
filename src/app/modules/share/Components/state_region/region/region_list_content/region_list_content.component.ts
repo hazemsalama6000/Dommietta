@@ -19,7 +19,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class RegionListContentComponent {
 
 	currentStateId = 0;
-	currentState:LookUpModel;
+	currentState: LookUpModel;
 	currentSelected: IRegion;
 	NameForAdd: string;
 
@@ -41,10 +41,18 @@ export class RegionListContentComponent {
 		});
 
 		this.StatesService.getStateIdObservable().subscribe((data: LookUpModel) => {
-			this.currentStateId = data.Id;
-			this.currentState = data;
-			console.log(this.currentStateId);
-			this.getallData(this.currentStateId);
+		
+			if (data.Id == 0) {
+				this.dataSource.data = [];
+				this.currentState = data;
+			}
+			else {
+				this.currentStateId = data.Id;
+				this.currentState = data;
+				console.log(this.currentStateId);
+				this.getallData(this.currentStateId);
+			}
+
 		});
 
 	}
@@ -54,9 +62,9 @@ export class RegionListContentComponent {
 			this.dataSource.data = this.dataSource.data.filter((a: IRegion) => a.id != 0);
 		}
 		this.currentSelected = model;
-		this.dataSource.data.filter((a: IRegion) => a.id != model.id).forEach( (element:IRegion) => {
-			element.isAdd=false;
-			element.isEdit=false;
+		this.dataSource.data.filter((a: IRegion) => a.id != model.id).forEach((element: IRegion) => {
+			element.isAdd = false;
+			element.isEdit = false;
 		});
 	}
 

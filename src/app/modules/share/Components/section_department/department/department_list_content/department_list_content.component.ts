@@ -115,6 +115,8 @@ export class DepartmentListContentComponent {
 				if (confirmed) {
 					this.service.DeleteLookupData(model.Id).subscribe(
 						(data: HttpReponseModel) => {
+							this.service.emitDepartmentIdSubject.next({Id:0,company_Id:0,Name:''});
+
 							this.toaster.openSuccessSnackBar(data.message);
 							this.getallData();
 						},

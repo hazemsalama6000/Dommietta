@@ -18,37 +18,45 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 export class SectionListContentComponent {
 
-	currentDepartmentId=0;
-
+	currentDepartmentId = 0;
+	currentDepartment: LookUpModel;
 	@Output() edit: EventEmitter<ISection> = new EventEmitter();
-	
-	displayedColumns: string[] = ['name' , 'state' , 'action'];
 
-	dataSource:any;
+	displayedColumns: string[] = ['name', 'state', 'action'];
 
-	currentSelected:ISection;
+	dataSource: any;
+
+	currentSelected: ISection;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: SectionService, private toaster: toasterService ,private DepartmentService:DepartmentService , private confirmationDialogService: ConfirmationDialogService) {
-		this.currentSelected = {department_Id:0 , id:0 , isActive:false , name:"" ,isEdit:false ,isAdd:false};
-//subscribe here to invoke when insert done in upsert component
+	constructor(private service: SectionService, private toaster: toasterService, private DepartmentService: DepartmentService, private confirmationDialogService: ConfirmationDialogService) {
+		this.currentSelected = { department_Id: 0, id: 0, isActive: false, name: "", isEdit: false, isAdd: false };
+		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentDepartmentId);
 		});
 
-        this.DepartmentService.getDepartmentIdObservable().subscribe((data:LookUpModel) => {
-			this.currentDepartmentId=data.Id;
-			console.log(this.currentDepartmentId);
-			this.getallData(this.currentDepartmentId);
+		this.DepartmentService.getDepartmentIdObservable().subscribe((data: LookUpModel) => {
+			
+			this.currentDepartment = data;
+
+			if (data.Id == 0) {
+				this.dataSource.data = [];
+			} else {
+				this.currentDepartmentId = data.Id;
+				console.log(this.currentDepartmentId);
+				this.getallData(this.currentDepartmentId);
+			}
+
 		});
 
 	}
-	
+
 	addNewRow() {
 		let Item: Array<ISection> = this.dataSource.data.filter((a: ISection) => a.id == 0);
 		if (Item.length == 0) {
-			let newRow: ISection = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, department_Id:0 }
+			let newRow: ISection = { id: 0, name: "", isActive: true, isAdd: true, isEdit: false, department_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			document.getElementById("NameForAddSection")?.focus();
 			this.dataSource.data.filter((a: ISection) => a.id != 0).forEach((element: ISection) => {
@@ -63,33 +71,33 @@ export class SectionListContentComponent {
 	}
 
 
-	rowClicked(model:ISection){
+	rowClicked(model: ISection) {
 		if (model.id != 0) {
 			this.dataSource.data = this.dataSource.data.filter((a: ISection) => a.id != 0);
 		}
 		this.currentSelected = model;
-		this.dataSource.data.filter((a: ISection) => a.id != model.id).forEach( (element:LookUpModel) => {
-			element.isAdd=false;
-			element.isEdit=false;
+		this.dataSource.data.filter((a: ISection) => a.id != model.id).forEach((element: LookUpModel) => {
+			element.isAdd = false;
+			element.isEdit = false;
 		});
 	}
 
-//emit model to upsert component for updating
+	//emit model to upsert component for updating
 	Edit(model: ISection) {
-		model.department_Id=this.currentDepartmentId;
+		model.department_Id = this.currentDepartmentId;
 		this.edit.emit(model);
 	}
 
 
-	Remove(model: ISection){
+	Remove(model: ISection) {
 
-			this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
+		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
 			.then((confirmed) => {
 				if (confirmed) {
 					this.service.DeleteLookupData(model.id).subscribe(
 						(data: HttpReponseModel) => {
 							this.toaster.openSuccessSnackBar(data.message);
-			            	this.getallData(this.currentDepartmentId);
+							this.getallData(this.currentDepartmentId);
 						},
 						(error: any) => {
 							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
@@ -101,15 +109,15 @@ export class SectionListContentComponent {
 	}
 
 
-	toggleActiveDeactive(element:ISection){
+	toggleActiveDeactive(element: ISection) {
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData(this.currentDepartmentId);
 			},
-			(error:any) => {
+			(error: any) => {
 				console.log(error);
-			 });
+			});
 	}
 	Submit(model: ISection) {
 		model.department_Id = this.currentDepartmentId;
@@ -129,7 +137,7 @@ export class SectionListContentComponent {
 						}
 					},
 					(error: any) => {
-						this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -139,22 +147,22 @@ export class SectionListContentComponent {
 			this.service.UpdateLookupData(model).subscribe(
 				(data: any) => {
 					this.toaster.openSuccessSnackBar(data.message);
-				//	this.service.bSubject.next(true);
+					//	this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:",""));
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}
 
 	}
 
-// getting data and initialize data Source and Paginator
-	getallData(stateId:number) {
+	// getting data and initialize data Source and Paginator
+	getallData(stateId: number) {
 		this.service.getLookupData(this.currentDepartmentId).subscribe(
 			(data: ISection[]) => {
 				this.dataSource = new MatTableDataSource<ISection>(data);
-				this.dataSource.paginator = this.paginator;	
+				this.dataSource.paginator = this.paginator;
 				this.service.addFlag.subscribe((data) => {
 					if (data == true) {
 						this.addNewRow();
@@ -165,7 +173,7 @@ export class SectionListContentComponent {
 		);
 	}
 
-//filter from search Box
+	//filter from search Box
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();

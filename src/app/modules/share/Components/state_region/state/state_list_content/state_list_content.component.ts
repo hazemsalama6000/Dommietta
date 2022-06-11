@@ -112,6 +112,8 @@ export class StateListContentComponent {
 			if (confirmed) {
 				this.service.DeleteLookupData(model.Id).subscribe(
 					(data: HttpReponseModel) => {
+						this.service.emitStateIdSubject.next({Id:0,company_Id:0,Name:''});
+
 						this.toaster.openSuccessSnackBar(data.message);
 						this.getallData();
 					},
