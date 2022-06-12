@@ -90,6 +90,7 @@ export class SectionListContentComponent {
 
 
 	Remove(model: ISection) {
+		this.service.addFlag.next(false);
 
 		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
 			.then((confirmed) => {

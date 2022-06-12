@@ -111,6 +111,7 @@ export class DepartmentListContentComponent {
 	}
 
 	Remove(model: LookUpModel) {
+		this.service.addFlag.next(false);
 
 		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
 			.then((confirmed) => {
