@@ -11,6 +11,15 @@ import { CompanyUpsertComponent } from "./company-item/companys-upsert/company-u
 })
 
 export class CompanysDataListComponent {
+
+
+	toolbarButtonMarginClass = 'ms-1 ms-lg-3';
+	toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px';
+	toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px';
+	toolbarButtonIconSizeClass = 'svg-icon-1';
+	headerLeft: string = 'menu';
+
+
 	companys: Array<ICompanyDisplayData> = [];
 
 	constructor(private companyService: CompanyService, private dialog: MatDialog) { }

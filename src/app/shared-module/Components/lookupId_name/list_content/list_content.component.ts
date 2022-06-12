@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -25,7 +25,8 @@ export class ListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog, private confirmationDialogService: ConfirmationDialogService) {
+	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog, 
+		private confirmationDialogService: ConfirmationDialogService ,private ref: ChangeDetectorRef) {
 
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 
@@ -46,7 +47,9 @@ export class ListContentComponent {
 			let newRow: LookUpModel = { Id: 0, Name: "", isActive: true, isAdd: true, isEdit: false, company_Id: 0 }
 			this.dataSource.data = [newRow, ...this.dataSource.data];
 			this.currentSelected = newRow;
+			
 			document.getElementById("NameForAdd")?.focus();
+            
 		}
 	}
 
@@ -81,7 +84,8 @@ export class ListContentComponent {
 						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);
-							this.service.addFlag.next(false);
+							this.service.addFlag.next(true);
+
 						}
 						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
@@ -152,12 +156,15 @@ export class ListContentComponent {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;
 
-				this.service.addFlag.subscribe((data) => {
-					if (data == true) {
-						this.addNewRow();
-					}
-				});
-
+				setTimeout(()=>{
+					this.service.addFlag.subscribe((data) => {
+						if (data == true) {
+							this.addNewRow();
+						}
+					});
+	
+				},500)
+			
 			}
 
 		);

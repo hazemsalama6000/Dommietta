@@ -15,7 +15,7 @@ input[type="file"] {
 
 .centered {
 	position: absolute;
-	top: 50%;
+	top: 0%;
 	left: 50%;
 	transform: translate(-50%, -50%);
   }
@@ -33,3 +33,8 @@ input[type="file"] {
   }
 
   .btn{line-height: 1;}
+
+  .selectedCardClass{
+     background-color:#dddcdc !important;		 
+  }
+

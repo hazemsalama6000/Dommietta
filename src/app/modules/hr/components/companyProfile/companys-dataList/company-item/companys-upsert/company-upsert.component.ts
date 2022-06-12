@@ -19,6 +19,8 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 })
 
 export class CompanyUpsertComponent implements OnInit {
+	
+	saveButtonClickedFlag=false;
 
 	companyBranch = 1;
 
@@ -45,8 +47,6 @@ export class CompanyUpsertComponent implements OnInit {
 	panelOpenState: boolean = true;
 
 	companyDataForm: FormGroup;
-	companyConnectionForm: FormGroup;
-	companyTaxForm: FormGroup;
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
@@ -75,15 +75,17 @@ export class CompanyUpsertComponent implements OnInit {
 				state_Id: ['', Validators.compose([Validators.required])],
 				region_Id: ['', Validators.compose([Validators.required])],
 				isActive: [false,],
-			});
-
-
-			this.companyConnectionForm = this.fb.group({
 				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[1-9][0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				employee_Id: ['', Validators.compose([Validators.required])],
+				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
+				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				isValTaxActive: [false,],
+				hasDirectTransferForStocks: [false,],
+				wTax: [0, Validators.pattern("^[1-9][0-9]*$")],
+				isWTaxActive: [false,],
 			});
-
 		}
 
 
@@ -101,26 +103,22 @@ export class CompanyUpsertComponent implements OnInit {
 				isActive: [false,],
 				logoPrint: ['', Validators.compose([Validators.required])],
 				logoWeb: ['', Validators.compose([Validators.required])],
-			});
-
-			this.companyConnectionForm = this.fb.group({
 				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[1-9][0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
+				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				isValTaxActive: [false,],
+				hasDirectTransferForStocks: [false,],
+				wTax: [0, Validators.pattern("^[1-9][0-9]*$")],
+				isWTaxActive: [false,],
 			});
 
 		}
 
-		this.companyTaxForm = this.fb.group({
-			commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
-			taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-			vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-			isValTaxActive: [false,],
-			hasDirectTransferForStocks: [false,],
-			wTax: [0, Validators.pattern("^[1-9][0-9]*$")],
-			isWTaxActive: [false,],
-		});
+
 
 	}
 
@@ -192,7 +190,7 @@ export class CompanyUpsertComponent implements OnInit {
 				this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
 			}
 		);
-		this.selectedItemForRegion={};
+		this.selectedItemForRegion = {};
 		this.companyDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
 
 
@@ -215,22 +213,20 @@ export class CompanyUpsertComponent implements OnInit {
 		this.companyDataForm.controls['state_Id'].setValue(this.selectedItemState);
 		this.companyDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
 		this.companyDataForm.controls['isActive'].setValue(this.company.isActive);
-	}
-	passingCompanyToFormConnection() {
-		this.companyConnectionForm.controls['phoneNumber'].setValue(this.company.phoneNumber);
-		this.companyConnectionForm.controls['email'].setValue(this.company.email);
-		this.companyConnectionForm.controls['employee_Id'].setValue(this.selectedItemForEmployee);
-	}
-	passingCompanyToFormTax() {
-		this.companyTaxForm.controls['commercialRecord'].setValue(this.company.commercialRecord);
-		this.companyTaxForm.controls['taxCardNo'].setValue(this.company.taxCardNo);
-		this.companyTaxForm.controls['vatTax'].setValue(this.company.vatTax);
-		this.companyTaxForm.controls['isValTaxActive'].setValue(this.company.isValTaxActive);
-		this.companyTaxForm.controls['hasDirectTransferForStocks'].setValue(this.company.hasDirectTransferForStocks);
-		this.companyTaxForm.controls['wTax'].setValue(this.company.wTax);
-		this.companyTaxForm.controls['isWTaxActive'].setValue(this.company.isWTaxActive);
-	}
 
+		this.companyDataForm.controls['phoneNumber'].setValue(this.company.phoneNumber);
+		this.companyDataForm.controls['email'].setValue(this.company.email);
+		this.companyDataForm.controls['employee_Id'].setValue(this.selectedItemForEmployee);
+
+		this.companyDataForm.controls['commercialRecord'].setValue(this.company.commercialRecord);
+		this.companyDataForm.controls['taxCardNo'].setValue(this.company.taxCardNo);
+		this.companyDataForm.controls['vatTax'].setValue(this.company.vatTax);
+		this.companyDataForm.controls['isValTaxActive'].setValue(this.company.isValTaxActive);
+		this.companyDataForm.controls['hasDirectTransferForStocks'].setValue(this.company.hasDirectTransferForStocks);
+		this.companyDataForm.controls['wTax'].setValue(this.company.wTax);
+		this.companyDataForm.controls['isWTaxActive'].setValue(this.company.isWTaxActive);
+
+	}
 
 	// initialize Form With Validations
 	initForm() {
@@ -267,17 +263,9 @@ export class CompanyUpsertComponent implements OnInit {
 	logoWebChange(event: any) {
 		this.logoWebFile = <File>event.target.files[0];
 	}
-	/*closeEdit() {
-		this.companyForm.setValue({ Id: 0, Name: '' });
-	}*/
 
 
-	// for Insert And Delete distingush them with model.id
-
-	mapFormGroupsToModel(companyTaxForm: any, companyConnectionForm: any, companyDataForm: any): ICompany {
-
-		console.log(companyDataForm.region_Id[0]);
-		console.log(companyConnectionForm.employee_Id[0]);
+	mapFormGroupsToModel(companyDataForm: any): ICompany {
 
 		let model: any = {};
 
@@ -290,33 +278,33 @@ export class CompanyUpsertComponent implements OnInit {
 		model.region_Id = companyDataForm.region_Id[0].Id;
 		model.isActive = companyDataForm.isActive;
 
-		model.phoneNumber = companyConnectionForm.phoneNumber;
-		model.email = companyConnectionForm.email;
+		model.phoneNumber = companyDataForm.phoneNumber;
+		model.email = companyDataForm.email;
 
 		if (model.id) {
-			model.employee_Id = companyConnectionForm.employee_Id[0].Id
+			model.employee_Id = companyDataForm.employee_Id[0].Id
 		}
 		else {
-			model.managerName = companyConnectionForm.managerName;
-			model.managerPosition = companyConnectionForm.managerPosition;
+			model.managerName = companyDataForm.managerName;
+			model.managerPosition = companyDataForm.managerPosition;
 		}
 
-		model.commercialRecord = companyTaxForm.commercialRecord;
-		model.taxCardNo = companyTaxForm.taxCardNo;
-		model.wTax = companyTaxForm.wTax;
-		model.vatTax = companyTaxForm.vatTax;
-		model.isValTaxActive = companyTaxForm.isValTaxActive;
-		model.isWTaxActive = companyTaxForm.isWTaxActive;
-		model.hasDirectTransferForStocks = companyTaxForm.hasDirectTransferForStocks;
+		model.commercialRecord = companyDataForm.commercialRecord;
+		model.taxCardNo = companyDataForm.taxCardNo;
+		model.wTax = companyDataForm.wTax;
+		model.vatTax = companyDataForm.vatTax;
+		model.isValTaxActive = companyDataForm.isValTaxActive;
+		model.isWTaxActive = companyDataForm.isWTaxActive;
+		model.hasDirectTransferForStocks = companyDataForm.hasDirectTransferForStocks;
 
 		return model;
 
 	}
 
 
-	Submit(companyTaxForm: any, companyConnectionForm: any, companyDataForm: any) {
+	Submit(companyDataForm: any) {
 
-		let model: ICompany = this.mapFormGroupsToModel(companyTaxForm, companyConnectionForm, companyDataForm);
+		let model: ICompany = this.mapFormGroupsToModel(companyDataForm);
 
 		this.isEditable = true;
 

@@ -7,14 +7,13 @@
 			<mat-accordion>
 				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 					<mat-expansion-panel-header
-						[ngClass]="{'bg-danger':panelOpenState==true ,'heiglightRowClass' : company.isActive == true}">
+						[ngClass]="{'selectedCardClass':panelOpenState==true}">
 						<mat-panel-title>
 
 							<img [src]="company.logoWeb" class="rounded" width="40" height="40">
 
 
-							<div style="width:100%" class="text-center"
-								[ngStyle]="{'color':panelOpenState==true ? 'white':'black'}">
+							<div style="width:100%; color: black;" class="text-center">
 
 								<span class="fontForInputs" style="font-weight:bold ;">
 									بيانات الشركة :
@@ -74,14 +73,14 @@
 											<div class="container">
 												<img class="card-img-top" [src]="company.logoWeb"
 													style="width:80px;height:80px;" alt="Card image">
-												<div class="centered boldfont"> {{"HR.INPUTS.LOGOWEB" | translate}}
+												<div class="centered badge badge-dark HintsStyles"> {{"HR.INPUTS.LOGOWEB" | translate}}
 												</div>
 												<span class="top-right">
 													<input id="file-logoWeb" type="file" class="mx-2 btn btn-danger"
 														(change)="logoWebChange($event)" placeholder="Placeholder"
 														name="logoWeb">
 													<label
-														style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 2px;border-radius: 20px;"
+														style="align-content:center;background-color: #c5c5c5;cursor: pointer;padding: 2px;border-radius: 20px;"
 														for="file-logoWeb">
 														<mat-icon style="font-size:18px ;display: inline;">edit
 														</mat-icon>
@@ -99,7 +98,7 @@
 											<div class="container">
 												<img class="card-img-top" [src]="company.logoPrint"
 													style="width:80px;height:80px ;" alt="Card image">
-												<div class="centered boldfont"> {{"HR.INPUTS.LOGOPRINT" | translate}}
+												<div class="centered badge badge-dark HintsStyles"> {{"HR.INPUTS.LOGOPRINT" | translate}}
 												</div>
 												<span class="top-right">
 													<input id="file-logoPrint" type="file" class="mx-2"
@@ -153,7 +152,7 @@
 														matTooltip="{{company.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
 														class="example-section">
 														<mat-slide-toggle name="isValTaxActive" class="example-margin"
-															[color]="'red'" (click)="activeCompany()"
+															[color]="'primary'" (click)="activeCompany()"
 															[checked]="company.isActive">
 														</mat-slide-toggle>
 													</section>
@@ -251,14 +250,14 @@
 									</div>
 
 									<div class="row mt-5">
-										<div class="col-md-6">
+										<div class="col-md-8">
 											<table class="table" style="width:100% ;">
 
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
-													<th style="padding: 10px;font-weight: bold;">المنطقة</th>
-													<td style="padding: 10px;">{{company.region}} </td>
 													<th style="padding: 10px;font-weight: bold;">المحافظة</th>
 													<td style="padding: 10px;">{{company.state}}</td>
+													<th style="padding: 10px;font-weight: bold;">المنطقة</th>
+													<td style="padding: 10px;">{{company.region}} </td>
 												</tr>
 
 												<tr style="border-bottom:1px dotted #5a5a5a ;">
@@ -270,7 +269,7 @@
 											</table>
 										</div>
 
-										<div class="col-md-6">
+										<div class="col-md-4">
 
 											<table class="table" style="width:100% ;">
 												<tr style="border-bottom:1px dotted #5a5a5a ;">

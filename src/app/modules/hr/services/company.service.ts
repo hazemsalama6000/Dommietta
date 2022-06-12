@@ -30,6 +30,7 @@ export class CompanyService {
 				email: Item.email,
 				isActive: Item.isActive,
 				mobileUserNumber: Item.mobileUserNumber,
+				state: Item.state,
 				region: Item.region,
 				managerName: Item.managerName,
 				managerPosition: Item.managerPosition,

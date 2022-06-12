@@ -58,7 +58,8 @@ export const locale = {
 				ADDORUPDATE: "اضافة  ",
 				ACTIVE:"مفعل",
 				NOTACTIVE:"غير مفعل",
-				JOBS:"الوظائف"
+				JOBS:"الوظائف",
+				COMPANIESDATA:"بيانات الشركات"
 			}
 		},
 		SHARE: {
