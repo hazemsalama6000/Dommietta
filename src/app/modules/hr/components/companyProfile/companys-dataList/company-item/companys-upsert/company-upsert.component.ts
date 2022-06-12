@@ -19,8 +19,8 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 })
 
 export class CompanyUpsertComponent implements OnInit {
-	
-	saveButtonClickedFlag=false;
+
+	saveButtonClickedFlag = false;
 
 	companyBranch = 1;
 
@@ -75,7 +75,7 @@ export class CompanyUpsertComponent implements OnInit {
 				state_Id: ['', Validators.compose([Validators.required])],
 				region_Id: ['', Validators.compose([Validators.required])],
 				isActive: [false,],
-				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[1-9][0-9]*$")])],
+				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
@@ -103,7 +103,7 @@ export class CompanyUpsertComponent implements OnInit {
 				isActive: [false,],
 				logoPrint: ['', Validators.compose([Validators.required])],
 				logoWeb: ['', Validators.compose([Validators.required])],
-				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[1-9][0-9]*$")])],
+				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
@@ -124,16 +124,20 @@ export class CompanyUpsertComponent implements OnInit {
 
 
 	fillDropDowns() {
+	
 
-		this.stateService.getLookupData().subscribe(
-			(data: LookUpModel[]) => {
-				this.dropdownListDataForState = data;
-				this.selectedItemState = this.dropdownListDataForState.filter(
-					(data: LookUpModel) => {
-						return data.Id == this.company.state_Id;
-					});
-			}
-		);
+		this.dropdownListDataForState = this.stateService.states;
+		this.dropdownListDataForEmployee = this.employeeService.employees;
+
+        console.log(this.dropdownListDataForState);
+
+		this.selectedItemState = this.dropdownListDataForState.filter(
+			(data:LookUpModel) => {
+				return data.Id == this.company.state_Id;
+			});
+
+				console.log(this.company.state_Id);
+				console.log(this.selectedItemState);
 
 		this.dropdownListDataForRegion = [];
 
@@ -154,21 +158,16 @@ export class CompanyUpsertComponent implements OnInit {
 
 			//get selected employee
 
-			this.employeeService.getLookupEmployeeData().subscribe(
-				(data: LookUpModel[]) => {
-					console.log(data);
-					this.dropdownListDataForEmployee = data;
-					this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
-						(data: LookUpModel) => {
-							return data.Id == this.company.employee_Id;
-						});
+			this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
+				(data: LookUpModel) => {
+					return data.Id == this.company.employee_Id;
+				});
 
-				}
-			);
+				console.log(this.selectedItemForEmployee);
 
 			setTimeout(() => {
 				this.passingCompanyToFormData();
-			}, 1500);
+			}, 1000);
 
 		}
 
@@ -238,7 +237,6 @@ export class CompanyUpsertComponent implements OnInit {
 		};
 
 
-		// TODO Here
 		if (this.isEdit) {
 
 			this.service.getCompanyDataById(this.data.companyId).subscribe(
@@ -267,6 +265,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 	mapFormGroupsToModel(companyDataForm: any): ICompany {
 
+		console.log(companyDataForm);
 		let model: any = {};
 
 		model.id = companyDataForm.id;

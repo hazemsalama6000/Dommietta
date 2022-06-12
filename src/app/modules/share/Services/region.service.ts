@@ -12,7 +12,7 @@ import { IRegion } from "../models/IRegion.interface";
 export class RegionService 
 {
 
-    
+    regions:LookUpModel[];
     bSubject = new BehaviorSubject(true); 
 	addFlag = new BehaviorSubject(false);
 

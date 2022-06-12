@@ -1,662 +1,616 @@
-<div
-  id="kt_activities"
-  class="bg-white"
-  data-kt-drawer="true"
-  data-kt-drawer-name="activities"
-  data-kt-drawer-activate="true"
-  data-kt-drawer-overlay="true"
-  data-kt-drawer-width="{default:'300px', 'lg': '900px'}"
-  data-kt-drawer-direction="end"
-  data-kt-drawer-toggle="#kt_activities_toggle"
-  data-kt-drawer-close="#kt_activities_close"
->
-  <div class="card shadow-none rounded-0">
-    <div class="card-header" id="kt_activities_header">
-      <h3 class="card-title fw-bolder text-dark">Activity Logs</h3>
+<h2 mat-dialog-title>
 
-      <div class="card-toolbar">
-        <button
-          type="button"
-          class="btn btn-sm btn-icon btn-active-light-primary me-n5"
-          id="kt_activities_close"
-        >
-     
-        </button>
-      </div>
-    </div>
-    <div class="card-body position-relative" id="kt_activities_body">
-      <div
-        id="kt_activities_scroll"
-        class="position-relative scroll-y me-n5 pe-5"
-        data-kt-scroll="true"
-        data-kt-scroll-height="auto"
-        data-kt-scroll-wrappers="#kt_activities_body"
-        data-kt-scroll-dependencies="#kt_activities_header, #kt_activities_footer"
-        data-kt-scroll-offset="5px"
-      >
-        <div class="timeline">
-          <!-- Item1 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+	<div class="d-flex justify-content-between align-items-center">
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
-              <div class="symbol-label bg-light">
-               
-              </div>
-            </div>
+		<span class="fontsection"> بيانات الشركة </span>
+		<button class="col-md-1" mat-button [mat-dialog-close]="true" cdkFocusInitial>
+			<mat-icon>close</mat-icon>
+		</button>
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  There are 2 new tasks for you in “AirPlus Mobile APp” project:
-                </div>
+	</div>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Added at 4:23 PM by</div>
+</h2>
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Nina Nilson"
-                  >
-                    <img src="./assets/media/avatars/300-14.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
 
-              <div class="overflow-auto pb-5">
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    border border-dashed border-gray-300
-                    rounded
-                    min-w-750px
-                    px-7
-                    py-3
-                    mb-5
-                  "
-                >
-                  <a
-                    class="
-                      fs-5
-                      text-dark text-hover-primary
-                      fw-bold
-                      w-375px
-                      min-w-200px
-                      cursor-pointer
-                    "
-                  >
-                    Meeting with customer
-                  </a>
+<mat-divider></mat-divider>
 
-                  <div class="min-w-175px pe-2">
-                    <span class="badge badge-light text-muted"
-                      >Application Design</span
-                    >
-                  </div>
+<form [formGroup]="companyDataForm" (ngSubmit)="Submit(companyDataForm.value)">
 
-                  <div
-                    class="
-                      symbol-group symbol-hover
-                      flex-nowrap flex-grow-1
-                      min-w-100px
-                      pe-2
-                    "
-                  >
-                    <div class="symbol symbol-circle symbol-25px">
-                      <img src="./assets/media/avatars/300-2.jpg" alt="img" />
-                    </div>
+<mat-dialog-content style="z-index: -1;" class="mat-typography">
 
-                    <div class="symbol symbol-circle symbol-25px">
-                      <img src="./assets/media/avatars/300-14.jpg" alt="img" />
-                    </div>
+	<br>
+	<br>
 
-                    <div class="symbol symbol-circle symbol-25px">
-                      <div
-                        class="
-                          symbol-label
-                          fs-8
-                          fw-bold
-                          bg-primary
-                          text-inverse-primary
-                        "
-                      >
-                        A
-                      </div>
-                    </div>
-                  </div>
+	<div class="d-flex justify-content-start align-content-center">
+		<mat-icon class="text-primary">home</mat-icon>
+		<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
+			بيانات الشركة
+		</h1>
+	</div>
 
-                  <div class="min-w-125px pe-2">
-                    <span class="badge badge-light-primary">In Progress</span>
-                  </div>
+	<div class="mb-5 border-bottom">
+	</div>
 
-                  <a
-                    class="
-                      btn btn-sm btn-light btn-active-light-primary
-                      cursor-pointer
-                    "
-                  >
-                    View
-                  </a>
-                </div>
 
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    border border-dashed border-gray-300
-                    rounded
-                    min-w-750px
-                    px-7
-                    py-3
-                    mb-0
-                  "
-                >
-                  <a
-                    class="
-                      fs-5
-                      text-dark text-hover-primary
-                      fw-bold
-                      w-375px
-                      min-w-200px
-                      cursor-pointer
-                    "
-                  >
-                    Project Delivery Preparation
-                  </a>
+		<input type="hidden" name="id" formControlName="id">
 
-                  <div class="min-w-175px">
-                    <span class="badge badge-light text-muted"
-                      >CRM System Development</span
-                    >
-                  </div>
+		<div class="col-md-12">
 
-                  <div
-                    class="
-                      symbol-group symbol-hover
-                      flex-nowrap flex-grow-1
-                      min-w-100px
-                    "
-                  >
-                    <div class="symbol symbol-circle symbol-25px">
-                      <img src="./assets/media/avatars/300-20.jpg" alt="img" />
-                    </div>
+			<div>
 
-                    <div class="symbol symbol-circle symbol-25px">
-                      <div
-                        class="
-                          symbol-label
-                          fs-8
-                          fw-bold
-                          bg-success
-                          text-inverse-primary
-                        "
-                      >
-                        B
-                      </div>
-                    </div>
-                  </div>
+				<!--<div class="fontForInputs">
+								{{'HR.INPUTS.COMPANYDATA' | translate}}
+							</div>-->
 
-                  <div class="min-w-125px">
-                    <span class="badge badge-light-success">Completed</span>
-                  </div>
+				<div class="d-flex" *ngIf="isEdit==false">
 
-                  <a
-                    class="
-                      btn btn-sm btn-light btn-active-light-primary
-                      cursor-pointer
-                    "
-                  >
-                    View
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item2 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+					<span class=" mx-10">
+						<label class="fontForInputs">{{'HR.INPUTS.LOGOPRINT' | translate}} </label>
+						<input type="file" class="mx-2" (change)="logoPrintChange($event)" placeholder="Placeholder"
+							name="logoPrint" formControlName="logoPrint">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											  validation: 'required',
+											  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.LOGOPRINT' | translate},
+											  control: companyDataForm.controls['logoPrint']
+											}"></ng-container>
+						</mat-hint>
+					</span>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-              
-              </div>
-            </div>
 
-            <div class="timeline-content mb-10 mt-n2">
-              <div class="overflow-auto pe-3">
-                <div class="fs-5 fw-bold mb-2">
-                  Invitation for crafting engaging designs that speak human
-                  workshop
-                </div>
+					<span class="">
+						<label class="fontForInputs">{{'HR.INPUTS.LOGOWEB' | translate}} </label>
+						<input type="file" class="mx-2" (change)="logoWebChange($event)" placeholder="Placeholder"
+							name="logoWeb" formControlName="logoWeb">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											  validation: 'required',
+											  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.LOGOWEB' | translate},
+											  control: companyDataForm.controls['logoWeb']
+											}"></ng-container>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Sent at 4:23 PM by</div>
+						</mat-hint>
+					</span>
+				</div>
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Alan Nilson"
-                  >
-                    <img src="./assets/media/avatars/300-1.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item3 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+			</div>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-                
-              </div>
-            </div>
+			<div class="row  mt-5">
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="mb-5 pe-3">
-                <a
-                  class="
-                    fs-5
-                    fw-bold
-                    text-gray-800 text-hover-primary
-                    mb-2
-                    cursor-pointer
-                  "
-                >
-                  3 New Incoming Project Files:
-                </a>
+				<div class="col-md-4">
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Sent at 10:30 PM by</div>
+					<mat-form-field appearance="outline">
+						<mat-label> {{"HR.INPUTS.CODE" | translate}} </mat-label>
+						<input matInput placeholder="Placeholder" name="code" formControlName="code">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.CODE' | translate},
+										  control: companyDataForm.controls['code']
+										}"></ng-container>
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Jan Hummer"
-                  >
-                    <img src="./assets/media/avatars/300-23.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.CODE' | translate , min:3},
+										  control: companyDataForm.controls['code']
+										}"></ng-container>
 
-              <div class="overflow-auto pb-5">
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    border border-dashed border-gray-300
-                    rounded
-                    min-w-700px
-                    p-5
-                  "
-                >
-                  <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-                    <img
-                      alt=""
-                      class="w-30px me-3"
-                      src="./assets/media/svg/files/pdf.svg"
-                    />
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.CODE' | translate , max:100},
+											control: companyDataForm.controls['code']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
 
-                    <div class="ms-1 fw-bold">
-                      <a
-                        class="fs-6 text-hover-primary fw-bolder cursor-pointer"
-                      >
-                        Finance KPI App Guidelines
-                      </a>
+				</div>
 
-                      <div class="text-gray-400">1.9mb</div>
-                    </div>
-                  </div>
+				<div class="col-md-4">
 
-                  <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-                    <img
-                      alt=""
-                      class="w-30px me-3"
-                      src="./assets/media/svg/files/doc.svg"
-                    />
+					<mat-form-field appearance="outline">
+						<mat-label> {{'HR.INPUTS.COMPANYNAME' | translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="companyName" formControlName="companyName">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.COMPANYNAME' | translate},
+										  control: companyDataForm.controls['companyName']
+										}"></ng-container>
 
-                    <div class="ms-1 fw-bold">
-                      <a
-                        class="fs-6 text-hover-primary fw-bolder cursor-pointer"
-                      >
-                        Client UAT Testing Results
-                      </a>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.COMPANYNAME' | translate , min:3},
+										  control: companyDataForm.controls['companyName']
+										}"></ng-container>
 
-                      <div class="text-gray-400">18kb</div>
-                    </div>
-                  </div>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.COMPANYNAME' | translate , max:100},
+											control: companyDataForm.controls['companyName']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
 
-                  <div class="d-flex flex-aligns-center">
-                    <img
-                      alt=""
-                      class="w-30px me-3"
-                      src="./assets/media/svg/files/css.svg"
-                    />
+				</div>
 
-                    <div class="ms-1 fw-bold">
-                      <a
-                        class="fs-6 text-hover-primary fw-bolder cursor-pointer"
-                      >
-                        Finance Reports
-                      </a>
+				<div class="col-md-4">
 
-                      <div class="text-gray-400">20mb</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item4 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+					<div class="row mt-2">
+						<div class="col-md-3">
+							<label class="fontForInputs mt-5"> {{'HR.INPUTS.STATE' | translate}} </label>
+						</div>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-               
-              </div>
-            </div>
+						<div class="col-md-9">
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  Task
-                  <a class="text-primary fw-bolder me-1 cursor-pointer">
-                    #45890
-                  </a>
-                  merged with
-                  <a class="text-primary fw-bolder me-1 cursor-pointer">
-                    #45890
-                  </a>
-                  in “Ads Pro Admin Dashboard project:
-                </div>
+							<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings" name="state_Id"
+								formControlName="state_Id" [data]="dropdownListDataForState"
+								(onSelect)="onItemSelectState($event)">
+							</ng-multiselect-dropdown>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">
-                    Initiated at 4:23 PM by
-                  </div>
+						</div>
+					</div>
+				</div>
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Nina Nilson"
-                  >
-                    <img src="./assets/media/avatars/300-14.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item5 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-              
-              </div>
-            </div>
+			</div>
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  3 new application design concepts added:
-                </div>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Created at 4:23 PM by</div>
+			<div class="row">
+				<div class="col-md-4">
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Marcus Dotson"
-                  >
-                    <img src="./assets/media/avatars/300-2.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
+					<mat-form-field appearance="outline">
+						<mat-label> {{'HR.INPUTS.USERCOUNTS'|translate}}</mat-label>
+						<input matInput type="number" placeholder="Ex. 12" min="1" name="mobileUsersCount"
+							formControlName="mobileUsersCount">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.USERCOUNTS' | translate},
+										  control: companyDataForm.controls['mobileUsersCount']
+										}"></ng-container>
 
-              <div class="overflow-auto pb-5">
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    border border-dashed border-gray-300
-                    rounded
-                    min-w-700px
-                    p-7
-                  "
-                >
-                  <div class="overlay me-10">
-                    <div class="overlay-wrapper">
-                      <img
-                        alt="img"
-                        class="rounded w-200px"
-                        src="./assets/media/demos/demo1.png"
-                      />
-                    </div>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'pattern',
+											message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.USERCOUNTS' | translate},
+											control: companyDataForm.controls['mobileUsersCount']
+										  }"></ng-container>
 
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                      <a
-                        class="btn btn-sm btn-primary btn-shadow cursor-pointer"
-                      >
-                        Explore
-                      </a>
-                    </div>
-                  </div>
+						</mat-hint>
 
-                  <div class="overlay me-10">
-                    <div class="overlay-wrapper">
-                      <img
-                        alt="img"
-                        class="rounded w-200px"
-                        src="./assets/media/demos/demo2.png"
-                      />
-                    </div>
+					</mat-form-field>
 
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                      <a
-                        class="btn btn-sm btn-primary btn-shadow cursor-pointer"
-                      >
-                        Explore
-                      </a>
-                    </div>
-                  </div>
+				</div>
 
-                  <div class="overlay">
-                    <div class="overlay-wrapper">
-                      <img
-                        alt="img"
-                        class="rounded w-200px"
-                        src="./assets/media/demos/demo3.png"
-                      />
-                    </div>
+				<div class="col-md-4">
+					<mat-form-field appearance="outline">
+						<mat-label>{{'HR.INPUTS.ACTIVITY'|translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="activity" formControlName="activity">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.ACTIVITY' | translate},
+										  control: companyDataForm.controls['activity']
+										}"></ng-container>
 
-                    <div class="overlay-layer bg-dark bg-opacity-10 rounded">
-                      <a
-                        class="btn btn-sm btn-primary btn-shadow cursor-pointer"
-                      >
-                        Explore
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item6 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.ACTIVITY' | translate , min:3},
+										  control: companyDataForm.controls['activity']
+										}"></ng-container>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-                <span
-                
-                  class="svg-icon svg-icon-1"
-                ></span>
-              </div>
-            </div>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.ACTIVITY' | translate , max:100},
+											control: companyDataForm.controls['activity']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
+				</div>
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  New case
-                  <a class="text-primary fw-bolder me-1 cursor-pointer">
-                    #67890
-                  </a>
-                  is assigned to you in Multi-platform Database Design project
-                </div>
+				<div class="col-md-4">
 
-                <div class="overflow-auto pb-5">
-                  <div class="d-flex align-items-center mt-1 fs-6">
-                    <div class="text-muted me-2 fs-7">Added at 4:23 PM by</div>
+					<div class="row mt-2">
+						<div class="col-md-3">
+							<label class="fontForInputs mt-5"> {{'HR.INPUTS.REGION' | translate}} </label>
+						</div>
 
-                    <a class="text-primary fw-bolder me-1 cursor-pointer">
-                      Alice Tan
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item7 -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
+						<div class="col-md-9">
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-                <span
-                  class="svg-icon svg-icon-1"
-                ></span>
-              </div>
-            </div>
+							<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+								[data]="dropdownListDataForRegion" name="region_Id" formControlName="region_Id">
+							</ng-multiselect-dropdown>
+							<mat-hint>
+								<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											  validation: 'required',
+											  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.REGION' | translate},
+											  control: companyDataForm.controls['region_Id']
+											}"></ng-container>
 
-            <div class="timeline-content mb-10 mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  You have received a new order:
-                </div>
+							</mat-hint>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Placed at 5:05 AM by</div>
+						</div>
+					</div>
+				</div>
 
-                  <div
-                    class="symbol symbol-circle symbol-25px"
-                    data-bs-toggle="tooltip"
-                    data-bs-boundary="window"
-                    data-bs-placement="top"
-                    title="Robert Rich"
-                  >
-                    <img src="./assets/media/avatars/300-4.jpg" alt="img" />
-                  </div>
-                </div>
-              </div>
+			</div>
 
-              <div class="overflow-auto pb-5">
-                <div
-                  class="
-                    notice
-                    d-flex
-                    bg-light-primary
-                    rounded
-                    border-primary border border-dashed
-                    min-w-lg-600px
-                    flex-shrink-0
-                    p-6
-                  "
-                >
-                  <span
-                  
-                    class="svg-icon svg-icon-1"
-                  ></span>
 
-                  <div
-                    class="
-                      d-flex
-                      flex-stack flex-grow-1 flex-wrap flex-md-nowrap
-                    "
-                  >
-                    <div class="mb-3 mb-md-0 fw-bold">
-                      <h4 class="text-gray-800 fw-bolder">
-                        Database Backup Process Completed!
-                      </h4>
-                      <div class="fs-6 text-gray-600 pe-7">
-                        Login into Metronic Admin Dashboard to make sure the
-                        data integrity is OK
-                      </div>
-                    </div>
-                    <a
-                      class="
-                        btn btn-primary
-                        px-6
-                        align-self-center
-                        text-nowrap
-                        cursor-pointer
-                      "
-                    >
-                      Proceed
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Item8  -->
-          <div class="timeline-item">
-            <div class="timeline-line w-40px"></div>
 
-            <div class="timeline-icon symbol symbol-circle symbol-40px">
-              <div class="symbol-label bg-light">
-                <span
-                 
-                  class="svg-icon svg-icon-3 svg-icon-primary"
-                ></span>
-              </div>
-            </div>
+			<div class="row">
 
-            <div class="timeline-content mt-n1">
-              <div class="pe-3 mb-5">
-                <div class="fs-5 fw-bold mb-2">
-                  New order
-                  <a class="text-primary fw-bolder me-1 cursor-pointer">
-                    #67890
-                  </a>
-                  is placed for Workshow Planning & Budget Estimation
-                </div>
 
-                <div class="d-flex align-items-center mt-1 fs-6">
-                  <div class="text-muted me-2 fs-7">Placed at 4:23 PM by</div>
+				<div class="col-md-8">
 
-                  <a class="text-primary fw-bolder me-1 cursor-pointer">
-                    Jimmy Bold
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-footer py-5 text-center" id="kt_activities_footer">
-      <a to="/crafted/pages/profile" class="btn btn-bg-white text-primary">
-        View All Activities
-        <span
-          class="svg-icon svg-icon-3 svg-icon-primary"
-        ></span>
-      </a>
-    </div>
-  </div>
-</div>
+					<mat-form-field appearance="outline">
+						<mat-label>{{'HR.INPUTS.ADDRESS' | translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="address" formControlName="address">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.ADDRESS' | translate},
+										  control: companyDataForm.controls['address']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.ADDRESS' | translate , min:3},
+										  control: companyDataForm.controls['address']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.ADDRESS' | translate , max:100},
+											control: companyDataForm.controls['address']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
+
+				</div>
+
+				<div class="col-md-4 d-flex justify-content-center align-items-center">
+					<p> <span class="mx-2 fontForInputs"> {{'HR.INPUTS.ISACTIVE' | translate}} </span>
+						<mat-checkbox name="isActive" formControlName="isActive"></mat-checkbox>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+
+		<br>
+
+		<div class="d-flex justify-content-start align-content-center">
+			<mat-icon class="text-primary">perm_phone_msg</mat-icon>
+			<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
+				بيانات تواصل الشركة
+			</h1>
+		</div>
+
+		<div class="mb-5 border-bottom">
+		</div>
+
+		<div class="col-md-12">
+
+			<div class="row mt-5">
+
+				<div class="col-md-4" *ngIf="isEdit==false">
+					<mat-form-field appearance="outline">
+						<mat-label> {{'HR.INPUTS.MANAGERNAME' | translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="managerName" formControlName="managerName">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.MANAGERNAME' | translate},
+										  control: companyDataForm.controls['managerName']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.MANAGERNAME' | translate , min:3},
+										  control: companyDataForm.controls['managerName']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.MANAGERNAME' | translate , max:100},
+											control: companyDataForm.controls['managerName']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
+				</div>
+
+
+				<div class="col-md-4" *ngIf="isEdit==false">
+					<mat-form-field appearance="outline">
+						<mat-label>{{'HR.INPUTS.MANAGERPOSITION' | translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="managerPosition"
+							formControlName="managerPosition">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.MANAGERPOSITION' | translate},
+										  control: companyDataForm.controls['managerPosition']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.MANAGERPOSITION' | translate , min:3},
+										  control: companyDataForm.controls['managerPosition']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.MANAGERPOSITION' | translate , max:100},
+											control: companyDataForm.controls['managerPosition']
+										 }"></ng-container>
+						</mat-hint>
+					</mat-form-field>
+				</div>
+
+
+				<div class="col-md-4">
+					<mat-form-field appearance="outline">
+						<mat-label>{{'HR.INPUTS.EMAIL' | translate}}</mat-label>
+						<input matInput placeholder="Placeholder" name="email" formControlName="email">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.EMAIL' | translate},
+										  control: companyDataForm.controls['email']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'pattern',
+											message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.EMAIL' | translate},
+											control: companyDataForm.controls['email']
+										  }"></ng-container>
+
+						</mat-hint>
+
+					</mat-form-field>
+				</div>
+
+				<div class="col-md-4">
+					<mat-form-field appearance="outline">
+						<mat-label> {{'HR.INPUTS.PHONENUM' | translate}}</mat-label>
+						<input matInput placeholder="01147785..." name="phoneNumber" formControlName="phoneNumber">
+						<mat-hint>
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'required',
+										  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.PHONENUM' | translate},
+										  control: companyDataForm.controls['phoneNumber']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										  validation: 'minlength',
+										  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.PHONENUM' | translate , min:3},
+										  control: companyDataForm.controls['phoneNumber']
+										}"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'maxlength',
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.PHONENUM' | translate , max:20},
+											control: companyDataForm.controls['phoneNumber']
+										 }"></ng-container>
+
+							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+											validation: 'pattern',
+											message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.PHONENUM' | translate},
+											control: companyDataForm.controls['phoneNumber']
+										  }"></ng-container>
+
+						</mat-hint>
+
+					</mat-form-field>
+				</div>
+
+				<div class="col-md-4" *ngIf="isEdit">
+
+					<div class="row mt-2">
+						<div class="col-md-3">
+							<label class="fontForInputs mt-5"> {{'HR.INPUTS.EMPLOYEE' | translate}} </label>
+						</div>
+
+						<div class="col-md-9">
+
+							<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+								[data]="dropdownListDataForEmployee" name="employee_Id" formControlName="employee_Id"
+								(onSelect)="onItemSelectState($event)">
+							</ng-multiselect-dropdown>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<br>
+		<div class="d-flex justify-content-start align-content-center">
+			<mat-icon class="text-primary">receipt</mat-icon>
+			<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
+				البيانات الضريبية
+			</h1>
+		</div>
+
+		<div class="mb-5 border-bottom">
+		</div>
+
+		<div class="row  mt-5">
+
+			<div class="col-md-4">
+				<mat-form-field appearance="outline">
+					<mat-label>{{'HR.INPUTS.COMMERCIALRECORD' | translate}} </mat-label>
+					<input matInput placeholder="Placeholder" name="commercialRecord"
+						formControlName="commercialRecord">
+					<mat-hint>
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'required',
+									  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.COMMERCIALRECORD' | translate},
+									  control: companyDataForm.controls['commercialRecord']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'minlength',
+									  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.COMMERCIALRECORD' | translate , min:3},
+									  control: companyDataForm.controls['commercialRecord']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'maxlength',
+										message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.COMMERCIALRECORD' | translate , max:50},
+										control: companyDataForm.controls['commercialRecord']
+									 }"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.COMMERCIALRECORD' | translate},
+										control: companyDataForm.controls['commercialRecord']
+									  }"></ng-container>
+
+					</mat-hint>
+
+				</mat-form-field>
+			</div>
+
+			<div class="col-md-4">
+				<mat-form-field appearance="outline">
+					<mat-label>{{'HR.INPUTS.TAXCARDNO' | translate}} </mat-label>
+					<input matInput type="number" placeholder="Placeholder" name="taxCardNo"
+						formControlName="taxCardNo">
+					<mat-hint>
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'required',
+									  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.TAXCARDNO' | translate},
+									  control: companyDataForm.controls['taxCardNo']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'minlength',
+									  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.TAXCARDNO' | translate , min:3},
+									  control: companyDataForm.controls['taxCardNo']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'maxlength',
+										message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.TAXCARDNO' | translate , max:50},
+										control: companyDataForm.controls['taxCardNo']
+									 }"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.TAXCARDNO' | translate},
+										control: companyDataForm.controls['taxCardNo']
+									  }"></ng-container>
+
+					</mat-hint>
+
+				</mat-form-field>
+			</div>
+
+
+			<div class="col-md-3 d-flex justify-content-center align-items-center">
+				<section class="example-section">
+					<span class="mx-2 fontForInputs">{{'HR.INPUTS.HASDIRECTIONTRANSFERFORSTOCKS' | translate}}
+					</span>
+					<mat-slide-toggle name="hasDirectTransferForStocks" formControlName="hasDirectTransferForStocks"
+						class="example-margin" [color]="'red'">
+
+					</mat-slide-toggle>
+				</section>
+			</div>
+
+			<div class="col-md-2 d-flex justify-content-center align-items-center">
+				<section class="example-section">
+					<span class="mx-2 fontForInputs"> {{'HR.INPUTS.WTAX' | translate}} </span>
+					<mat-slide-toggle name="isWTaxActive" formControlName="isWTaxActive" class="example-margin"
+						[color]="'red'">
+					</mat-slide-toggle>
+				</section>
+			</div>
+
+
+			<div class="col-md-2" *ngIf="companyDataForm.controls['isWTaxActive'].value">
+				<mat-form-field appearance="outline">
+					<mat-label>{{'HR.INPUTS.WTAX' | translate}} </mat-label>
+					<input matInput type="number" placeholder="Placeholder" name="wTax" formControlName="wTax">
+					<mat-hint>
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.WTAX' | translate},
+										control: companyDataForm.controls['wTax']
+									  }"></ng-container>
+
+					</mat-hint>
+				</mat-form-field>
+			</div>
+
+
+			<div class="col-md-2 d-flex justify-content-center align-items-center">
+				<section class="example-section">
+					<span class="mx-2 fontForInputs"> {{'HR.INPUTS.VATTAX' | translate}}</span>
+					<mat-slide-toggle name="isValTaxActive" formControlName="isValTaxActive" class="example-margin"
+						[color]="'red'">
+					</mat-slide-toggle>
+				</section>
+			</div>
+
+			<div class="col-md-2" *ngIf="companyDataForm.controls['isValTaxActive'].value">
+				<mat-form-field appearance="outline">
+					<mat-label>{{'HR.INPUTS.VATTAX' | translate}} </mat-label>
+					<input matInput type="number" placeholder="Placeholder" name="vatTax" formControlName="vatTax">
+					<mat-hint>
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'required',
+									  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.VATTAX' | translate},
+									  control: companyDataForm.controls['vatTax']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+									  validation: 'minlength',
+									  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.VATTAX' | translate , min:3},
+									  control: companyDataForm.controls['vatTax']
+									}"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'maxlength',
+										message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.VATTAX' | translate , max:50},
+										control: companyDataForm.controls['vatTax']
+									 }"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.VATTAX' | translate},
+										control: companyDataForm.controls['vatTax']
+									  }"></ng-container>
+
+					</mat-hint>
+				</mat-form-field>
+			</div>
+
+		</div>
+
+
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<div class="d-flex">
+		<button mat-raised-button type="submit" (click)="saveButtonClickedFlag = true" color="primary">حفظ</button>
+		<button mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
+	</div>
+</mat-dialog-actions>
+</form>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+	<ng-container *ngIf="control.hasError(validation) && ( saveButtonClickedFlag || control.touched)">
+		<div class="fv-plugins-message-container">
+			<span role="alert">
+				{{ message }}
+			</span>
+		</div>
+	</ng-container>
+</ng-template>

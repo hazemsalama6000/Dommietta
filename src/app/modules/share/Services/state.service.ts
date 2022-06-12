@@ -11,6 +11,8 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class StatesService 
 {
 
+	states:LookUpModel[];
+
 	emitStateIdSubject = new BehaviorSubject<LookUpModel>({Id:0,company_Id:0,Name:''});
     
     bSubject = new BehaviorSubject(true); 

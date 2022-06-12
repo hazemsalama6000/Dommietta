@@ -11,7 +11,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 export class EmployeeService 
 {
 	companyBranch=1;
-    
+    employees:LookUpModel[];
     bSubject = new BehaviorSubject(true); 
 
 	constructor(private http:CommonHttpService){}

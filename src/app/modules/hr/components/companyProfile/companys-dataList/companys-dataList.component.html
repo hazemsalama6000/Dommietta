@@ -7,32 +7,12 @@
 				{{"HR.TITLES.COMPANIESDATA" | translate}}
 			</span>
 
-			<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1" id="AddJobs" (click)="openDialog()"
+			<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1" id="kt_activities_toggle" (click)="openDialog()"
 				aria-label="Example icon button with a filter list icon">
 				<mat-icon>add</mat-icon>
 			</button>
 
 		</div>
-
-
-
-		<div class="d-flex align-items-center" [ngClass]="toolbarButtonMarginClass">
-			<!-- begin::Drawer toggle -->
-			<div
-			  class="btn btn-icon btn-active-light-primary"
-			  [ngClass]="toolbarButtonHeightClass"
-			  id="kt_activities_toggle"
-			>
-			  <span
-				class="svg-icon"
-				[ngClass]="toolbarButtonIconSizeClass"
-			  >
-			<mat-icon>Add</mat-icon>
-			</span>
-			</div>
-			<!-- end::Drawer toggle -->
-		  </div>
-
 
 	</mat-card>
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DialogPosition, MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { left } from "@popperjs/core";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
@@ -27,6 +27,8 @@ export class CompanyItemComponent {
 	logoWebFile: File;
 	logoPrintFile: File;
 
+
+
 	ngOnInit() {
 		/*this.matDialogConfig.position = { left: `200px`, top: `200px` };
 		this.matDialogConfig.width = '300px';
@@ -44,15 +46,19 @@ export class CompanyItemComponent {
 	}
 
 	openDialog(companyId: number) {
+		const dialogPosition: DialogPosition = {
+			top:'0px',
+			right:'0px'
+		  };
 
 		const dialogRef = this.dialog.open(CompanyUpsertComponent,
 			{
-				maxWidth: '100vw',
+				/*maxWidth: '50vw',
+				maxHeight: '100vh',*/
 				maxHeight: '100vh',
 				height: '100%',
-				width: '100%',
-				panelClass: 'full-screen-modal',
-				position:this.matDialogConfig.position,
+				//panelClass: 'full-screen-modal',*/
+				position:dialogPosition,
 				data: { companyId: companyId }
 			});
 
