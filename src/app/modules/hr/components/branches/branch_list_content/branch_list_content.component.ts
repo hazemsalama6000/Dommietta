@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
@@ -43,14 +43,16 @@ export class BranchListContentComponent {
 
     addNewBranch(branchId = 0){
 
+		const dialogPosition: DialogPosition = {
+			top:'0px',
+			right:'0px'
+		  };
+
 		const dialogRef = this.dialog.open(BranchUpsertComponent,
 			{
-				maxWidth: '100vw',
 				maxHeight: '100vh',
 				height: '100%',
-				width: '100%',
-				panelClass: 'full-screen-modal',
-
+             	position:dialogPosition,
 				data: { branchId: branchId , companyId:this.companyId}
 			});
 

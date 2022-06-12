@@ -79,19 +79,17 @@ export class BranchUpsertComponent implements OnInit {
 
 	fillDropDowns() {
 
-		this.stateService.getLookupData().subscribe(
-			(data: LookUpModel[]) => {
-				this.dropdownListDataForState = data;
+		this.dropdownListDataForState = this.stateService.states;
+		this.dropdownListDataForEmployee = this.employeeService.employees;
 
-				if (this.data.branchId != 0) {
-					this.selectedItemState = this.dropdownListDataForState.filter(
-						(data: LookUpModel) => {
-							return data.Id == this.branch.stateId;
-						});
-				}
+        console.log(this.dropdownListDataForState);
 
-			}
-		);
+		this.selectedItemState = this.dropdownListDataForState.filter(
+			(data:LookUpModel) => {
+				return data.Id == this.branch.stateId;
+			});
+
+
 
 		this.dropdownListDataForRegion = [];
 
@@ -110,28 +108,17 @@ export class BranchUpsertComponent implements OnInit {
 		}
 
 		//get selected employee
-
-		this.employeeService.getLookupEmployeeData().subscribe(
-			(data: LookUpModel[]) => {
-				this.dropdownListDataForEmployee = data;
-
-				if (this.data.branchId != 0) {
-					this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
-						(dataa: LookUpModel) => {
-							return dataa.Id == this.branch.branchManager_Id;
-						});
-
-				}
-			}
-		);
-
+		this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
+			(data: LookUpModel) => {
+				return data.Id == this.branch.branchManager_Id;
+			});
 
 
 		setTimeout(() => {
 			if (this.data.branchId != 0) {
 				this.passingCompanyToFormData();
 			}
-		}, 1500);
+		}, 1000);
 
 	}
 
