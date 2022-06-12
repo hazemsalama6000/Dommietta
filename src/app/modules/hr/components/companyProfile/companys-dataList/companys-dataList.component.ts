@@ -66,14 +66,6 @@ export class CompanysDataListComponent {
 			}
 		);
 
-		
-		this.employeeService.getLookupEmployeeData().subscribe(
-			(data: LookUpModel[]) => {
-				this.employeeService.employees = data;
-			}
-		);
-
-	
 
 		this.companyService.bSubject.subscribe(data => {
 

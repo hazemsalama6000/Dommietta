@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { EmployeeService } from "../../services/employee.service";
 
 @Component({
 	selector: "branchs-c",
@@ -8,7 +9,9 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 	styleUrls: ['./branch.component.scss']
 })
 
-export class BranchComponent {
+export class BranchComponent implements OnInit{
+	
+	
 
 	title: string;
 	icon: string;
@@ -16,5 +19,17 @@ export class BranchComponent {
 
 	@Input() companyId : number;
 
+	constructor(private employeeService : EmployeeService){
+
+	}
+	
+	ngOnInit(): void {
+		this.employeeService.getLookupEmployeeData(this.companyId).subscribe(
+			(data: LookUpModel[]) => {
+				this.employeeService.employees = data;
+				
+			}
+		);
+	}
 
 }

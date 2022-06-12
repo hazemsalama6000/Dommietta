@@ -157,11 +157,17 @@ export class CompanyUpsertComponent implements OnInit {
 			);
 
 			//get selected employee
+			this.employeeService.getLookupEmployeeData(this.company.id).subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownListDataForEmployee = data.map(item => ({ Id: item.Id, Name: item.Name }) as LookUpModel)
+					this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
+						(data: LookUpModel) => {
+							return data.Id == this.company.employee_Id;
+						});
+				}
+			);
 
-			this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
-				(data: LookUpModel) => {
-					return data.Id == this.company.employee_Id;
-				});
+		
 
 				console.log(this.selectedItemForEmployee);
 

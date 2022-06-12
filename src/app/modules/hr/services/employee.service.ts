@@ -10,14 +10,13 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 
 export class EmployeeService 
 {
-	companyBranch=1;
     employees:LookUpModel[];
     bSubject = new BehaviorSubject(true); 
 
 	constructor(private http:CommonHttpService){}
     
-	getLookupEmployeeData():Observable<LookUpModel[]>{
-            return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}${this.companyBranch}`)
+	getLookupEmployeeData(companyId:number):Observable<LookUpModel[]>{
+            return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}${companyId}`)
 			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
 	}
 
