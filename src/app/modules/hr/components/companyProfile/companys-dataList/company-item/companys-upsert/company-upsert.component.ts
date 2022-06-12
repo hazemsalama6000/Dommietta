@@ -78,12 +78,12 @@ export class CompanyUpsertComponent implements OnInit {
 				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(11), Validators.pattern("^[0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				employee_Id: ['', Validators.compose([Validators.required])],
-				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
+				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
 				vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.pattern("^[1-9][0-9]*$")],
+				wTax: [0, ],
 				isWTaxActive: [false,],
 			});
 		}
@@ -107,7 +107,7 @@ export class CompanyUpsertComponent implements OnInit {
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
+				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: [0, Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
 				vatTax: [0, Validators.compose([ Validators.minLength(3), Validators.maxLength(50)])],
 				isValTaxActive: [false,],
