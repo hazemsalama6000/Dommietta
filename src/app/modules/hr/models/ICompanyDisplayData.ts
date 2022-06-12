@@ -10,7 +10,7 @@ export interface ICompanyDisplayData {
 	hasDirectTransferForStocks?: boolean,
 	email?: string,
 	isActive?: boolean,
-	mobileUserNumber?: number,
+	mobileUsersCount?: number,
 	state?: string,
 	region?: string,
 	managerName?: string,

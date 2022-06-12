@@ -29,17 +29,20 @@ export class CompanyService {
 				hasDirectTransferForStocks: Item.hasDirectTransferForStocks,
 				email: Item.email,
 				isActive: Item.isActive,
-				mobileUserNumber: Item.mobileUserNumber,
+				mobileUsersCount: Item.mobileUsersCount,
 				state: Item.state,
 				region: Item.region,
 				managerName: Item.managerName,
 				managerPosition: Item.managerPosition,
-
+				vatTax: Item.vatTax,
+				taxCardNo: Item.taxCardNo,
+				wTax: Item.wTax,
+				commercialRecord: Item.commercialRecord
 
 			}) as ICompanyDisplayData)));
 	}
 
-	getCompanyDataById(id:number): Observable<ICompany> {
+	getCompanyDataById(id: number): Observable<ICompany> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_GETBYID}${id}`);
 	}
 
@@ -51,7 +54,7 @@ export class CompanyService {
 		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_UPDATE}${model.id}`);
 	}
 
-	changeLogoWebData(model:any): Observable<any> {
+	changeLogoWebData(model: any): Observable<any> {
 		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_CHANGELOGOWEB}`);
 	}
 
