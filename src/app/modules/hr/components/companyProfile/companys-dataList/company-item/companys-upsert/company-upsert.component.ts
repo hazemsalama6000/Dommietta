@@ -80,10 +80,10 @@ export class CompanyUpsertComponent implements OnInit {
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([ Validators.minLength(1), Validators.maxLength(50),Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, ],
+				wTax: [0, Validators.compose( [Validators.pattern("^[0-9]*$")]) ],
 				isWTaxActive: [false,],
 			});
 		}
@@ -109,10 +109,10 @@ export class CompanyUpsertComponent implements OnInit {
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: [0, Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([ Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([ Validators.minLength(1), Validators.maxLength(50),Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, ],
+				wTax: [0, Validators.compose( [Validators.pattern("^[0-9]*$")]) ],
 				isWTaxActive: [false,],
 			});
 
@@ -208,7 +208,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 
 	passingCompanyToFormData() {
-		this.company.mobileUsersCount = 5;
+
 		this.companyDataForm.controls['id'].setValue(this.company.id);
 		this.companyDataForm.controls['code'].setValue(this.company.code);
 		this.companyDataForm.controls['companyName'].setValue(this.company.companyName);

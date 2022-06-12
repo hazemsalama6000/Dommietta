@@ -561,11 +561,6 @@
 					<mat-label>{{'HR.INPUTS.VATTAX' | translate}} </mat-label>
 					<input matInput  placeholder="Placeholder" name="vatTax" formControlName="vatTax">
 					<mat-hint>
-						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-									  validation: 'required',
-									  message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'HR.INPUTS.VATTAX' | translate},
-									  control: companyDataForm.controls['vatTax']
-									}"></ng-container>
 
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 									  validation: 'minlength',
