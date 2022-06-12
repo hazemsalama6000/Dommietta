@@ -373,7 +373,7 @@
 				<div class="col-md-4">
 					<mat-form-field appearance="outline">
 						<mat-label> {{'HR.INPUTS.PHONENUM' | translate}}</mat-label>
-						<input matInput placeholder="01147785..." name="phoneNumber" formControlName="phoneNumber">
+						<input matInput placeholder="01147785..." minlength="3" maxlength="11" name="phoneNumber" formControlName="phoneNumber">
 						<mat-hint>
 							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										  validation: 'required',
@@ -477,7 +477,7 @@
 			<div class="col-md-4">
 				<mat-form-field appearance="outline">
 					<mat-label>{{'HR.INPUTS.TAXCARDNO' | translate}} </mat-label>
-					<input matInput type="number" placeholder="Placeholder" name="taxCardNo"
+					<input matInput  placeholder="Placeholder" name="taxCardNo"
 						formControlName="taxCardNo">
 					<mat-hint>
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
@@ -534,7 +534,7 @@
 			<div class="col-md-2" *ngIf="companyDataForm.controls['isWTaxActive'].value">
 				<mat-form-field appearance="outline">
 					<mat-label>{{'HR.INPUTS.WTAX' | translate}} </mat-label>
-					<input matInput type="number" placeholder="Placeholder" name="wTax" formControlName="wTax">
+					<input matInput  placeholder="Placeholder" name="wTax" formControlName="wTax">
 					<mat-hint>
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										validation: 'pattern',
@@ -559,7 +559,7 @@
 			<div class="col-md-2" *ngIf="companyDataForm.controls['isValTaxActive'].value">
 				<mat-form-field appearance="outline">
 					<mat-label>{{'HR.INPUTS.VATTAX' | translate}} </mat-label>
-					<input matInput type="number" placeholder="Placeholder" name="vatTax" formControlName="vatTax">
+					<input matInput  placeholder="Placeholder" name="vatTax" formControlName="vatTax">
 					<mat-hint>
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 									  validation: 'required',

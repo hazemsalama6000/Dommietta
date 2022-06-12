@@ -12,10 +12,10 @@ export interface ICompany {
 	taxCardNo: string,
 	taxFileNo: string,
 	vatTaxNum: string
-	vatTax: number,
+	vatTax: string,
 	isValTaxActive: boolean,
 	hasDirectTransferForStocks: boolean,
-	wTax: number,
+	wTax: string,
 	isWTaxActive: boolean,
 	email: string,
 	isActive: boolean,

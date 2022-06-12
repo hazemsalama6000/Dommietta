@@ -75,7 +75,7 @@ export class CompanyUpsertComponent implements OnInit {
 				state_Id: ['', Validators.compose([Validators.required])],
 				region_Id: ['', Validators.compose([Validators.required])],
 				isActive: [false,],
-				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern("^[0-9]*$")])],
+				phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(11), Validators.pattern("^[0-9]*$")])],
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
@@ -108,11 +108,11 @@ export class CompanyUpsertComponent implements OnInit {
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern("^[1-9][0-9]*$")])],
-				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
+				taxCardNo: [0, Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([ Validators.minLength(3), Validators.maxLength(50)])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.pattern("^[1-9][0-9]*$")],
+				wTax: [0, ],
 				isWTaxActive: [false,],
 			});
 
@@ -232,8 +232,8 @@ export class CompanyUpsertComponent implements OnInit {
 
 		this.company = {
 			id: 0, code: '', companyName: '', activity: '', address: '', mobileUsersCount: 0, region_Id: 0, isActive: false, logoPrint: '',
-			logoWeb: '', phoneNumber: '0', email: '', managerName: '', managerPosition: '', commercialRecord: '', taxCardNo: '', vatTax: 0,
-			isValTaxActive: false, hasDirectTransferForStocks: false, wTax: 0, state_Id: 0, isWTaxActive: false, taxFileNo: '', vatTaxNum: '', employee_Id: 0
+			logoWeb: '', phoneNumber: '0', email: '', managerName: '', managerPosition: '', commercialRecord: '', taxCardNo: '', vatTax: '',
+			isValTaxActive: false, hasDirectTransferForStocks: false, wTax: '', state_Id: 0, isWTaxActive: false, taxFileNo: '', vatTaxNum: '', employee_Id: 0
 		};
 
 
