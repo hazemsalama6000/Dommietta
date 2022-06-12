@@ -163,7 +163,7 @@ export class ListContentComponent {
 						}
 					});
 	
-				},500)
+				},500);
 			
 			}
 

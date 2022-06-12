@@ -153,11 +153,14 @@ export class StateListContentComponent {
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;
-				this.service.addFlag.subscribe((data) => {
-					if (data == true) {
-						this.addNewRow();
-					}
-				});
+				setTimeout(()=>{
+					this.service.addFlag.subscribe((data) => {
+						if (data == true) {
+							this.addNewRow();
+						}
+					});
+	
+				},500);
 			}
 		);
 	}
