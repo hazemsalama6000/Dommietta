@@ -389,7 +389,7 @@
 
 							<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 											validation: 'maxlength',
-											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.PHONENUM' | translate , max:20},
+											message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.PHONENUM' | translate , max:11},
 											control: companyDataForm.controls['phoneNumber']
 										 }"></ng-container>
 
