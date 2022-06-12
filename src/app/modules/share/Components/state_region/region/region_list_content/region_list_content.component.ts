@@ -127,6 +127,7 @@ export class RegionListContentComponent {
 
 
 	Remove(model: IRegion) {
+		this.service.addFlag.next(false);
 
 		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.name} ? `)
 			.then((confirmed) => {
