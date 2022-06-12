@@ -98,6 +98,8 @@ export class DepartmentListContentComponent {
 	}
 
 	toggleActiveDeactive(element: LookUpModel) {
+		this.service.addFlag.next(false);
+
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);

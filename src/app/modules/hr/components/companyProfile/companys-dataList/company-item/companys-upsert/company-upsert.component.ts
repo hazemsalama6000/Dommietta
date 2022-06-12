@@ -170,7 +170,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 			setTimeout(() => {
 				this.passingCompanyToFormData();
-			}, 1000);
+			}, 1500);
 
 		}
 

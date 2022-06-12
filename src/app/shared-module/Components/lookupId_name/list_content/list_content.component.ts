@@ -110,10 +110,12 @@ export class ListContentComponent {
 
 
 	toggleActiveDeactive(element: LookUpModel) {
+		this.service.addFlag.next(false);
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.getallData();
+			
 			},
 			(error: any) => {
 				console.log(error);

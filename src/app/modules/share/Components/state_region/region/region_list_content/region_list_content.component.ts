@@ -113,6 +113,8 @@ export class RegionListContentComponent {
 	}
 
 	toggleActiveDeactive(element: IRegion) {
+		this.service.addFlag.next(false);
+
 		this.service.toggleActiveDeactive(element).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
