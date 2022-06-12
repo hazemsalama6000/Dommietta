@@ -18,7 +18,7 @@ import { BranchUpsertComponent } from "../branch_Upsert/branch-upsert.component"
 })
 
 export class BranchListContentComponent {
-
+	panelOpenState:boolean = false;
     currentSelected:LookUpModel;
     companyId : number ;
     @Input() set _companyId (value:number){

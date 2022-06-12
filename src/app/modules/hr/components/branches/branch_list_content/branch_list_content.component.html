@@ -1,28 +1,49 @@
 <section id="Branch">
 
-	<div class="d-flex justify-content-between align-items-center">
 
-		<div class="col-md-3">
+	<div class="row">
 
-			<mat-form-field appearance="standard">
-				<mat-label> {{"HR.INPUTS.FILTER" | translate}}</mat-label>
-				<input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-			</mat-form-field>
-		</div>
+		<div class="col-md-12">
+
+			<mat-accordion>
+				<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+					<mat-expansion-panel-header class="selectedCardClass">
+						<mat-panel-title>
+
+							<div class="d-flex justify-content-between align-items-center mx-5">
+						
+								<div class="col-md-12">
+									<a class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer fontsection">
+										الفروع
+									</a>
+									<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1" (click)="addNewBranch()"
+										aria-label="Example icon button with a filter list icon">
+										<mat-icon>add</mat-icon>
+									</button>
+								</div>
+						
+							</div>
+						
+
+						</mat-panel-title>
+					</mat-expansion-panel-header>
 
 
-		<div class="col-md-3">
-			<a class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer fontsection">
-				الفروع
-			</a>
-			<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1" (click)="addNewBranch()"
-				aria-label="Example icon button with a filter list icon">
-				<mat-icon>add</mat-icon>
-			</button>
-		</div>
 
-	</div>
 
+
+
+					<div class="d-flex justify-content-between align-items-center">
+
+						<div class="col-md-3">
+				
+							<mat-form-field appearance="standard">
+								<mat-label> {{"HR.INPUTS.FILTER" | translate}}</mat-label>
+								<input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+							</mat-form-field>
+						</div>
+				
+					</div>
 
 
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -133,4 +154,11 @@
 	</mat-paginator>
 
 
+</mat-expansion-panel>
+</mat-accordion>
+
+
+
+</div>
+</div>
 </section>

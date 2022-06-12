@@ -11,7 +11,7 @@ import { EmployeeService } from "../../services/employee.service";
 
 export class BranchComponent implements OnInit{
 	
-	
+	panelOpenState:boolean = false;
 
 	title: string;
 	icon: string;
