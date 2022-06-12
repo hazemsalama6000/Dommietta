@@ -85,7 +85,7 @@ export class RegionListContentComponent {
 						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
 							this.service.bSubject.next(true);
-							this.service.addFlag.next(false);
+							this.service.addFlag.next(true);
 						}
 						else if (data.isExists) {
 							this.toaster.openWarningSnackBar(data.message);
