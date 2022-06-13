@@ -3,12 +3,12 @@
 </h2>
 
 <mat-divider></mat-divider>
+<form [formGroup]="branchDataForm" (ngSubmit)="Submit(branchDataForm.value)">
 
 
 <mat-dialog-content style="z-index: -1;" class="mat-typography">
 
 
-	<form [formGroup]="branchDataForm" (ngSubmit)="Submit(branchDataForm.value)">
 
 		<input type="hidden" name="id" formControlName="id">
 		<input type="hidden" name="company_Id" formControlName="company_Id">
@@ -280,33 +280,26 @@
 
 		</div>
 
-		<br><br><br>
+		<br>
 
-		<div class="mt-2">
-			<button mat-button type="submit" (click)="submitClicked=true" class="btn btn-danger btn-sm col-md-2 mx-2">
-				حفظ
-			</button>
-			<button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary btn-sm col-md-2">
-				اغلاق
-			</button>
-		</div>
+		
 
 
-		<br><br><br><br><br><br>
-
-	</form>
 
 
 
 </mat-dialog-content>
-<!--
+
 	<mat-dialog-actions>
 		<div class="d-flex">
-			<button mat-raised-button type="submit" [disabled]="companyForm.invalid" color="primary">حفظ</button>
+			<button mat-raised-button type="submit" (click)="submitClicked=true" color="primary">حفظ</button>
 			<button mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
 		</div>
 	</mat-dialog-actions>
--->
+
+
+</form>
+
 <ng-template #formError let-control="control" let-message="message" let-validation="validation">
 	<ng-container *ngIf="control.hasError(validation)  && submitClicked">
 		<div class="fv-plugins-message-container">

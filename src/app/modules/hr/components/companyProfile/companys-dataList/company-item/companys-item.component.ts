@@ -56,6 +56,8 @@ export class CompanyItemComponent {
 				/*maxWidth: '50vw',
 				maxHeight: '100vh',*/
 				maxHeight: '100vh',
+				height: '100%',
+
 				//panelClass: 'full-screen-modal',*/
 				position:dialogPosition,
 				data: { companyId: companyId }
