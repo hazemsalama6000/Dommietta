@@ -425,7 +425,7 @@
 						<div class="col-md-9">
 
 							<ng-select [items]="dropdownListDataForEmployee" bindLabel="Name" bindValue="Id"
-								name="employee_Id" formControlName="employee_Id" >
+								name="employee_Id" formControlName="employee_Id">
 							</ng-select>
 
 						</div>
@@ -507,11 +507,6 @@
 										control: companyDataForm.controls['taxCardNo']
 									 }"></ng-container>
 
-						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-										validation: 'pattern',
-										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.TAXCARDNO' | translate},
-										control: companyDataForm.controls['taxCardNo']
-									  }"></ng-container>
 
 					</mat-hint>
 
@@ -545,9 +540,22 @@
 					<mat-label>{{'HR.INPUTS.WTAX' | translate}} </mat-label>
 					<input matInput placeholder="Placeholder" name="wTax" formControlName="wTax">
 					<mat-hint>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+							validation: 'min',
+							message: 'AUTH.VALIDATION.MIN_VALUE_NUMBER' | translate : {name:'HR.INPUTS.WTAX' | translate , min:0},
+							control: companyDataForm.controls['wTax']
+						  }"></ng-container>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+							  validation: 'max',
+							  message: 'AUTH.VALIDATION.MAX_VALUE_NUMBER' | translate : {name:'HR.INPUTS.WTAX' | translate , max:100},
+							  control: companyDataForm.controls['wTax']
+						   }"></ng-container>
+
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										validation: 'pattern',
-										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.WTAX' | translate},
+										message: 'AUTH.VALIDATION.INVALID_NUMBER' | translate : {name:'HR.INPUTS.WTAX' | translate},
 										control: companyDataForm.controls['wTax']
 									  }"></ng-container>
 
@@ -572,20 +580,20 @@
 					<mat-hint>
 
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-									  validation: 'minlength',
-									  message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'HR.INPUTS.VATTAX' | translate , min:3},
+									  validation: 'min',
+									  message: 'AUTH.VALIDATION.MIN_VALUE_NUMBER' | translate : {name:'HR.INPUTS.VATTAX' | translate , min:0},
 									  control: companyDataForm.controls['vatTax']
 									}"></ng-container>
 
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-										validation: 'maxlength',
-										message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'HR.INPUTS.VATTAX' | translate , max:50},
+										validation: 'max',
+										message: 'AUTH.VALIDATION.MAX_VALUE_NUMBER' | translate : {name:'HR.INPUTS.VATTAX' | translate , max:100},
 										control: companyDataForm.controls['vatTax']
 									 }"></ng-container>
 
 						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										validation: 'pattern',
-										message: 'AUTH.VALIDATION.INVALID' | translate : {name:'HR.INPUTS.VATTAX' | translate},
+										message: 'AUTH.VALIDATION.INVALID_NUMBER' | translate : {name:'HR.INPUTS.VATTAX' | translate},
 										control: companyDataForm.controls['vatTax']
 									  }"></ng-container>
 

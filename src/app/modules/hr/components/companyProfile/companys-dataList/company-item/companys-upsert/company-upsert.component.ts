@@ -78,11 +78,11 @@ export class CompanyUpsertComponent implements OnInit {
 				email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.pattern("^[0-9]*$")])],
+				taxCardNo: ['', Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose([Validators.pattern("^[0-9]*$")])],
+				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^[0-9]*$")])],
 				isWTaxActive: [false,],
 			});
 		}
@@ -107,11 +107,11 @@ export class CompanyUpsertComponent implements OnInit {
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-				taxCardNo: [0, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.pattern("^[0-9]*$")])],
+				taxCardNo: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose([Validators.pattern("^[0-9]*$")])],
+				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^[0-9]*$")])],
 				isWTaxActive: [false,],
 			});
 
@@ -283,72 +283,74 @@ export class CompanyUpsertComponent implements OnInit {
 
 	Submit(companyDataForm: any) {
 
-		let model: ICompany = this.mapFormGroupsToModel(companyDataForm);
+		if (this.companyDataForm.valid) {
 
-		this.isEditable = true;
+			let model: ICompany = this.mapFormGroupsToModel(companyDataForm);
 
-		console.log(model);
+			this.isEditable = true;
 
-		if (companyDataForm.id == 0) {
+			if (companyDataForm.id == 0) {
 
-			const fd = new FormData();
+				const fd = new FormData();
 
-			fd.append('logoPrintPhoto', this.logoPrintFile, this.logoPrintFile.name);
-			fd.append('logoWebPhoto', this.logoWebFile, this.logoWebFile.name);
+				fd.append('logoPrintPhoto', this.logoPrintFile, this.logoPrintFile.name);
+				fd.append('logoWebPhoto', this.logoWebFile, this.logoWebFile.name);
 
-			fd.append('id', model.id.toString());
-			fd.append('code', model.code);
-			fd.append('companyName', model.companyName);
-			fd.append('activity', model.activity);
-			fd.append('address', model.address);
-			fd.append('mobileUsersCount', model.mobileUsersCount.toString());
-			fd.append('region_Id', model.region_Id.toString());
-			fd.append('isActive', model.isActive.toString());
+				fd.append('id', model.id.toString());
+				fd.append('code', model.code);
+				fd.append('companyName', model.companyName);
+				fd.append('activity', model.activity);
+				fd.append('address', model.address);
+				fd.append('mobileUsersCount', model.mobileUsersCount.toString());
+				fd.append('region_Id', model.region_Id.toString());
+				fd.append('isActive', model.isActive.toString());
 
-			fd.append('phoneNumber', model.phoneNumber);
-			fd.append('email', model.email);
-			fd.append('managerName', model.managerName);
-			fd.append('managerPosition', model.managerPosition);
+				fd.append('phoneNumber', model.phoneNumber);
+				fd.append('email', model.email);
+				fd.append('managerName', model.managerName);
+				fd.append('managerPosition', model.managerPosition);
 
-			fd.append('commercialRecord', model.commercialRecord);
-			fd.append('taxCardNo', model.taxCardNo);
-			fd.append('wTax', model.wTax.toString());
-			fd.append('vatTax', model.vatTax.toString());
-			fd.append('isValTaxActive', model.isValTaxActive.toString());
-			fd.append('isWTaxActive', model.isWTaxActive.toString());
-			fd.append('hasDirectTransferForStocks', model.hasDirectTransferForStocks.toString());
+				fd.append('commercialRecord', model.commercialRecord);
+				fd.append('taxCardNo', model.taxCardNo);
+				fd.append('wTax', model.wTax.toString());
+				fd.append('vatTax', model.vatTax.toString());
+				fd.append('isValTaxActive', model.isValTaxActive.toString());
+				fd.append('isWTaxActive', model.isWTaxActive.toString());
+				fd.append('hasDirectTransferForStocks', model.hasDirectTransferForStocks.toString());
 
 
-			this.service.PostCompanyData(fd).
-				subscribe(
-					(data: HttpReponseModel) => {
+				this.service.PostCompanyData(fd).
+					subscribe(
+						(data: HttpReponseModel) => {
 
-						if (data.isSuccess) {
-							this.toaster.openSuccessSnackBar(data.message);
-							console.log(data.message);
-							this.service.bSubject.next(true);
+							if (data.isSuccess) {
+								this.toaster.openSuccessSnackBar(data.message);
+								console.log(data.message);
+								this.service.bSubject.next(true);
+							}
+							else if (data.isExists) {
+								this.toaster.openWarningSnackBar(data.message);
+							}
+						},
+						(error: any) => {
+							console.log(error);
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 						}
-						else if (data.isExists) {
-							this.toaster.openWarningSnackBar(data.message);
-						}
+					);
+
+			}
+
+			else {
+				this.service.UpdateCompanyData(model).subscribe(
+					(data: any) => {
+						this.toaster.openSuccessSnackBar(data.message);
+						this.service.bSubject.next(true);
 					},
 					(error: any) => {
-						console.log(error);
 						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-					}
-				);
+					});
 
-		}
-
-		else {
-			this.service.UpdateCompanyData(model).subscribe(
-				(data: any) => {
-					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
-				},
-				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-				});
+			}
 
 		}
 

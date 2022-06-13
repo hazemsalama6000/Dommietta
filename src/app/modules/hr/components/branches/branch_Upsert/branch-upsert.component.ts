@@ -80,7 +80,7 @@ export class BranchUpsertComponent implements OnInit {
 	fillDropDowns() {
 
 		this.dropdownListDataForState = this.stateService.states;
-	
+
 		this.dropdownListDataForEmployee = this.employeeService.employees;
 
 		this.dropdownListDataForRegion = [];
@@ -157,43 +157,43 @@ export class BranchUpsertComponent implements OnInit {
 
 	Submit(model: IBranchUpsert) {
 
-		console.log(model);
 
-		model.region_Id = model.region_Id;
-		model.branchManager_Id = model.branchManager_Id;
+		if (this.branchDataForm.valid) {
 
-		if (model.id == 0) {
-			model.company_Id = this.data.companyId;
-			this.service.PostBranchData(model).
-				subscribe(
-					(data: HttpReponseModel) => {
+			if (model.id == 0) {
+				model.company_Id = this.data.companyId;
+				this.service.PostBranchData(model).
+					subscribe(
+						(data: HttpReponseModel) => {
 
-						if (data.isSuccess) {
-							this.toaster.openSuccessSnackBar(data.message);
-							console.log(data.message);
-							this.service.bSubject.next(true);
+							if (data.isSuccess) {
+								this.toaster.openSuccessSnackBar(data.message);
+								console.log(data.message);
+								this.service.bSubject.next(true);
+							}
+							else if (data.isExists) {
+								this.toaster.openWarningSnackBar(data.message);
+							}
+						},
+						(error: any) => {
+							console.log(error);
+							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 						}
-						else if (data.isExists) {
-							this.toaster.openWarningSnackBar(data.message);
-						}
+					);
+
+			}
+
+			else {
+				this.service.UpdateBranchData(model).subscribe(
+					(data: any) => {
+						this.toaster.openSuccessSnackBar(data.message);
+						this.service.bSubject.next(true);
 					},
 					(error: any) => {
-						console.log(error);
 						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-					}
-				);
+					});
 
-		}
-
-		else {
-			this.service.UpdateBranchData(model).subscribe(
-				(data: any) => {
-					this.toaster.openSuccessSnackBar(data.message);
-					this.service.bSubject.next(true);
-				},
-				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-				});
+			}
 
 		}
 

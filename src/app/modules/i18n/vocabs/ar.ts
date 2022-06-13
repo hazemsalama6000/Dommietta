@@ -117,9 +117,13 @@ export const locale = {
 			},
 			VALIDATION: {
 				INVALID: '{{name}}  غير مضبوط',
+				INVALID_NUMBER: '{{name}}  يحتوى على احروف',
+
 				REQUIRED: '{{name}} مطلوب',
 				MIN_LENGTH: '{{name}} اقل عدد حروف {{min}}',
 				MAX_LENGTH: '{{name}} اكبر عدد حروف {{max}}',
+				MIN_VALUE_NUMBER: '{{name}} اقل من  {{min}}',
+				MAX_VALUE_NUMBER: '{{name}} اكبر من  {{max}}',
 				AGREEMENT_REQUIRED: 'Accepting terms & conditions are required',
 				NOT_FOUND: 'The requested {{name}} is not found',
 				INVALID_LOGIN: 'The login detail is incorrect',
