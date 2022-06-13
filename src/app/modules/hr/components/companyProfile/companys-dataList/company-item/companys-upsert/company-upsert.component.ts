@@ -79,10 +79,10 @@ export class CompanyUpsertComponent implements OnInit {
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: ['', Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^[0-9]*$")])],
+				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^[0-9]*$")])],
+				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$")])],
 				isWTaxActive: [false,],
 			});
 		}
@@ -108,10 +108,10 @@ export class CompanyUpsertComponent implements OnInit {
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^[0-9]*$")])],
+				vatTax: [0, Validators.compose([Validators.min(0), Validators.max(100), Validators.pattern("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^[0-9]*$")])],
+				wTax: [0, Validators.compose([Validators.min(0), Validators.max(100),Validators.pattern("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$")])],
 				isWTaxActive: [false,],
 			});
 
