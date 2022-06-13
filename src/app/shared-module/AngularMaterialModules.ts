@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export const MaterialsModules=[
 
@@ -65,5 +66,6 @@ export const MaterialsModules=[
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-	NgMultiSelectDropDownModule
+	NgMultiSelectDropDownModule,
+	NgSelectModule
 ];

@@ -30,12 +30,12 @@ import { BranchListContentComponent } from './components/branches/branch_list_co
   imports: [
     CommonModule,
     HrRoutingModule,
-	SharedModule,
     TranslationModule,
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+	SharedModule,
   ]
 })
 export class HrModule { }

@@ -68,8 +68,8 @@ export class BranchListContentComponent {
 				this.getallData(this.companyId);
 			},
 			(error:any) => {
-				console.log(error);
-			 });
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+			});
 	}
 
 
@@ -80,8 +80,8 @@ export class BranchListContentComponent {
 				this.getallData(this.companyId);
 			},
 			(error:any) => {
-				console.log(error);
-			 });
+				this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+			});
 	}
 
 	

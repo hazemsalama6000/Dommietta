@@ -11,6 +11,7 @@ import { IRegion } from "src/app/modules/share/models/IRegion.interface";
 import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
 	selector: "company-upsert",
@@ -22,13 +23,10 @@ export class CompanyUpsertComponent implements OnInit {
 
 	saveButtonClickedFlag = false;
 
-	companyBranch = 1;
-
 	isEdit = false;
 	company: ICompany;
 	logoWebFile: File;
 	logoPrintFile: File;
-
 	isEditable: boolean = false;
 	dropdownListDataForState: any = [];
 	selectedItemState: any = [];
@@ -55,7 +53,8 @@ export class CompanyUpsertComponent implements OnInit {
 		private stateService: StatesService,
 		private regionService: RegionService,
 		private service: CompanyService,
-		private employeeService: EmployeeService
+		private employeeService: EmployeeService,
+		private rcd: ChangeDetectorRef
 	) {
 
 		//here get data of company and put data in the form
@@ -80,10 +79,10 @@ export class CompanyUpsertComponent implements OnInit {
 				employee_Id: ['', Validators.compose([Validators.required])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
 				taxCardNo: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([ Validators.minLength(1), Validators.maxLength(50),Validators.pattern("^[0-9]*$")])],
+				vatTax: [0, Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose( [Validators.pattern("^[0-9]*$")]) ],
+				wTax: [0, Validators.compose([Validators.pattern("^[0-9]*$")])],
 				isWTaxActive: [false,],
 			});
 		}
@@ -97,7 +96,7 @@ export class CompanyUpsertComponent implements OnInit {
 				companyName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				activity: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-				mobileUsersCount: [0, Validators.compose([Validators.required , Validators.pattern("^[1-9][0-9]*$")])],
+				mobileUsersCount: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$")])],
 				state_Id: ['', Validators.compose([Validators.required])],
 				region_Id: ['', Validators.compose([Validators.required])],
 				isActive: [false,],
@@ -108,11 +107,11 @@ export class CompanyUpsertComponent implements OnInit {
 				managerName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				managerPosition: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
 				commercialRecord: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
-				taxCardNo: [0, Validators.compose([Validators.required,  Validators.minLength(3), Validators.maxLength(50)])],
-				vatTax: [0, Validators.compose([ Validators.minLength(1), Validators.maxLength(50),Validators.pattern("^[0-9]*$")])],
+				taxCardNo: [0, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
+				vatTax: [0, Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.pattern("^[0-9]*$")])],
 				isValTaxActive: [false,],
 				hasDirectTransferForStocks: [false,],
-				wTax: [0, Validators.compose( [Validators.pattern("^[0-9]*$")]) ],
+				wTax: [0, Validators.compose([Validators.pattern("^[0-9]*$")])],
 				isWTaxActive: [false,],
 			});
 
@@ -124,20 +123,11 @@ export class CompanyUpsertComponent implements OnInit {
 
 
 	fillDropDowns() {
-	
+
 
 		this.dropdownListDataForState = this.stateService.states;
 		this.dropdownListDataForEmployee = this.employeeService.employees;
 
-        console.log(this.dropdownListDataForState);
-
-		this.selectedItemState = this.dropdownListDataForState.filter(
-			(data:LookUpModel) => {
-				return data.Id == this.company.state_Id;
-			});
-
-				console.log(this.company.state_Id);
-				console.log(this.selectedItemState);
 
 		this.dropdownListDataForRegion = [];
 
@@ -148,11 +138,6 @@ export class CompanyUpsertComponent implements OnInit {
 			this.regionService.getLookupData(this.company.state_Id).subscribe(
 				(data: IRegion[]) => {
 					this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
-					this.selectedItemForRegion = this.dropdownListDataForRegion.filter(
-						(data: LookUpModel) => {
-							return data.Id == this.company.region_Id;
-						});
-
 				}
 			);
 
@@ -160,16 +145,8 @@ export class CompanyUpsertComponent implements OnInit {
 			this.employeeService.getLookupEmployeeData(this.company.id).subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownListDataForEmployee = data.map(item => ({ Id: item.Id, Name: item.Name }) as LookUpModel)
-					this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
-						(data: LookUpModel) => {
-							return data.Id == this.company.employee_Id;
-						});
 				}
 			);
-
-		
-
-				console.log(this.selectedItemForEmployee);
 
 			setTimeout(() => {
 				this.passingCompanyToFormData();
@@ -189,7 +166,6 @@ export class CompanyUpsertComponent implements OnInit {
 	}
 
 	onItemSelectState(item: any) {
-
 		this.regionService.getLookupData(item.Id).subscribe(
 			(data: IRegion[]) => {
 				this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
@@ -198,11 +174,6 @@ export class CompanyUpsertComponent implements OnInit {
 		this.selectedItemForRegion = {};
 		this.companyDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
 
-
-	}
-
-	onSelectAll(items: any) {
-		console.log(items);
 	}
 
 
@@ -215,13 +186,15 @@ export class CompanyUpsertComponent implements OnInit {
 		this.companyDataForm.controls['activity'].setValue(this.company.activity);
 		this.companyDataForm.controls['address'].setValue(this.company.address);
 		this.companyDataForm.controls['mobileUsersCount'].setValue(this.company.mobileUsersCount);
-		this.companyDataForm.controls['state_Id'].setValue(this.selectedItemState);
-		this.companyDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
+
+		this.companyDataForm.controls['state_Id'].setValue(this.company.state_Id);
+		this.companyDataForm.controls['region_Id'].setValue(this.company.region_Id);
+
 		this.companyDataForm.controls['isActive'].setValue(this.company.isActive);
 
 		this.companyDataForm.controls['phoneNumber'].setValue(this.company.phoneNumber);
 		this.companyDataForm.controls['email'].setValue(this.company.email);
-		this.companyDataForm.controls['employee_Id'].setValue(this.selectedItemForEmployee);
+		this.companyDataForm.controls['employee_Id'].setValue(this.company.employee_Id);
 
 		this.companyDataForm.controls['commercialRecord'].setValue(this.company.commercialRecord);
 		this.companyDataForm.controls['taxCardNo'].setValue(this.company.taxCardNo);
@@ -280,14 +253,14 @@ export class CompanyUpsertComponent implements OnInit {
 		model.activity = companyDataForm.activity;
 		model.address = companyDataForm.address;
 		model.mobileUsersCount = companyDataForm.mobileUsersCount;
-		model.region_Id = companyDataForm.region_Id[0].Id;
+		model.region_Id = companyDataForm.region_Id;
 		model.isActive = companyDataForm.isActive;
 
 		model.phoneNumber = companyDataForm.phoneNumber;
 		model.email = companyDataForm.email;
 
 		if (model.id) {
-			model.employee_Id = companyDataForm.employee_Id[0].Id
+			model.employee_Id = companyDataForm.employee_Id
 		}
 		else {
 			model.managerName = companyDataForm.managerName;
@@ -360,7 +333,7 @@ export class CompanyUpsertComponent implements OnInit {
 					},
 					(error: any) => {
 						console.log(error);
-						this.toaster.openWarningSnackBar(error);
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -373,7 +346,7 @@ export class CompanyUpsertComponent implements OnInit {
 					this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}

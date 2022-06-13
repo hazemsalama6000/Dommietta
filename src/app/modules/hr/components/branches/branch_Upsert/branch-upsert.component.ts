@@ -80,38 +80,19 @@ export class BranchUpsertComponent implements OnInit {
 	fillDropDowns() {
 
 		this.dropdownListDataForState = this.stateService.states;
+	
 		this.dropdownListDataForEmployee = this.employeeService.employees;
-
-        console.log(this.dropdownListDataForState);
-
-		this.selectedItemState = this.dropdownListDataForState.filter(
-			(data:LookUpModel) => {
-				return data.Id == this.branch.stateId;
-			});
-
-
 
 		this.dropdownListDataForRegion = [];
 
-		if (this.data.branchId != 0) {
+		if (this.data.branchId != 0) { // in Edit State
 			//get selected region
 			this.regionService.getLookupData(this.branch.stateId).subscribe(
 				(data: IRegion[]) => {
 					this.dropdownListDataForRegion = data.map(item => ({ Id: item.id, Name: item.name }) as LookUpModel)
-
-					this.selectedItemForRegion = this.dropdownListDataForRegion.filter(
-						(data: LookUpModel) => {
-							return data.Id == this.branch.region_Id;
-						});
 				}
 			);
 		}
-
-		//get selected employee
-		this.selectedItemForEmployee = this.dropdownListDataForEmployee.filter(
-			(data: LookUpModel) => {
-				return data.Id == this.branch.branchManager_Id;
-			});
 
 
 		setTimeout(() => {
@@ -142,11 +123,11 @@ export class BranchUpsertComponent implements OnInit {
 		this.branchDataForm.controls['id'].setValue(this.branch.id);
 		this.branchDataForm.controls['company_Id'].setValue(this.branch.company_Id);
 		this.branchDataForm.controls['branchName'].setValue(this.branch.branchName);
-		this.branchDataForm.controls['branchManager_Id'].setValue(this.selectedItemForEmployee);
+		this.branchDataForm.controls['branchManager_Id'].setValue(this.branch.branchManager_Id);
 		this.branchDataForm.controls['branchAddress'].setValue(this.branch.branchAddress);
 		this.branchDataForm.controls['phoneNumber'].setValue(this.branch.phoneNumber);
-		this.branchDataForm.controls['state_Id'].setValue(this.selectedItemState);
-		this.branchDataForm.controls['region_Id'].setValue(this.selectedItemForRegion);
+		this.branchDataForm.controls['state_Id'].setValue(this.branch.stateId);
+		this.branchDataForm.controls['region_Id'].setValue(this.branch.region_Id);
 		this.branchDataForm.controls['isActive'].setValue(this.branch.isActive);
 		this.branchDataForm.controls['isMain'].setValue(this.branch.isMain);
 		this.branchDataForm.controls['email'].setValue(this.branch.email);
@@ -178,8 +159,8 @@ export class BranchUpsertComponent implements OnInit {
 
 		console.log(model);
 
-		model.region_Id = model.region_Id[0].Id
-		model.branchManager_Id = model.branchManager_Id[0].Id
+		model.region_Id = model.region_Id;
+		model.branchManager_Id = model.branchManager_Id;
 
 		if (model.id == 0) {
 			model.company_Id = this.data.companyId;
@@ -198,7 +179,7 @@ export class BranchUpsertComponent implements OnInit {
 					},
 					(error: any) => {
 						console.log(error);
-						this.toaster.openWarningSnackBar(error);
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
 
@@ -211,7 +192,7 @@ export class BranchUpsertComponent implements OnInit {
 					this.service.bSubject.next(true);
 				},
 				(error: any) => {
-					this.toaster.openWarningSnackBar(error);
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				});
 
 		}

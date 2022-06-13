@@ -67,10 +67,9 @@
 
 							<div class="col-md-9">
 
-								<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings" name="state_Id"
-									formControlName="state_Id" [data]="dropdownListDataForState"
-									(onSelect)="onItemSelectState($event)">
-								</ng-multiselect-dropdown>
+								<ng-select [items]="dropdownListDataForState" bindLabel="Name" bindValue="Id"
+									name="state_Id" formControlName="state_Id" (change)="onItemSelectState($event)">
+								</ng-select>
 
 							</div>
 						</div>
@@ -121,9 +120,10 @@
 
 							<div class="col-md-9">
 
-								<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
-									[data]="dropdownListDataForRegion" name="region_Id" formControlName="region_Id">
-								</ng-multiselect-dropdown>
+								<ng-select [items]="dropdownListDataForRegion" bindLabel="Name" bindValue="Id"
+									name="region_Id" formControlName="region_Id" >
+								</ng-select>
+
 								<mat-hint>
 									<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 										  validation: 'required',
@@ -143,7 +143,7 @@
 
 			<div class="col-md-12">
 
-			
+
 
 				<div class="d-flex justify-content-start align-content-center">
 					<mat-icon class="text-primary">perm_phone_msg</mat-icon>
@@ -190,10 +190,15 @@
 
 							<div class="col-md-9">
 
-								<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
+								<!--	<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
 									[data]="dropdownListDataForEmployee" name="branchManager_Id"
 									formControlName="branchManager_Id">
 								</ng-multiselect-dropdown>
+-->
+
+								<ng-select [items]="dropdownListDataForEmployee" bindLabel="Name" bindValue="Id"
+									name="branchManager_Id" formControlName="branchManager_Id">
+								</ng-select>
 
 								<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 									validation: 'required',
