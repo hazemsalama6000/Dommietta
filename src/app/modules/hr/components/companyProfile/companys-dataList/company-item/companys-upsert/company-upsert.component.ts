@@ -182,6 +182,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 		this.companyDataForm.controls['id'].setValue(this.company.id);
 		this.companyDataForm.controls['code'].setValue(this.company.code);
+		this.companyDataForm.controls['code'].disable();
 		this.companyDataForm.controls['companyName'].setValue(this.company.companyName);
 		this.companyDataForm.controls['activity'].setValue(this.company.activity);
 		this.companyDataForm.controls['address'].setValue(this.company.address);
