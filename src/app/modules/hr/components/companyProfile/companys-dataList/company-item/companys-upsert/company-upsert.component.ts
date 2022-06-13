@@ -270,10 +270,19 @@ export class CompanyUpsertComponent implements OnInit {
 
 		model.commercialRecord = companyDataForm.commercialRecord;
 		model.taxCardNo = companyDataForm.taxCardNo;
+	
 		model.wTax = companyDataForm.wTax;
 		model.vatTax = companyDataForm.vatTax;
 		model.isValTaxActive = companyDataForm.isValTaxActive;
 		model.isWTaxActive = companyDataForm.isWTaxActive;
+		
+		if(companyDataForm.isValTaxActive == false){
+			model.vatTax = 0;
+		}
+		if(companyDataForm.isWTaxActive == false){
+			model.wTax = 0;
+		}
+
 		model.hasDirectTransferForStocks = companyDataForm.hasDirectTransferForStocks;
 
 		return model;
