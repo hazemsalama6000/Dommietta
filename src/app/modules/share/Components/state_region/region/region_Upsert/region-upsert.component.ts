@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
@@ -16,7 +16,9 @@ interface ClientError {
 @Component({
 	selector: 'region-upsert',
 	templateUrl: './region-upsert.component.html',
-	styleUrls: ['./region-upsert.component.scss']
+	styleUrls: ['./region-upsert.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
+
 })
 
 export class RegionUpsertComponent {
@@ -37,7 +39,8 @@ export class RegionUpsertComponent {
 		}
 	}
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: RegionService ,private StatesService:StatesService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService,
+		 private service: RegionService ,private StatesService:StatesService , private cdr: ChangeDetectorRef) { }
 
 
 	ngOnInit(): void {
@@ -48,6 +51,7 @@ export class RegionUpsertComponent {
 		this.StatesService.getStateIdObservable().subscribe((data:LookUpModel) => {
 			this.currentStateId=data.Id;
 			this.currentStateActiveOrNot=data.isActive??false;
+			this.cdr.detectChanges();
 		});
 		
 	}

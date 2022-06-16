@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -10,7 +10,8 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 @Component({
 	selector: 'list_content',
 	templateUrl: './list_content.component.html',
-	styleUrls: ['./list_content.component.scss']
+	styleUrls: ['./list_content.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
 })
 
 export class ListContentComponent {

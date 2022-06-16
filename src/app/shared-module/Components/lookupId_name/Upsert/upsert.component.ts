@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { catchError, EMPTY, throwError } from "rxjs";
 import { ErrorResponse } from "src/app/core-module/httpServices/ErrorResponse.service";
@@ -17,7 +17,9 @@ interface ClientError {
 @Component({
 	selector: 'upsert',
 	templateUrl: './upsert.component.html',
-	styleUrls: ['./upsert.component.scss']
+	styleUrls: ['./upsert.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
+
 })
 
 export class UpsertComponent {

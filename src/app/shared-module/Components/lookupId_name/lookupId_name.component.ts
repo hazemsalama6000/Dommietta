@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { LookUpModel } from "../../models/lookup";
 
 @Component({
 	selector:"lookupId_name",
 	templateUrl:'./lookupId_name.component.html',
-	styleUrls:['./lookupId_name.component.scss']
+	styleUrls:['./lookupId_name.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
 })
 
 export class LookupIdNameComponent 

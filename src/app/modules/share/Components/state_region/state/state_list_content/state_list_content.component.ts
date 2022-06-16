@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
@@ -10,7 +10,9 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 @Component({
 	selector: 'state_list_content',
 	templateUrl: './state_list_content.component.html',
-	styleUrls: ['./state_list_content.component.scss']
+	styleUrls: ['./state_list_content.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
+
 })
 
 export class StateListContentComponent {

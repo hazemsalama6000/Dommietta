@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { catchError, EMPTY } from "rxjs";
@@ -13,7 +13,9 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 @Component({
 	selector: 'region_list_content',
 	templateUrl: './region_list_content.component.html',
-	styleUrls: ['./region_list_content.component.scss']
+	styleUrls: ['./region_list_content.component.scss'],
+	changeDetection:ChangeDetectionStrategy.OnPush
+
 })
 
 export class RegionListContentComponent {
@@ -32,16 +34,15 @@ export class RegionListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: RegionService, private toaster: toasterService, private StatesService: StatesService, private confirmationDialogService: ConfirmationDialogService) {
-
+		this.currentState = {} as LookUpModel;
 		this.currentSelected = { id: 0, isActive: false, isEdit: false, isAdd: false, name: "", state_Id: 0 }
-
 		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData(this.currentStateId);
 		});
 
 		this.StatesService.getStateIdObservable().subscribe((data: LookUpModel) => {
-		
+
 			if (data.Id == 0) {
 				this.dataSource.data = [];
 				this.currentState = data;
@@ -168,14 +169,14 @@ export class RegionListContentComponent {
 			(data: IRegion[]) => {
 				this.dataSource = new MatTableDataSource<IRegion>(data);
 				this.dataSource.paginator = this.paginator;
-				setTimeout(()=>{
+				setTimeout(() => {
 					this.service.addFlag.subscribe((data) => {
 						if (data == true) {
 							this.addNewRow();
 						}
 					});
-	
-				},500);
+
+				}, 500);
 			}
 
 		);
