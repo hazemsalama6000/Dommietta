@@ -7,13 +7,18 @@ import { TranslationModule } from '../i18n';
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { OnlineUsersDataListComponent } from './components/onlineUsers/onlineUsers-dataList/onlineUsers-dataList.component';
 import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.component';
+import { SearchOnlineUsersComponent } from './components/onlineUsers/search-online-users/search-online-users.component';
+import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-users-datatable/online-users-datatable.component';
+import { UserLocationComponent } from './components/onlineUsers/online-users-datatable/user-locations/user-location.component';
+
 
 @NgModule({
   declarations: [
-	OnlineUsersDataListComponent,
-	OnlineUsersComponent
+	OnlineUsersComponent,
+	SearchOnlineUsersComponent,
+	OnlineUsersDatatableComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,7 @@ import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	SharedModule,
-  ]
+	SharedModule
+	 ]
 })
 export class PermissionsModule { }

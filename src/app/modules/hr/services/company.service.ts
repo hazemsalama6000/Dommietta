@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Data } from "@angular/router";
 import { BehaviorSubject, map, Observable } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
@@ -40,6 +41,11 @@ export class CompanyService {
 				commercialRecord: Item.commercialRecord
 
 			}) as ICompanyDisplayData)));
+	}
+
+	getActiveCompanies() : Observable<LookUpModel[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_GETACTIVE}`)
+		.pipe(map(Items =>  Items.map( (item:any) =>  ({Id:item.id,Name:item.name }) as LookUpModel  ) ));
 	}
 
 	getCompanyDataById(id: number): Observable<ICompany> {
