@@ -10,6 +10,9 @@ export enum HttpPaths {
 	API_JOB_GETALL = "/api/v1/hr/getjobs",
 	API_JOB_DELETE = "/api/v1/hr/deletejob/",
 
+	API_JOB_GETPERSECTION="/api/v1/hr/GetJobsPerSection?SectionId",
+	API_JOB_UPDATEJOBPERSECTION="/api/v1/hr/ManageJobSection",
+
 	//State APIS
 
 	API_STATE_ADD = "/api/v1/shared/addstate",
