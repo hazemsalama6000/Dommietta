@@ -8,6 +8,7 @@ import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../../auth";
+import { ILocationXY } from "../models/ILocationXY.interface";
 import { IOnlineUsers } from "../models/IOnlineUsers.interface";
 import { IOnlineUsersCountPerCompany } from "../models/IOnlineUsersCountPerCompany.interface";
 
@@ -31,8 +32,10 @@ export class OnlineUsersService {
 		.pipe(map((data: IOnlineUsersCountPerCompany[]) => data as IOnlineUsersCountPerCompany[]));
 	}
 
-	stopConnection(userId: number) {
 
+	getOnlineUsersCurrentLocationData(userId:number): Observable<ILocationXY[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERES_LASTLOCATION}?empsIds=1005`)
+			.pipe(map((data: HttpReponseModel) => data.data as ILocationXY[]));
 	}
 
 }

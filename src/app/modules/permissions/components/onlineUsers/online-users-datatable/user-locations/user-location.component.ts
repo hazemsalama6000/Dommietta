@@ -1,9 +1,12 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnDestroy } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google } from "google-maps";
+import { Subscription } from "rxjs";
+import { ILocationXY } from "src/app/modules/permissions/models/ILocationXY.interface";
+import { OnlineUsersService } from "src/app/modules/permissions/services/onlineUsers.service";
 
-declare var google : google;
+declare var google: google;
 
 @Component({
 	selector: 'user-location',
@@ -11,7 +14,9 @@ declare var google : google;
 	styleUrls: ['./user-location.component.scss'],
 })
 
-export class UserLocationComponent {
+export class UserLocationComponent implements OnDestroy{
+	subscribe:Subscription;
+	
 	styles = [
 		{
 			"elementType": "geometry",
@@ -242,11 +247,16 @@ export class UserLocationComponent {
 			]
 		}
 	];
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: OnlineUsersService) {
 		console.log(data.userId);
 	}
 
-	
+	ngOnDestroy(): void {
+		this.subscribe.unsubscribe();
+	}
+
+
 	private map: google.maps.Map
 
 
@@ -258,19 +268,27 @@ export class UserLocationComponent {
 		});
 
 		loader.load().then(() => {
+		setInterval(()=>{
+			this.subscribe =	this.service.getOnlineUsersCurrentLocationData(this.data.userId).subscribe((data: ILocationXY[]) => {
+	
+					let location = { lat: data[0].x, lng: data[0].y }
+					this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+						center: location,
+						zoom: 6,
+						styles: this.styles
+					});
+	
+					const marker = new google.maps.Marker({
+						position: location,
+						map: this.map,
+					});
+	
+				});
+			
+		},5000);
+	});
 
-			const location = { lat: 51.233334, lng: 6.783333 }
 
-			new google.maps.Map(document.getElementById("map") as HTMLElement, {
-				center: location,
-				zoom: 6,
-			});
-/*
-			const marker = new google.maps.Marker({
-				position: location,
-				map: this.map,
-			});*/
-		});
 
 
 	}
