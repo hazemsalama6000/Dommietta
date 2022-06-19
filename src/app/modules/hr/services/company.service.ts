@@ -45,7 +45,7 @@ export class CompanyService {
 
 	getActiveCompanies() : Observable<LookUpModel[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_COMPANY_GETACTIVE}`)
-		.pipe(map(Items =>  Items.map( (item:any) =>  ({Id:item.id,Name:item.companyName }) as LookUpModel  ) ));
+		.pipe(map(Items =>  Items.map( (item:any) =>  ({Id:item.id,Name:item.name }) as LookUpModel  ) ));
 	}
 
 	getCompanyDataById(id: number): Observable<ICompany> {

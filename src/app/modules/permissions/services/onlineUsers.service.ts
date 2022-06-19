@@ -26,9 +26,9 @@ export class OnlineUsersService {
 			.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsers[]));
 	}
 
-    OnlineUserCountForEachCompany(companyId?:number){
+    OnlineUserCountForEachCompany(companyId?:number) : Observable<IOnlineUsersCountPerCompany[]>{
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERS_FOREACH_COMPANY}?companyId=${!!companyId ? companyId : ''}`)
-		.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsersCountPerCompany[]));
+		.pipe(map((data: IOnlineUsersCountPerCompany[]) => data as IOnlineUsersCountPerCompany[]));
 	}
 
 	stopConnection(userId: number) {

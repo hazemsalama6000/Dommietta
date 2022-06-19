@@ -10,12 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.component';
 import { SearchOnlineUsersComponent } from './components/onlineUsers/search-online-users/search-online-users.component';
 import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-users-datatable/online-users-datatable.component';
+import { UserLocationComponent } from './components/onlineUsers/online-users-datatable/user-locations/user-location.component';
+
 
 @NgModule({
   declarations: [
 	OnlineUsersComponent,
 	SearchOnlineUsersComponent,
-	OnlineUsersDatatableComponent
+	OnlineUsersDatatableComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,7 @@ import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-u
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	SharedModule,
-  ]
+	SharedModule
+	 ]
 })
 export class PermissionsModule { }

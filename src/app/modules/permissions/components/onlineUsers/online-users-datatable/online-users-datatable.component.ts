@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
@@ -10,6 +10,8 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { OnlineUsersService } from "../../../services/onlineUsers.service";
 import { IOnlineUsers } from "../../../models/IOnlineUsers.interface";
 import { AuthService } from "src/app/modules/auth";
+import { map } from "rxjs";
+import { UserLocationComponent } from "./user-locations/user-location.component";
 @Component({
 	selector: 'online-users-datatable',
 	templateUrl: './online-users-datatable.component.html',
@@ -30,21 +32,45 @@ export class OnlineUsersDatatableComponent implements OnInit {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: OnlineUsersService, private toaster: toasterService, public dialog: MatDialog,
-		private confirmationDialogService: ConfirmationDialogService, private ref: ChangeDetectorRef, private auth: AuthService) {}
+		private confirmationDialogService: ConfirmationDialogService, private ref: ChangeDetectorRef, private auth: AuthService) { }
 
 
 	ngOnInit(): void {
 		this.service.bSubject.subscribe(
-			(data: IOnlineUsers[]) => {
-				console.log(data);
-				if (data) {
-					this.dataSource = new MatTableDataSource<IOnlineUsers>(data);
-					this.dataSource.paginator = this.paginator;
+				(data: IOnlineUsers[]) => {
+
+					if (data ) {
+						this.dataSource = new MatTableDataSource<IOnlineUsers>(data);
+						this.dataSource.paginator = this.paginator;
+					}
+					else{
+						this.dataSource.data = [];
+					}
 				}
-			}
-		);
+			);
 	}
 
+	currentLocation(userId:number){
+		const dialogPosition: DialogPosition = {
+			top:'0px',
+			right:'0px'
+		  };
+
+		const dialogRef = this.dialog.open(UserLocationComponent,
+			{
+				/*maxWidth: '50vw',
+				maxHeight: '100vh',*/
+				maxHeight: '100vh',
+				height: '100%',
+
+				//panelClass: 'full-screen-modal',*/
+				position:dialogPosition,
+				data: { userId: userId }
+			});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});	}
 
 	stopConnection(userId: number) {
 

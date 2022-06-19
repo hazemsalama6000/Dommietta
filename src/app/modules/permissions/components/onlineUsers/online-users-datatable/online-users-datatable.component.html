@@ -18,7 +18,7 @@
 			<ng-container matColumnDef="name">
 				<th mat-header-cell *matHeaderCellDef> {{"HR.INPUTS.NAME" | translate}} </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-					<span >
+					<span>
 						{{element.name}}
 					</span>
 				</td>
@@ -27,7 +27,7 @@
 			<ng-container matColumnDef="mobile">
 				<th mat-header-cell *matHeaderCellDef> الموبيل </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-				{{element.mobile}}
+					{{element.mobile}}
 				</td>
 			</ng-container>
 
@@ -49,16 +49,16 @@
 			<ng-container matColumnDef="userName">
 				<th mat-header-cell *matHeaderCellDef> اسم المستخدم </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-				
+
 					{{element.email}}
 
 				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="loginDate">
-				<th mat-header-cell *matHeaderCellDef>  وقت الدخول	 </th>
+				<th mat-header-cell *matHeaderCellDef> وقت الدخول </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-				
+
 					{{element.startDate | date}}
 
 				</td>
@@ -69,30 +69,55 @@
 				<th mat-header-cell *matHeaderCellDef> الوقت المتبقي
 				</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-				
-					{{element.remainingTime}}
 
+					<span class="badge badge-danger">
+						{{element.remainingTime.days}} ي
+					</span>
+
+					{{element.remainingTime.hours}} س
+
+					<span class="badge badge-danger">
+						{{element.remainingTime.minutes}}د
+					</span>
 				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="action">
 				<th mat-header-cell *matHeaderCellDef> </th>
 				<td mat-cell *matCellDef="let element">
-					<div *ngIf="element.isConnected == true">
-						<div class="d-flex gap-1 justify-content-center align-items-center">
-							<button (click)="stopConnection(element.userId)" matTooltip="قطع الاتصال" mat-mini-fab color="warn" class="mx-md-1"
+
+					<div *ngIf="element.isConnected == true; else notConnected;">
+						<div class="">
+							<button (click)="currentLocation(element.userId)" matTooltip="اخر موقع للمستخدم"
+								mat-mini-fab color="primary" class="justify-content-center align-items-center"
 								aria-label="Example icon button with a filter list icon">
+								<mat-icon style="font-size:20px ;"> location_on</mat-icon>
+							</button>
+
+							<button (click)="stopConnection(element.userId)" matTooltip="قطع الاتصال" mat-mini-fab
+								color="warn" class="mx-md-1" aria-label="Example icon button with a filter list icon">
 								<mat-icon>stop</mat-icon>
 							</button>
+
 						</div>
+
 					</div>
+
+					<ng-template #notConnected>
+
+							<button (click)="currentLocation(element.userId)" matTooltip="اخر موقع للمستخدم"
+								mat-mini-fab color="primary" class=""
+								aria-label="Example icon button with a filter list icon">
+								<mat-icon style="font-size:20px ;"> location_on</mat-icon>
+							</button>
+					</ng-template>
+
 
 				</td>
 			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns; let entry"
-				(click)="rowClicked(row)"
+			<tr mat-row *matRowDef="let row; columns: displayedColumns; let entry" (click)="rowClicked(row)"
 				style="cursor:pointer ;">
 
 			</tr>

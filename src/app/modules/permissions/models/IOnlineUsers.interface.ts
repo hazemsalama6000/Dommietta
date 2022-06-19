@@ -6,7 +6,7 @@ export interface IOnlineUsers {
 	 companyName : string,
 	 startDate : Date,
 	 endDate: Date,
-	 remainingTime : string,
+	 remainingTime : any,
 	 jobId : number,
 	 mobile : string,
 	 isActive : boolean,
