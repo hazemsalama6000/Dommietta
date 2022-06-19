@@ -89,6 +89,10 @@ export class AuthService implements OnDestroy {
     });
   }
 
+  logoutByUserId( userId:number ){
+	return this.CommonHttp.CommonPostRequests( null ,`${localStorage.getItem("companyLink")}${HttpPaths.API_LOGINWITH_USERID}${userId}`);
+  }
+
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
    

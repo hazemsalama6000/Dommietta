@@ -1,7 +1,7 @@
 export enum HttpPaths {
 	API_LOGIN_URL = "/api/v1/Auth/token",
 	API_COMPANYCONFIG_URL = "/api/v1/Auth/CompanyConfiguration?code=",
-
+	API_LOGINWITH_USERID = "/api/v1/Auth/logout/",
 	// Jobs APIS
 	API_JOB_ADD = "/api/v1/hr/addjob",
 	API_JOB_UPDATE = "/api/v1/hr/updatejob/",
@@ -16,7 +16,7 @@ export enum HttpPaths {
 	API_STATE_UPDATE = "/api/v1/shared/updatestate/",
 	API_STATE_GETALL = "/api/v1/shared/getstates",
 	API_STATE_DELETE = "/api/v1/shared/deletestate/",
-	API_STATE_UACTIVEDEACTIVE="/api/v1/shared/changstateactiveornot/",
+	API_STATE_UACTIVEDEACTIVE = "/api/v1/shared/changstateactiveornot/",
 
 	//Region APIS
 
@@ -24,7 +24,7 @@ export enum HttpPaths {
 	API_REGION_UPDATE = "/api/v1/shared/updateregion/",
 	API_REGION_GETALL = "/api/v1/shared/getregions/",
 	API_REGION_DELETE = "/api/v1/shared/deleteregion/",
-	API_REGION_UACTIVEDEACTIVE="/api/v1/shared/changeregionactiveornot/",
+	API_REGION_UACTIVEDEACTIVE = "/api/v1/shared/changeregionactiveornot/",
 
 	//Department APIS
 
@@ -32,7 +32,7 @@ export enum HttpPaths {
 	API_DEPARTMENT_UPDATE = "/api/v1/hr/updatedepartment/",
 	API_DEPARTMENT_GETALL = "/api/v1/hr/getdepartments",
 	API_DEPARTMENT_DELETE = "/api/v1/hr/deletedepartment/",
-	API_DEPARTMENT_UACTIVEDEACTIVE="/api/v1/hr/changedepartmentactiveornot/",
+	API_DEPARTMENT_UACTIVEDEACTIVE = "/api/v1/hr/changedepartmentactiveornot/",
 	//Section APIS
 
 	API_SECTION_ADD = "/api/v1/hr/addSection",
@@ -53,7 +53,8 @@ export enum HttpPaths {
 	API_COMPANY_CHANGELOGOPRINT = "/api/v1/shared/ChangeLogoPrint",
 	API_COMPANY_ACTIVEORNOT = "/api/v1/shared/ActiveOrNot/",
 
-	
+	API_COMPANY_GETACTIVE = "/api/v1/shared/listofcompanies",
+
 	//Branches APIS
 
 	API_BRANCH_ADD = "/api/v1/shared/addcompanybranch",
@@ -68,5 +69,10 @@ export enum HttpPaths {
 	//Employee APIS
 
 	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/getemployees/",
+
+	// Online Users
+	API_ONLINE_USERS = "/api/v1/auth/getusers",
+	API_ONLINE_USERS_FOREACH_COMPANY = "/api/v1/auth/getnumofonlineusers"
+
 
 }

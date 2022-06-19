@@ -1,0 +1,56 @@
+<form [formGroup]="SearchOnlineUsersForm" (ngSubmit)="searchOnlineUsers(SearchOnlineUsersForm.value)">
+
+
+	<div class="row">
+
+		<div class="col-md-4">
+
+			<div class="row align-items-center">
+				<div class="col-md-2">
+					<label class="col-md-2" for="companyId" class="fontForInputs"> الشركات</label>
+				</div>
+				<div class="col-md-9">
+					<ng-select [items]="dropCompaniesData" bindLabel="Name" bindValue="Id" name="companyId"
+						formControlName="companyId">
+					</ng-select>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-8">
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group mt-5"
+						formControlName="userStates">
+
+						<mat-radio-button class="fontForInputs example-radio-button" [value]="true">
+							المستخدمين المتصلين
+						</mat-radio-button>
+						<mat-radio-button class="fontForInputs example-radio-button" [value]="false">
+							المستخدمين الغير متصلين
+						</mat-radio-button>
+						<mat-radio-button class="fontForInputs example-radio-button" [value]="">
+							الكل
+						</mat-radio-button>
+
+					</mat-radio-group>
+
+					<button mat-fab color="primary" id="search" type="submit" class="mx-10">
+						<mat-icon>search</mat-icon>
+					  </button>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+</form>
