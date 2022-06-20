@@ -1,5 +1,6 @@
 export interface IOnlineUsers {
 	 userId : string,
+	 empId:number,
 	 name: string,
 	 email : string,
 	 branchName: string,

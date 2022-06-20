@@ -16,7 +16,8 @@ declare var google: google;
 
 export class UserLocationComponent implements OnDestroy{
 	subscribe:Subscription;
-	
+	idInterval:any;
+
 	styles = [
 		{
 			"elementType": "geometry",
@@ -254,6 +255,9 @@ export class UserLocationComponent implements OnDestroy{
 
 	ngOnDestroy(): void {
 		this.subscribe.unsubscribe();
+		if(this.idInterval){
+			clearInterval(this.idInterval);
+		}
 	}
 
 
@@ -268,24 +272,28 @@ export class UserLocationComponent implements OnDestroy{
 		});
 
 		loader.load().then(() => {
-		setInterval(()=>{
-			this.subscribe =	this.service.getOnlineUsersCurrentLocationData(this.data.userId).subscribe((data: ILocationXY[]) => {
+
+	        this.idInterval = setInterval(()=>{
+
+			this.subscribe = this.service.getOnlineUsersCurrentLocationData(this.data.userId).subscribe((data: ILocationXY[]) => {
 	
 					let location = { lat: data[0].x, lng: data[0].y }
 					this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
 						center: location,
-						zoom: 6,
+						zoom: 10,
 						styles: this.styles
 					});
 	
 					const marker = new google.maps.Marker({
-						position: location,
-						map: this.map,
+						position : location,
+						map : this.map,
+						title : data[0].empName + "\n" + data[0].date
 					});
 	
 				});
 			
-		},5000);
+		},8000);
+		
 	});
 
 

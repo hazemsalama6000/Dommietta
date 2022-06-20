@@ -50,7 +50,7 @@ export class OnlineUsersDatatableComponent implements OnInit {
 			);
 	}
 
-	currentLocation(userId:number){
+	currentLocation(empId:number){
 		const dialogPosition: DialogPosition = {
 			top:'0px',
 			right:'0px'
@@ -65,7 +65,7 @@ export class OnlineUsersDatatableComponent implements OnInit {
 
 				//panelClass: 'full-screen-modal',*/
 				position:dialogPosition,
-				data: { userId: userId }
+				data: { empId: empId }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {
