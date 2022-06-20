@@ -11,6 +11,9 @@ import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.compo
 import { SearchOnlineUsersComponent } from './components/onlineUsers/search-online-users/search-online-users.component';
 import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-users-datatable/online-users-datatable.component';
 import { UserLocationComponent } from './components/onlineUsers/online-users-datatable/user-locations/user-location.component';
+import { SearchUserLogsComponent } from './components/userConnectionLogs/search-user-logs/search-user-logs.component';
+import { UserLogsDatatableComponent } from './components/userConnectionLogs/users-logs-datatable/users-logs-datatable.component';
+import { UserConnectionLogsComponent } from './components/userConnectionLogs/user-connection-logs.component';
 
 
 @NgModule({
@@ -18,7 +21,11 @@ import { UserLocationComponent } from './components/onlineUsers/online-users-dat
 	OnlineUsersComponent,
 	SearchOnlineUsersComponent,
 	OnlineUsersDatatableComponent,
-	UserLocationComponent
+	UserLocationComponent,
+	SearchUserLogsComponent,
+	UserLogsDatatableComponent,
+	UserConnectionLogsComponent
+
   ],
   imports: [
     CommonModule,
