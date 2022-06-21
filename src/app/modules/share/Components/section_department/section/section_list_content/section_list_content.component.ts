@@ -32,7 +32,7 @@ export class SectionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: SectionService, private toaster: toasterService, private DepartmentService: DepartmentService, private confirmationDialogService: ConfirmationDialogService,private dialog: MatDialog) {
+	constructor(private service: SectionService, private toaster: toasterService, private DepartmentService: DepartmentService, private confirmationDialogService: ConfirmationDialogService, private dialog: MatDialog) {
 		this.currentSelected = { department_Id: 0, id: 0, isActive: false, name: "", isEdit: false, isAdd: false };
 		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
@@ -40,7 +40,7 @@ export class SectionListContentComponent {
 		});
 
 		this.DepartmentService.getDepartmentIdObservable().subscribe((data: LookUpModel) => {
-			
+
 			this.currentDepartment = data;
 
 			if (data.Id == 0) {
@@ -168,14 +168,14 @@ export class SectionListContentComponent {
 			(data: ISection[]) => {
 				this.dataSource = new MatTableDataSource<ISection>(data);
 				this.dataSource.paginator = this.paginator;
-				setTimeout(()=>{
+				setTimeout(() => {
 					this.service.addFlag.subscribe((data) => {
 						if (data == true) {
 							this.addNewRow();
 						}
 					});
-	
-				},500);
+
+				}, 500);
 			}
 
 		);
@@ -187,15 +187,13 @@ export class SectionListContentComponent {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
-	openJobDialog(id:number) {
-
-		const dialogRef = this.dialog.open(Job_upsertComponent,
+	openJobDialog(id: number) {
+		this.dialog.open(Job_upsertComponent,
 			{
 				height: '50%',
-				width:'300px',
+				width: '300px',
 				data: { sectionId: id }
 			});
-
 	}
 
 }

@@ -10,6 +10,7 @@ import {TranslationModule} from '../../../../modules/i18n';
 import {SearchResultInnerComponent} from "./dropdown-inner/search-result-inner/search-result-inner.component";
 import {NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
+import { ChatInnerModule } from '../../content/chat-inner/chat-inner.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {FormsModule} from "@angular/forms";
     QuickLinksInnerComponent,
     SearchResultInnerComponent,
     UserInnerComponent,
-    LayoutScrollTopComponent,
+    LayoutScrollTopComponent
   ],
 })
 export class ExtrasModule {
