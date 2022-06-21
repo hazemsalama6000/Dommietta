@@ -8,30 +8,33 @@ import { TranslationModule } from '../modules/i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationDialogComponent } from './Components/confirm-dialog/confirmation-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
-  declarations: [
-	 UpsertComponent,
-	 ListContentComponent,
-	 LookupIdNameComponent,
-	 ConfirmationDialogComponent
+	declarations: [
+		UpsertComponent,
+		ListContentComponent,
+		LookupIdNameComponent,
+		ConfirmationDialogComponent
 	],
-  imports: [
-	  MaterialsModules,
-      CommonModule
-	  ,TranslationModule,
-	  FormsModule,
-	  ReactiveFormsModule,
-	  HttpClientModule
-  ],
-  exports:[
-	  MaterialsModules,
-	  UpsertComponent,
-	  ListContentComponent,
-	  LookupIdNameComponent,
-	  ConfirmationDialogComponent
-]  ,
-entryComponents: [ ConfirmationDialogComponent ],
-
+	imports: [
+		MaterialsModules,
+		CommonModule
+		, TranslationModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpClientModule
+	],
+	exports: [
+		MaterialsModules,
+		UpsertComponent,
+		ListContentComponent,
+		LookupIdNameComponent,
+		ConfirmationDialogComponent
+	],
+	entryComponents: [ConfirmationDialogComponent],
+	providers: [
+		{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+	]
 })
 export class SharedModule { }

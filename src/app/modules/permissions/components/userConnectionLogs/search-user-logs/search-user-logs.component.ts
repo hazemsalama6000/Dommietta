@@ -1,5 +1,7 @@
+import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { EmployeeService } from "src/app/modules/hr/services/employee.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IOnlineUsers } from "../../../models/IOnlineUsers.interface";
@@ -18,7 +20,7 @@ export class SearchUserLogsComponent implements OnInit {
 	SearchUsersConnectionLogsForm: FormGroup;
 	dropUsersData: LookUpModel[] = []
 
-	constructor(private fb: FormBuilder, private service: OnlineUsersService, private employeeService: EmployeeService) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: OnlineUsersService, private employeeService: EmployeeService, private datePipe: DatePipe) { }
 
 	ngOnInit(): void {
 
@@ -29,12 +31,12 @@ export class SearchUserLogsComponent implements OnInit {
 		});
 
 		this.SearchUsersConnectionLogsForm = this.fb.group({
-			empId: [''],
-			startDate: [''],
-			endDate:['']
+			empId: [null],
+			startDate: [new Date().toISOString()],
+			endDate: [new Date().toISOString()]
 		});
 
-		this.employeeService.getLookupEmployeeData(1032).subscribe(
+		this.employeeService.getLookupEmployeeData(1005).subscribe(
 			(data: LookUpModel[]) => {
 				this.dropUsersData = data;
 			}
@@ -44,17 +46,26 @@ export class SearchUserLogsComponent implements OnInit {
 
 	}
 
-	searchOnlineUsers(OnlineUsersModel: IUserLogsSearchBox) {
+	searchUsersConnectionLogs(userLogsSearch: IUserLogsSearchBox) {
 
-	/*	this.service.getOnlineUsersData(OnlineUsersModel.userStates, OnlineUsersModel.companyId)
-			.subscribe((data: IOnlineUsers[]) => {
-				this.service.bSubject.next(data);
-			});
+		if (userLogsSearch.empId == null || userLogsSearch.endDate == '' || userLogsSearch.startDate == '') {
+			this.toaster.openWarningSnackBar('تاكد من ادخال التاريخ والموظف');
+			return;
+		}
 
-		this.service.OnlineUserCountForEachCompany(OnlineUsersModel.companyId).subscribe((data : IOnlineUsersCountPerCompany[]) => {
-			this.onlineUsersGrouped = data;
-		});
-*/
+		userLogsSearch.startDate = this.datePipe.transform(userLogsSearch.startDate, 'MM/dd/yyyy')!;
+		userLogsSearch.endDate = this.datePipe.transform(userLogsSearch.endDate, 'MM/dd/yyyy')!;
+
+		this.service.getUsersLogHistoryData(userLogsSearch)
+			.subscribe(
+				(data: IOnlineUsers[]) => {
+					this.service.bSubject.next(data);
+				}, (error) => {
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+				}
+			);
+
+
 	}
 
 

@@ -78,6 +78,8 @@ export enum HttpPaths {
 	API_ONLINE_USERS_FOREACH_COMPANY = "/api/v1/auth/getnumofonlineusers",
 	API_ONLINE_USERES_LASTLOCATION = "/api/v1/tech/getlastlocationforuser",
 	API_GET_USER_DATA = "/api/v1/auth/getuserData",
+	API_USERS_CONNECTION_LOGS = "/api/v1/auth/getuserlogs",
 
 
+	
 }

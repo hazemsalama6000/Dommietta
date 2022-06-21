@@ -11,6 +11,7 @@ import { AuthService } from "../../auth";
 import { ILocationXY } from "../models/ILocationXY.interface";
 import { IOnlineUsers } from "../models/IOnlineUsers.interface";
 import { IOnlineUsersCountPerCompany } from "../models/IOnlineUsersCountPerCompany.interface";
+import { IUserLogsSearchBox } from "../models/IUserLogsSearchBox.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -24,6 +25,12 @@ export class OnlineUsersService {
 
 	getOnlineUsersData(connectionStatus?: boolean, companyId?: number): Observable<IOnlineUsers[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERS}?connectionStatus=${connectionStatus == null ? '' : connectionStatus}&&companyId=${!!companyId ? companyId : ''}`)
+			.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsers[]));
+	}
+
+	
+	getUsersLogHistoryData(userLogsSearchModel : IUserLogsSearchBox): Observable<IOnlineUsers[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_USERS_CONNECTION_LOGS}?empId=${userLogsSearchModel.empId}&&startDate=${userLogsSearchModel.startDate}&&endDate=${userLogsSearchModel.endDate}`)
 			.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsers[]));
 	}
 
