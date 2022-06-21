@@ -1,8 +1,11 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { Subscription } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { AuthService } from "src/app/modules/auth";
+import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
@@ -27,15 +30,21 @@ export class StateListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
+	userdata:IUserData;
+	 private unsubscribe: Subscription[] = [];
+
 
 	constructor(private service: StatesService, private toaster: toasterService 
-		, private confirmationDialogService: ConfirmationDialogService ,private regionService:RegionService ) {
+		, private confirmationDialogService: ConfirmationDialogService ,private regionService:RegionService ,private auth:AuthService) {
 		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
 			this.getallData();
 		});
 
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
+
+		const udata=this.auth.userData.subscribe(res=>this.userdata=res);
+		this.unsubscribe.push(udata);
 	}
 
 	addNewRow() {
@@ -72,7 +81,7 @@ export class StateListContentComponent {
 
 	Submit(model: LookUpModel) {
 
-		model.company_Id = 1;
+		model.company_Id = this.userdata.companyId;
 		model.isActive = true;
 		if (model.Id == 0) {
 			model.Id = 0;
@@ -174,6 +183,10 @@ export class StateListContentComponent {
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
+
+	ngOnDestroy(){
+		this.unsubscribe.forEach((sb)=>sb.unsubscribe());
 	}
 
 }

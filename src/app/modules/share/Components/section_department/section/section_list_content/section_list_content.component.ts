@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
@@ -9,6 +10,7 @@ import { DepartmentService } from "src/app/modules/share/Services/department_sec
 import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
 import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { Job_upsertComponent } from "./job_upsert/job_upsert.component";
 
 @Component({
 	selector: 'section_list_content',
@@ -30,7 +32,7 @@ export class SectionListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
-	constructor(private service: SectionService, private toaster: toasterService, private DepartmentService: DepartmentService, private confirmationDialogService: ConfirmationDialogService) {
+	constructor(private service: SectionService, private toaster: toasterService, private DepartmentService: DepartmentService, private confirmationDialogService: ConfirmationDialogService, private dialog: MatDialog) {
 		this.currentSelected = { department_Id: 0, id: 0, isActive: false, name: "", isEdit: false, isAdd: false };
 		//subscribe here to invoke when insert done in upsert component
 		this.service.selectFromStore().subscribe(data => {
@@ -38,7 +40,7 @@ export class SectionListContentComponent {
 		});
 
 		this.DepartmentService.getDepartmentIdObservable().subscribe((data: LookUpModel) => {
-			
+
 			this.currentDepartment = data;
 
 			if (data.Id == 0) {
@@ -166,14 +168,14 @@ export class SectionListContentComponent {
 			(data: ISection[]) => {
 				this.dataSource = new MatTableDataSource<ISection>(data);
 				this.dataSource.paginator = this.paginator;
-				setTimeout(()=>{
+				setTimeout(() => {
 					this.service.addFlag.subscribe((data) => {
 						if (data == true) {
 							this.addNewRow();
 						}
 					});
-	
-				},500);
+
+				}, 500);
 			}
 
 		);
@@ -183,6 +185,15 @@ export class SectionListContentComponent {
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
+
+	openJobDialog(id: number) {
+		this.dialog.open(Job_upsertComponent,
+			{
+				height: '50%',
+				width: '300px',
+				data: { sectionId: id }
+			});
 	}
 
 }

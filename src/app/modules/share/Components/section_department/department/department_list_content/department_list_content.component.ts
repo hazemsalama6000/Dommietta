@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { Subscription } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { AuthService } from "src/app/modules/auth";
+import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { DepartmentService } from "src/app/modules/share/Services/department_section/department.service";
 import { SectionService } from "src/app/modules/share/Services/department_section/section.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
@@ -27,20 +30,25 @@ export class DepartmentListContentComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
+	userdata: IUserData;
 
-	constructor(private service: DepartmentService, private toaster: toasterService,
-		 private confirmationDialogService: ConfirmationDialogService , private sectionService:SectionService) {
+	private unsubscribe: Subscription[] = [];
+
+
+	constructor(private service: DepartmentService, private toaster: toasterService, private auth: AuthService,
+		private confirmationDialogService: ConfirmationDialogService, private sectionService: SectionService) {
 		//subscribe here to invoke when insert done in upsert component
-		this.service.selectFromStore().subscribe(data => {
-			this.getallData();
+		const data = this.service.selectFromStore().subscribe(data => {
+			const udata = auth.userData.subscribe(res => { this.userdata = res; this.getallData(); })
+			this.unsubscribe.push(udata);
 		});
-
+		this.unsubscribe.push(data)
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 	}
 
 	Submit(model: LookUpModel) {
 
-		model.company_Id = 1;
+		model.company_Id = this.userdata.companyId;
 
 		if (model.Id == 0) {
 			model.Id = 0;
@@ -118,7 +126,7 @@ export class DepartmentListContentComponent {
 				if (confirmed) {
 					this.service.DeleteLookupData(model.Id).subscribe(
 						(data: HttpReponseModel) => {
-							this.service.emitDepartmentIdSubject.next({Id:0,company_Id:0,Name:''});
+							this.service.emitDepartmentIdSubject.next({ Id: 0, company_Id: 0, Name: '' });
 
 							this.toaster.openSuccessSnackBar(data.message);
 							this.getallData();
@@ -147,29 +155,24 @@ export class DepartmentListContentComponent {
 		});
 	}
 
-
-
 	// getting data and initialize data Source and Paginator
 	getallData() {
-		this.service.getLookupData().subscribe(
+		this.service.getLookupData(this.userdata.companyId).subscribe(
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;
 				console.log(data);
-				setTimeout(()=>{
+				setTimeout(() => {
 					this.service.addFlag.subscribe((data) => {
 						if (data == true) {
 							this.addNewRow();
 						}
 					});
-	
-				},500);
+
+				}, 500);
 			}
 		);
 	}
-
-
-
 
 	//filter from search Box
 	applyFilter(event: Event) {
@@ -177,4 +180,7 @@ export class DepartmentListContentComponent {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
+	ngOnDestroy() {
+		this.unsubscribe.forEach((sb) => sb.unsubscribe())
+	}
 }

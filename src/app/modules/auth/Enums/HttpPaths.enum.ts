@@ -10,6 +10,9 @@ export enum HttpPaths {
 	API_JOB_GETALL = "/api/v1/hr/getjobs",
 	API_JOB_DELETE = "/api/v1/hr/deletejob/",
 
+	API_JOB_GETPERSECTION="/api/v1/hr/GetJobsPerSection/",
+	API_JOB_UPDATEJOBPERSECTION="/api/v1/hr/ManageJobSection",
+
 	//State APIS
 
 	API_STATE_ADD = "/api/v1/shared/addstate",
@@ -68,11 +71,15 @@ export enum HttpPaths {
 
 	//Employee APIS
 
-	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/getemployees/",
+	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/ListOfEmployees",
 
 	// Online Users
 	API_ONLINE_USERS = "/api/v1/auth/getusers",
-	API_ONLINE_USERS_FOREACH_COMPANY = "/api/v1/auth/getnumofonlineusers"
+	API_ONLINE_USERS_FOREACH_COMPANY = "/api/v1/auth/getnumofonlineusers",
+	API_ONLINE_USERES_LASTLOCATION = "/api/v1/tech/getlastlocationforuser",
+	API_GET_USER_DATA = "/api/v1/auth/getuserData",
+	API_USERS_CONNECTION_LOGS = "/api/v1/auth/getuserlogs",
 
 
+	
 }

@@ -3,14 +3,14 @@
 
 	<div class="row">
 
-		<div class="col-md-4">
+		<div class="col-md-6">
 
 			<div class="row align-items-center">
 				<div class="col-md-2">
 					<label class="col-md-2" for="companyId" class="fontForInputs"> الشركات</label>
 				</div>
-				<div class="col-md-9">
-					<ng-select [items]="dropCompaniesData" bindLabel="Name" bindValue="Id" name="companyId"
+				<div class="col-md-10">
+					<ng-select class="customized" [items]="dropCompaniesData" bindLabel="Name" bindValue="Id" name="companyId"
 						formControlName="companyId">
 					</ng-select>
 				</div>
@@ -18,7 +18,7 @@
 
 		</div>
 
-		<div class="col-md-8">
+		<div class="col-md-6">
 
 			<div class="row">
 
@@ -39,9 +39,9 @@
 
 					</mat-radio-group>
 
-					<button mat-fab color="primary" id="search" type="submit" class="mx-10">
-						<mat-icon>search</mat-icon>
-					  </button>
+					<button mat-mini-fab color="primary" id="search" type="submit" class="mx-10">
+						<mat-icon style="font-size: 20px;">search</mat-icon>
+					</button>
 
 				</div>
 
@@ -54,3 +54,34 @@
 
 
 </form>
+
+<mat-divider class="mt-5"></mat-divider>
+
+<div class="row mt-5">
+
+	<span class="fontForInputs mt-3 mb-5">
+		عدد المستخدمين المتصلين لكل شركة
+	
+		<mat-icon class="text-primary mt-2 mx-2"> cell_wifi</mat-icon>
+	</span>
+
+	<span  *ngIf="onlineUsersGrouped; else noData;">
+		<div class="d-inline mx-5" *ngFor="let t of onlineUsersGrouped">
+
+			<span class="badge badge-info fontForInputs">
+				{{t.companyName}}
+			</span>
+
+			<span class="badge badge-danger fontForInputs">
+				{{t.countOnlineUsers}}
+			</span>
+
+		</div>
+	</span>
+	<ng-template #noData>
+		<span class="fontForInputs">
+			لايوجد بيانات
+		</span>
+	</ng-template>
+
+</div>

@@ -8,8 +8,10 @@ import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../../auth";
+import { ILocationXY } from "../models/ILocationXY.interface";
 import { IOnlineUsers } from "../models/IOnlineUsers.interface";
 import { IOnlineUsersCountPerCompany } from "../models/IOnlineUsersCountPerCompany.interface";
+import { IUserLogsSearchBox } from "../models/IUserLogsSearchBox.interface";
 
 @Injectable({
 	providedIn: 'root'
@@ -26,13 +28,21 @@ export class OnlineUsersService {
 			.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsers[]));
 	}
 
-    OnlineUserCountForEachCompany(companyId?:number){
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERS_FOREACH_COMPANY}?companyId=${!!companyId ? companyId : ''}`)
-		.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsersCountPerCompany[]));
+	
+	getUsersLogHistoryData(userLogsSearchModel : IUserLogsSearchBox): Observable<IOnlineUsers[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_USERS_CONNECTION_LOGS}?empId=${userLogsSearchModel.empId}&&startDate=${userLogsSearchModel.startDate}&&endDate=${userLogsSearchModel.endDate}`)
+			.pipe(map((data: HttpReponseModel) => data.data as IOnlineUsers[]));
 	}
 
-	stopConnection(userId: number) {
+    OnlineUserCountForEachCompany(companyId?:number) : Observable<IOnlineUsersCountPerCompany[]>{
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERS_FOREACH_COMPANY}?companyId=${!!companyId ? companyId : ''}`)
+		.pipe(map((data: IOnlineUsersCountPerCompany[]) => data as IOnlineUsersCountPerCompany[]));
+	}
 
+
+	getOnlineUsersCurrentLocationData(userId:number): Observable<ILocationXY[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERES_LASTLOCATION}?empsIds=1005`)
+			.pipe(map((data: HttpReponseModel) => data.data as ILocationXY[]));
 	}
 
 }

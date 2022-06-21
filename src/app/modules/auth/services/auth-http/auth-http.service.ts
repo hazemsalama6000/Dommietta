@@ -62,4 +62,10 @@ export class AuthHTTPService {
       params:params
     });
   }
+  
+  getUserByToken1(url: string): Observable<any> {
+    
+    return this.http.get<any>(`${url}${HttpPaths.API_GET_USER_DATA}`);
+  }
+
 }

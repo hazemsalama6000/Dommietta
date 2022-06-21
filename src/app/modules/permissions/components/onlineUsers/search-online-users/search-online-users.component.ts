@@ -15,7 +15,7 @@ import { OnlineUsersService } from "../../../services/onlineUsers.service";
 export class SearchOnlineUsersComponent implements OnInit {
 
 	SearchOnlineUsersForm: FormGroup;
-
+    onlineUsersGrouped : IOnlineUsersCountPerCompany[];
 	dropCompaniesData: LookUpModel[] = []
 
 	constructor(private fb: FormBuilder, private service: OnlineUsersService, private companyService: CompanyService) { }
@@ -39,6 +39,9 @@ export class SearchOnlineUsersComponent implements OnInit {
 			}
 		);
 
+		this.searchOnlineUsers({companyId:undefined , userStates:true});
+
+
 	}
 
 	searchOnlineUsers(OnlineUsersModel: IOnlineUsersSearch) {
@@ -48,9 +51,9 @@ export class SearchOnlineUsersComponent implements OnInit {
 				this.service.bSubject.next(data);
 			});
 
-		this.service.OnlineUserCountForEachCompany(OnlineUsersModel.companyId).subscribe((data: IOnlineUsersCountPerCompany[]) => {
-			console.log(data);
-		})
+		this.service.OnlineUserCountForEachCompany(OnlineUsersModel.companyId).subscribe((data : IOnlineUsersCountPerCompany[]) => {
+			this.onlineUsersGrouped = data;
+		});
 
 	}
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { PermissionsRoutingModule } from './permissions-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
@@ -10,12 +10,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.component';
 import { SearchOnlineUsersComponent } from './components/onlineUsers/search-online-users/search-online-users.component';
 import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-users-datatable/online-users-datatable.component';
+import { UserLocationComponent } from './components/onlineUsers/online-users-datatable/user-locations/user-location.component';
+import { SearchUserLogsComponent } from './components/userConnectionLogs/search-user-logs/search-user-logs.component';
+import { UserLogsDatatableComponent } from './components/userConnectionLogs/users-logs-datatable/users-logs-datatable.component';
+import { UserConnectionLogsComponent } from './components/userConnectionLogs/user-connection-logs.component';
+
 
 @NgModule({
   declarations: [
 	OnlineUsersComponent,
 	SearchOnlineUsersComponent,
-	OnlineUsersDatatableComponent
+	OnlineUsersDatatableComponent,
+	UserLocationComponent,
+	SearchUserLogsComponent,
+	UserLogsDatatableComponent,
+	UserConnectionLogsComponent
+
   ],
   imports: [
     CommonModule,
@@ -25,7 +35,8 @@ import { OnlineUsersDatatableComponent } from './components/onlineUsers/online-u
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	SharedModule,
-  ]
+	SharedModule
+	 ],
+	 providers:[DatePipe]
 })
 export class PermissionsModule { }

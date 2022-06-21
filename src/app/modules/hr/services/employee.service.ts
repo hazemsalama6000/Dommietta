@@ -16,7 +16,7 @@ export class EmployeeService
 	constructor(private http:CommonHttpService){}
     
 	getLookupEmployeeData(companyId:number):Observable<LookUpModel[]>{
-            return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}${companyId}`)
+            return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
 			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
 	}
 

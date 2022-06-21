@@ -9,7 +9,7 @@
 				<mat-label> {{"HR.INPUTS.FILTER" | translate}}</mat-label>
 				<input matInput (keyup)="applyFilter($event)" placeholder="" #input>
 			</mat-form-field>
-	
+
 			<span class="badge badge-danger">
 				{{currentDepartment.Name}}
 			</span>
@@ -99,6 +99,10 @@
 								<mat-icon>close</mat-icon>
 							</button>
 
+							<button matTooltip="عرض الوظائف" mat-mini-fab color="accent" (click)="openJobDialog(element.id)"
+								class="mx-md-1" aria-label="Example icon button with a filter list icon">
+								<mat-icon>work</mat-icon>
+							</button>
 						</div>
 					</div>
 
