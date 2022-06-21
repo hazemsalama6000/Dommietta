@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { PermissionsRoutingModule } from './permissions-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
@@ -36,6 +36,7 @@ import { UserConnectionLogsComponent } from './components/userConnectionLogs/use
     ReactiveFormsModule,
     HttpClientModule,
 	SharedModule
-	 ]
+	 ],
+	 providers:[DatePipe]
 })
 export class PermissionsModule { }
