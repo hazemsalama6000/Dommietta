@@ -44,7 +44,7 @@ function appInitializer(authService: AuthService) {
 		AppRoutingModule,
 		InlineSVGModule.forRoot(),
 		NgbModule
-		],
+	],
 	providers: [
 		{
 			provide: RouteReuseStrategy,

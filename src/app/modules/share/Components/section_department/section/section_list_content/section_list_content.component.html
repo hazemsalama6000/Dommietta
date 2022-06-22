@@ -50,12 +50,9 @@
 					<div [hidden]="element.isAdd == true">
 
 						<div class="d-flex justify-content-center align-items-center">
-							<label *ngIf="element.isActive == true" class="badge badge-primary"> {{"HR.TITLES.ACTIVE" |
-								translate}}
+							<label *ngIf="element.isActive == true" class="badge badge-primary"> {{"HR.TITLES.ACTIVE" |translate}}
 							</label>
-							<label *ngIf="element.isActive == false" class="badge badge-danger"> {{"HR.TITLES.NOTACTIVE"
-								|
-								translate}}
+							<label *ngIf="element.isActive == false" class="badge badge-danger"> {{"HR.TITLES.NOTACTIVE"|translate}}
 							</label>
 							<span class="mx-2">
 								<section matTooltip="{{element.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
@@ -79,14 +76,14 @@
 					<div [hidden]="element.isAdd == true">
 						<div class="d-flex gap-1 justify-content-center align-items-center">
 
-							<button [hidden]="element.isEdit == true" matTooltip="تعديل" mat-mini-fab color="primary"
+							<button [hidden]="element.isEdit == true" matTooltip="{{'SHARE.BUTTONS.EDIT'|translate}}" mat-mini-fab color="primary"
 								(click)="element.isEdit=true;" aria-label="Example icon button with a menu icon">
 								<mat-icon><span class="material-symbols-outlined">
 										edit
 									</span></mat-icon>
 							</button>
 
-							<button [hidden]="element.isEdit == false" matTooltip="حفظ" mat-mini-fab color="primary"
+							<button [hidden]="element.isEdit == false" matTooltip="{{'SHARE.BUTTONS.SAVE'|translate}}" mat-mini-fab color="primary"
 								(click)="Submit(element);element.isEdit=false;"
 								aria-label="Example icon button with a menu icon">
 								<mat-icon><span class="material-symbols-outlined">
@@ -94,12 +91,12 @@
 									</span></mat-icon>
 							</button>
 
-							<button matTooltip="حذف" mat-mini-fab color="warn" (click)="Remove(element)" class="mx-md-1"
+							<button matTooltip="{{'SHARE.BUTTONS.DELETE'|translate}}" mat-mini-fab color="warn" (click)="Remove(element)" class="mx-md-1"
 								aria-label="Example icon button with a filter list icon">
 								<mat-icon>close</mat-icon>
 							</button>
 
-							<button matTooltip="عرض الوظائف" mat-mini-fab color="accent" (click)="openJobDialog(element.id)"
+							<button matTooltip="{{'SHARE.BUTTONS.VIEWJOBS'|translate}}" mat-mini-fab color="accent" (click)="openJobDialog(element.id)"
 								class="mx-md-1" aria-label="Example icon button with a filter list icon">
 								<mat-icon>work</mat-icon>
 							</button>
@@ -108,7 +105,7 @@
 
 					<div [hidden]="element.isAdd == false">
 
-						<button matTooltip="اضافة" mat-mini-fab color="primary" (click)="Submit(element)"
+						<button matTooltip="{{'SHARE.BUTTONS.ADD'|translate}}" mat-mini-fab color="primary" (click)="Submit(element)"
 							aria-label="Example icon button with a menu icon">
 							<mat-icon><span class="material-symbols-outlined">
 									done_all
@@ -116,7 +113,7 @@
 							</mat-icon>
 						</button>
 
-						<button matTooltip="حذف" mat-mini-fab color="warn" (click)="deleteRow()" class="mx-md-1"
+						<button matTooltip="{{'SHARE.BUTTONS.DELETE'|translate}}" mat-mini-fab color="warn" (click)="deleteRow()" class="mx-md-1"
 							aria-label="Example icon button with a filter list icon">
 							<mat-icon>subdirectory_arrow_left</mat-icon>
 						</button>
@@ -135,7 +132,7 @@
 
 			<!-- Row shown when there is no matching data. -->
 			<tr class="mat-row" *matNoDataRow>
-				<td class="mat-cell" colspan="4"> لايوجد بيانات "{{input.value}}"</td>
+				<td class="mat-cell" colspan="4"> {{'SHARE.MESSAGE.NOROWFOUND'|translate}} "{{input.value}}"</td>
 			</tr>
 		</table>
 

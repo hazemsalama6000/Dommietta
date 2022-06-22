@@ -13,67 +13,107 @@ export const locale = {
       FEATURES: 'Features',
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
+      governoratsAndRegions: "Governorats And Regions",
+      departments: "Departments",
+      jobs: "Jobs",
+      companies: "Companies",
+      onlineUsers: "Online Users",
+      loginUsersData: "Users Login Information"
+    }, USERDIALOG: {
+      MyProfile: "My Profile",
+      PROFILESETTING: "Account Settings",
+      LOGOUT: "LogOut"
     },
-	HR:{
-		INPUTS:{
-		 NAME:"Name",
-		 FILTER:"Search",
-		 CODE:"code",
-		 COMPANYNAME:"Company Name",
-		 USERCOUNTS:"users counts",
-		 ACTIVITY:"activity",
-		 ADDRESS:"address",
-		 REGION:"Region",
-         STATE:"State",
-		 ISACTIVE:"is Active",
-		 MANAGERPOSITION:"manager Position",
-		 MANAGERNAME:"manager Name",
-		 EMAIL:"email",
-		 PHONENUM:"phone number",
-		 COMMERCIALRECORD:"commercialRecord",
-		 TAXCARDNO:"taxCardNo",
-		 VATTAX:"vatTax",
-		 ISVALTAXACTIVE:"isValTaxActive",
-		 HASDIRECTIONTRANSFERFORSTOCKS:"hasDirectTransferForStocks",
-		 WTAX:"wTax",
-		 ISWTAXACTIVE:"isWTaxActive",
-		 LOGOPRINT:"logoPrint",
-		 LOGOWEB:"logoWeb",
-		 COMPANYDATA:"company data"
+
+    HR: {
+      INPUTS: {
+        NAME: "Name",
+        FILTER: "Search",
+        CODE: "code",
+        COMPANYNAME: "Company Name",
+        USERCOUNTS: "users counts",
+        ACTIVITY: "activity",
+        ADDRESS: "address",
+        REGION: "Region",
+        STATE: "State",
+        ISACTIVE: "is Active",
+        MANAGERPOSITION: "manager Position",
+        MANAGERNAME: "manager Name",
+        EMAIL: "email",
+        PHONENUM: "phone number",
+        COMMERCIALRECORD: "commercialRecord",
+        TAXCARDNO: "taxCardNo",
+        VATTAX: "vatTax",
+        ISVALTAXACTIVE: "isValTaxActive",
+        HASDIRECTIONTRANSFERFORSTOCKS: "hasDirectTransferForStocks",
+        WTAX: "wTax",
+        ISWTAXACTIVE: "isWTaxActive",
+        LOGOPRINT: "logoPrint",
+        LOGOWEB: "logoWeb",
+        COMPANYDATA: "company data",
+        BRANCHNAME:"Branch Name",
+        ISMAIN:"IsMain",
+        RESPONSIBLEEMPLOYEE:"Manager Name",
+        SALESSTATELOGIN:"Stop Logining For representative",
+        STATUS:"Status"
 
 
+      },
+      BUTTONS: {
+        ADD: "Add",
+        CLOSE: "close",
+        EDIT: "edit",
+        NEXT: "Next",
+        BACK: "Back",
+        SAVE: "Save",
+				DELETE: "Delete",
 
-		},
-		BUTTONS:{
-			ADD:"Add",
-			CLOSE:"close",
-			EDIT:"edit",
-			NEXT:"Next",
-			BACK:"Back",
+      },
+      TITLES: {
+        ADDORUPDATE: "add or Edit",
+				ACTIVE: "Active",
+				NOTACTIVE: "Not Active",
+				JOBS: "Jobs",
+				COMPANIESDATA: "Companies Data",
+				BRANCHDATA:"Branch Data",
+				BRANCHMAINDATA:"Main Data",
+				CONTACTDATA:"Contact Data",
+				CONTROLDATA:"Control Data",
 
+        BRANCHS:"Branchs",
+        
+      },
+      MESSAGE: {
+        NOROWFOUND: "No Rows Found"
+      }
+    },
 
-		},
-		TITLES:{
-			ADDORUPDATE:"add or Edit",
-		}
-	},
-	SHARE:{
-		INPUTS:{
-			NAME:"Name",
-			FILTER:"Search"
-		   },
-		   BUTTONS:{
-			   ADD:"Add",
-			   CLOSE:"close",
-			   EDIT:"edit"
-		   },
-		TITLES:{
-			ADDORUPDATESTATE:" Add Or Edit State",
-			ADDORUPDATEREGION:" Add Or Edit Region",
-			ADDORUPDATESECTION:" Add Or Edit Section",
-			ADDORUPDATEDEPARTMENTN:"Add Or Edit Department",
-		}
-	},
+    SHARE: {
+      INPUTS: {
+        NAME: "Name",
+        FILTER: "Search"
+      },
+      BUTTONS: {
+        ADD: "Add",
+        CLOSE: "close",
+        EDIT: "edit",
+        SAVE: "Save",
+        DELETE: "Delete",
+        VIEWJOBS: "View Jobs"
+
+      },
+      TITLES: {
+        ADDORUPDATESTATE: " Add Or Edit State",
+        ADDORUPDATEREGION: " Add Or Edit Region",
+        ADDORUPDATESECTION: " Add Or Edit Section",
+        ADDORUPDATEDEPARTMENTN: "Add Or Edit Department",
+        VIEWJOBSSECTION: "Jobs"
+      },
+      MESSAGE: {
+        NOROWFOUND: "No Rows Found"
+      }
+    },
+
     AUTH: {
       GENERAL: {
         OR: 'Or',
@@ -85,7 +125,7 @@ export const locale = {
         PRIVACY: 'Privacy',
         LEGAL: 'Legal',
         CONTACT: 'Contact',
-		SIGNIN_BUTTON:'Sign In'
+        SIGNIN_BUTTON: 'Sign In'
       },
       LOGIN: {
         TITLE: 'Login Account',
@@ -107,7 +147,7 @@ export const locale = {
         PASSWORD: 'Password',
         CONFIRM_PASSWORD: 'Confirm Password',
         USERNAME: 'Username',
-		COMPANYCODE:'Company Code'
+        COMPANYCODE: 'Company Code'
       },
       VALIDATION: {
         INVALID: '{{name}} is not valid',
@@ -120,12 +160,13 @@ export const locale = {
         MIN_LENGTH_FIELD: 'Minimum field length:',
         MAX_LENGTH_FIELD: 'Maximum field length:',
         INVALID_FIELD: 'Field is not valid',
-		INVALID_CREDENTIALS:'verify Credentials',
-		INVALID_COMPANY:'verify Company Code'
+        INVALID_CREDENTIALS: 'verify Credentials',
+        INVALID_COMPANY: 'verify Company Code'
 
 
       }
     },
+
     ECOMMERCE: {
       COMMON: {
         SELECTED_RECORDS_COUNT: 'Selected records count: ',
@@ -166,6 +207,48 @@ export const locale = {
           ADD_MESSAGE: 'Customer has been created'
         }
       }
+    },
+
+    PERMISSIONS: {
+      INPUTS: {
+        NAME: "Name",
+        FILTER: "Search",
+        FROMDATE: "From Date",
+        TODATE: "To Date",
+        ONLINEUSERS: "Online Users",
+        OFFLINEUSERS: "Offline Users",
+        ALLUSERS: "All"
+      },
+      BUTTONS: {
+        ADD: "Add",
+        CLOSE: "close",
+        EDIT: "edit",
+        SAVE: "Save",
+        DELETE: "Delete",
+        LASTLOCATION: "Last Location",
+        NOTCONNECTED: "Not Connected"
+      },
+      TITLES: {
+        ADDORUPDATEONLINEUSERS: "Users Login Data",
+        USERS: " Users",
+        MOBILE: "Mobile",
+        COMPANYNAME: "Company Name",
+        BRANCHNAME: "Branch Name",
+        USERNAME: "User Name",
+        LOGINTIME: "Login Time",
+        REMININIGTIME: "Remining Time",
+        DAY: "D",
+        HOUR: "H",
+        MINUTE: "M",
+        ONLINEUSERS: "Online Users",
+        COMPANIES: "Companies",
+        COUNTONLINEUSERFOREACHCOMPANY: "Count Connected Users Foreach Company",
+
+      },
+      MESSAGE: {
+        NOROWFOUND: "No Rows Found"
+      }
     }
+
   }
 };

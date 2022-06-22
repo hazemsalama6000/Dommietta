@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-  <span class="fontsection"> عرض الوظائف </span>
+  <span class="fontsection"> {{"SHARE.TITLES.VIEWJOBSSECTION" | translate}} </span>
 </h2>
 
 <mat-divider></mat-divider>
@@ -18,7 +18,7 @@
   </div>
 
   <div *ngIf="jobData.jobs.length==0" class="row mx-0 ">
-    <span class="fontsection fs-2 p-3 text-center">لا توجد وظائف</span>
+    <span class="fontsection fs-2 p-3 text-center">{{'SHARE.MESSAGE.NOROWFOUND'|translate}}</span>
   </div>
 
 
@@ -26,7 +26,7 @@
 
 <mat-dialog-actions>
   <div class="d-flex">
-    <button mat-raised-button type="submit" (click)="save()" color="primary">حفظ</button>
+    <button mat-raised-button type="submit" (click)="save()" color="primary">{{'SHARE.BUTTONS.SAVE'|translate}}</button>
     <button mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
   </div>
 </mat-dialog-actions>
