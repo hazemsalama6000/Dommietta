@@ -38,14 +38,16 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-			  "src/styles.scss",
+              "src/styles.scss",
               {
                 "input": "./src/assets/sass/style.bundle.rtl.css",
                 "bundleName": "rtlStyleSheet",
                 "inject": false
               }
             ],
-            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -131,6 +133,7 @@
   },
   "defaultProject": "demo1",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

@@ -15,11 +15,11 @@
 								<div class="">
 									<a
 										class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer fontsection">
-										الفروع
+										{{'HR.TITLES.BRANCHS'|translate}}
 									</a>
 
 								</div>
-								<button matTooltip="اضافة" mat-mini-fab color="primary" class="mx-md-1"
+								<button matTooltip="{{'HR.BUTTONS.ADD'|translate}}" mat-mini-fab color="primary" class="mx-md-1"
 									(click)="addNewBranch()" aria-label="Example icon button with a filter list icon">
 									<mat-icon>add</mat-icon>
 								</button>
@@ -82,11 +82,9 @@
 
 								<div class="d-flex justify-content-center align-items-center">
 									<label *ngIf="element.lockTechnicalsLogins == true" class="badge badge-primary">
-										{{"HR.TITLES.ACTIVE" |
-										translate}} </label>
+										{{"HR.TITLES.ACTIVE" |translate}} </label>
 									<label *ngIf="element.lockTechnicalsLogins == false" class="badge badge-danger">
-										{{"HR.TITLES.NOTACTIVE" |
-										translate}} </label>
+										{{"HR.TITLES.NOTACTIVE" |translate}} </label>
 									<span class="mx-2">
 										<section
 											matTooltip="{{element.lockTechnicalsLogins==true?'ايقاف التفعيل':'تفعيل'}}"
@@ -110,13 +108,11 @@
 
 								<div class="d-flex justify-content-center align-items-center">
 									<label *ngIf="element.isActive == true" class="badge badge-primary">
-										{{"HR.TITLES.ACTIVE" |
-										translate}} </label>
+										{{"HR.TITLES.ACTIVE" |translate}} </label>
 									<label *ngIf="element.isActive == false" class="badge badge-danger">
-										{{"HR.TITLES.NOTACTIVE" |
-										translate}} </label>
+										{{"HR.TITLES.NOTACTIVE" |translate}} </label>
 									<span class="mx-2">
-										<section matTooltip="{{element.isActive==true?'ايقاف التفعيل':'تفعيل'}}"
+										<section matTooltip="{{element.isActive==true?('HR.TITLES.NOTACTIVE'|translate):('HR.TITLES.ACTIVE'|translate)}}"
 											class="example-section">
 											<mat-slide-toggle name="isValTaxActive" class="example-margin"
 												[color]="'red'" (click)="toggleActiveDeactive(element)"
@@ -135,7 +131,7 @@
 
 								<div class="d-flex justify-content-center align-items-center">
 
-									<button [hidden]="element.isEdit == true" matTooltip="تعديل" mat-mini-fab
+									<button [hidden]="element.isEdit == true" matTooltip="{{'HR.BUTTONS.Edit'|translate}}" mat-mini-fab
 										color="primary" (click)="addNewBranch(element.id)"
 										aria-label="Example icon button with a menu icon">
 										<mat-icon><span class="material-symbols-outlined">
@@ -155,7 +151,7 @@
 
 						<!-- Row shown when there is no matching data. -->
 						<tr class="mat-row" *matNoDataRow>
-							<td class="mat-cell" colspan="4"> لايوجد بيانات "{{input.value}}"</td>
+							<td class="mat-cell" colspan="4"> {{'HR.MESSAGE.NOROWFOUND'|translate}} "{{input.value}}"</td>
 						</tr>
 					</table>
 

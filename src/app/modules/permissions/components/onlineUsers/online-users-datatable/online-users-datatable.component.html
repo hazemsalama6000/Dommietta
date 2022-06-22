@@ -25,21 +25,21 @@
 			</ng-container>
 
 			<ng-container matColumnDef="mobile">
-				<th mat-header-cell *matHeaderCellDef> الموبيل </th>
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.MOBILE'|translate}} </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.mobile}}
 				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="companyName">
-				<th mat-header-cell *matHeaderCellDef> اسم الشركة </th>
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.COMPANYNAME'|translate}}</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.companyName}}
 				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="branchNameName">
-				<th mat-header-cell *matHeaderCellDef> اسم الفرع </th>
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.BRANCHNAME'|translate}} </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.branchName}}
 				</td>
@@ -47,7 +47,7 @@
 
 
 			<ng-container matColumnDef="userName">
-				<th mat-header-cell *matHeaderCellDef> اسم المستخدم </th>
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.USERNAME'|translate}} </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 
 					{{element.email}}
@@ -56,7 +56,7 @@
 			</ng-container>
 
 			<ng-container matColumnDef="loginDate">
-				<th mat-header-cell *matHeaderCellDef> وقت الدخول </th>
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.LOGINTIME'|translate}} </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 
 					{{element.startDate | date}}
@@ -66,18 +66,18 @@
 
 
 			<ng-container matColumnDef="timeRemaining">
-				<th mat-header-cell *matHeaderCellDef> الوقت المتبقي
+				<th mat-header-cell *matHeaderCellDef> {{'PERMISSIONS.TITLES.REMININIGTIME'|translate}}
 				</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 
 					<span class="badge badge-danger">
-						{{element.remainingTime.days}} ي
+						{{element.remainingTime.days}} {{'PERMISSIONS.TITLES.DAY'|translate}}
 					</span>
 
-					{{element.remainingTime.hours}} س
+					{{element.remainingTime.hours}} {{'PERMISSIONS.TITLES.HOUR'|translate}}
 
 					<span class="badge badge-danger">
-						{{element.remainingTime.minutes}}د
+						{{element.remainingTime.minutes}} {{'PERMISSIONS.TITLES.MINUTE'|translate}}
 					</span>
 				</td>
 			</ng-container>
@@ -88,13 +88,13 @@
 
 					<div *ngIf="element.isConnected == true; else notConnected;">
 						<div class="">
-							<button (click)="currentLocation(element.userId)" matTooltip="اخر موقع للمستخدم"
+							<button (click)="currentLocation(element.userId)" matTooltip="{{'PERMISSIONS.BUTTONS.LASTLOCATION'|translate}}"
 								mat-mini-fab color="primary" class="justify-content-center align-items-center"
 								aria-label="Example icon button with a filter list icon">
 								<mat-icon style="font-size:20px ;"> location_on</mat-icon>
 							</button>
 
-							<button (click)="stopConnection(element.userId)" matTooltip="قطع الاتصال" mat-mini-fab
+							<button (click)="stopConnection(element.userId)" matTooltip="{{'PERMISSIONS.BUTTONS.NOTCONNECTED'|translate}}" mat-mini-fab
 								color="warn" class="mx-md-1" aria-label="Example icon button with a filter list icon">
 								<mat-icon>stop</mat-icon>
 							</button>
@@ -105,7 +105,7 @@
 
 					<ng-template #notConnected>
 
-							<button (click)="currentLocation(element.empId)" matTooltip="اخر موقع للمستخدم"
+							<button (click)="currentLocation(element.empId)" matTooltip="{{'PERMISSIONS.BUTTONS.LASTLOCATION'|translate}}"
 								mat-mini-fab color="primary" class=""
 								aria-label="Example icon button with a filter list icon">
 								<mat-icon style="font-size:20px ;"> location_on</mat-icon>
@@ -124,7 +124,7 @@
 
 			<!-- Row shown when there is no matching data. -->
 			<tr class="mat-row" *matNoDataRow>
-				<td class="mat-cell" colspan="4"> لايوجد بيانات "{{input.value}}"</td>
+				<td class="mat-cell" colspan="4"> {{'PERMISSIONS.MESSAGE.NOROWFOUND'|translate}} "{{input.value}}"</td>
 			</tr>
 		</table>
 

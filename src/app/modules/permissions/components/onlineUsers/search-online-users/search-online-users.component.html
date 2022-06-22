@@ -7,11 +7,12 @@
 
 			<div class="row align-items-center">
 				<div class="col-md-2">
-					<label class="col-md-2" for="companyId" class="fontForInputs"> الشركات</label>
+					<label class="col-md-2" for="companyId" class="fontForInputs">
+						{{'PERMISSIONS.TITLES.COMPANIES'|translate}}</label>
 				</div>
 				<div class="col-md-10">
-					<ng-select class="customized" [items]="dropCompaniesData" bindLabel="Name" bindValue="Id" name="companyId"
-						formControlName="companyId">
+					<ng-select class="customized" [items]="dropCompaniesData" bindLabel="Name" bindValue="Id"
+						name="companyId" formControlName="companyId">
 					</ng-select>
 				</div>
 			</div>
@@ -28,13 +29,12 @@
 						formControlName="userStates">
 
 						<mat-radio-button class="fontForInputs example-radio-button" [value]="true">
-							المستخدمين المتصلين
-						</mat-radio-button>
+							{{'PERMISSIONS.INPUTS.ONLINEUSERS'|translate}} </mat-radio-button>
 						<mat-radio-button class="fontForInputs example-radio-button" [value]="false">
-							المستخدمين الغير متصلين
+							{{'PERMISSIONS.INPUTS.OFFLINEUSERS'|translate}}
 						</mat-radio-button>
 						<mat-radio-button class="fontForInputs example-radio-button" [value]="">
-							الكل
+							{{'PERMISSIONS.INPUTS.ALLUSERS'|translate}}
 						</mat-radio-button>
 
 					</mat-radio-group>
@@ -60,12 +60,12 @@
 <div class="row mt-5">
 
 	<span class="fontForInputs mt-3 mb-5">
-		عدد المستخدمين المتصلين لكل شركة
-	
+		{{'PERMISSIONS.TITLES.COUNTONLINEUSERFOREACHCOMPANY'|translate}}
+
 		<mat-icon class="text-primary mt-2 mx-2"> cell_wifi</mat-icon>
 	</span>
 
-	<span  *ngIf="onlineUsersGrouped; else noData;">
+	<span *ngIf="onlineUsersGrouped; else noData;">
 		<div class="d-inline mx-5" *ngFor="let t of onlineUsersGrouped">
 
 			<span class="badge badge-info fontForInputs">
@@ -80,7 +80,7 @@
 	</span>
 	<ng-template #noData>
 		<span class="fontForInputs">
-			لايوجد بيانات
+			{{'PERMISSIONS.MESSAGE.NOROWFOUND'|translate}}
 		</span>
 	</ng-template>
 
