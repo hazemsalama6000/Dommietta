@@ -263,7 +263,7 @@ export class UserLocationLogsOnMapComponent implements OnDestroy {
 
 	private map: google.maps.Map
 
-	
+
 
 	ngOnInit(): void {
 
@@ -273,30 +273,29 @@ export class UserLocationLogsOnMapComponent implements OnDestroy {
 
 		loader.load().then(() => {
 
-			this.subscribe = this.service.Locations.subscribe((data: ILocationXY[]) => {
+			this.subscribe = this.service.Locations.subscribe(
+				(data: ILocationXY[]) => {
 
-				_.forEach(data, (location: ILocationXY) => {
+					_.forEach(data, (location: ILocationXY) => {
 
-					this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-						center: { lat: location.x, lng: location.y },
-						zoom: 10,
-						styles: this.styles
-					});
+						this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+							center: { lat: location.x, lng: location.y },
+							zoom: 10,
+							styles: this.styles
+						});
 
-					let icon = this.service.checkIconBasedLocation(location.status);
+						let icon = this.service.checkIconBasedLocation(location.status);
 
-					const marker = new google.maps.Marker({
-						position: { lat: location.x, lng: location.y },
-						map: this.map,
-						title: data[0].empName + "\n" + data[0].date,
-						icon: icon
+						const marker = new google.maps.Marker({
+							position: { lat: location.x, lng: location.y },
+							map: this.map,
+							title: data[0].empName + "\n" + data[0].date,
+							icon: icon
+						});
 					});
 
 
 				});
-
-
-			});
 
 		});
 

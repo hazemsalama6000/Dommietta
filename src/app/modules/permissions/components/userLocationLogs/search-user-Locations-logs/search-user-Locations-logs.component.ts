@@ -62,7 +62,7 @@ export class SearchUserLocationLogsComponent implements OnInit {
 				(data: ILocationXY[]) => {
 					this.service.Locations.next(data);
 				}, (error) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+					this.toaster.openWarningSnackBar('لايوجد مواقع');
 				}
 			);
 
