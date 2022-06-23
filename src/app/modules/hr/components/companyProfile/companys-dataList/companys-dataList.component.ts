@@ -58,7 +58,7 @@ export class CompanysDataListComponent {
 				height: '100%',
 
 				position: dialogPosition,
-				data: { companyId: this.userdata.companyId }
+				data: { companyId: 0 }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {

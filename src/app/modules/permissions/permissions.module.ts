@@ -14,6 +14,9 @@ import { UserLocationComponent } from './components/onlineUsers/online-users-dat
 import { SearchUserLogsComponent } from './components/userConnectionLogs/search-user-logs/search-user-logs.component';
 import { UserLogsDatatableComponent } from './components/userConnectionLogs/users-logs-datatable/users-logs-datatable.component';
 import { UserConnectionLogsComponent } from './components/userConnectionLogs/user-connection-logs.component';
+import { UserLocationLogsComponent } from './components/userLocationLogs/user-Locations-logs.component';
+import { SearchUserLocationLogsComponent } from './components/userLocationLogs/search-user-Locations-logs/search-user-Locations-logs.component';
+import { UserLocationLogsOnMapComponent } from './components/userLocationLogs/user-locations-logs-onmap/user-location-logs-onmap.component';
 
 
 @NgModule({
@@ -24,8 +27,10 @@ import { UserConnectionLogsComponent } from './components/userConnectionLogs/use
 	UserLocationComponent,
 	SearchUserLogsComponent,
 	UserLogsDatatableComponent,
-	UserConnectionLogsComponent
-
+	UserConnectionLogsComponent,
+	UserLocationLogsComponent,
+	SearchUserLocationLogsComponent,
+	UserLocationLogsOnMapComponent
   ],
   imports: [
     CommonModule,

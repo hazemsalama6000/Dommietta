@@ -79,7 +79,5 @@ export enum HttpPaths {
 	API_ONLINE_USERES_LASTLOCATION = "/api/v1/tech/getlastlocationforuser",
 	API_GET_USER_DATA = "/api/v1/auth/getuserData",
 	API_USERS_CONNECTION_LOGS = "/api/v1/auth/getuserlogs",
-
-
-	
+	API_USRS_LOCATION_LOGS = "/api/v1/tech/getlocations"
 }
