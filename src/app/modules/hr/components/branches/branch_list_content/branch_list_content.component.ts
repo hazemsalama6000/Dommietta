@@ -36,7 +36,6 @@ export class BranchListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private service: BranchService, private toaster: toasterService ,private dialog: MatDialog) {
-	console.log('cocococ');
 
 		this.currentSelected={Id:0,Name:'',company_Id:0};
 	}

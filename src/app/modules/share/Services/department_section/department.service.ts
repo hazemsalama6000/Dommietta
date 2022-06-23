@@ -17,8 +17,8 @@ export class DepartmentService {
 
 	constructor(private http: CommonHttpService) { }
 
-	getLookupData(): Observable<LookUpModel[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_DEPARTMENT_GETALL}`)
+	getLookupData(companyid:number): Observable<LookUpModel[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_DEPARTMENT_GETALL}/${companyid}`)
 			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name ,isActive:Item.isActive , isEdit:false,isAdd:false}) as LookUpModel)));
 	}
 

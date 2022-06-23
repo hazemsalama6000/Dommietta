@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth';
+import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { LayoutService } from '../../core/layout.service';
 
 @Component({
@@ -13,21 +15,23 @@ export class TopbarComponent implements OnInit {
   toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px';
   toolbarButtonIconSizeClass = 'svg-icon-1';
   headerLeft: string = 'menu';
-  TOKENIN_LOCALSTORAGE="token";
+  TOKENIN_LOCALSTORAGE = "token";
+  userdata: IUserData;
 
+  constructor(private layout: LayoutService, private router: Router, private auth: AuthService) {
+    auth.userData.subscribe(res => this.userdata = res)
+  }
 
-  constructor(private layout: LayoutService,private router:Router) {}
-
-  logoutLogo:boolean=false;
+  logoutLogo: boolean = false;
 
   ngOnInit(): void {
     this.headerLeft = this.layout.getProp('header.left') as string;
   }
 
-  logout = ()=>
-         {
-	  localStorage.removeItem(this.TOKENIN_LOCALSTORAGE);
-	  this.router.navigate(['/auth']);
-          }
+  // logout = ()=>
+  //        {
+  //   localStorage.removeItem(this.TOKENIN_LOCALSTORAGE);
+  //   this.router.navigate(['/auth']);
+  //         }
 
 }

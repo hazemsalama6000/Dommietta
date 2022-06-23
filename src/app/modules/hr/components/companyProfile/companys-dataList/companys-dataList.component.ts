@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
 import { DialogPosition, MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { Subscription } from "rxjs";
+import { AuthService } from "src/app/modules/auth";
+import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { RegionService } from "src/app/modules/share/Services/region.service";
 import { StatesService } from "src/app/modules/share/Services/state.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
@@ -16,25 +19,33 @@ import { CompanyUpsertComponent } from "./company-item/companys-upsert/company-u
 
 export class CompanysDataListComponent {
 
-	matDialogConfig:DialogPosition ;
+	matDialogConfig: DialogPosition;
 
 	companys: Array<ICompanyDisplayData> = [];
-	
+
 	toolbarButtonMarginClass = 'ms-1 ms-lg-3';
 	toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px';
 	toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px';
 	toolbarButtonIconSizeClass = 'svg-icon-1';
 	headerLeft: string = 'menu';
-		
-	constructor(private companyService: CompanyService, private dialog: MatDialog,private stateService:StatesService ,private employeeService:EmployeeService ,private regionService:RegionService) { }
+	userdata: IUserData;
+	private unsubscribe: Subscription[] = [];
+
+	constructor(
+		private companyService: CompanyService,
+		private dialog: MatDialog,
+		private stateService: StatesService,
+		private employeeService: EmployeeService,
+		private regionService: RegionService,
+		private auth: AuthService) { }
 
 
 	openDialog() {
 
 		const dialogPosition: DialogPosition = {
-			top:'0px',
-			right:'0px'
-		  };
+			top: '0px',
+			right: '0px'
+		};
 
 		const dialogRef = this.dialog.open(CompanyUpsertComponent,
 			{
@@ -46,8 +57,8 @@ export class CompanysDataListComponent {
 				maxHeight: '100vh',
 				height: '100%',
 
-             	position:dialogPosition,
-				data: { companyId: 0 }
+				position: dialogPosition,
+				data: { companyId: this.userdata.companyId }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {
@@ -57,12 +68,10 @@ export class CompanysDataListComponent {
 	}
 
 	ngOnInit() {
-		
+
 		this.stateService.getLookupData().subscribe(
 			(data: LookUpModel[]) => {
 				this.stateService.states = data;
-				
-		console.log(this.stateService.states);
 			}
 		);
 
@@ -75,16 +84,19 @@ export class CompanysDataListComponent {
 						...item, logoWeb: `${localStorage.getItem('companyLink')}${item.logoWeb}`
 						, logoPrint: `${localStorage.getItem('companyLink')}${item.logoPrint}`
 					}) as ICompanyDisplayData);
-				
+
 					console.log(this.companys);
 				}
 			);
 
 		});
+
+		const userdata = this.auth.userData.subscribe(res => this.userdata = res);
+		this.unsubscribe.push(userdata);
 	}
 
-
-
-
+	ngOnDestroy() {
+		this.unsubscribe.forEach((sb) => sb.unsubscribe());
+	}
 
 }

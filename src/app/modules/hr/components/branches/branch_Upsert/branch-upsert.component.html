@@ -1,14 +1,12 @@
 <h2 mat-dialog-title>
-	<span class="fontsection"> بيانات الفرع </span>
+	<span class="fontsection"> {{'HR.TITLES.BRANCHDATA'|translate}} </span>
 </h2>
 
 <mat-divider></mat-divider>
 <form [formGroup]="branchDataForm" (ngSubmit)="Submit(branchDataForm.value)">
 
 
-<mat-dialog-content style="z-index: -1;" class="mat-typography">
-
-
+	<mat-dialog-content style="z-index: -1;" class="mat-typography">
 
 		<input type="hidden" name="id" formControlName="id">
 		<input type="hidden" name="company_Id" formControlName="company_Id">
@@ -17,16 +15,14 @@
 
 			<div class="col-md-12">
 
-
 				<div class="d-flex justify-content-start align-content-center">
 					<mat-icon class="text-primary">home</mat-icon>
 					<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
-						بيانات الاساسية
+						{{'HR.TITLES.BRANCHMAINDATA'|translate}}
 					</h1>
 				</div>
 
-				<div class="mb-5 border-bottom">
-				</div>
+				<div class="mb-5 border-bottom"></div>
 
 				<div class="row">
 
@@ -61,8 +57,8 @@
 
 						<div class="row mt-2">
 							<div class="col-md-3">
-								<label class="fontForInputs mt-5"> {{'HR.INPUTS.STATE' | translate}} <span
-										class="text-danger">*</span></label>
+								<label class="fontForInputs mt-5"> {{'HR.INPUTS.STATE' | translate}}
+									<span class="text-danger">*</span></label>
 							</div>
 
 							<div class="col-md-9">
@@ -84,7 +80,7 @@
 
 						<mat-form-field appearance="outline">
 							<mat-label>{{'HR.INPUTS.ADDRESS' | translate}}</mat-label>
-							<input matInput placeholder="Placeholder" name="branchAddress"
+							<input matInput placeholder="" name="branchAddress"
 								formControlName="branchAddress">
 							<mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 							<mat-hint>
@@ -121,7 +117,7 @@
 							<div class="col-md-9">
 
 								<ng-select [items]="dropdownListDataForRegion" bindLabel="Name" bindValue="Id"
-									name="region_Id" formControlName="region_Id" >
+									name="region_Id" formControlName="region_Id">
 								</ng-select>
 
 								<mat-hint>
@@ -148,7 +144,7 @@
 				<div class="d-flex justify-content-start align-content-center">
 					<mat-icon class="text-primary">perm_phone_msg</mat-icon>
 					<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
-						بيانات الاتصال
+						{{'HR.TITLES.CONTACTDATA'|translate}}
 					</h1>
 				</div>
 
@@ -161,7 +157,7 @@
 					<div class="col-md-4">
 						<mat-form-field appearance="outline">
 							<mat-label>{{'HR.INPUTS.EMAIL' | translate}}</mat-label>
-							<input matInput placeholder="Placeholder" name="email" formControlName="email">
+							<input matInput placeholder="" name="email" formControlName="email">
 							<mat-hint>
 								<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
 									  validation: 'required',
@@ -184,8 +180,8 @@
 
 						<div class="row">
 							<div class="col-md-3">
-								<label class="fontForInputs mt-5"> {{'HR.INPUTS.RESPONSIBLEEMPLOYEE' | translate}} <span
-										class="text-danger">*</span></label>
+								<label class="fontForInputs mt-5"> {{'HR.INPUTS.RESPONSIBLEEMPLOYEE' | translate}}
+									<span class="text-danger">*</span></label>
 							</div>
 
 							<div class="col-md-9">
@@ -261,13 +257,11 @@
 				<div class="d-flex justify-content-start align-content-center">
 					<mat-icon class="text-primary">assignment</mat-icon>
 					<h1 class="fontsection text-primary fs-2 fw-bolder me-1 cursor-pointer">
-						بيانات التحكم
+						{{'HR.TITLES.CONTROLDATA'|translate}}
 					</h1>
 				</div>
 
-				<div class="mb-5 border-bottom">
-				</div>
-
+				<div class="mb-5 border-bottom"></div>
 
 				<div class="">
 					<p> <span class="fontForInputs"> {{'HR.INPUTS.ISMAIN' | translate}} </span>
@@ -277,35 +271,26 @@
 
 			</div>
 
-
 		</div>
 
 		<br>
 
-		
-
-
-
-
-
-</mat-dialog-content>
+	</mat-dialog-content>
 
 	<mat-dialog-actions>
 		<div class="d-flex">
-			<button mat-raised-button type="submit" (click)="submitClicked=true" color="primary">حفظ</button>
+			<button mat-raised-button type="submit" (click)="submitClicked=true"
+				color="primary">{{'HR.BUTTONS.SAVE'|translate}}</button>
 			<button mat-button [mat-dialog-close]="true" cdkFocusInitial>close</button>
 		</div>
 	</mat-dialog-actions>
-
 
 </form>
 
 <ng-template #formError let-control="control" let-message="message" let-validation="validation">
 	<ng-container *ngIf="control.hasError(validation)  && submitClicked">
 		<div class="fv-plugins-message-container">
-			<span role="alert">
-				{{ message }}
-			</span>
+			<span role="alert">{{ message }}</span>
 		</div>
 	</ng-container>
 </ng-template>

@@ -20,8 +20,8 @@ export class LookupService {
 
 	constructor(private http: CommonHttpService) { }
 
-	getLookupData(): Observable<LookUpModel[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_GETALL}`)
+	getLookupData(companyId:number): Observable<LookUpModel[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_GETALL}/${companyId}`)
 			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name, isActive: Item.isActive ,isEdit:false , isAdd:false }) as LookUpModel)));
 	}
 

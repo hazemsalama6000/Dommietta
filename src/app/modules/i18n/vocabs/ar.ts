@@ -13,7 +13,19 @@ export const locale = {
 			FEATURES: 'Features',
 			APPS: 'Apps',
 			DASHBOARD: 'Dashboard',
+			governoratsAndRegions: "المحافظات والمناطق",
+			departments: "الادارات والاقسام",
+			jobs: "الوظائف",
+			companies: "الشركات",
+			onlineUsers: "المستخدمين المتصلين",
+			loginUsersData: "بيانات الدخول للمستخدمين"
 		},
+		USERDIALOG: {
+			MyProfile: "الملف الشخصى",
+			PROFILESETTING: "أعدادات الحساب",
+			LOGOUT: "تسجيل الخروج"
+		},
+
 		HR: {
 			INPUTS: {
 				NAME: "الاسم",
@@ -21,31 +33,31 @@ export const locale = {
 				CODE: "الكود",
 				COMPANYNAME: "اسم الشركة",
 				BRANCHNAME: "اسم الفرع",
-				ISMAIN:"رئيسي",
+				ISMAIN: "رئيسي",
 				USERCOUNTS: "عدد المستخدمين ",
 				ACTIVITY: "النشاط",
 				ADDRESS: "العنوان",
 				REGION: "المنطقة",
 				STATE: "المحافظة",
 				ISACTIVE: "نشط",
-				MANAGERPOSITION:"الوظيفة",
-				MANAGERNAME:"اسم المسؤول",
-				EMAIL:"الايميل",
-				PHONENUM:"رقم الهاتف",
-				COMMERCIALRECORD:" السجل التجارى",
-				TAXCARDNO:"رقم البطاقه الضريبية",
-				VATTAX:" ضريبه ق . م",
-				ISVALTAXACTIVE:"isValTaxActive",
-				HASDIRECTIONTRANSFERFORSTOCKS:"تحويل مباشر بين المخازن ",
-				WTAX:"ضريبه الخصم",
-				ISWTAXACTIVE:"isWTaxActive",
-				LOGOPRINT:"الطباعة",
-				LOGOWEB:"الموقع",
-				COMPANYDATA:"بيانات الشركة",
-				EMPLOYEE:"الموظف",
-				RESPONSIBLEEMPLOYEE:"اسم المسؤول",
-				STATUS : "حالة التفعيل" , 
-				SALESSTATELOGIN:"ايقاف تسجيل الدخول للمناديب"
+				MANAGERPOSITION: "الوظيفة",
+				MANAGERNAME: "اسم المسؤول",
+				EMAIL: "الايميل",
+				PHONENUM: "رقم الهاتف",
+				COMMERCIALRECORD: " السجل التجارى",
+				TAXCARDNO: "رقم البطاقه الضريبية",
+				VATTAX: " ضريبه ق . م",
+				ISVALTAXACTIVE: "isValTaxActive",
+				HASDIRECTIONTRANSFERFORSTOCKS: "تحويل مباشر بين المخازن ",
+				WTAX: "ضريبه الخصم",
+				ISWTAXACTIVE: "isWTaxActive",
+				LOGOPRINT: "الطباعة",
+				LOGOWEB: "الموقع",
+				COMPANYDATA: "بيانات الشركة",
+				EMPLOYEE: "الموظف",
+				RESPONSIBLEEMPLOYEE: "اسم المسؤول",
+				STATUS: "حالة التفعيل",
+				SALESSTATELOGIN: "ايقاف تسجيل الدخول للمناديب"
 			},
 			BUTTONS: {
 				ADD: "اضافة",
@@ -53,15 +65,30 @@ export const locale = {
 				EDIT: "تعديل",
 				NEXT: "التالى",
 				BACK: "رجوع",
+				SAVE: "حفظ",
+				DELETE: "حذف",
 			},
 			TITLES: {
 				ADDORUPDATE: "اضافة  ",
-				ACTIVE:"مفعل",
-				NOTACTIVE:"غير مفعل",
-				JOBS:"الوظائف",
-				COMPANIESDATA:"بيانات الشركات"
+				ACTIVE: "مفعل",
+				NOTACTIVE: "غير مفعل",
+				SETACTIVE: "تفعيل",
+				SETNOTACTIVE: "ايقاف التفعيل",
+				JOBS: "الوظائف",
+				COMPANIESDATA: "بيانات الشركات",
+				BRANCHDATA:"بيانات الفرع",
+				BRANCHMAINDATA:"بيانات الاساسية",
+				CONTACTDATA:"بيانات الاتصال",
+				CONTROLDATA:"بيانات التحكم",
+
+				BRANCHS:"الفروع",
+
+			},
+			MESSAGE:{
+				NOROWFOUND: "لايوجد بيانات"
 			}
 		},
+
 		SHARE: {
 			INPUTS: {
 				NAME: "الاسم",
@@ -70,13 +97,21 @@ export const locale = {
 			BUTTONS: {
 				ADD: "اضافة",
 				CLOSE: "غلق",
-				EDIT: "تعديل"
+				EDIT: "تعديل",
+				SAVE: "حفظ",
+				DELETE: "حذف",
+				VIEWJOBS: "عرض الوظائف"
 			},
 			TITLES: {
 				ADDORUPDATESTATE: " المحافظات",
 				ADDORUPDATEREGION: " المناطق",
 				ADDORUPDATESECTION: "الاقسام",
 				ADDORUPDATEDEPARTMENTN: "الادارات",
+				VIEWJOBSSECTION: "الوظائف"
+
+			},
+			MESSAGE: {
+				NOROWFOUND: "لايوجد بيانات"
 			}
 		},
 
@@ -136,6 +171,7 @@ export const locale = {
 
 			}
 		},
+
 		ECOMMERCE: {
 			COMMON: {
 				SELECTED_RECORDS_COUNT: 'Selected records count: ',
@@ -175,6 +211,47 @@ export const locale = {
 					UPDATE_MESSAGE: 'Customer has been updated',
 					ADD_MESSAGE: 'Customer has been created'
 				}
+			}
+		},
+
+		PERMISSIONS: {
+			INPUTS: {
+				NAME: "الاسم",
+				FILTER: "بحث",
+				FROMDATE:"من تاريخ",
+				TODATE:"الى تاريخ",
+				ONLINEUSERS:"المستخدمين المتصلين",
+				OFFLINEUSERS:"المستخدمين الغير متصلين",
+				ALLUSERS:"الكل"
+			},
+			BUTTONS: {
+				ADD: "اضافة",
+				CLOSE: "غلق",
+				EDIT: "تعديل",
+				SAVE: "حفظ",
+				DELETE: "حذف",
+				LASTLOCATION:"اخر موقع للمستخدم",
+				NOTCONNECTED:"قطع الاتصال"
+			},
+			TITLES: {
+				ADDORUPDATEONLINEUSERS: " بيانات دخول المستخدمين",
+				USERS: " المستخدمين",
+				MOBILE: "الموبيل",
+				COMPANYNAME: "اسم الشركة",
+				BRANCHNAME: "اسم الفرع",
+				USERNAME: "اسم المستخدم",
+				LOGINTIME: "وقت الدخول",
+				REMININIGTIME: "الوقت المتبقي",
+				DAY: "ي",
+				HOUR: "س",
+				MINUTE:"د",
+				ONLINEUSERS:"المستخدمين المتصلين",
+				COMPANIES:"الشركات",
+				COUNTONLINEUSERFOREACHCOMPANY:"عدد المستخدمين المتصلين لكل شركة",
+
+			},
+			MESSAGE: {
+				NOROWFOUND: "لايوجد بيانات"
 			}
 		}
 	}
