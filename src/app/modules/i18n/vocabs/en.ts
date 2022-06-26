@@ -21,13 +21,13 @@ export const locale = {
       loginUsersData: "Users Login Information"
     },
     FOOTER:{
-      COPYRIGHT:"جميع الحقوق محفوظة"
-    }
-    , USERDIALOG: {
-      MyProfile: "My Profile",
+      COPYRIGHT:"Copy Right"
+    },
+     USERDIALOG: {
+      MYPROFILE: "My Profile",
       PROFILESETTING: "Account Settings",
       LOGOUT: "LogOut",
-      Language:"Language"
+      LANGUAGE:"Language"
 
     },
 
@@ -105,8 +105,6 @@ export const locale = {
         COMPANYDATA1:"Company Data",
         COMAPNYCONTACTDATA:"Company Contact Data",
         TAXDATA:"Tax Data"
-
-
 
       },
       MESSAGE: {

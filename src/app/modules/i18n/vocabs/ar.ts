@@ -1,3 +1,4 @@
+
 // USA
 export const locale = {
 	lang: 'ar',
@@ -21,13 +22,13 @@ export const locale = {
 			loginUsersData: "بيانات الدخول للمستخدمين"
 		},
     FOOTER:{
-      COPYRIGHT:"Copy Right"
+      COPYRIGHT:"جميع الحقوق محفوظة"
     },
 		USERDIALOG: {
-			MyProfile: "الملف الشخصى",
+			MYPROFILE: "الملف الشخصى",
 			PROFILESETTING: "أعدادات الحساب",
 			LOGOUT: "تسجيل الخروج",
-      Language:"اللغة"
+      LANGUAGE:"اللغة"
 		},
 
 		HR: {
