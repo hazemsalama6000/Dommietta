@@ -14,12 +14,12 @@ export const locale = {
 			FEATURES: 'Features',
 			APPS: 'Apps',
 			DASHBOARD: 'Dashboard',
-			governoratsAndRegions: "المحافظات والمناطق",
-			departments: "الادارات والاقسام",
-			jobs: "الوظائف",
-			companies: "الشركات",
-			onlineUsers: "المستخدمين المتصلين",
-			loginUsersData: "بيانات الدخول للمستخدمين"
+			GOVERNORATESANDREGIONS: "المحافظات والمناطق",
+			DEPARTMENTS: "الادارات والاقسام",
+			JOBS: "الوظائف",
+			COMPANIES: "الشركات",
+			ONLINEUSERS: "المستخدمين المتصلين",
+			LOGINUSERSDATA: "بيانات الدخول للمستخدمين"
 		},
     FOOTER:{
       COPYRIGHT:"جميع الحقوق محفوظة"

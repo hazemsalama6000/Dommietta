@@ -13,21 +13,21 @@ export const locale = {
       FEATURES: 'Features',
       APPS: 'Apps',
       DASHBOARD: 'Dashboard',
-      governoratsAndRegions: "Governorats And Regions",
-      departments: "Departments",
-      jobs: "Jobs",
-      companies: "Companies",
-      onlineUsers: "Online Users",
-      loginUsersData: "Users Login Information"
+      GOVERNORATESANDREGIONS: "Governorats And Regions",
+      DEPARTMENTS: "Departments",
+      JOBS: "Jobs",
+      COMPANIES: "Companies",
+      ONLINEUSERS: "Online Users",
+      LOGINUSERSDATA: "Users Login Information"
     },
-    FOOTER:{
-      COPYRIGHT:"Copy Right"
+    FOOTER: {
+      COPYRIGHT: "Copy Right"
     },
-     USERDIALOG: {
+    USERDIALOG: {
       MYPROFILE: "My Profile",
       PROFILESETTING: "Account Settings",
       LOGOUT: "LogOut",
-      LANGUAGE:"Language"
+      LANGUAGE: "Language"
 
     },
 
@@ -57,12 +57,12 @@ export const locale = {
         LOGOPRINT: "logoPrint",
         LOGOWEB: "logoWeb",
         COMPANYDATA: "company data",
-        BRANCHNAME:"Branch Name",
-        ISMAIN:"IsMain",
-        EMPLOYEE:"Employee",
-        RESPONSIBLEEMPLOYEE:"Manager Name",
-        SALESSTATELOGIN:"Stop Logining For representative",
-        STATUS:"Status"
+        BRANCHNAME: "Branch Name",
+        ISMAIN: "IsMain",
+        EMPLOYEE: "Employee",
+        RESPONSIBLEEMPLOYEE: "Manager Name",
+        SALESSTATELOGIN: "Stop Logining For representative",
+        STATUS: "Status"
 
 
       },
@@ -73,38 +73,38 @@ export const locale = {
         NEXT: "Next",
         BACK: "Back",
         SAVE: "Save",
-				DELETE: "Delete",
-        EDITCOMPANY:"Edit Company",
-        VIEWBRANCHS:"View Branchs"
+        DELETE: "Delete",
+        EDITCOMPANY: "Edit Company",
+        VIEWBRANCHS: "View Branchs"
       },
       TITLES: {
         ADDORUPDATE: "add or Edit",
-				ACTIVE: "Active",
-				NOTACTIVE: "Not Active",
+        ACTIVE: "Active",
+        NOTACTIVE: "Not Active",
         SETACTIVE: "Set Active",
-				SETNOTACTIVE: "Set Not Active",
-				JOBS: "Jobs",
-				COMPANIESDATA: "Companies Data",
-				BRANCHDATA:"Branch Data",
-				BRANCHMAINDATA:"Main Data",
-				CONTACTDATA:"Contact Data",
-				CONTROLDATA:"Control Data",
-        BRANCHS:"Branchs",
-        COMPANYDATA:"Company Data:",
-        COMPANYCODE:"Code :",
-        COUNTUSERS:"Number Of Users :",
-        COMPANYNOTACTIVE:"Not Active",
-        COMPANYACTIVE:"Active",
-        GOVERNORATE:"Governorate",
-        REGION:"Region",
-        COMMERCIALRECORD:"Commercial Record",
-        TAXCARDNUMBER:"Tax Card NO",
-        WTAX:"WTax",
-        ACTIVITY:"Activity",
-        STAX:"STax",
-        COMPANYDATA1:"Company Data",
-        COMAPNYCONTACTDATA:"Company Contact Data",
-        TAXDATA:"Tax Data"
+        SETNOTACTIVE: "Set Not Active",
+        JOBS: "Jobs",
+        COMPANIESDATA: "Companies Data",
+        BRANCHDATA: "Branch Data",
+        BRANCHMAINDATA: "Main Data",
+        CONTACTDATA: "Contact Data",
+        CONTROLDATA: "Control Data",
+        BRANCHS: "Branchs",
+        COMPANYDATA: "Company Data:",
+        COMPANYCODE: "Code :",
+        COUNTUSERS: "Number Of Users :",
+        COMPANYNOTACTIVE: "Not Active",
+        COMPANYACTIVE: "Active",
+        GOVERNORATE: "Governorate",
+        REGION: "Region",
+        COMMERCIALRECORD: "Commercial Record",
+        TAXCARDNUMBER: "Tax Card NO",
+        WTAX: "WTax",
+        ACTIVITY: "Activity",
+        STAX: "STax",
+        COMPANYDATA1: "Company Data",
+        COMAPNYCONTACTDATA: "Company Contact Data",
+        TAXDATA: "Tax Data"
 
       },
       MESSAGE: {
@@ -186,8 +186,6 @@ export const locale = {
         INVALID_FIELD: 'Field is not valid',
         INVALID_CREDENTIALS: 'verify Credentials',
         INVALID_COMPANY: 'verify Company Code'
-
-
       }
     },
 
