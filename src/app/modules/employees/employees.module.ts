@@ -7,6 +7,10 @@ import { SettingComponent } from './setting/setting.component';
 import { OverviewComponent } from './overview/overview.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { EditemployeeComponent } from './editemployee/editemployee.component';
+import { SharedModule } from 'src/app/shared-module/shared-module.module';
+import { TranslationModule } from '../i18n';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,11 @@ import { EditemployeeComponent } from './editemployee/editemployee.component';
     EmployeesRoutingModule,
     InlineSVGModule,
     NgApexchartsModule,
+	SharedModule,
+	TranslationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
  
 })
