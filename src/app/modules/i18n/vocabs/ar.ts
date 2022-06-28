@@ -19,7 +19,10 @@ export const locale = {
 			JOBS: "الوظائف",
 			COMPANIES: "الشركات",
 			ONLINEUSERS: "المستخدمين المتصلين",
-			LOGINUSERSDATA: "بيانات الدخول للمستخدمين"
+			LOGINUSERSDATA: "بيانات الدخول للمستخدمين",
+      TRACINGUSERSLOCATION:"متابعة اماكن المستخدمين",
+      EMPLOYEELIST:"قائمة الموظفين"
+
 		},
     FOOTER:{
       COPYRIGHT:"جميع الحقوق محفوظة"

@@ -3,38 +3,44 @@ import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "r
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { IEmployeeList } from "../models/IEmployeeList.interface";
 
 @Injectable({
-	providedIn:'root'
+  providedIn: 'root'
 })
 
-export class EmployeeService 
-{
-    employees:LookUpModel[];
-    bSubject = new BehaviorSubject(true); 
+export class EmployeeService {
+  employees: LookUpModel[];
+  bSubject = new BehaviorSubject(true);
 
-	constructor(private http:CommonHttpService){}
-    
-	getLookupEmployeeData(companyId:number):Observable<LookUpModel[]>{
-            return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-			.pipe( map(Items=> Items.map( (Item:any) => ({Id:Item.id,Name:Item.name}) as LookUpModel )  ) );
-	}
+  constructor(private http: CommonHttpService) { }
 
-	DeleteLookupData(id:number):Observable<any>{
-		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_DELETE}${id}`);
-	}
-	
-	PostLookupData(model:LookUpModel):Observable<any>{
-      return this.http.CommonPostRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_ADD}`);
-	}
+  getLookupEmployeeData(companyId: number): Observable<LookUpModel[]> {
+    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
+      .pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+  }
 
-	UpdateLookupData(model:LookUpModel):Observable<any>{
-		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_UPDATE}${model.Id}`);
-	  }
+  DeleteLookupData(id: number): Observable<any> {
+    return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_DELETE}${id}`);
+  }
 
-	selectFromStore():Observable<any> {
-		return this.bSubject.asObservable();
-	 }
+  PostLookupData(model: LookUpModel): Observable<any> {
+    return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_ADD}`);
+  }
+
+  UpdateLookupData(model: LookUpModel): Observable<any> {
+    return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_JOB_UPDATE}${model.Id}`);
+  }
+
+  selectFromStore(): Observable<any> {
+    return this.bSubject.asObservable();
+  }
+
+  getEmployeesData(searchModel: any) {
+    return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
+      .pipe(map(Items => Items.map((Item: any) => ({ ...Item }) as IEmployeeList)));
+
+  }
 
 
 }

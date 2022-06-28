@@ -18,7 +18,9 @@ export const locale = {
       JOBS: "Jobs",
       COMPANIES: "Companies",
       ONLINEUSERS: "Online Users",
-      LOGINUSERSDATA: "Users Login Information"
+      LOGINUSERSDATA: "Users Login Information",
+      TRACINGUSERSLOCATION: "Tracking users' locations",
+      EMPLOYEELIST: "Employee List"
     },
     FOOTER: {
       COPYRIGHT: "Copy Right"

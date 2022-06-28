@@ -1,0 +1,100 @@
+<section class="row">
+
+  <div class="col-md-12 mat-elevation-z8" style="overflow-y: auto;min-height: 450px;">
+
+    <p-table id="employeetable" [value]="employees" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+      responsiveLayout="scroll" [rowsPerPageOptions]="[5,10,20]" [alwaysShowPaginator]="false" [loading]="loading"
+      styleClass="p-datatable-employees" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [paginator]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">الاسم</th>
+          <th class="text-center">الموبيل</th>
+          <th class="text-center">اسم الفرع</th>
+          <th class="text-center">الادارة</th>
+          <th class="text-center">القسم</th>
+          <th class="text-center">الوظيفة</th>
+          <th class="text-center"></th>
+        </tr>
+        <tr>
+          <th>
+
+            <p-multiSelect [options]="employeeDropdown" optionLabel="Name" #employee
+              (onChange)="myfilter(employee.value,'employee')">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.Name}}</span>
+              </ng-template>
+            </p-multiSelect>
+
+          </th>
+          <th>
+            <!-- <p-columnFilter type="text" field="country.name"></p-columnFilter> -->
+          </th>
+          <th>
+
+            <p-multiSelect [options]="branchDropdown" optionLabel="branchName" #branch
+              (onChange)="myfilter(branch.value,'branch')">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.branchName}}</span>
+              </ng-template>
+            </p-multiSelect>
+
+          </th>
+          <th>
+
+            <p-multiSelect [options]="departmentDropdown" optionLabel="Name"
+              (onChange)="myfilter($event.value,'department')">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.Name}}</span>
+              </ng-template>
+            </p-multiSelect>
+
+          </th>
+          <th>
+
+            <p-multiSelect [options]="sectionDropdown" optionLabel="Name" (onChange)="myfilter($event.value,'section')">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.Name}</span>
+              </ng-template>
+            </p-multiSelect>
+
+          </th>
+          <th>
+
+            <p-multiSelect [options]="jobDropdown" optionLabel="displayValue" (onChange)="myfilter($event.value,'job')">
+              <ng-template let-option pTemplate="item">
+                <span>{{option.displayValue}</span>
+              </ng-template>
+            </p-multiSelect>
+
+          </th>
+          <th> </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-employee>
+        <tr>
+          <td>{{employee.name}}</td>
+          <td><span class="image-text">{{employee.mobile}}</span></td>
+          <td><span class="image-text">{{employee.branch}}</span></td>
+          <td><span class="image-text">{{employee.department}}</span></td>
+          <td><span class="image-text">{{employee.section}}</span></td>
+          <td><span class="image-text">{{employee.job}}</span></td>
+          <td>
+            <button mat-mini-fab color="primary" id="search" type="submit" class="mx-10">
+              <mat-icon style="font-size: 20px;">edit</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="11" class="text-center">No employees found.</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+
+</section>
