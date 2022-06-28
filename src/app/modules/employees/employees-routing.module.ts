@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LookupIdNameComponent } from 'src/app/shared-module/Components/lookupId_name/lookupId_name.component';
-import { EmployeeProfile } from './components/employee-profile/employee-profile.component';
+import { OverviewComponent } from './overview/overview.component';
+import { EmployeesComponent } from './employees.component';
 
 const routes: Routes = [
-	{path:'employeeprofile' , component:EmployeeProfile }
+
+  {
+    path: '',
+    component: EmployeesComponent,
+    children: [
+      {
+        path: 'overview',
+        component: OverviewComponent,
+      },
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: '**', redirectTo: 'overview', pathMatch: 'full' },
+    ],
+  },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EmployeeRoutingModule { }
+export class EmployeesRoutingModule { }

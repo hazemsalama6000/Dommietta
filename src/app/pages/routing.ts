@@ -14,7 +14,7 @@ const Routing: Routes = [
   {
 	path:'employee',
 	loadChildren:()=>
-	    import('../modules/employees/employees.module').then((m)=>m.EmployeeModule)
+	    import('../modules/employees/employees.module').then((m)=>m.EmployeesModule)
   },
   {
 	path:'permissions',

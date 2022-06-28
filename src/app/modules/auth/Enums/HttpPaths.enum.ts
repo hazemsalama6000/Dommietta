@@ -72,6 +72,7 @@ export enum HttpPaths {
 	//Employee APIS
 
 	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/ListOfEmployees",
+	API_GET_EMPLOYEEBY_ID = "/api/v1/hr/getemployeeprofileinfo",
 
 	// Online Users
 	API_ONLINE_USERS = "/api/v1/auth/getusers",

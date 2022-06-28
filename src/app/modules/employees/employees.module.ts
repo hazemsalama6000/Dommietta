@@ -1,29 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { EmployeeRoutingModule } from './employees-routing.module';
-import { SharedModule } from 'src/app/shared-module/shared-module.module';
-import { TranslationModule } from '../i18n';
-import { AuthRoutingModule } from '../auth/auth-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { EmployeeProfile } from './components/employee-profile/employee-profile.component';
-
-
+import { InlineSVGModule } from 'ng-inline-svg-2';
+import { EmployeesRoutingModule } from './employees-routing.module';
+import { EmployeesComponent } from './employees.component';
+import { SettingComponent } from './setting/setting.component';
+import { OverviewComponent } from './overview/overview.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { EditemployeeComponent } from './editemployee/editemployee.component';
 
 @NgModule({
   declarations: [
-	EmployeeProfile
+    EmployeesComponent,
+    SettingComponent,
+    OverviewComponent,
+    EditemployeeComponent
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule,
-    TranslationModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-	SharedModule,
-  ]
+    EmployeesRoutingModule,
+    InlineSVGModule,
+    NgApexchartsModule,
+  ],
+ 
 })
-export class EmployeeModule { }
+export class EmployeesModule { }
