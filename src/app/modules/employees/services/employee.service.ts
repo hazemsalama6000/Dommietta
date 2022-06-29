@@ -32,9 +32,6 @@ export class EmployeeService {
 	}
 
 	
-	toggleIsTechnician(employeeId: number) : Observable<HttpReponseModel>{
-		return this.http.CommonPostRequests(null,`${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_TECHNICIAN}?EmployeeId=${employeeId}`);
-	}
 
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();

@@ -11,13 +11,15 @@ import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { TranslationModule } from '../i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 
 @NgModule({
   declarations: [
     EmployeesComponent,
     SettingComponent,
     OverviewComponent,
-    EditemployeeComponent
+    EditemployeeComponent,
+	AddTechnitianLogComponent
   ],
   imports: [
     CommonModule,
