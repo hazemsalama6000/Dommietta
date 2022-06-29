@@ -31,11 +31,12 @@ export class EmployeeService {
 		return this.http.CommonPostRequests(null,`${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}?EmployeeId=${employeeId}`);
 	}
 
-	
-
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();
 	}
-
+	
+	changeEmployeeImageData(model: any): Observable<any> {
+		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_EMP_IMAGE}`);
+	}
 
 }

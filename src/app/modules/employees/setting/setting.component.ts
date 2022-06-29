@@ -1,16 +1,16 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { IEmployee } from '../models/employee.interface';
+import { ITechnitianLog } from '../models/ITechnitianLog.interface';
 import { EmployeeService } from '../services/employee.service';
 import { TechnitianService } from '../services/technitian.service';
 import { AddTechnitianLogComponent } from './Add-technitian-Log/add-technitian-Log.component';
 
 @Component({
 	selector: 'app-setting',
-	templateUrl: './setting.component.html',
-	providers: [TechnitianService]
+	templateUrl: './setting.component.html'
 })
 export class SettingComponent implements OnInit {
 	@HostBinding('class') class =
@@ -19,6 +19,8 @@ export class SettingComponent implements OnInit {
 
 	employeeProfile: IEmployee = {} as IEmployee;
 
+	@Output() emitter = new EventEmitter<ITechnitianLog>();
+	@Output() emitForActiveProp = new EventEmitter<boolean>();
 	@Input() set _Employee(value: IEmployee) {
 		this.employeeProfile = value;
 		console.log(this.employeeProfile.imagePath);
@@ -34,6 +36,7 @@ export class SettingComponent implements OnInit {
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
 				this.employeeProfile.isActive = !this.employeeProfile.isActive;
+				this.emitForActiveProp.emit(this.employeeProfile.isActive);
 			},
 			(error) => {
 				this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
@@ -44,15 +47,15 @@ export class SettingComponent implements OnInit {
 
 	toggleIsTechnician() {
 
-		if (this.employeeProfile.is_Technical == true) {
+		if (this.employeeProfile.isTechnician == true) {
 
 			this.technicianService.toggleIsTechnician(this.employeeProfile.id).subscribe(
 				(data: HttpReponseModel) => {
 					this.toaster.openSuccessSnackBar(data.message);
-					this.employeeProfile.is_Technical = false;
+					this.employeeProfile.isTechnician = false;
 				}, (error) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-					this.employeeProfile.is_Technical = false;
+					this.employeeProfile.isTechnician = false;
 				}
 			)
 
@@ -83,8 +86,14 @@ export class SettingComponent implements OnInit {
 				data: { employeeId: this.employeeProfile.id }
 			});
 
-		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
+		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
+			if (result.employeeId !== undefined) {
+				this.employeeProfile.isTechnician = true;
+				this.emitter.emit(result);
+			}
+			else {
+				this.employeeProfile.isTechnician = false;				
+			}
 		});
 
 	}

@@ -43,7 +43,8 @@
 							data-bs-original-title="Change avatar" aria-describedby="tooltip569443">
 							<i class="bi bi-pencil-fill fs-7"></i>
 							<!--begin::Inputs-->
-
+							<input id="file-logoWeb"  type="file" class="mx-2 btn btn-danger d-none"
+                            (change)="imageChange($event)" placeholder="" name="logoWeb">
 							<!--end::Inputs-->
 						</label>
 						
@@ -91,7 +92,7 @@
                                   " class="svg-icon svg-icon-4 me-1"></span>
 							{{employeeDsiaplay.job}}
 						</a>
-						<div class="badge badge-light-info d-inline" *ngIf="employeeDsiaplay.is_Technical"> فنى </div>
+						<div class="badge badge-light-info d-inline" *ngIf="employeeDsiaplay.isTechnician == true"> فنى </div>
 						<!--begin::Badge-->
 					</div>
 					<div class="d-flex flex-wrap fw-bold fs-6 mb-2 pe-2">
@@ -176,7 +177,7 @@
 					<div class="text-gray-600">{{employeeDsiaplay.graduateDate | date:'dd/MM/yyyy'}}</div>
 					<!--begin::Details item-->
 				</div>
-				<div *ngIf="employeeDsiaplay.is_Technical">
+				<div *ngIf="employeeDsiaplay.isTechnician">
 
 					<div class="d-flex flex-stack fs-4 py-3">
 						<div class="fw-bolder"> فنى </div>
@@ -290,7 +291,7 @@
 								اعدادات الملف
 								<i class="bi bi-gear-fill fs-3"></i>
 							</a>
-							<app-setting [_Employee]="employeeDsiaplay"></app-setting>
+							<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter) = "editEmployeeTechnicialData($event)" [_Employee]="employeeDsiaplay"></app-setting>
 						</div>
 					</div>
 				</li>

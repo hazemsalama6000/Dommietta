@@ -12,6 +12,7 @@ import { TranslationModule } from '../i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
+import { TechnitianService } from './services/technitian.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-tech
     ReactiveFormsModule,
     HttpClientModule,
   ],
+  providers:[TechnitianService]
  
 })
 export class EmployeesModule { }

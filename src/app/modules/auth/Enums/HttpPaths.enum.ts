@@ -73,10 +73,10 @@ export enum HttpPaths {
 
 	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/ListOfEmployees",
 	API_GET_EMPLOYEEBY_ID = "/api/v1/hr/getemployeeprofileinfo",
-	API_ADD_TECHNICIAN = "/api/tech/addtechnicianlog",
+	API_ADD_TECHNICIAN = "/api/v1/tech/addtechnicianlog",
 	API_TOGGLE_EMPLOYEE_ACTIVE = "/api/v1/hr/changeactiveornot",
 	API_TOGGLE_EMPLOYEE_TECHNICIAN = "/api/v1/tech/stoptechnician",
-
+	API_CHANGE_EMP_IMAGE = "/api/v1/hr/changeimage",
 
 	// Online Users
 	API_ONLINE_USERS = "/api/v1/auth/getusers",
