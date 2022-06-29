@@ -21,7 +21,7 @@ export class SettingComponent implements OnInit {
 		console.log(this.employeeProfile.imagePath);
 	}
 
-	constructor(private service: EmployeeService,private toaster: toasterService) { }
+	constructor(private service: EmployeeService, private toaster: toasterService) { }
 
 	ngOnInit(): void {
 	}
@@ -37,5 +37,29 @@ export class SettingComponent implements OnInit {
 			}
 		)
 	}
+
+
+	toggleIsTechnician() {
+
+		if (this.employeeProfile.is_Technical == true) {
+
+			this.service.toggleIsTechnician(this.employeeProfile.id).subscribe(
+				(data: HttpReponseModel) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.employeeProfile.is_Technical = false;
+				}, (error) => {
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+					this.employeeProfile.is_Technical = false;
+				}
+			)
+
+		}
+
+		else {
+
+		}
+
+	}
+
 
 }
