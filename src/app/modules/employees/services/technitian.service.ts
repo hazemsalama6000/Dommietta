@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
@@ -18,4 +18,10 @@ export class TechnitianService {
 		return this.http.CommonPostRequests(technicianLog,`${localStorage.getItem("companyLink")}${HttpPaths.API_ADD_TECHNICIAN}`);
 	}
 
+	getTechnicianLogByEmpId(employeeId: number): Observable<ITechnitianLog[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_TECHNNICIAN_DATA}?EmployeeId=${employeeId}`).pipe(
+			map((data: HttpReponseModel) => data.data)
+		);
+	}
+	
 }

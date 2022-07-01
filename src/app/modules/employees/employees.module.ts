@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 import { TechnitianService } from './services/technitian.service';
+import { technicianLogComponent } from './technician-log/technician-log.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TechnitianService } from './services/technitian.service';
     SettingComponent,
     OverviewComponent,
     EditemployeeComponent,
-	AddTechnitianLogComponent
+	AddTechnitianLogComponent,
+	technicianLogComponent
   ],
   imports: [
     CommonModule,
