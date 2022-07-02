@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
@@ -6,6 +7,7 @@ import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IEmployee } from './models/employee.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
 import { EmployeeService } from './services/employee.service';
+import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 
 @Component({
 	selector: 'app-employees',
@@ -19,7 +21,7 @@ export class EmployeesComponent implements OnInit {
 	dropdownEmployeeData: LookUpModel[] = [];
 	employeeDsiaplay: IEmployee = {} as IEmployee;
 	constructor(private service: EmployeeService,
-		private toaster: toasterService) {
+		private toaster: toasterService , public dialog: MatDialog) {
 
 	}
 
@@ -90,6 +92,38 @@ export class EmployeesComponent implements OnInit {
 
 	editActiveProp(value: boolean) {
 		this.employeeDsiaplay.isActive = value;
+	}
+
+	
+
+	openDialog() {
+		const dialogPosition: DialogPosition = {
+			top: '0px',
+			right: '0px'
+		};
+
+		const dialogRef = this.dialog.open(AddTechnitianLogComponent,
+			{
+				/*maxWidth: '50vw',
+				maxHeight: '100vh',*/
+				maxHeight: '100vh',
+				height: '100%',
+
+				//panelClass: 'full-screen-modal',*/
+				position: dialogPosition,
+				data: { employeeId: this.employeeDsiaplay.id }
+			});
+
+		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
+			if (result.employeeId !== undefined) {
+				this.employeeDsiaplay.isTechnician = true;
+				this.editEmployeeTechnicialData(result);
+			}
+			else {
+				this.employeeDsiaplay.isTechnician = false;				
+			}
+		});
+
 	}
 
 }
