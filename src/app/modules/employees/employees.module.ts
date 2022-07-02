@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 import { TechnitianService } from './services/technitian.service';
 import { technicianLogComponent } from './technician-log/technician-log.component';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { technicianLogComponent } from './technician-log/technician-log.componen
     OverviewComponent,
     EditemployeeComponent,
 	AddTechnitianLogComponent,
-	technicianLogComponent
+	technicianLogComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,

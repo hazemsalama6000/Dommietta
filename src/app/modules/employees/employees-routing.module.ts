@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './overview/overview.component';
 import { EmployeesComponent } from './employees.component';
 import { technicianLogComponent } from './technician-log/technician-log.component';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,11 @@ const routes: Routes = [
 				path: 'technicianlog/:employeeId',
 				component: technicianLogComponent
 			},
+			{
+				path: 'userlocation/:employeeId',
+				component: UserLocationComponent
+			},
+			
 			{ path: '', redirectTo: 'overview', pathMatch: 'full' },
 			{ path: '**', redirectTo: 'overview', pathMatch: 'full' },
 		],
