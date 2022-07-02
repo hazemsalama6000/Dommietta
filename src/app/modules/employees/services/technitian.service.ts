@@ -20,7 +20,7 @@ export class TechnitianService {
 
 	getTechnicianLogByEmpId(employeeId: number): Observable<ITechnitianLog[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_TECHNNICIAN_DATA}?EmployeeId=${employeeId}`).pipe(
-			map((data: HttpReponseModel) => data.data)
+			map((data: ITechnitianLog[]) => data)
 		);
 	}
 	

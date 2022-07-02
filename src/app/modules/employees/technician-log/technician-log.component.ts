@@ -16,8 +16,7 @@ import { ITechnitianLog } from "../models/ITechnitianLog.interface";
 @Component({
 	selector: 'technician-log',
 	templateUrl: './technician-log.component.html',
-	styleUrls: ['./technician-log.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	styleUrls: ['./technician-log.component.scss']
 })
 
 export class technicianLogComponent {
