@@ -1,3 +1,8 @@
+export interface IEmployee {
+  employeeRecords: IEmployeeList[],
+  pageSize: number
+}
+
 export interface IEmployeeList {
   imagePath?: string;
   militery_Status?: string;
@@ -32,5 +37,5 @@ export interface IEmployeeList {
   jobSection_Id?: number;
   hireDate?: Date;
   branch_Id?: number;
-  is_Technical?: boolean
+  is_Technical?: boolean;
 }

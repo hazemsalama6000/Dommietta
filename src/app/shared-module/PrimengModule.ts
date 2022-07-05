@@ -13,6 +13,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {DropdownModule} from 'primeng/dropdown';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
+import {PaginatorModule} from 'primeng/paginator';
 
 export const PrimengModule = [
   ConfirmDialogModule,
@@ -29,5 +30,6 @@ export const PrimengModule = [
   DropdownModule,
   ProgressBarModule,
   InputTextModule,
-  ToastModule
+  ToastModule,
+  PaginatorModule
 ]

@@ -14,7 +14,6 @@ import { CompanyUpsertComponent } from './components/companyProfile/companys-dat
 import { BranchComponent } from './components/branches/branch.component';
 import { BranchUpsertComponent } from './components/branches/branch_Upsert/branch-upsert.component';
 import { BranchListContentComponent } from './components/branches/branch_list_content/branch_list_content.component';
-import { Employee_listComponent } from './components/employee-list/employee-list.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { Employee_listComponent } from './components/employee-list/employee-list
     BranchUpsertComponent,
     BranchListContentComponent,
     BranchUpsertComponent,
-    Employee_listComponent,
   ],
   imports: [
     CommonModule,

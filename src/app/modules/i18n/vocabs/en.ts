@@ -272,6 +272,40 @@ export const locale = {
       MESSAGE: {
         NOROWFOUND: "No Rows Found"
       }
+    },
+
+    EMPLOYEE: {
+      INPUTS: {
+      },
+      BUTTONS: {
+        ADD: "Add",
+        CLOSE: "close",
+        EDIT: "edit",
+        SAVE: "Save",
+        DELETE: "Delete",
+      },
+      TITLES: {
+        NAME: "Name",
+        MOBILE: "Mobile",
+        BRANCHNAME: "Branch Name",
+        DEPARTMENT: "Department",
+        SECTION: "Section",
+        JOB: "Job",
+        HIREDATE:"HireDate",
+        GRADUATIONDATE:"GraduateDate",
+        QUALIFICATION:"Qualification",
+        UNIVERSITY:"University",
+        NID:"NID",
+        BITHDATE:"BirthDate",
+        ADDRESS:"Address",
+        STATE:"State",
+        REGION:"Region",
+        MARTIALSTATUS:"NartialStatus",
+        MILITERYSTATUS:"MiliteryStatus"
+      },
+      MESSAGE: {
+        NOROWFOUND: "No Rows Found"
+      }
     }
 
   }

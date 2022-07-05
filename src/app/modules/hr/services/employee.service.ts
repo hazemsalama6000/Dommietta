@@ -3,7 +3,7 @@ import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "r
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { IEmployeeList } from "../models/IEmployeeList.interface";
+import { IEmployee, IEmployeeList } from "../../employees/models/IEmployeeList.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +36,9 @@ export class EmployeeService {
     return this.bSubject.asObservable();
   }
 
-  getEmployeesData(searchModel: any) {
+  getEmployeesData(searchModel: any):Observable<IEmployee> {
     return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
-      .pipe(map(Items => Items.map((Item: any) => ({ ...Item }) as IEmployeeList)));
+      // .pipe(map(Items => Items.map((Item: any) => ({ ...Item }))));
 
   }
 
