@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeesComponent } from './employees.component';
@@ -32,6 +32,7 @@ import { TranslationModule } from '../i18n/translation.module';
     HttpClientModule,
     SharedModule,
   ],
+  providers:[DatePipe]
 
 })
 export class EmployeesModule { }

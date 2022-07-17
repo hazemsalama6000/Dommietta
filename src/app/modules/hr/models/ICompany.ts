@@ -7,7 +7,7 @@ export interface ICompany {
 	address: string,
 	phoneNumber: string,
 	logoPrint: string,
-	logoWeb: string,
+	logoWeb?: string,
 	commercialRecord: string
 	taxCardNo: string,
 	taxFileNo: string,

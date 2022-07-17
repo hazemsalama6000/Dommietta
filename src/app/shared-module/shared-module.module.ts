@@ -20,16 +20,16 @@ import { PrimengModule } from './PrimengModule';
 	],
 	imports: [
 		MaterialsModules,
-    PrimengModule,
+		PrimengModule,
 		CommonModule,
-    TranslationModule,
+		TranslationModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule
 	],
 	exports: [
 		MaterialsModules,
-    PrimengModule,
+		PrimengModule,
 		UpsertComponent,
 		ListContentComponent,
 		LookupIdNameComponent,

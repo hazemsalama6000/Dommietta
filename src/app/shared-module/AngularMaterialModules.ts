@@ -34,7 +34,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DividerModule } from 'primeng/divider';
-
+import { MatTreeModule } from '@angular/material/tree';
 export const MaterialsModules=[
 
 
@@ -71,5 +71,6 @@ export const MaterialsModules=[
 	NgMultiSelectDropDownModule,
 	NgSelectModule,
 	MatNativeDateModule,
-    DividerModule
+    DividerModule,
+    MatTreeModule
 ];

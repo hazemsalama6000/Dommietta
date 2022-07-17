@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-
 import { PermissionsRoutingModule } from './permissions-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { TranslationModule } from '../i18n';
@@ -17,6 +16,17 @@ import { UserConnectionLogsComponent } from './components/userConnectionLogs/use
 import { UserLocationLogsComponent } from './components/userLocationLogs/user-Locations-logs.component';
 import { SearchUserLocationLogsComponent } from './components/userLocationLogs/search-user-Locations-logs/search-user-Locations-logs.component';
 import { UserLocationLogsOnMapComponent } from './components/userLocationLogs/user-locations-logs-onmap/user-location-logs-onmap.component';
+import { GetusersComponent } from './components/users/getusers/getusers.component';
+import { AddnewuserComponent } from './components/users/addnewuser/addnewuser.component';
+import { AssignrolestousersComponent } from './components/users/assignrolestousers/assignrolestousers.component';
+import { InlineSVGModule } from 'ng-inline-svg-2';
+import { AddnewroleComponent } from './components/roles/addnewrole/addnewrole.component';
+import { GetrolesComponent } from './components/roles/getroles/getroles.component';
+import { RoleprofileComponent } from './components/roles/roleprofile/roleprofile.component';
+import { UpdateroleComponent } from './components/roles/updaterole/updaterole.component';
+import { PermissionsComponent } from './components/permissions.component';
+import { OverviewComponent } from './components/users/overview/overview.component';
+import { TreepermissionComponent } from './components/roles/treepermission/treepermission.component';
 
 
 @NgModule({
@@ -30,17 +40,27 @@ import { UserLocationLogsOnMapComponent } from './components/userLocationLogs/us
 	UserConnectionLogsComponent,
 	UserLocationLogsComponent,
 	SearchUserLocationLogsComponent,
-	UserLocationLogsOnMapComponent
+	UserLocationLogsOnMapComponent,
+	GetusersComponent,
+	AddnewuserComponent,
+	AssignrolestousersComponent,
+	PermissionsComponent,
+	AddnewroleComponent,
+	GetrolesComponent,
+	RoleprofileComponent,
+	UpdateroleComponent,
+	OverviewComponent,
+	TreepermissionComponent
   ],
   imports: [
     CommonModule,
-    PermissionsRoutingModule,
-    TranslationModule,
-    AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	SharedModule
+	PermissionsRoutingModule,
+    TranslationModule,
+	SharedModule,
+	InlineSVGModule
 	 ],
 	 providers:[DatePipe]
 })

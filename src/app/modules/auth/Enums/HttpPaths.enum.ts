@@ -10,8 +10,8 @@ export enum HttpPaths {
 	API_JOB_GETALL = "/api/v1/hr/getjobs",
 	API_JOB_DELETE = "/api/v1/hr/deletejob/",
 
-	API_JOB_GETPERSECTION="/api/v1/hr/GetJobsPerSection/",
-	API_JOB_UPDATEJOBPERSECTION="/api/v1/hr/ManageJobSection",
+	API_JOB_GETPERSECTION = "/api/v1/hr/GetJobsPerSection/",
+	API_JOB_UPDATEJOBPERSECTION = "/api/v1/hr/ManageJobSection",
 
 	//State APIS
 
@@ -72,7 +72,7 @@ export enum HttpPaths {
 	//Employee APIS
 
 	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/ListOfEmployees",
-  API_GET_EMPLOYEES_DATA="/api/v1/hr/listofallemployeeswithfilter",
+	API_GET_EMPLOYEES_DATA = "/api/v1/hr/listofallemployeeswithfilter",
 	API_GET_EMPLOYEEBY_ID = "/api/v1/hr/getemployeeprofileinfo",
 
 
@@ -82,5 +82,26 @@ export enum HttpPaths {
 	API_ONLINE_USERES_LASTLOCATION = "/api/v1/tech/getlastlocationforuser",
 	API_GET_USER_DATA = "/api/v1/auth/getuserData",
 	API_USERS_CONNECTION_LOGS = "/api/v1/auth/getuserlogs",
-	API_USRS_LOCATION_LOGS = "/api/v1/tech/getlocations"
+	API_USRS_LOCATION_LOGS = "/api/v1/tech/getlocations",
+
+	//Users
+	API_GET_COMPANY_USERS = "/api/v1/auth/getCompanyUsers/",
+	API_USER_REGISTER = "/api/v1/auth/userregister",
+	API_GET_COMPANY_ROLES = "/api/v1/permissions/getrulesforcompany?CompanyId=",
+	API_GET_USER_TYPE = "/api/v1/auth/getAllUserTypes",
+
+	API_GET_USER_ROLES = "/api/v1/permissions/getuserroles?UserId=",
+	API_UPDATE_USER_ROLES = "/api/v1/permissions/manageuserroles",
+
+	API_RESET_USER_PASSWORD = "/api/v1/auth/resetUserPassWord",
+	API_ACTIVE_USER_OR_NOT = "/api/v1/auth/activateuserornot?UserId=",
+
+	//Permissions
+	API_GET_ROLES_DETAILS_FOR_COMPANY = "/api/v1/permissions/getrolesdetailsforcompany?CompanyId=",
+	API_GET_DEFAULT_PERMISSIONS_FOR_COMPANY = "/api/v1/permissions/getdefaultpermissionsforcompany/",
+	API_MANAGE_PERMISSION_FOR_ROLE = "/api/v1/permissions/managepermissionforrole",
+	API_GET_PERMISSIONS_BY_ROLE = "/api/v1/permissions/getpermissionbyrole/",
+	API_ADD_ROLE = "/api/v1/permissions/addruleforcompany",
+	API_UPDATE_ROLE = "/api/v1/permissions/editroleforcompany/",
+	API_DELETE_ROLE = "/api/v1/permissions/deleteruleforcompany/",
 }

@@ -13,6 +13,9 @@ import { IEmployeeList } from '../models/IEmployeeList.interface';
 import * as FileSaver from 'file-saver';
 import { IUserData } from '../../auth/models/IUserData.interface';
 import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 
 @Component({
@@ -56,7 +59,6 @@ export class Employee_listComponent implements OnInit, OnDestroy {
     { propName: 'militery_Status', translateKey: "MILITERYSTATUS" }];
 
   loading: boolean = true;
-
   private unsubscribe: Subscription[] = [];
 
   constructor(
@@ -66,7 +68,7 @@ export class Employee_listComponent implements OnInit, OnDestroy {
     private departmentService: DepartmentService,
     private sectionService: SectionService,
     private jobService: JobService,
-    // private datePipe: DatePipe
+    private datePipe: DatePipe
   ) {
 
     this.searchObject = {
@@ -160,13 +162,53 @@ export class Employee_listComponent implements OnInit, OnDestroy {
   // start Export Functions
   exportPdf() {
     // import("jspdf").then(jsPDF => {
-    //   import("jspdf-autotable").then(x => {
-    //     const doc = new jsPDF.default(0, 0);
-    //     doc.autoTable(this.exportColumns, this.products);
-    //     doc.save('products.pdf');
-    //   })
+    //     import("jspdf-autotable").then(x => {
+    //         const doc = new jsPDF.default(0,0);
+    //         doc.autoTable(this.exportColumns, this.products);
+    //         doc.save('products.pdf');
+    //     })
     // })
+    // const doc = new jsPDF('p','pt');
+    // doc['autoTable']([], []);
+    // doc.save("products.pdf");
+    // this.generatePdf();
   }
+
+
+  // generatePdf() {
+  //   let header: string[] = [];
+  //   let tableData: any = [];
+  //   this.selectedColumns.map((s) => header.push(s.translateKey));
+  //   this.employees.map((obj: any) => {
+  //     let o: string[] = [];
+  //     for (let index = 0; index < this.selectedColumns.length; index++) {
+  //       let prop = obj[this.selectedColumns[index].propName]
+  //       o.push(`${prop ?? ''}`);
+  //     }
+  //     tableData.push(o);
+  //   })
+
+  //   var pdf = new jsPDF();
+  //   // pdf.addFileToVFS('Cairo-Black-normal.ttf', font);
+  //   pdf.addFont('Cairo-Black-normal.ttf', 'Cairo-Black', 'normal');
+  //   pdf.setFont('Cairo-Black')
+  //   pdf.setFontSize(12);
+  //   pdf.text('بيانات الموظفين', 100, 8);
+  //   pdf.setFontSize(12);
+  //   pdf.setTextColor(99);
+
+  //   autoTable(pdf, {
+  //     columns: [{ title: "الا", dataKey: "name" }],
+  //     body: [{ name: "jjhj" }, { name: "jjhj" }, { name: "jjhj" }, { name: "jjhj" }],
+  //     didDrawPage: (dataArg) => {
+  //       pdf.text('Sales', dataArg.settings.margin.left, 10);
+  //     }
+  //   });
+  //   // Open PDF document in browser's new tab
+  //   pdf.output('dataurlnewwindow')
+  //   // Download PDF doc  
+  //   pdf.save('table.pdf');
+  // }
 
   exportExcel() {
     let employeeFiltered: any[] = [];
@@ -174,7 +216,7 @@ export class Employee_listComponent implements OnInit, OnDestroy {
       let obj: any = {};
       for (let index = 0; index < this.selectedColumns.length; index++) {
         if (this.selectedColumns[index].propName.includes('Date')) {
-          obj[this.selectedColumns[index].propName] = x[this.selectedColumns[index].propName];
+          obj[this.selectedColumns[index].propName] = this.datePipe.transform(x[this.selectedColumns[index].propName], 'dd/MM/yyyy');
         } else {
           obj[this.selectedColumns[index].propName] = x[this.selectedColumns[index].propName];
         }
@@ -183,12 +225,11 @@ export class Employee_listComponent implements OnInit, OnDestroy {
       employeeFiltered.push(obj)
     })
 
-    console.log('test excel')
     import("xlsx").then(xlsx => {
       const worksheet = xlsx.utils.json_to_sheet(employeeFiltered);
       const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.saveAsExcelFile(excelBuffer, "products");
+      this.saveAsExcelFile(excelBuffer, "Employees");
     });
   }
 
@@ -198,18 +239,15 @@ export class Employee_listComponent implements OnInit, OnDestroy {
     const data: Blob = new Blob([buffer], {
       type: EXCEL_TYPE
     });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    FileSaver.saveAs(data, fileName + '_export_' + this.datePipe.transform(new Date(), 'MM/dd/yyyy') + EXCEL_EXTENSION);
   }
   // End Export Functions
-
-
 
   ngOnDestroy(): void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe);
   }
 
 }
-
 
 export interface IEmployeeSearch {
   branchesIds: number[];
@@ -220,6 +258,8 @@ export interface IEmployeeSearch {
   pageNumber: number;
   pageSize: number;
 }
+
+
 
 
 

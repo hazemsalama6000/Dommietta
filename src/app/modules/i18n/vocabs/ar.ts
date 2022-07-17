@@ -21,7 +21,10 @@ export const locale = {
       ONLINEUSERS: "المستخدمين المتصلين",
       LOGINUSERSDATA: "بيانات الدخول للمستخدمين",
       TRACINGUSERSLOCATION: "متابعة اماكن المستخدمين",
-      EMPLOYEELIST: "قائمة الموظفين"
+      EMPLOYEELIST: "قائمة الموظفين",
+      PERMISSION:"الصلاحيات",
+      USERS:"المستخدمين",
+      ROLES:"الأدوار"
 
     },
     FOOTER: {
@@ -256,7 +259,13 @@ export const locale = {
         SAVE: "حفظ",
         DELETE: "حذف",
         LASTLOCATION: "اخر موقع للمستخدم",
-        NOTCONNECTED: "قطع الاتصال"
+        NOTCONNECTED: "قطع الاتصال",
+        CANCEL:"الغاء",
+        ALLUSERS:"كل المستخدمين",
+        ADDROLE:"اضافة صلاحية",
+        ADDUSER:"اضافة مستخدم",
+        EDITROLE:"تعديل الصلاحية"
+
       },
       TITLES: {
         ADDORUPDATEONLINEUSERS: " بيانات دخول المستخدمين",
@@ -270,9 +279,30 @@ export const locale = {
         DAY: "ي",
         HOUR: "س",
         MINUTE: "د",
-        ONLINEUSERS: "المستخدمين المتصلين",
         COMPANIES: "الشركات",
         COUNTONLINEUSERFOREACHCOMPANY: "عدد المستخدمين المتصلين لكل شركة",
+        ONLINEUSERS: "المستخدمين المتصلين",
+        OFFLINEUSERS: "المستخدمين الغير متصلين",
+        ADDNEWUSER:"اضافة مستخدم جديد", 
+        EMPLOYEE:"الموظف",
+        FULLNAME:"الاسم بالكامل",
+        PHONENUMBER:"رقم الهاتف",
+        EMAIL:"البريد الالكترونى",
+        PASSWORD:"كلمة المرور",
+        USERTYPE:"نوع المستخدم",
+        ROLES:"الأدوار",
+        ASSIGNROLESTOUSER:"اضافة صلاحيات إلى مستخدم",
+        SEARCHUSER:"يمكنك البحث بالاسم أو بالتليفون",
+        STATUS:"الحالة",
+        LASTLOGINTIME:"أخر تسجيل دخول",
+        ASSIGNEDROLES:"صلاحيات المستخدم",
+        TOTAL:"الكل",
+        ONLINE:"متصلين",
+        OFFLINE:"غير متصلين",
+        OVERVIEW:"نظرة عامة",
+        CARDTOTAL:"عدد المستخدمين",
+        MORE:"المزيد",
+        TABLETITLEROLEPROFILE:"عدد مستخدمين الصلاحية"
 
       },
       MESSAGE: {

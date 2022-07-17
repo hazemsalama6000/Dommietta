@@ -167,6 +167,16 @@ th {
 	max-width: 150px;
 }
 
+.userDropdown{
+	padding: 0 !important;
+}
+
+.userDropdown>.p-dropdown {
+	width: 100% !important;
+	max-width: unset;
+	height: 39px;
+	align-content: center;
+}
 .p-dropdown {
 	width: 100% !important;
 	max-width: 150px;
@@ -242,3 +252,43 @@ p-paginator button {
 	margin: 0;
 	padding: 0 6px;
 }
+
+.mcontainer{
+	margin-inline-end: 21px !important;
+    margin-inline-start: 115px !important;
+}
+
+.pi {
+    font-size: 1.4rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+	
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+	border-radius:50px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888; 
+	  border-radius:50px;
+  
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }
+
+@media only screen and (max-width: 991.98px) {
+	.mcontainer{
+		margin-inline-end: 21px !important;
+		margin-inline-start: 40px !important;
+	}
+  }

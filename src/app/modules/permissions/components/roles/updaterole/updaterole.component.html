@@ -1,0 +1,90 @@
+<div id="kt_updaterole" class="bg-white" data-kt-drawer="true" data-kt-drawer-name="updaterole"
+    data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'900px', 'lg': '900px'}"
+    data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_updaterole_toggle"
+    data-kt-drawer-close="#kt_updaterole_close">
+    <div class="card shadow-none rounded-0 w-100">
+        <div class="card-header" id="kt_updaterole_header">
+            <h3 class="card-title fw-bolder text-dark">Update Role</h3>
+
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5"
+                    id="kt_updaterole_close">
+                    <span [inlineSVG]="'./assets/media/icons/duotune/arrows/arr061.svg'"
+                        class="svg-icon svg-icon-1"></span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body position-relative" id="kt_updaterole_body">
+            <div class="row">
+                <div class="col-12">
+                    <form [formGroup]="roleForm" (ngSubmit)="updateRole()">
+                        <div class="fv-row mb-10 d-flex">
+
+                            <div class="col-md-8">
+                                <label class="fs-5 fw-bolder form-label mb-2"><span class="required">Role
+                                        name</span></label>
+                                <input class="form-control form-control-solid" placeholder="Enter a role name"
+                                    name="role_name" formControlName="roleNameNew" />
+                            </div>
+                            <div class="col-md-4 d-flex align-item-bottom">
+                                <button type="submit" class="btn btn-primary me-3">update Role</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class="fv-row">
+
+                        <label class="fs-5 fw-bolder form-label mb-2">Role Permissions</label>
+
+                        <app-treepermission></app-treepermission>
+
+                        <!-- <div class="table-responsive">
+
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+
+                                <tbody class="text-gray-600 fw-bold">
+
+                                    <tr>
+                                        <td class="text-gray-800">Administrator Access
+                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                                title="Allows a full access to the system"></i>
+                                        </td>
+                                        <td>
+
+                                            <label class="form-check form-check-custom form-check-solid me-9">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="kt_roles_select_all" />
+                                                <span class="form-check-label" for="kt_roles_select_all">Select
+                                                    all</span>
+                                            </label>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div> -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-footer py-5 row justify-content-center" id="kt_editemployees_footer">
+            <div class="col-md-6 d-flex">
+                <button type="reset" id="kt_updaterole_close"
+                    class="btn btn-light me-3">{{'PERMISSIONS.BUTTONS.CANCEL'|translate}}</button>
+                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                    <span class="indicator-label">{{'PERMISSIONS.BUTTONS.SAVE'|translate}}</span>
+                    <span class="indicator-progress">Please wait...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

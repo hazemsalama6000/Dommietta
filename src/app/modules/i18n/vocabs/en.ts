@@ -20,7 +20,10 @@ export const locale = {
       ONLINEUSERS: "Online Users",
       LOGINUSERSDATA: "Users Login Information",
       TRACINGUSERSLOCATION: "Tracking users' locations",
-      EMPLOYEELIST: "Employee List"
+      EMPLOYEELIST: "Employee List",
+      PERMISSION:"Permissions",
+      USERS:"Users",
+      ROLES:"Roles"
     },
     FOOTER: {
       COPYRIGHT: "Copy Right"
@@ -250,7 +253,12 @@ export const locale = {
         SAVE: "Save",
         DELETE: "Delete",
         LASTLOCATION: "Last Location",
-        NOTCONNECTED: "Not Connected"
+        NOTCONNECTED: "Not Connected",
+        CANCEL:"Cancel",
+        ALLUSERS:"All Users",
+        ADDROLE:"Add Role",
+        ADDUSER:"Add User",
+        EDITROLE:"Edit Role"
       },
       TITLES: {
         ADDORUPDATEONLINEUSERS: "Users Login Data",
@@ -264,9 +272,30 @@ export const locale = {
         DAY: "D",
         HOUR: "H",
         MINUTE: "M",
-        ONLINEUSERS: "Online Users",
         COMPANIES: "Companies",
         COUNTONLINEUSERFOREACHCOMPANY: "Count Connected Users Foreach Company",
+        ONLINEUSERS: "Online Users",
+        OFFLINEUSERS: "Offline Users",
+        ADDNEWUSER:"Add New User",
+        EMPLOYEE:"Employee",
+        FULLNAME:"Full Name",
+        PHONENUMBER:"Phone Number",
+        EMAIL:"Email",
+        PASSWORD:"password",
+        USERTYPE:"User Type",
+        ROLES:"ROLES",
+        ASSIGNROLESTOUSER:"Assign Roles To User",
+        SEARCHUSER:"Search Users",
+        STATUS:"Status",
+        LASTLOGINTIME:"Last Login Time",
+        ASSIGNEDROLES:"Assigned Roles",
+        TOTAL:"Total",
+        ONLINE:"Online",
+        OFFLINE:"Offline",
+        OVERVIEW:"Overview",
+        CARDTOTAL:"Total users with this role:",
+        MORE:"more...",
+        TABLETITLEROLEPROFILE:"Count Users In Role"
 
       },
       MESSAGE: {
@@ -295,7 +324,7 @@ export const locale = {
         GRADUATIONDATE:"GraduateDate",
         QUALIFICATION:"Qualification",
         UNIVERSITY:"University",
-        NID:"NID",
+        NID:"National ID",
         BITHDATE:"BirthDate",
         ADDRESS:"Address",
         STATE:"State",

@@ -17,9 +17,16 @@ export class TopbarComponent implements OnInit {
   headerLeft: string = 'menu';
   TOKENIN_LOCALSTORAGE = "token";
   userdata: IUserData;
+  url: string = '';
 
-  constructor(private layout: LayoutService, private router: Router, private auth: AuthService) {
+
+  constructor(
+    private layout: LayoutService,
+    private router: Router,
+    private auth: AuthService
+  ) {
     auth.userData.subscribe(res => this.userdata = res)
+    this.url = localStorage.getItem("companyLink") ?? '';
   }
 
   logoutLogo: boolean = false;
