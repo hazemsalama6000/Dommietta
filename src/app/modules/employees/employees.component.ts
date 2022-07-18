@@ -96,6 +96,39 @@ export class EmployeesComponent implements OnInit {
 
 	
 
+
+	openDialogForEmployee() {
+		const dialogPosition: DialogPosition = {
+			top: '0px',
+			right: '0px'
+		};
+
+		const dialogRef = this.dialog.open(AddTechnitianLogComponent,
+			{
+				/*maxWidth: '50vw',
+				maxHeight: '100vh',*/
+				maxHeight: '100vh',
+				height: '100%',
+
+				//panelClass: 'full-screen-modal',*/
+				position: dialogPosition,
+				data: { employeeId: this.employeeDsiaplay.id }
+			});
+
+		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
+			if (result.employeeId !== undefined) {
+				this.employeeDsiaplay.isTechnician = true;
+				this.editEmployeeTechnicialData(result);
+			}
+			else {
+				this.employeeDsiaplay.isTechnician = false;				
+			}
+		});
+
+	}
+
+
+
 	openDialog() {
 		const dialogPosition: DialogPosition = {
 			top: '0px',
