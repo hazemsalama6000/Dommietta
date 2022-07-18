@@ -23,5 +23,6 @@ export class TechnitianService {
 			map((data: ITechnitianLog[]) => data)
 		);
 	}
+	///
 	
 }
