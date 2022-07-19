@@ -21,19 +21,40 @@
                     <div class="col-12">
 
                         <div class="fv-row mb-10 d-flex">
-
                             <div class="col-md-10">
                                 <label class="fs-5 fw-bolder form-label mb-2"><span class="required">Role
                                         name</span></label>
                                 <input class="form-control form-control-solid" placeholder="Enter a role name"
-                                    name="role_name" formControlName="roleName" />
-                            </div>
+                                    name="role_name" formControlName="roleName"
+                                    [ngClass]="{'border-danger':roleForm.controls['roleName'].errors&&(roleForm.controls['roleName'].touched||saveButtonClickedFlag)}" />
 
+                                <mat-hint>
+
+                                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                        validation: 'required',
+                                                        message: '' | translate : {name:'' | translate},
+                                                        control: roleForm.controls['roleName']
+                                                      }"></ng-container>
+
+                                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                      validation: 'min',
+                                                      message: '' | translate : {name:'' | translate , min:0},
+                                                      control: roleForm.controls['roleName']
+                                                    }"></ng-container>
+
+                                    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                                                        validation: 'max',
+                                                        message: '' | translate : {name:'' | translate , max:100},
+                                                        control: roleForm.controls['roleName']
+                                                     }"></ng-container>
+
+                                </mat-hint>
+                            </div>
                         </div>
 
                         <div class="fv-row">
                             <label class="fs-5 fw-bolder form-label mb-2">Role Permissions</label>
-<app-treepermission></app-treepermission>
+                            <app-treepermission #tree></app-treepermission>
                             <div class="table-responsive">
                                 <table class="table align-middle table-row-dashed fs-6 gy-5">
                                     <tbody class="text-gray-600 fw-bold">
@@ -98,9 +119,10 @@
             </div>
             <div class="card-footer py-5 row justify-content-center" id="kt_editemployees_footer">
                 <div class="text-center col-md-6 d-flex">
-                    <button type="reset" id="kt_addnewrole_close"
+                    <button type="reset" id="kt_addnewrole_close" #btnClose
                         class="btn btn-light me-3">{{'PERMISSIONS.BUTTONS.CANCEL'|translate}}</button>
-                    <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+                    <button type="submit" (click)="saveButtonClickedFlag = true" id="kt_modal_new_target_submit"
+                        class="btn btn-primary">
                         <span class="indicator-label">{{'PERMISSIONS.BUTTONS.SAVE'|translate}}</span>
                         <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -111,3 +133,13 @@
     </div>
 
 </div>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && ( saveButtonClickedFlag || control.touched)">
+        <div class="fv-plugins-message-container">
+            <span role="alert">
+                {{ message }}
+            </span>
+        </div>
+    </ng-container>
+</ng-template>

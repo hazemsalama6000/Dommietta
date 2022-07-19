@@ -17,6 +17,8 @@ import { UsersService } from '../../../services/users.service';
 })
 export class AddnewuserComponent implements OnInit, OnDestroy {
 
+  saveButtonClickedFlag = false;
+
   employeeDropdown: LookUpModel[];
   userTypeDropdown: LookUpModel[];
   rolesData: any[];

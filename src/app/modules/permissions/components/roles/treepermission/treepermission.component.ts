@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { ITreeRoles } from '../../../models/ITreeRoles.interface';
+import { Subscription } from 'rxjs';
+import { RolesService } from '../../../services/roles.service';
 
 @Component({
   selector: 'app-treepermission',
@@ -8,21 +11,28 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
   styleUrls: ['./treepermission.component.scss']
 })
 export class TreepermissionComponent implements OnInit {
+  permissionTree: ITreeRoles[];
+  private unsubscribe: Subscription[] = [];
 
-  public treeControl = new NestedTreeControl<permissionNode>((node:any) => node.children);
-  public dataSource = new MatTreeNestedDataSource<permissionNode>();
+  public treeControl = new NestedTreeControl<ITreeRoles>((node: any) => node.children);
+  public dataSource = new MatTreeNestedDataSource<ITreeRoles>();
 
-  constructor() {
-    this.dataSource.data = TREE_DATA;
-    Object.keys(this.dataSource.data).forEach((key: any) => { this.setParent(this.dataSource.data[key]); });
+  constructor(private roleService: RolesService) {
+    let getTree = roleService.permissionTree.subscribe(res => {
+      this.permissionTree = res
+      this.dataSource.data = res;
+      Object.keys(this.dataSource.data).forEach((key: any) => { this.setParent(this.dataSource.data[key]); });
+    });
+    this.unsubscribe.push(getTree);
   }
-  
+
   ngOnInit(): void {
+
   }
 
-  hasChild = (_: number, node: permissionNode) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: ITreeRoles) => !!node.children && node.children.length > 0;
 
-  setParent(node: permissionNode, parent?: permissionNode) {
+  setParent(node: ITreeRoles, parent?: ITreeRoles) {
     node.parent = parent;
     if (node.children) {
       node.children.forEach((childNode) => { this.setParent(childNode, node); });
@@ -32,80 +42,28 @@ export class TreepermissionComponent implements OnInit {
     }
   }
 
-  checkAllParents(node: permissionNode) {
+  checkAllParents(node: ITreeRoles) {
     if (node.parent) {
       const descendants = this.treeControl.getDescendants(node.parent);
-      node.parent.isSelected = descendants.every((child:any) => child.isSelected);
-      node.parent.indeterminate = descendants.some((child:any) => child.isSelected);
+      node.parent.isSelected = descendants.every((child: any) => child.isSelected);
+      node.parent.indeterminate = descendants.some((child: any) => child.isSelected);
       this.checkAllParents(node.parent);
     }
   }
 
-  itemToggle(checked: boolean, node: permissionNode) {
+  itemToggle(checked: boolean, node: ITreeRoles) {
+    
     node.isSelected = checked;
     if (node.children) {
-      node.children.forEach((child) => { this.itemToggle(checked, child); });
+      node.children.forEach((child: any) => { this.itemToggle(checked, child); });
     }
     this.checkAllParents(node);
   }
 
-  submit() {
-console.log(TREE_DATA)
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
-
 
 }
 
-class permissionNode {
-  parent?: permissionNode;
-  name: string;
-  id?: number;
-  children?: permissionNode[];
-  isSelected?: boolean = true;
-  indeterminate?: boolean;
-}
 
-const TREE_DATA: permissionNode[] = [
-  {
-    name: 'hr',
-
-    children: [
-      {
-        name: 'job',
-        children: [
-          { name: 'Add', id: 1, isSelected: true },
-          { name: 'Update', id: 2, isSelected: false },
-          { name: 'Delete', id: 3, isSelected: true },
-        ],
-      },
-      {
-        name: 'department',
-        children: [
-          { name: 'Add', id: 1, isSelected: true },
-          { name: 'Update', id: 2, isSelected: true },
-          { name: 'Delete', id: 3, isSelected: true },
-        ],
-      },
-    ],
-  }, {
-    name: 'Companies',
-    children: [
-      {
-        name: 'Company',
-        children: [
-          { name: 'Add', id: 1, isSelected: true },
-          { name: 'Update', id: 2, isSelected: true },
-          { name: 'Delete', id: 3, isSelected: true },
-        ],
-      },
-      {
-        name: 'Branch',
-        children: [
-          { name: 'Add', id: 1, isSelected: true },
-          { name: 'Update', id: 2, isSelected: true },
-          { name: 'Delete', id: 3, isSelected: true },
-        ],
-      },
-    ],
-  }
-];
