@@ -1,11 +1,9 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl p-0">
 
-        <div class="d-flex flex-column flex-lg-row">
+        <div class="row mx-0" >
 
-            <div class="flex-column flex-lg-row-auto w-100 w-lg-200px w-xl-300px mb-10">
-
-                <div class="card card-flush">
+                <div class="card card-flush col-4 me-5" >
 
                     <div class="card-header">
                         <div class="card-title">
@@ -13,34 +11,26 @@
                         </div>
                     </div>
 
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-0 " style="max-height: 300px;overflow-y: auto;overflow-x: hidden;">
                         <div class="d-flex flex-column text-gray-600">
                             <ng-container *ngFor="let claim of roleData?.claims;let i=index">
-                                <div *ngIf="3>i" class="d-flex align-items-center py-2">
+                                <div class="d-flex align-items-center py-2">
                                     <span class="bullet bg-primary me-3"></span>{{claim??''}}
                                 </div>
                             </ng-container>
-
-                            <div *ngIf="(roleData?.claims?.length??0)>3" class='d-flex align-items-center py-2'>
-                                <span class='bullet bg-primary me-3'></span>
-                                <em>and {{(roleData?.claims?.length??0)-3}} more...</em>
-                            </div>
                         </div>
                     </div>
 
                     <div class="card-footer pt-0">
                         <button type="button" class="btn btn-light btn-active-primary" data-bs-toggle="modal"
-                            data-bs-target="#kt_modal_update_role" (click)="editRole(roleData.roleId)">
+                            data-bs-target="#kt_modal_update_role" id="kt_updaterole_toggle"
+                            (click)="editRole(roleData.roleId)">
                             {{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}</button>
                     </div>
 
-                </div>
+                </div>   
 
-            </div>
-
-            <div class="flex-lg-row-fluid" style="margin-inline-start: 2.5rem;">
-
-                <div class="card card-flush mb-6 mb-xl-9">
+                <div class="card card-flush col" >
 
                     <div class="card-header pt-5">
                         <div class="card-title">
@@ -80,7 +70,7 @@
 
                     </div>
 
-                    <div class="card-body pt-0">
+                    <div class="card-body pt-0" style="overflow-y: auto">
 
                         <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0" id="kt_permissions_table">
                             <thead>
@@ -129,8 +119,7 @@
                                             <label class="badge badge-light-danger fs-7 m-1">Offline</label>
                                         </div>
                                     </td>
-                                    <td style="direction: initial;">{{user.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm
-                                        a '}}</td>
+                                    <td style="direction: initial;">{{user.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm a '}}</td>
 
                                 </tr>
                             </tbody>
@@ -138,9 +127,7 @@
                     </div>
 
                 </div>
-
-            </div>
-
+ 
         </div>
 
     </div>

@@ -15,6 +15,7 @@ import { RolesService } from '../../../services/roles.service';
 export class RoleprofileComponent implements OnInit {
 
   roleData!: IRoles;
+  roleId: string;
   userData: IUserData;
   unsubscribe: Subscription[] = [];
   url: string = '';
@@ -26,14 +27,11 @@ export class RoleprofileComponent implements OnInit {
     private rolesService: RolesService
   ) {
     this.url = localStorage.getItem("companyLink") ?? '';
-  }
-
-  ngOnInit(): void {
-
     let userDatasub = this.authService.userData.subscribe(res => {
       this.userData = res;
       let queryParams = this.activatedRoute.queryParams.subscribe((params) => {
         if (params.roleId) {
+          this.roleId=params.roleId;
           this.getRolesData(params.roleId);
         } else
           this.router.navigate(['/permissions/roles']);
@@ -42,6 +40,14 @@ export class RoleprofileComponent implements OnInit {
       this.unsubscribe.push(queryParams)
     })
     this.unsubscribe.push(userDatasub);
+  }
+
+  ngOnInit(): void {
+
+    let bSubject = this.rolesService.bSubject.subscribe(res => {
+      this.getRolesData(this.roleId);
+    })
+    this.unsubscribe.push(bSubject);
 
   }
 

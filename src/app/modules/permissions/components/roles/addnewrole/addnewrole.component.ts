@@ -52,7 +52,6 @@ export class AddnewroleComponent implements OnInit {
   getDefualtPermission() {
     this.rolesService.GetDefaultPermissionForCompany(this.userData.companyId).subscribe(
       (res: ITreeRoles[]) => {
-        this.treePermissions = res;
         this.rolesService.permissionTree.next(res);
       },
       (err) => console.log(err),
@@ -62,39 +61,11 @@ export class AddnewroleComponent implements OnInit {
 
 
   addRole() {
-    console.log(this.treePermissions)
     if (this.roleForm.valid && this.saveButtonClickedFlag) {
-      console.log('addrole')
       this.rolesService.AddRole(this.roleForm.value).subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {
-            //this.toaster.openSuccessSnackBar(data.message);
- //           this.managePermissions(data.data.id, data.data.name);
-            //this.rolesService.bSubject.next(true);
-
-            let permissions: IManagePermission = { roleId: data.data.id, roleName: data.data.name, roleTree: this.treePermissions };
-            if (permissions.roleId != null) {
-                                  console.log(this.treePermissions, permissions, 'test permission')
-console.log(JSON.stringify(permissions.roleTree))
-              this.rolesService.PostManagePermission(permissions).subscribe(
-                (data: HttpReponseModel) => {
-                  if (data.isSuccess) {
-                    this.toaster.openSuccessSnackBar(data.message);
-                    this.rolesService.bSubject.next(true);
-                    this.roleForm.reset();
-                    this.btnClose.nativeElement.click();
-                  }
-                  else if (data.isExists) {
-                    this.toaster.openWarningSnackBar(data.message);
-                  }
-                },
-                (error: any) => {
-                  console.log(error);
-                  this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-                }
-              );
-            }
-
+            this.managePermissions(data.data.id, data.data.name)
           }
           else if (data.isExists) {
             this.toaster.openWarningSnackBar(data.message);
@@ -109,30 +80,40 @@ console.log(JSON.stringify(permissions.roleTree))
 
   }
 
-  // managePermissions(roleId: string, roleName: string) {
-  //   let permissions: IManagePermission = { roleId: roleId, roleName: roleName, roleTree: this.treePermissions };
-  //   if (permissions.roleId != null) {
-  //     console.log(this.treePermissions, permissions, 'test permission')
-  //     this.rolesService.PostManagePermission(permissions).subscribe(
-  //       (data: HttpReponseModel) => {
-  //         if (data.isSuccess) {
-  //           this.toaster.openSuccessSnackBar(data.message);
-  //           this.rolesService.bSubject.next(true);
-  //           this.roleForm.reset();
-  //           this.btnClose.nativeElement.click();
-  //         }
-  //         else if (data.isExists) {
-  //           this.toaster.openWarningSnackBar(data.message);
-  //         }
-  //       },
-  //       (error: any) => {
-  //         console.log(error);
-  //         this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-  //       }
-  //     );
-  //   }
+  removeParent(arr?: ITreeRoles[]) {
+    arr?.map(x => {
+      delete x.parent
+      if ((x?.children?.length ?? 0) > 0) {
+        this.removeParent(x?.children);
+      }
+    })
+  }
 
-  // }
+  managePermissions(roleId: string, roleName: string) {
+    this.removeParent(this.treePermissions)
+    let permissions: IManagePermission = { roleId: roleId, roleName: roleName, roleTree: this.treePermissions };
+    if (permissions.roleId != null) {
+      this.rolesService.PostManagePermission(permissions).subscribe(
+        (data: HttpReponseModel) => {
+          if (data.isSuccess) {
+            this.toaster.openSuccessSnackBar(data.message);
+            this.rolesService.bSubject.next(true);
+            this.roleForm.reset();
+            this.btnClose.nativeElement.click();
+            this.saveButtonClickedFlag=false;
+          }
+          else if (data.isExists) {
+            this.toaster.openWarningSnackBar(data.message);
+          }
+        },
+        (error: any) => {
+          console.log(error);
+          this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+        }
+      );
+    }
+
+  }
 
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());

@@ -29,9 +29,9 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
     userName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
     email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
     password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-    phoneNumber: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]*$")])],
-    company_Id: ['', [Validators.required]],
-    userType_Id: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+    phoneNumber: [0, Validators.compose([Validators.required])],
+    company_Id: [0, [Validators.required]],
+    userType_Id: [0, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
     addingRoles: this.fb.array([])
   });
 
@@ -78,8 +78,8 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
   }
 
   Submit() {
-    console.log(this.userDataForm.value)
-    if (this.userDataForm.valid) {
+    console.log(this.userDataForm.value,'this user form',this.userDataForm.valid)
+    if (this.userDataForm.valid&&this.saveButtonClickedFlag) {
 
       this.userservice.PostUserData(this.userDataForm.value).
         subscribe(
