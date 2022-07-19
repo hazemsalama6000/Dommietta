@@ -1,10 +1,8 @@
 
-
-
 export interface IEmployee{
     imagePath: string,
     militery_Status: string,
-    martialStatus: string,
+    maritalStatus: string,
     hR_Status: string,
     region: string,
     state: string,
@@ -12,8 +10,14 @@ export interface IEmployee{
     section: string,
     department: string,
     branch: string,
-    isActive: true,
-    techTechnician: null,
+    isActive: boolean,
+    techTechnician: {
+		id: number,
+		employee_Id: number,
+		useGps: boolean,
+		returnFromBill: boolean,
+		isActive: boolean
+	},
     id: number,
     name: string,
     code: string,
@@ -35,5 +39,6 @@ export interface IEmployee{
     jobSection_Id: number,
     hireDate: Date,
     branch_Id: number,
-    is_Technical: boolean
+    isTechnician: boolean,
+	email:string
 }

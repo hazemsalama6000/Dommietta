@@ -9,9 +9,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { EditemployeeComponent } from './editemployee/editemployee.component';
 import { Employee_listComponent } from './employee-list/employee-list.component';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
+import { TranslationModule } from '../i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { TranslationModule } from '../i18n/translation.module';
+import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
+import { TechnitianService } from './services/technitian.service';
+import { technicianLogComponent } from './technician-log/technician-log.component';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,9 @@ import { TranslationModule } from '../i18n/translation.module';
     OverviewComponent,
     EditemployeeComponent,
     Employee_listComponent,
+    AddTechnitianLogComponent,
+    technicianLogComponent,
+    UserLocationComponent
   ],
   imports: [
     CommonModule,
@@ -27,12 +34,13 @@ import { TranslationModule } from '../i18n/translation.module';
     InlineSVGModule,
     TranslationModule,
     NgApexchartsModule,
+    SharedModule,
+    TranslationModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule,
   ],
-  providers:[DatePipe]
+  providers: [TechnitianService]
 
 })
 export class EmployeesModule { }
