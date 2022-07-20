@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
@@ -16,7 +16,7 @@ import { UsersService } from '../../../services/users.service';
   styleUrls: ['./addnewuser.component.scss']
 })
 export class AddnewuserComponent implements OnInit, OnDestroy {
-
+  @ViewChild('btnClose') btnClose: ElementRef<HTMLElement>;
   saveButtonClickedFlag = false;
 
   employeeDropdown: LookUpModel[];
@@ -25,13 +25,13 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
   userData: IUserData;
 
   userDataForm: FormGroup = this.fb.group({
-    employeeId: [0],
-    userName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-    email: ['', Validators.compose([Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
-    password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-    phoneNumber: [0, Validators.compose([Validators.required])],
+    employeeId: [0, [Validators.required]],
+    userName: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(150)])],
+    password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(100)])],
+    email: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
+    phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(11)])],
     company_Id: [0, [Validators.required]],
-    userType_Id: [0, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+    userType_Id: [0, [Validators.required]],
     addingRoles: this.fb.array([])
   });
 
@@ -78,8 +78,8 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
   }
 
   Submit() {
-    console.log(this.userDataForm.value,'this user form',this.userDataForm.valid)
-    if (this.userDataForm.valid&&this.saveButtonClickedFlag) {
+    // console.log(this.userDataForm.value, 'this user form', this.userDataForm.get('phoneNumber')?.errors)
+    if (this.userDataForm.valid && this.saveButtonClickedFlag) {
 
       this.userservice.PostUserData(this.userDataForm.value).
         subscribe(
@@ -87,8 +87,8 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
 
             if (data.isSuccess) {
               this.toaster.openSuccessSnackBar(data.message);
-              console.log(data.message);
               this.userservice.bSubject.next(true);
+              this.btnClose.nativeElement.click();
             }
             else if (data.isExists) {
               this.toaster.openWarningSnackBar(data.message);

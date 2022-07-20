@@ -6,6 +6,7 @@ export const locale = {
     TRANSLATOR: {
       SELECT: 'Select your language',
     },
+
     MENU: {
       NEW: 'new',
       ACTIONS: 'Actions',
@@ -24,12 +25,15 @@ export const locale = {
       EMPLOYEELIST: "قائمة الموظفين",
       PERMISSION:"الصلاحيات",
       USERS:"المستخدمين",
-      ROLES:"الأدوار"
+      ROLES:"الأدوار",
+      SUPERADMIN:"صلاحيات المدير"
 
     },
+
     FOOTER: {
       COPYRIGHT: "جميع الحقوق محفوظة"
     },
+
     USERDIALOG: {
       MYPROFILE: "الملف الشخصى",
       PROFILESETTING: "أعدادات الحساب",
@@ -302,11 +306,19 @@ export const locale = {
         OVERVIEW:"نظرة عامة",
         CARDTOTAL:"عدد المستخدمين",
         MORE:"المزيد",
-        TABLETITLEROLEPROFILE:"عدد مستخدمين الصلاحية"
+        TABLETITLEROLEPROFILE:"عدد مستخدمين الصلاحية",
+        ADDPERMISSIONTOCOMPANY:"اضافة صلاحيات الى شركة",
+        ADDNEWROLE:"اضافة دور جديد",
+        ROLEPERMISSION:"صلاحيات الدور",
+        ROLENAME:"أسم الدور",
+        UPDATEROLE:"تعديل الدور"
 
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"
+      },
+      PLACEHOLDER:{
+        ROLENAMEPLACEHOLDER:"برجاء ادخال اسم الدور"
       }
     },
 

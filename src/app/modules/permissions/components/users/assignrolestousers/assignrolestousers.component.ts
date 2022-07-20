@@ -21,7 +21,7 @@ export class AssignrolestousersComponent implements OnInit {
     let data = usersService.userid.subscribe((res) => {
       if (res)
         usersService.getRolesByUserData(res).subscribe(
-          (res) => this.roleData = res,
+          (res) =>{ this.roleData = res;console.log(this.roleData)},
           (err) => console.log(err),
           () => { })
     });

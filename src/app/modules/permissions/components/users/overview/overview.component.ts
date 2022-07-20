@@ -33,7 +33,12 @@ export class OverviewComponent implements OnInit {
       this.getUsersData();
     })
 
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+    this.unsubscribe.push(data)
+  }
+
+  ngOnInit(): void {
+    let bsub = this.userService.bSubject.subscribe(res => this.getUsersData());
+    this.unsubscribe.push(bsub);
   }
 
   getUsersData() {
@@ -46,14 +51,15 @@ export class OverviewComponent implements OnInit {
       (err) => console.log(err),
       () => { }
     )
+
   }
 
   getLength(arr: any, onlineOrNot: boolean) {
     return arr.filter((x: any) => x.onlineOrNot == onlineOrNot)?.length ?? 0
   }
 
-
-  ngOnInit(): void {
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
 }

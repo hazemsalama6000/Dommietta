@@ -27,6 +27,7 @@ import { UpdateroleComponent } from './components/roles/updaterole/updaterole.co
 import { PermissionsComponent } from './components/permissions.component';
 import { OverviewComponent } from './components/users/overview/overview.component';
 import { TreepermissionComponent } from './components/roles/treepermission/treepermission.component';
+import { AdminrolesComponent } from './components/roles/adminroles/adminroles.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { TreepermissionComponent } from './components/roles/treepermission/treep
 	RoleprofileComponent,
 	UpdateroleComponent,
 	OverviewComponent,
-	TreepermissionComponent
+	TreepermissionComponent,
+	AdminrolesComponent
   ],
   imports: [
     CommonModule,

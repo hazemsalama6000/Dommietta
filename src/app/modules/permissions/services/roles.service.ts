@@ -3,6 +3,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
 import { IAddRole } from '../models/IAddRole.interface';
+import { ICompanyRoles } from '../models/ICompanyRoles.interface';
 import { IManagePermission } from '../models/IManagePermission.interface';
 import { IRolesProfile } from '../models/IRolesProfile.interface';
 import { ITreeRoles } from '../models/ITreeRoles.interface';
@@ -48,12 +49,21 @@ export class RolesService {
 
   //this function to delete role
   DeleteRole(roleId: string): Observable<any> {
-   return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_DELETE_ROLE}${roleId}`)
+    return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_DELETE_ROLE}${roleId}`)
   }
 
   //this function to add or update permissions for role
   PostManagePermission(model: IManagePermission): Observable<any> {
     return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_MANAGE_PERMISSION_FOR_ROLE}`);
+  }
+
+  GetCompanyRole(CompanyId: number): Observable<ICompanyRoles> {
+    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPAY_ROLES}${CompanyId}`)
+      .pipe(map((Items: any) => Items.data as ICompanyRoles));
+  }
+
+  AddCompanyRole(model: ICompanyRoles): Observable<any> {
+    return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_ADD_COMPANY_ROLES}`);
   }
 
 }

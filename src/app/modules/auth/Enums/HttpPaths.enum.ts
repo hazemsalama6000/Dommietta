@@ -109,4 +109,6 @@ export enum HttpPaths {
 	API_ADD_ROLE = "/api/v1/permissions/addruleforcompany",
 	API_UPDATE_ROLE = "/api/v1/permissions/editroleforcompany/",
 	API_DELETE_ROLE = "/api/v1/permissions/deleteruleforcompany/",
+	API_GET_COMPAY_ROLES="/api/v1/permissions/getpermissionforcompanyadmin/",
+	API_ADD_COMPANY_ROLES="/api/v1/permissions/managepermissionforcompanyadmin",
 }

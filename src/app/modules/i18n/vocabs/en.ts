@@ -5,6 +5,7 @@ export const locale = {
     TRANSLATOR: {
       SELECT: 'Select your language',
     },
+
     MENU: {
       NEW: 'new',
       ACTIONS: 'Actions',
@@ -23,11 +24,14 @@ export const locale = {
       EMPLOYEELIST: "Employee List",
       PERMISSION:"Permissions",
       USERS:"Users",
-      ROLES:"Roles"
+      ROLES:"Roles",
+      SUPERADMIN:"Super Admin"
     },
+
     FOOTER: {
       COPYRIGHT: "Copy Right"
     },
+
     USERDIALOG: {
       MYPROFILE: "My Profile",
       PROFILESETTING: "Account Settings",
@@ -295,11 +299,19 @@ export const locale = {
         OVERVIEW:"Overview",
         CARDTOTAL:"Total users with this role:",
         MORE:"more...",
-        TABLETITLEROLEPROFILE:"Count Users In Role"
+        TABLETITLEROLEPROFILE:"Count Users In Role",
+        ADDPERMISSIONTOCOMPANY:"Add Role To Company",
+        ADDNEWROLE:"Add New Role",
+        ROLEPERMISSION:"Role Permissions",
+        ROLENAME:"Role Name",
+        UPDATEROLE:"Update Role"
 
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"
+      },
+      PLACEHOLDER:{
+        ROLENAMEPLACEHOLDER:"Enter a role name"
       }
     },
 

@@ -4,6 +4,7 @@ import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpSe
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
 import { IUserList } from '../models/IUserLList.interface';
+import { IUserRole } from '../models/IUserRole.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,8 @@ export class UsersService {
 
   //Get Roles By UserID
   getRolesByUserData(userID: string): Observable<any> {
-    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_UPDATE_USER_ROLES}${userID}`);
+    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_USER_ROLES}${userID}`)
+    .pipe(map((Items: any) => Items.data as IUserRole));
   }
 
   //Update User Roles
