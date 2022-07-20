@@ -26,8 +26,14 @@ export class AddTechnitianLogComponent implements OnInit {
 	ngOnInit(): void {
 		this.AddTechnicianForm = this.fb.group({
 			employeeId: [this.data.employeeId],
-			useGps: [false],
-			returnFromBill: [false]
+			canCollect: [false],
+			canRead: [false],
+			canComplain: [false],
+			canEditCustomer: [false],
+			attachImageRead: [false],
+			attachImageEditCustomer: [false],
+			maxOfflineWorkingHours: [0],
+			maxOfflineWorkingBills: [0]
 		});
 	}
 

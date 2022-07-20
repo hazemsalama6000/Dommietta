@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
+import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
+import { BlockService } from 'src/app/core-module/LookupsServices/block.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
+import { BranchService } from '../hr/services/branch.service';
 import { IEmployee } from './models/employee.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
 import { EmployeeService } from './services/employee.service';
@@ -19,82 +22,72 @@ export class EmployeesComponent implements OnInit {
 	imageFile: File;
 
 	dropdownEmployeeData: LookUpModel[] = [];
-	employeeDsiaplay: IEmployee = {} as IEmployee;
-	constructor(private service: EmployeeService,
-		private toaster: toasterService , public dialog: MatDialog) {
+	employeeDisplay: IEmployee = {} as IEmployee;
+	constructor(
+		private service: EmployeeService,
+		private blockService:BlockService,
+		private areaService:AreaService,
+		private branchService:BranchService,
+		private toaster: toasterService,
+		public dialog: MatDialog) {
 
 	}
 
 	ngOnInit(): void {
-		this.service.getLookupEmployeeData(1005).subscribe((data: LookUpModel[]) => {
+		/*this.service.getLookupEmployeeData(1005).subscribe((data: LookUpModel[]) => {
 			this.dropdownEmployeeData = data;
-		});
+		});*/
 	}
 
-	imageChange(event: any) {
-
-		this.imageFile = <File>event.target.files[0];
-
-		const fd = new FormData();
-		fd.append('image', this.imageFile, this.imageFile.name.toString());
-		fd.append('employee_Id', this.employeeDsiaplay.id.toString());
-		this.service.changeEmployeeImageData(fd).
-			subscribe(
-				(data: HttpReponseModel) => {
-
-					if (data.isSuccess) {
-						this.toaster.openSuccessSnackBar(data.message);
-						console.log(data.data);
-						this.employeeDsiaplay.imagePath = `${localStorage.getItem('companyLink')}${data.data}`
-						console.log(this.employeeDsiaplay.imagePath);
-						//	this.service.bSubject.next(true);
-					}
-					else if (data.isExists) {
-						this.toaster.openWarningSnackBar(data.message);
-					}
-				},
-				(error: any) => {
-					console.log(error);
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-				}
-			);
-	}
 
 	employeeSelectListOnChange(selectedItem: LookUpModel) {
 		this.service.getEmployeeById(selectedItem.Id)
-			.pipe(
-				map(
-					(data: IEmployee) => ({ ...data, imagePath: `${localStorage.getItem("companyLink")}${data.imagePath}` }) as IEmployee
-				)
-			)
 			.subscribe(
 				(data: IEmployee) => {
-					this.employeeDsiaplay = data;
-					console.log(this.employeeDsiaplay);
+					this.employeeDisplay = data;
+					console.log(this.employeeDisplay);
 				}
 				, (error) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				}
 			);
-
 	}
 
 
 	editEmployeeTechnicialData(value: ITechnitianLog) {
 
-		this.employeeDsiaplay.techTechnician = {employee_Id:0,id:0,isActive:false,returnFromBill:false,useGps:false};
-		this.employeeDsiaplay.isTechnician = true;
-		this.employeeDsiaplay.techTechnician.employee_Id = value.employeeId;
-		this.employeeDsiaplay.techTechnician.isActive = true;
-		this.employeeDsiaplay.techTechnician.returnFromBill = value.returnFromBill;
-		this.employeeDsiaplay.techTechnician.useGps = value.useGps;
+		this.employeeDisplay.Technician = {
+			employee_Id: 0
+			, id: 0
+			, isActive: false
+			, attachImageEditCustomer: false
+			, attachImageRead: false
+			, canCollect: false
+			, canComplain: false
+			, canEditCustomer: false
+			, canRead: false
+			, maxOfflineWorkingBills: 0
+			, maxOfflineWorkingHours: 0
+		};
+
+		this.employeeDisplay.isTechnician = true;
+		this.employeeDisplay.Technician.employee_Id = value.employee_Id;
+		this.employeeDisplay.Technician.isActive = true;
+		this.employeeDisplay.Technician.attachImageEditCustomer = value.attachImageEditCustomer;
+		this.employeeDisplay.Technician.attachImageRead = value.attachImageRead;
+		this.employeeDisplay.Technician.canCollect = value.attachImageRead;
+		this.employeeDisplay.Technician.canComplain = value.attachImageRead;
+		this.employeeDisplay.Technician.canEditCustomer = value.attachImageRead;
+		this.employeeDisplay.Technician.canRead = value.attachImageRead;
+		this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
+		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;
 	}
 
 	editActiveProp(value: boolean) {
-		this.employeeDsiaplay.isActive = value;
+		this.employeeDisplay.userIsActive = value;
 	}
 
-	
+
 
 
 	openDialogForEmployee() {
@@ -112,16 +105,16 @@ export class EmployeesComponent implements OnInit {
 
 				//panelClass: 'full-screen-modal',*/
 				position: dialogPosition,
-				data: { employeeId: this.employeeDsiaplay.id }
+				data: { employeeId: this.employeeDisplay.id }
 			});
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employeeId !== undefined) {
-				this.employeeDsiaplay.isTechnician = true;
+			if (result.employee_Id !== undefined) {
+				this.employeeDisplay.isTechnician = true;
 				this.editEmployeeTechnicialData(result);
 			}
 			else {
-				this.employeeDsiaplay.isTechnician = false;				
+				this.employeeDisplay.isTechnician = false;
 			}
 		});
 
@@ -144,16 +137,16 @@ export class EmployeesComponent implements OnInit {
 
 				//panelClass: 'full-screen-modal',*/
 				position: dialogPosition,
-				data: { employeeId: this.employeeDsiaplay.id }
+				data: { employeeId: this.employeeDisplay.id }
 			});
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employeeId !== undefined) {
-				this.employeeDsiaplay.isTechnician = true;
+			if (result.employee_Id !== undefined) {
+				this.employeeDisplay.isTechnician = true;
 				this.editEmployeeTechnicialData(result);
 			}
 			else {
-				this.employeeDsiaplay.isTechnician = false;				
+				this.employeeDisplay.isTechnician = false;
 			}
 		});
 

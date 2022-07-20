@@ -37,31 +37,16 @@
 				<div class="d-flex flex-center flex-column mb-5">
 					<!--begin::Avatar-->
 					<div class="symbol symbol-150px symbol-circle mb-4">
-						<label
-							class="btn mb-20 btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-							data-kt-image-input-action="change" data-bs-toggle="tooltip" title=""
-							data-bs-original-title="Change avatar" aria-describedby="tooltip569443">
-							<i class="bi bi-pencil-fill fs-7"></i>
-							<!--begin::Inputs-->
-							<input id="file-logoWeb"  type="file" class="mx-2 btn btn-danger d-none"
-                            (change)="imageChange($event)" placeholder="" name="logoWeb">
-							<!--end::Inputs-->
-						</label>
-						
-						<img *ngIf="employeeDsiaplay.imagePath == ''"
-							src="../../../assets/media/svg/avatars/001-boy.svg" alt="image" />
-
-						<img *ngIf="employeeDsiaplay.imagePath !== ''" [src]="employeeDsiaplay.imagePath" alt="image" />
-
+						<img src="../../../assets/media/svg/avatars/001-boy.svg" alt="image" />
 					</div>
 					<!--end::Avatar-->
 					<!--begin::Name-->
 					<a href="#"
 						title="get data from endpoint:/api/v1/hr/getemployeeprofileinfo , when click name open edit employee profile"
-						class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{employeeDsiaplay.name}}</a>
+						class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{employeeDisplay.employeeName}}</a>
 					<!--end::Name-->
 
-					<a *ngIf="employeeDsiaplay.isActive == true; else inActive"
+					<a *ngIf="employeeDisplay.userIsActive == true; else inActive"
 						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 						data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 						{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -90,56 +75,14 @@
 							<span [inlineSVG]="
                                     './assets/media/icons/duotune/communication/com006.svg'
                                   " class="svg-icon svg-icon-4 me-1"></span>
-							{{employeeDsiaplay.job}}
+							{{employeeDisplay.employeeJob}}
 						</a>
-						<div class="badge badge-light-info d-inline" *ngIf="employeeDsiaplay.isTechnician == true"> فنى </div>
+						<div class="badge badge-light-info d-inline" *ngIf="employeeDisplay.isTechnician == true"> فنى
+						</div>
 						<!--begin::Badge-->
 					</div>
-					<div class="d-flex flex-wrap fw-bold fs-6 mb-2 pe-2">
-						<a class="
-                                    d-flex
-                                    align-items-center
-                                    text-gray-400 text-hover-primary
-
-                                    mb-2
-                                    cursor-pointer
-                                  ">
-							<span [inlineSVG]="
-                                      './assets/media/icons/duotune/general/gen018.svg'
-                                    " class="svg-icon svg-icon-4 me-1"></span>
-							{{employeeDsiaplay.address}}
-						</a>
-					</div>
-					<div class="d-flex flex-wrap fw-bold fs-6 mb-2 pe-2">
-
-						<a class="
-                                    d-flex
-                                    align-items-center
-                                    text-gray-400 text-hover-primary
-                                    mb-2
-                                    cursor-pointer
-                                  ">
-							<span [inlineSVG]="
-                                      './assets/media/icons/duotune/communication/com005.svg'
-                                    " class="svg-icon svg-icon-4 me-1"></span>
-							{{employeeDsiaplay.mobile}}
-						</a>
-					</div>
-					<div class="d-flex flex-wrap fw-bold fs-6 mb-2 pe-2">
-
-						<a class="
-                                    d-flex
-                                    align-items-center
-                                    text-gray-400 text-hover-primary
-                                    mb-2
-                                    cursor-pointer
-                                  ">
-							<span [inlineSVG]="
-                                      './assets/media/icons/duotune/communication/com011.svg'
-                                    " class="svg-icon svg-icon-4 me-1"></span>
-							{{employeeDsiaplay.email}}
-						</a>
-					</div>
+				
+				
 				</div>
 				<!--end::Summary-->
 				<!--begin::Details toggle-->
@@ -147,9 +90,7 @@
 					<div class="fw-bolder"> بيانات الموظف </div>
 					<!--begin::Badge-->
 
-					<div class="badge badge-light-info d-inline"><a id="kt_editemployees_toggle" data-bs-toggle="modal"
-							title="/api/v1/hr/getemployeeprofile" data-bs-target="kt_editemployees"
-							class="btn btn-sm btn-primary  cursor-pointer"> تعديل الملف</a></div>
+					
 					<!--begin::Badge-->
 				</div>
 				<!--end::Details toggle-->
@@ -157,34 +98,28 @@
 				<!--begin::Details content-->
 				<div class="pb-5 fs-6">
 					<!--begin::Details item-->
-					<div class="fw-bolder mt-5">الكود</div>
-					<div class="text-gray-600">
-						{{employeeDsiaplay.code}}
-					</div>
-					<!--begin::Details item-->
+					
 					<!--begin::Details item-->
 					<div class="fw-bolder mt-5"> تفاصيل الوظيفة </div>
 					<div class="text-gray-600">
-						<a href="#" class="text-gray-600 text-hover-primary">{{employeeDsiaplay.job}} ,
-							{{employeeDsiaplay.section}} ,{{employeeDsiaplay.department}}</a>
+						<a href="#" class="text-gray-600 text-hover-primary">{{employeeDisplay.employeeJob}} ,
+							{{employeeDisplay.branchName}} </a>
 					</div>
 
-					<div class="fw-bolder mt-5"> الرقم القومى </div>
-					<div class="text-gray-600"> {{employeeDsiaplay.nId}} </div>
+
 					<!--begin::Details item-->
 					<!--begin::Details item-->
-					<div class="fw-bolder mt-5"> تاريخ التخرج </div>
-					<div class="text-gray-600">{{employeeDsiaplay.graduateDate | date:'dd/MM/yyyy'}}</div>
 					<!--begin::Details item-->
 				</div>
-				<div *ngIf="employeeDsiaplay.isTechnician">
+				<div *ngIf="employeeDisplay.isTechnician">
 
 					<div class="d-flex flex-stack fs-4 py-3">
 						<div class="fw-bolder"> فنى </div>
 						<!--begin::Badge-->
 						<div class="badge badge-light-info d-inline"><a id="" data-bs-toggle="modal"
 								title="/v1/tech/getlastrecordtechnician" data-bs-target="#kt_modal_offer_a_deal"
-								class="btn btn-sm btn-primary cursor-pointer" (click)="openDialog()"> اضافة بيان جديد</a></div>
+								class="btn btn-sm btn-primary cursor-pointer" (click)="openDialog()"> اضافة بيان
+								جديد</a></div>
 						<!--begin::Badge-->
 					</div>
 					<!--end::Details toggle-->
@@ -193,7 +128,7 @@
 					<div class="pb-5 fs-6">
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5"> استخدام Gps </div>
-						<a *ngIf="employeeDsiaplay.techTechnician.useGps == true; else inActiveForGps"
+						<a *ngIf="employeeDisplay.Technician.canCollect == true; else inActiveForGps"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -210,7 +145,7 @@
 						<!--begin::Details item-->
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">return From Bill</div>
-						<a *ngIf="employeeDsiaplay.techTechnician.returnFromBill == true; else inActiveForReturnBill"
+						<a *ngIf="employeeDisplay.Technician.canRead == true; else inActiveForReturnBill"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -223,6 +158,90 @@
 							</a>
 						</ng-template>
 						<!--begin::Details item-->
+
+
+						<!--begin::Details item-->
+						<div class="fw-bolder mt-5">return From Bill</div>
+						<a *ngIf="employeeDisplay.Technician.canComplain == true; else inActiveForReturnBill"
+							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+							{{'HR.TITLES.COMPANYACTIVE'|translate}}
+						</a>
+
+						<ng-template #inActiveForReturnBill>
+							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+							</a>
+						</ng-template>
+						<!--begin::Details item-->
+
+
+
+						<!--begin::Details item-->
+						<div class="fw-bolder mt-5">return From Bill</div>
+						<a *ngIf="employeeDisplay.Technician.canEditCustomer == true; else inActiveForReturnBill"
+							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+							{{'HR.TITLES.COMPANYACTIVE'|translate}}
+						</a>
+
+						<ng-template #inActiveForReturnBill>
+							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+							</a>
+						</ng-template>
+						<!--begin::Details item-->
+
+	<!--begin::Details item-->
+	<div class="fw-bolder mt-5">return From Bill</div>
+	<a *ngIf="employeeDisplay.Technician.attachImageRead == true; else inActiveForReturnBill"
+		class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+		data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+		{{'HR.TITLES.COMPANYACTIVE'|translate}}
+	</a>
+
+	<ng-template #inActiveForReturnBill>
+		<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+			data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+			{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+		</a>
+	</ng-template>
+	<!--begin::Details item-->
+
+
+	<!--begin::Details item-->
+	<div class="fw-bolder mt-5">return From Bill</div>
+	<a *ngIf="employeeDisplay.Technician.attachImageEditCustomer == true; else inActiveForReturnBill"
+		class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+		data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+		{{'HR.TITLES.COMPANYACTIVE'|translate}}
+	</a>
+
+	<ng-template #inActiveForReturnBill>
+		<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+			data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+			{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+		</a>
+	</ng-template>
+	<!--begin::Details item-->
+
+
+	<!--begin::Details item-->
+
+	<div class="fw-bolder mt-5">maxOfflineWorkingHours</div>
+	<span>{{employeeDisplay.Technician.maxOfflineWorkingHours}}</span>
+	
+	<!--begin::Details item-->
+
+	<!--begin::Details item-->
+
+	<div class="fw-bolder mt-5">maxOfflineWorkingBills</div>
+	<span>{{employeeDisplay.Technician.maxOfflineWorkingBills}}</span>
+
+	<!--begin::Details item-->
+
 						<!--begin::Details item-->
 
 						<!--begin::Details item-->
@@ -250,19 +269,19 @@
                       ">
 
 				<li class="nav-item">
-					<a class="nav-link text-active-primary me-6" [routerLink]="['/employee/technicianlog/', employeeDsiaplay.id ]"
-						routerLinkActive="">
+					<a class="nav-link text-active-primary me-6"
+						[routerLink]="['/employee/technicianlog/', employeeDisplay.id ]" routerLinkActive="">
 						البيانات الفنية السابقة
 					</a>
 				</li>
 
-				<li class="nav-item"> 
-					<a class="nav-link text-active-primary me-6" [routerLink]="['/employee/userlocation/', employeeDsiaplay.id ]"
-						routerLinkActive="">
+				<li class="nav-item">
+					<a class="nav-link text-active-primary me-6"
+						[routerLink]="['/employee/userlocation/', employeeDisplay.id ]" routerLinkActive="">
 						متابعة الموقع الحالى
 					</a>
 				</li>
-			
+
 				<li class="nav-item ms-auto" style="padding-right:150px!important ;">
 					<div class="d-flex my-4">
 
@@ -275,7 +294,9 @@
 								اعدادات الملف
 								<i class="bi bi-gear-fill fs-3"></i>
 							</a>
-							<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter) = "editEmployeeTechnicialData($event)" [_Employee]="employeeDsiaplay"></app-setting>
+							<app-setting (emitForActiveProp)="editActiveProp($event)"
+								(emitter)="editEmployeeTechnicialData($event)" [_Employee]="employeeDisplay">
+							</app-setting>
 						</div>
 					</div>
 				</li>
@@ -289,5 +310,3 @@
 	</div>
 	<!--end::Content-->
 </div>
-
-<!-- <app-editemployee></app-editemployee>-->
