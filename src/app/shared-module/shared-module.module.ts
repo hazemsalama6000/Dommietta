@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationDialogComponent } from './Components/confirm-dialog/confirmation-dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { PrimengModule } from './PrimengModule';
 
 @NgModule({
 	declarations: [
@@ -19,14 +20,16 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 	],
 	imports: [
 		MaterialsModules,
-		CommonModule
-		, TranslationModule,
+		PrimengModule,
+		CommonModule,
+		TranslationModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule
 	],
 	exports: [
 		MaterialsModules,
+		PrimengModule,
 		UpsertComponent,
 		ListContentComponent,
 		LookupIdNameComponent,

@@ -6,7 +6,7 @@ import { CompanyComponent } from './components/companyProfile/company.component'
 
 const routes: Routes = [
 	{path:'jobs' , component:LookupIdNameComponent},
-	{path:'company',component:CompanyComponent }
+	{path:'company',component:CompanyComponent },
 ];
 
 @NgModule({

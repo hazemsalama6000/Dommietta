@@ -72,6 +72,7 @@ export enum HttpPaths {
 	//Employee APIS
 
 	API_GET_EMPLOYEELOOKUP = "/api/v1/hr/ListOfEmployees",
+	API_GET_EMPLOYEES_DATA = "/api/v1/hr/listofallemployeeswithfilter",
 	API_GET_EMPLOYEEBY_ID = "/api/v1/hr/getemployeeprofileinfo",
 	API_ADD_TECHNICIAN = "/api/v1/tech/addtechnicianlog",
 	API_GET_TECHNNICIAN_DATA="/api/v1/tech/gettechnicianlogs",
@@ -79,11 +80,35 @@ export enum HttpPaths {
 	API_TOGGLE_EMPLOYEE_TECHNICIAN = "/api/v1/tech/stoptechnician",
 	API_CHANGE_EMP_IMAGE = "/api/v1/hr/changeimage",
 
+
 	// Online Users
 	API_ONLINE_USERS = "/api/v1/auth/getusers",
 	API_ONLINE_USERS_FOREACH_COMPANY = "/api/v1/auth/getnumofonlineusers",
 	API_ONLINE_USERES_LASTLOCATION = "/api/v1/tech/getlastlocationforuser",
 	API_GET_USER_DATA = "/api/v1/auth/getuserData",
 	API_USERS_CONNECTION_LOGS = "/api/v1/auth/getuserlogs",
-	API_USRS_LOCATION_LOGS = "/api/v1/tech/getlocations"
+	API_USRS_LOCATION_LOGS = "/api/v1/tech/getlocations",
+
+	//Users
+	API_GET_COMPANY_USERS = "/api/v1/auth/getCompanyUsers/",
+	API_USER_REGISTER = "/api/v1/auth/userregister",
+	API_GET_COMPANY_ROLES = "/api/v1/permissions/getrulesforcompany?CompanyId=",
+	API_GET_USER_TYPE = "/api/v1/auth/getAllUserTypes",
+
+	API_GET_USER_ROLES = "/api/v1/permissions/getuserroles?UserId=",
+	API_UPDATE_USER_ROLES = "/api/v1/permissions/manageuserroles",
+
+	API_RESET_USER_PASSWORD = "/api/v1/auth/resetUserPassWord",
+	API_ACTIVE_USER_OR_NOT = "/api/v1/auth/activateuserornot?UserId=",
+
+	//Permissions
+	API_GET_ROLES_DETAILS_FOR_COMPANY = "/api/v1/permissions/getrolesdetailsforcompany?CompanyId=",
+	API_GET_DEFAULT_PERMISSIONS_FOR_COMPANY = "/api/v1/permissions/getdefaultpermissionsforcompany/",
+	API_MANAGE_PERMISSION_FOR_ROLE = "/api/v1/permissions/managepermissionforrole",
+	API_GET_PERMISSIONS_BY_ROLE = "/api/v1/permissions/getpermissionbyrole/",
+	API_ADD_ROLE = "/api/v1/permissions/addruleforcompany",
+	API_UPDATE_ROLE = "/api/v1/permissions/editroleforcompany/",
+	API_DELETE_ROLE = "/api/v1/permissions/deleteruleforcompany/",
+	API_GET_COMPAY_ROLES="/api/v1/permissions/getpermissionforcompanyadmin/",
+	API_ADD_COMPANY_ROLES="/api/v1/permissions/managepermissionforcompanyadmin",
 }

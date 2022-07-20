@@ -55,7 +55,7 @@
     data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
     <img *ngIf="!userdata" [src]="'./assets/media/svg/avatars/001-boy.svg'" alt="" />
 
-    <img *ngIf="userdata" [src]="userdata.imgPath==''?'./assets/media/svg/avatars/001-boy.svg':userdata.imgPath"
+    <img *ngIf="userdata" [src]="url+(userdata?.imgPath??'./assets/media/svg/avatars/001-boy.svg')"
       alt="{{userdata.fullName}}" />
   </div>
   <!-- end::Toggle  -->
