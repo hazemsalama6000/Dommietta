@@ -15,6 +15,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {PaginatorModule} from 'primeng/paginator';
 import {PasswordModule} from 'primeng/password';
+import {BadgeModule} from 'primeng/badge';
 
 export const PrimengModule = [
   ConfirmDialogModule,
@@ -33,5 +34,6 @@ export const PrimengModule = [
   InputTextModule,
   ToastModule,
   PaginatorModule,
-  PasswordModule
+  PasswordModule,
+  BadgeModule
 ]
