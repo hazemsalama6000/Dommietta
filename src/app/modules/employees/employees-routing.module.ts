@@ -7,7 +7,7 @@ import { technicianLogComponent } from './technician-log/technician-log.componen
 import { UserLocationComponent } from './user-locations/user-location.component';
 
 const routes: Routes = [
-	{ path: 'employeelist', component: Employee_listComponent },
+	{ path: 'employeelist', component: Employee_listComponent, pathMatch: 'full' },
 	{
 		path: '',
 		component: EmployeesComponent,
