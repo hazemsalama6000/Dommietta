@@ -40,7 +40,7 @@ import { UserLocationComponent } from './user-locations/user-location.component'
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [TechnitianService]
+  providers: [TechnitianService,DatePipe]
 
 })
 export class EmployeesModule { }
