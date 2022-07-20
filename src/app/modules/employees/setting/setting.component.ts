@@ -79,7 +79,6 @@ export class SettingComponent implements OnInit {
 				maxHeight: '100vh',*/
 				maxHeight: '100vh',
 				height: '100%',
-
 				//panelClass: 'full-screen-modal',*/
 				position: dialogPosition,
 				data: { employeeId: this.employeeProfile.id }
@@ -91,7 +90,7 @@ export class SettingComponent implements OnInit {
 				this.emitter.emit(result);
 			}
 			else {
-				this.employeeProfile.isTechnician = false;				
+				this.employeeProfile.isTechnician = false;
 			}
 		});
 

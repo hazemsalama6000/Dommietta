@@ -22,73 +22,76 @@
 		<input type="hidden" name="employee_Id" formControlName="employee_Id">
 
 		<br>
-
 		<div class="row mt-5">
 
 			<div class="col-md-12 d-flex justify-content-center align-items-center">
 				<section class="example-section">
-					<span class="mx-2 fontForInputs">canCollect </span>
-					<mat-slide-toggle name="canCollect" formControlName="canCollect" class="example-margin" [color]="'red'">
-					</mat-slide-toggle>
-				</section>
-			</div>
-
-		</div>
-
-		<div class="row mt-5">
-
-			<div class="col-md-12 d-flex justify-content-center align-items-center">
-				<section class="example-section">
-					<span class="mx-2 fontForInputs"> canRead</span>
-					<mat-slide-toggle name="canRead" formControlName="canRead" class="example-margin"
-						[color]="'red'">
-					</mat-slide-toggle>
-				</section>
-			</div>
-
-		</div>
-
-		<div class="row mt-5">
-
-			<div class="col-md-12 d-flex justify-content-center align-items-center">
-				<section class="example-section">
-					<span class="mx-2 fontForInputs"> canComplain</span>
+					<span class="mx-2 fontForInputs"> اضافة بلاغ</span>
 					<mat-slide-toggle name="canComplain" formControlName="canComplain" class="example-margin"
 						[color]="'red'">
 					</mat-slide-toggle>
 				</section>
 			</div>
-
+			
 		</div>
+		
 		<div class="row mt-5">
 
 			<div class="col-md-12 d-flex justify-content-center align-items-center">
 				<section class="example-section">
-					<span class="mx-2 fontForInputs"> canEditCustomer</span>
+					<span class="mx-1 fontForInputs">تحصيل فواتير </span>
+					<mat-slide-toggle name="canCollect" formControlName="canCollect" class="example-margin" [color]="'red'">
+					</mat-slide-toggle>
+				</section>
+			</div>
+
+
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-md-12 d-flex justify-content-center align-items-center">
+				<section class="example-section">
+					<span class="mx-1 fontForInputs"> تسجيل قراءه
+						
+					</span>
+					<mat-slide-toggle name="canRead" formControlName="canRead" class="example-margin"
+						[color]="'red'">
+					</mat-slide-toggle>
+				</section>
+			</div>
+		</div>
+	
+
+		
+		
+		<div class="row mt-5">
+			<div class="col-md-12 d-flex justify-content-center align-items-center">
+				<section class="example-section">
+					<span  class="mx-2 fontForInputs"> تعديل بيانات عميل</span>
 					<mat-slide-toggle name="canEditCustomer" formControlName="canEditCustomer" class="example-margin"
 						[color]="'red'">
 					</mat-slide-toggle>
 				</section>
 			</div>
-
 		</div>
-		<div class="row mt-5">
 
+		<div class="row mt-5">
+			
 			<div class="col-md-12 d-flex justify-content-center align-items-center">
 				<section class="example-section">
-					<span class="mx-2 fontForInputs">attachImageRead</span>
+					<span class="mx-2 fontForInputs">ارفاق صوره قراءه العداد</span>
 					<mat-slide-toggle name="attachImageRead" formControlName="attachImageRead" class="example-margin"
 						[color]="'red'">
 					</mat-slide-toggle>
 				</section>
 			</div>
-
 		</div>
+		
 		<div class="row mt-5">
 
 			<div class="col-md-12 d-flex justify-content-center align-items-center">
 				<section class="example-section">
-					<span class="mx-2 fontForInputs"> ارجاع فواتير </span>
+					<span class="mx-2 fontForInputs">ارفاق صوره لتعديلات العملاء</span>
 					<mat-slide-toggle name="attachImageEditCustomer" formControlName="attachImageEditCustomer"
 						class="example-margin" [color]="'red'">
 					</mat-slide-toggle>
@@ -98,13 +101,21 @@
 		</div>
 
 		<div class="mt-5">
-			<mat-label> {{"HR.INPUTS.maxOfflineWorkingHours" | translate}} </mat-label>
-			<input matInput placeholder="Placeholder" name="maxOfflineWorkingHours" formControlName="maxOfflineWorkingHours">
+		
+			<mat-form-field appearance="outline">
+				<mat-label class="fontForInputs">الحد الاقصي للعمل بدون شبكة </mat-label>
+				<input matInput placeholder="" name="maxOfflineWorkingHours"
+					formControlName="maxOfflineWorkingHours">
+			</mat-form-field>
+
 		</div>
 
 		<div class="mt-5">
-			<mat-label> {{"HR.INPUTS.maxOfflineWorkingBills" | translate}} </mat-label>
-			<input matInput placeholder="Placeholder" name="maxOfflineWorkingBills" formControlName="maxOfflineWorkingBills">
+			<mat-form-field appearance="outline">
+				<mat-label class="fontForInputs">  الحد الاقصي لعدد الفواتير المسجلة بدون شبكة </mat-label>
+				<input matInput placeholder="" name="maxOfflineWorkingBills"
+					formControlName="maxOfflineWorkingBills">
+			</mat-form-field>
 		</div>
 
 

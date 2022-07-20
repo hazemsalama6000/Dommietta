@@ -3,11 +3,12 @@ import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
 import { BlockService } from 'src/app/core-module/LookupsServices/block.service';
+import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
-import { BranchService } from '../hr/services/branch.service';
 import { IEmployee } from './models/employee.interface';
+import { ISearch } from './models/ISearch.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
 import { EmployeeService } from './services/employee.service';
 import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
@@ -22,23 +23,64 @@ export class EmployeesComponent implements OnInit {
 	imageFile: File;
 
 	dropdownEmployeeData: LookUpModel[] = [];
+	dropdownBranchData: LookUpModel[] = [];
+	dropdownAreaData: LookUpModel[] = [];
+	dropdownBlockData: LookUpModel[] = [];
+	searchModel: ISearch = {} as ISearch;
 	employeeDisplay: IEmployee = {} as IEmployee;
+
 	constructor(
 		private service: EmployeeService,
-		private blockService:BlockService,
-		private areaService:AreaService,
-		private branchService:BranchService,
+		private blockService: BlockService,
+		private areaService: AreaService,
+		private branchService: BranchService,
 		private toaster: toasterService,
 		public dialog: MatDialog) {
-
 	}
 
 	ngOnInit(): void {
-		/*this.service.getLookupEmployeeData(1005).subscribe((data: LookUpModel[]) => {
-			this.dropdownEmployeeData = data;
-		});*/
+		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
+			this.dropdownBranchData = data;
+		});
 	}
 
+
+	branchSelectListOnChange(selectedItem: LookUpModel) {
+		this.areaService.getLookupAreaData(selectedItem.Id)
+			.subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownAreaData = data;
+				}
+			);
+		this.searchModel.branchId = selectedItem.Id;
+		this.searchEmployee();
+	}
+
+	areaSelectListOnChange(selectedItem: LookUpModel) {
+		this.blockService.getLookupBlockData(selectedItem.Id)
+			.subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownBlockData = data;
+				}
+			);
+		this.searchModel.AreaId = selectedItem.Id;
+		this.searchEmployee();
+	}
+
+
+	blockSelectListOnChange(selectedItem: LookUpModel) {
+		this.searchModel.Block = selectedItem.Id;
+		this.searchEmployee();
+	}
+
+	searchEmployee() {
+		this.service.getLookupEmployeeDataByParam(this.searchModel)
+			.subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownEmployeeData = data;
+				}
+			);
+	}
 
 	employeeSelectListOnChange(selectedItem: LookUpModel) {
 		this.service.getEmployeeById(selectedItem.Id)

@@ -9,15 +9,26 @@
 		</div>
 
 		<div class="row align-items-center mx-5">
-			<ng-select class="customized" style="width:500px ;" [items]="dropdownEmployeeData" bindLabel="Name"
+			
+		</div>
+
+		<div class="row align-items-center mx-5">
+			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
+				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
+				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
+			</ng-select>
+			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
+				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
+				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();">
+			</ng-select>
+			<ng-select #blockselect class="customized" style="width:250px ;" [items]="dropdownBlockData" bindLabel="Name"
+				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المربع"
+				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();">
+			</ng-select>
+			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
 				(change)="employeeSelectListOnChange($event)">
 			</ng-select>
-
-			<button matTooltip="{{'HR.BUTTONS.ADD'|translate}}" mat-mini-fab color="primary" class="mx-md-1"
-				id="kt_activities_toggle" aria-label="Example icon button with a filter list icon">
-				<mat-icon>add</mat-icon>
-			</button>
 		</div>
 
 	</div>
@@ -127,117 +138,129 @@
 					<!--begin::Details content-->
 					<div class="pb-5 fs-6">
 						<!--begin::Details item-->
-						<div class="fw-bolder mt-5"> استخدام Gps </div>
-						<a *ngIf="employeeDisplay.Technician.canCollect == true; else inActiveForGps"
+						<div class="fw-bolder mt-5">تحصيل فواتير 
+							<a *ngIf="employeeDisplay.Technician.canCollect == true; else inActiveForCanCollect"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
 						</a>
 
-						<ng-template #inActiveForGps>
+						<ng-template #inActiveForCanCollect>
 							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 							</a>
 						</ng-template>
+						</div>
+						
 
 
 						<!--begin::Details item-->
 						<!--begin::Details item-->
-						<div class="fw-bolder mt-5">return From Bill</div>
-						<a *ngIf="employeeDisplay.Technician.canRead == true; else inActiveForReturnBill"
+						<div class="fw-bolder mt-5">تسجيل قراءه
+							<a *ngIf="employeeDisplay.Technician.canRead == true; else inActiveForCanRead"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
 						</a>
 
-						<ng-template #inActiveForReturnBill>
+						<ng-template #inActiveForCanRead>
 							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 							</a>
 						</ng-template>
+						</div>
+						
 						<!--begin::Details item-->
 
 
 						<!--begin::Details item-->
-						<div class="fw-bolder mt-5">return From Bill</div>
-						<a *ngIf="employeeDisplay.Technician.canComplain == true; else inActiveForReturnBill"
+						<div class="fw-bolder mt-5">اضافة بلاغ
+							<a *ngIf="employeeDisplay.Technician.canComplain == true; else inActiveForCanComplain"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
 						</a>
 
-						<ng-template #inActiveForReturnBill>
+						<ng-template #inActiveForCanComplain>
 							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 							</a>
 						</ng-template>
+						</div>
+						
 						<!--begin::Details item-->
 
 
 
 						<!--begin::Details item-->
-						<div class="fw-bolder mt-5">return From Bill</div>
-						<a *ngIf="employeeDisplay.Technician.canEditCustomer == true; else inActiveForReturnBill"
+						<div class="fw-bolder mt-5">تعديل بيانات عميل
+							<a *ngIf="employeeDisplay.Technician.canEditCustomer == true; else inActiveForCanEditCustomer"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							{{'HR.TITLES.COMPANYACTIVE'|translate}}
 						</a>
 
-						<ng-template #inActiveForReturnBill>
+						<ng-template #inActiveForCanEditCustomer>
 							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 							</a>
 						</ng-template>
+						</div>
+						
 						<!--begin::Details item-->
 
 	<!--begin::Details item-->
-	<div class="fw-bolder mt-5">return From Bill</div>
-	<a *ngIf="employeeDisplay.Technician.attachImageRead == true; else inActiveForReturnBill"
+	<div class="fw-bolder mt-5">ارفاق صوره قراءه العداد
+		<a *ngIf="employeeDisplay.Technician.attachImageRead == true; else inActiveForAttachImageRead"
 		class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 		data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 		{{'HR.TITLES.COMPANYACTIVE'|translate}}
 	</a>
 
-	<ng-template #inActiveForReturnBill>
+	<ng-template #inActiveForAttachImageRead>
 		<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 			data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 			{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 		</a>
 	</ng-template>
+	</div>
+	
 	<!--begin::Details item-->
 
 
 	<!--begin::Details item-->
-	<div class="fw-bolder mt-5">return From Bill</div>
-	<a *ngIf="employeeDisplay.Technician.attachImageEditCustomer == true; else inActiveForReturnBill"
+	<div class="fw-bolder mt-5">ارفاق صوره لتعديلات اعملاء
+		<a *ngIf="employeeDisplay.Technician.attachImageEditCustomer == true; else inActiveForAttachImageEditCustomer"
 		class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 		data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 		{{'HR.TITLES.COMPANYACTIVE'|translate}}
 	</a>
 
-	<ng-template #inActiveForReturnBill>
+	<ng-template #inActiveForAttachImageEditCustomer>
 		<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 			data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 			{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
 		</a>
 	</ng-template>
+	</div>
+	
 	<!--begin::Details item-->
 
 
 	<!--begin::Details item-->
 
-	<div class="fw-bolder mt-5">maxOfflineWorkingHours</div>
+	<div class="fw-bolder mt-5"> (ساعة) الحد الاقصي للعمل بدون شبكة</div>
 	<span>{{employeeDisplay.Technician.maxOfflineWorkingHours}}</span>
 	
 	<!--begin::Details item-->
 
 	<!--begin::Details item-->
 
-	<div class="fw-bolder mt-5">maxOfflineWorkingBills</div>
+	<div class="fw-bolder mt-5"> (بالفاتورة) الحد الاقصي لعدد الفواتير المسجلة بدون شبكة</div>
 	<span>{{employeeDisplay.Technician.maxOfflineWorkingBills}}</span>
 
 	<!--begin::Details item-->
