@@ -7,24 +7,29 @@ const Routing: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
-	  path:'hr',
-	  loadChildren:()=> 
-	      import('../modules/hr/hr.module').then((m)=>m.HrModule)
+    path: 'hr',
+    loadChildren: () =>
+      import('../modules/hr/hr.module').then((m) => m.HrModule)
   },
   {
-	path:'employee',
-	loadChildren:()=>
-	    import('../modules/employees/employees.module').then((m)=>m.EmployeesModule)
+    path: 'employee',
+    loadChildren: () =>
+      import('../modules/employees/employees.module').then((m) => m.EmployeesModule)
   },
   {
-	path:'permissions',
-	loadChildren:()=>
-	import('../modules/permissions/permissions.module').then(m=>m.PermissionsModule)
+    path: 'permissions',
+    loadChildren: () =>
+      import('../modules/permissions/permissions.module').then(m => m.PermissionsModule)
+  },
+   {
+    path: 'operation',
+    loadChildren: () =>
+      import('../modules/operations/operations.module').then(m => m.OperationsModule)
   },
   {
-	  path:'share',
-	  loadChildren:()=>
-	      import('../modules/share/share.module').then((m)=>m.shareModule)
+    path: 'share',
+    loadChildren: () =>
+      import('../modules/share/share.module').then((m) => m.shareModule)
   },
   {
     path: '',
