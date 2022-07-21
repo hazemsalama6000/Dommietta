@@ -87,6 +87,7 @@ export class EmployeesComponent implements OnInit {
 			.subscribe(
 				(data: IEmployee) => {
 					this.employeeDisplay = data;
+					this.service.currentEmployeeSelected = data;
 					console.log(this.employeeDisplay);
 				}
 				, (error) => {

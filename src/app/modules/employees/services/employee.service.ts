@@ -14,7 +14,8 @@ import { ISearch } from "../models/ISearch.interface";
 export class EmployeeService {
 	employees: LookUpModel[];
 	bSubject = new BehaviorSubject(true);
-
+	currentEmployeeSelected: IEmployee = {} as IEmployee;
+	
 	constructor(private http: CommonHttpService) { }
 
 	getLookupEmployeeDataByParam(model: ISearch): Observable<LookUpModel[]> {

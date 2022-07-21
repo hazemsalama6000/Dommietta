@@ -16,6 +16,7 @@ import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-tech
 import { TechnitianService } from './services/technitian.service';
 import { technicianLogComponent } from './technician-log/technician-log.component';
 import { UserLocationComponent } from './user-locations/user-location.component';
+import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UserLocationComponent } from './user-locations/user-location.component'
     Employee_listComponent,
     AddTechnitianLogComponent,
     technicianLogComponent,
-    UserLocationComponent
+    UserLocationComponent,
+	EmployeeBlocksComponent
   ],
   imports: [
     CommonModule,

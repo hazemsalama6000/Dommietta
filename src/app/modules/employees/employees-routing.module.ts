@@ -5,6 +5,7 @@ import { EmployeesComponent } from './employees.component';
 import { Employee_listComponent } from './employee-list/employee-list.component';
 import { technicianLogComponent } from './technician-log/technician-log.component';
 import { UserLocationComponent } from './user-locations/user-location.component';
+import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.component';
 
 const routes: Routes = [
 	{ path: 'employeelist', component: Employee_listComponent, pathMatch: 'full' },
@@ -21,8 +22,8 @@ const routes: Routes = [
 				component: technicianLogComponent
 			},
 			{
-				path: 'userlocation/:employeeId',
-				component: UserLocationComponent
+				path: 'employeeblocks',
+				component: EmployeeBlocksComponent
 			},
 
 			{ path: '', redirectTo: 'overview', pathMatch: 'full' },

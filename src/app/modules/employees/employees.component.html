@@ -300,8 +300,8 @@
 
 				<li class="nav-item">
 					<a class="nav-link text-active-primary me-6"
-						[routerLink]="['/employee/userlocation/', employeeDisplay.id ]" routerLinkActive="">
-						متابعة الموقع الحالى
+						[routerLink]="['/employee/employeeblocks',employeeDisplay.blocks]" [state] = "employeeDisplay.blocks" routerLinkActive="">
+						مربعات الموظف
 					</a>
 				</li>
 
