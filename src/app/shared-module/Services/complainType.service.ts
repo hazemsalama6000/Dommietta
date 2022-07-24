@@ -1,21 +1,15 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Tab } from "bootstrap";
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from "rxjs";
-import { AnyCatcher } from "rxjs/internal/AnyCatcher";
-import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
-import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
-import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
-import { environment } from "src/environments/environment";
-import { LookUpModel } from "../models/lookup";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
+import { HttpPaths } from 'src/app/modules/auth/Enums/HttpPaths.enum';
+import { LookUpModel } from '../models/lookup';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
+export class ComplainTypeService {
 
-export class LookupService {
-
-	bSubject = new BehaviorSubject(true);
+  bSubject = new BehaviorSubject(true);
 	addFlag = new BehaviorSubject(false);
 
 	constructor(private http: CommonHttpService) { }
@@ -44,6 +38,4 @@ export class LookupService {
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();
 	}
-
-	
 }

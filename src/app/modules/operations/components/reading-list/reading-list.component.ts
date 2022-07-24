@@ -2,15 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as FileSaver from 'file-saver';
 import { Subscription } from 'rxjs';
+import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
+import { BlockService } from 'src/app/core-module/LookupsServices/block.service';
+import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
+import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
+import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
-import { IBranch } from 'src/app/modules/hr/models/IBranch';
-import { BranchService } from 'src/app/modules/hr/services/branch.service';
-import { IJobSub, IJob } from 'src/app/modules/share/models/IJob.interface';
-import { ISection } from 'src/app/modules/share/models/ISection.interface';
-import { DepartmentService } from 'src/app/modules/share/Services/department_section/department.service';
-import { SectionService } from 'src/app/modules/share/Services/department_section/section.service';
-import { JobService } from 'src/app/modules/share/Services/job.service';
+import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IReading } from '../../models/IReading.interface';
 import { IReadingSearch } from '../../models/IReadingSearch.interface';
@@ -42,10 +41,11 @@ export class ReadingListComponent implements OnInit {
   constructor(
     private readingService: ReadingService,
     private branchService: BranchService,
+    private areaService: AreaService,
+    private blockService: BlockService,
+    private employeeService: EmployeeService,
     private authService: AuthService,
-    private departmentService: DepartmentService,
-    private sectionService: SectionService,
-    private jobService: JobService,
+    private toaster: toasterService,
     private datePipe: DatePipe
   ) {
 
@@ -57,12 +57,12 @@ export class ReadingListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const data = this.authService.userData.subscribe(res => {
-    // this.userData = res;
-    //this.fillDropdowns();
-    this.getReadingData();
-    // });
-    // this.unsubscribe.push(data);
+    const data = this.authService.userData.subscribe(res => {
+      this.userData = res;
+      this.fillDropdowns();
+      this.getReadingData();
+    });
+    this.unsubscribe.push(data);
   }
 
   // Change pagination page
@@ -75,88 +75,47 @@ export class ReadingListComponent implements OnInit {
   //this function to create search object and reload data in table
   myfilter(columnname: string) {
     console.log(this.searchObject)
-    // switch (columnname) {
-    //   case "employee":
-    //     this.searchObject.employeesIds = ids.map((a: any) => a.Id);
-    //     break;
-    //   case "branch":
-    //     ids != null ? this.searchObject.branchesIds = [ids.id] : this.searchObject.branchesIds = [];
-    //     break;
-    //   case "department":
-    //     if (ids != null) {
-    //       this.searchObject.departmentsIds = [ids.Id];
-    //       this.sectionService.getLookupData(ids.id).subscribe((res: ISection[]) =>
-    //         this.sectionDropdown = res
-    //       );
-    //     } else this.searchObject.departmentsIds = [];
-    //     break;
-    //   case "section":
-    //     if (ids != null) {
-    //       this.searchObject.sectionsIds = [ids.id];
-    //       this.jobService.getLookUpData(this.searchObject.sectionsIds[0]).subscribe((res: IJob) =>
-    //         this.jobDropdown = res.jobs.filter(x => x.isSelected == true)
-    //       );
-    //     } else this.searchObject.sectionsIds = [];
-    //     break;
-    //   case "job":
-    //     this.searchObject.jobsIds = ids.map((a: any) => a.Id);
-    //     break;
-    //   default:
-    //     break;
-    // }
+    switch (columnname) {
+      case "branch":
+        this.areaService.getLookupAreaData(this.searchObject.branchId ?? 0).subscribe(
+          (data: LookUpModel[]) => { this.areaDropdown = data; });
+        break;
+      case "area":
+        this.blockService.getLookupBlockData(this.searchObject.areaId ?? 0).subscribe(
+          (data: LookUpModel[]) => { this.blockDropdown = data; });
+        this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId })
+          .subscribe((data: LookUpModel[]) => { this.blockDropdown = data; });
+        break;
+      case "block":
+        this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId, blockId: this.searchObject.blockId })
+          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+        break;
+      default:
+        break;
+    }
 
-    this.getReadingData();
+    columnname != 'branch' ? this.getReadingData() : null;
   }
 
   //this function to fill dropdowns data
   fillDropdowns() {
-
-    // this.branchService.getBranchData(this.userData.companyId).subscribe((data: IBranch[]) => this.branchDropdown = data);
-    // this.departmentService.getLookupData(this.userData.companyId).subscribe((res: LookUpModel[]) => this.departmentDropdown = res);
-
+    this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
+    this.employeeService.getLookupEmployeeData(this.userData.companyId).subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
   }
 
   //this function to get data from employee 
   getReadingData() {
-    this.loading = false;
-    let ispost = true;
-    for (let index = 1; index < 10; index++) {
-      ispost = !ispost;
-      this.readingData.push({
-        Id: index,
-        CollectorId: index,
-        BranchName: "BranchName" + index,
-        CollectorName: "CollectorName" + index,
-        CustomerCode: "CustomerCode" + index,
-        IsPotsed: ispost,
-        IsRevised: !ispost,
-        CustomerName: "CustomerName" + index,
-        IssueDate: new Date(),
-        MeterStatus: "MeterStatus" + index,
-        IssueName: "202204" + index,
-        CustomerId: 2 + index,
-        Value: 96325,
-        IssueStatus: "IssueStatus" + index,
-        ReadingImagePath: "path" + index,
-        X: 1245242 + index,
-        Y: 6464646 + index,
-        LastReading: 4556456,
-        Notes: "Notes" + index,
-        lastPosted: ispost
-      })
-    }
-    this.loading = false;
-    // this.readingService.getReadingsData(this.searchObject).subscribe(
-    //   (res:any) => {
-    //     this.readingData = res.employeeRecords;
-    //     this.totalRecords = res.pageSize;
-    //   },
-    //   (err:any) => { console.log(err); this.loading = false },
-    //   () => { this.loading = false });
+    this.loading = true;
+    this.readingService.getReadingsData(this.searchObject).subscribe(
+      (res: IReading[]) => {
+        this.readingData = res;
+        //this.totalRecords = res.pageSize;
+      },
+      (err: any) => { console.log(err); this.loading = false },
+      () => { this.loading = false });
   }
 
   setAllIsPostOrIsRevise(type: string) {
-    console.log(this.readingData)
     if (type == 'revise') {
       for (let index = 0; index < this.readingData.length; index++) {
         if (!this.readingData[index].lastPosted) {
@@ -175,37 +134,77 @@ export class ReadingListComponent implements OnInit {
   }
 
   postAllDataToChecked() {
-    let data: IReading[] = this.readingData.filter(x => !x.lastPosted);
-    //data.map((x:IReading)=>{delete x.lastPosted});
-    console.log(data)
+    let reading: IReading[] = this.readingData.filter(x => !x.lastPosted);
+    reading.map((x: IReading) => { delete x.lastPosted });
+    console.log(reading);
+    this.postReviseOrPost(reading);
   }
 
-  ActivePostOrRevise(read?: IReading) {
-    console.log(read);
+  ActivePostOrRevise(read: IReading) {
+    this.postReviseOrPost([read])
   }
 
+  postReviseOrPost(reading: IReading[]) {
+    this.readingService.PostIsreviseOrIsPost(reading).
+      subscribe(
+        (data: HttpReponseModel) => {
+          if (data.isSuccess) {
+            this.toaster.openSuccessSnackBar(data.message);
+          }
+          else if (data.isExists)
+            this.toaster.openWarningSnackBar(data.message);
+        },
+        (error: any) => {
+          console.log(error);
+          this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+        }
+      )
+  }
 
   exportExcel() {
-    // let employeeFiltered: any[] = [];
-    // this.employees.map((x: any) => {
-    //   let obj: any = {};
-    //   for (let index = 0; index < this.selectedColumns.length; index++) {
-    //     if (this.selectedColumns[index].propName.includes('Date')) {
-    //       obj[this.selectedColumns[index].propName] = this.datePipe.transform(x[this.selectedColumns[index].propName], 'dd/MM/yyyy');
-    //     } else {
-    //       obj[this.selectedColumns[index].propName] = x[this.selectedColumns[index].propName];
-    //     }
-    //   }
+    let selectedColumns: string[] = [
+      'Id' ,
+      'CollectorId',
+      'CollectorName',
+      'CustomerId',
+      'CustomerName',
+      'CustomerCode',
+      'BranchName',
+      'Value',
+      'LastReading' ,
+      'X',
+      'Y',
+      'MeterStatus',
+      'IssueName',
+      'IssueStatus',
+      'IssueDate',
+      'IsRevised',
+      'IsPotsed',
+      'lastPosted',
+      'Notes' ,
+    ];
+    let readingFiltered: any[] = [];
+    this.readingData.map((x: any) => {
+      let obj: any = {};
 
-    //   employeeFiltered.push(obj)
-    // })
+      for (let index = 0; index < selectedColumns.length; index++) {
+        if (selectedColumns[index].includes('Date')) {
+          obj[selectedColumns[index]] = this.datePipe.transform(x[selectedColumns[index]], 'dd/MM/yyyy');
+        } else {
+          obj[selectedColumns[index]] = x[selectedColumns[index]];
+        }
+      }
 
-    // import("xlsx").then(xlsx => {
-    //   const worksheet = xlsx.utils.json_to_sheet(employeeFiltered);
-    //   const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    //   const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-    //   this.saveAsExcelFile(excelBuffer, "Employees");
-    // });
+      readingFiltered.push(obj)
+    })
+
+
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(readingFiltered);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "reading");
+    });
   }
 
   saveAsExcelFile(buffer: any, fileName: string): void {

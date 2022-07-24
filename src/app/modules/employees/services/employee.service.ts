@@ -24,9 +24,11 @@ export class EmployeeService {
 	}
 
 	getLookupEmployeeData(companyId: number): Observable<LookUpModel[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
-	}
+		// return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
+		// 	.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+			return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
+}
+	
 	// note
 	getEmployeeById(employeeId: number): Observable<IEmployee> {
 		/*return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEEBY_ID}?EmployeeId=${employeeId}`).pipe(
@@ -63,7 +65,6 @@ export class EmployeeService {
 	toggleActive(employeeId: number): Observable<HttpReponseModel> {
 		return this.http.CommonPostRequests(null, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}?EmployeeId=${employeeId}`);
 	}
-	//
 
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();

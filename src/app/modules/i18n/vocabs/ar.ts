@@ -23,10 +23,13 @@ export const locale = {
       LOGINUSERSDATA: "بيانات الدخول للمستخدمين",
       TRACINGUSERSLOCATION: "متابعة اماكن المستخدمين",
       EMPLOYEELIST: "قائمة الموظفين",
-      PERMISSION:"الصلاحيات",
-      USERS:"المستخدمين",
-      ROLES:"الأدوار",
-      SUPERADMIN:"صلاحيات المدير"
+      PERMISSION: "الصلاحيات",
+      USERS: "المستخدمين",
+      ROLES: "الأدوار",
+      SUPERADMIN: "صلاحيات المدير",
+      COMPLAINLIST:"الشكاوى",
+      READINGLIST:"القراءات",
+      COMPLAINTYPE:"انواع الشكاوى"
 
     },
 
@@ -264,11 +267,11 @@ export const locale = {
         DELETE: "حذف",
         LASTLOCATION: "اخر موقع للمستخدم",
         NOTCONNECTED: "قطع الاتصال",
-        CANCEL:"الغاء",
-        ALLUSERS:"كل المستخدمين",
-        ADDROLE:"اضافة صلاحية",
-        ADDUSER:"اضافة مستخدم",
-        EDITROLE:"تعديل الصلاحية"
+        CANCEL: "الغاء",
+        ALLUSERS: "كل المستخدمين",
+        ADDROLE: "اضافة صلاحية",
+        ADDUSER: "اضافة مستخدم",
+        EDITROLE: "تعديل الصلاحية"
 
       },
       TITLES: {
@@ -287,38 +290,38 @@ export const locale = {
         COUNTONLINEUSERFOREACHCOMPANY: "عدد المستخدمين المتصلين لكل شركة",
         ONLINEUSERS: "المستخدمين المتصلين",
         OFFLINEUSERS: "المستخدمين الغير متصلين",
-        ADDNEWUSER:"اضافة مستخدم جديد", 
-        EMPLOYEE:"الموظف",
-        FULLNAME:"الاسم بالكامل",
-        PHONENUMBER:"رقم الهاتف",
-        EMAIL:"البريد الالكترونى",
-        PASSWORD:"كلمة المرور",
-        USERTYPE:"نوع المستخدم",
-        ROLES:"الأدوار",
-        ASSIGNROLESTOUSER:"اضافة صلاحيات إلى مستخدم",
-        SEARCHUSER:"يمكنك البحث بالاسم أو بالتليفون",
-        STATUS:"الحالة",
-        LASTLOGINTIME:"أخر تسجيل دخول",
-        ASSIGNEDROLES:"صلاحيات المستخدم",
-        TOTAL:"الكل",
-        ONLINE:"متصلين",
-        OFFLINE:"غير متصلين",
-        OVERVIEW:"نظرة عامة",
-        CARDTOTAL:"عدد المستخدمين",
-        MORE:"المزيد",
-        TABLETITLEROLEPROFILE:"عدد مستخدمين الصلاحية",
-        ADDPERMISSIONTOCOMPANY:"اضافة صلاحيات الى شركة",
-        ADDNEWROLE:"اضافة دور جديد",
-        ROLEPERMISSION:"صلاحيات الدور",
-        ROLENAME:"أسم الدور",
-        UPDATEROLE:"تعديل الدور"
+        ADDNEWUSER: "اضافة مستخدم جديد",
+        EMPLOYEE: "الموظف",
+        FULLNAME: "الاسم بالكامل",
+        PHONENUMBER: "رقم الهاتف",
+        EMAIL: "البريد الالكترونى",
+        PASSWORD: "كلمة المرور",
+        USERTYPE: "نوع المستخدم",
+        ROLES: "الأدوار",
+        ASSIGNROLESTOUSER: "اضافة صلاحيات إلى مستخدم",
+        SEARCHUSER: "يمكنك البحث بالاسم أو بالتليفون",
+        STATUS: "الحالة",
+        LASTLOGINTIME: "أخر تسجيل دخول",
+        ASSIGNEDROLES: "صلاحيات المستخدم",
+        TOTAL: "الكل",
+        ONLINE: "متصلين",
+        OFFLINE: "غير متصلين",
+        OVERVIEW: "نظرة عامة",
+        CARDTOTAL: "عدد المستخدمين",
+        MORE: "المزيد",
+        TABLETITLEROLEPROFILE: "عدد مستخدمين الصلاحية",
+        ADDPERMISSIONTOCOMPANY: "اضافة صلاحيات الى شركة",
+        ADDNEWROLE: "اضافة دور جديد",
+        ROLEPERMISSION: "صلاحيات الدور",
+        ROLENAME: "أسم الدور",
+        UPDATEROLE: "تعديل الدور"
 
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"
       },
-      PLACEHOLDER:{
-        ROLENAMEPLACEHOLDER:"برجاء ادخال اسم الدور"
+      PLACEHOLDER: {
+        ROLENAMEPLACEHOLDER: "برجاء ادخال اسم الدور"
       }
     },
 
@@ -341,17 +344,57 @@ export const locale = {
         DEPARTMENT: "الادارة",
         SECTION: "القسم",
         JOB: "الوظيفة",
-        HIREDATE:"تاريخ التعيين",
-        GRADUATIONDATE:"تاريخ التخرج",
-        QUALIFICATION:"المؤهل",
-        UNIVERSITY:"الجامعة",
-        NID:"الرقم القومى",
-        BITHDATE:"تاريخ الميلاد",
-        ADDRESS:"العنوان",
-        STATE:"المنطقة",
-        REGION:"المدينة",
-        MARTIALSTATUS:"الحالة الاجتماعية",
-        MILITERYSTATUS:"الخدمة العسكرية"
+        HIREDATE: "تاريخ التعيين",
+        GRADUATIONDATE: "تاريخ التخرج",
+        QUALIFICATION: "المؤهل",
+        UNIVERSITY: "الجامعة",
+        NID: "الرقم القومى",
+        BITHDATE: "تاريخ الميلاد",
+        ADDRESS: "العنوان",
+        STATE: "المنطقة",
+        REGION: "المدينة",
+        MARTIALSTATUS: "الحالة الاجتماعية",
+        MILITERYSTATUS: "الخدمة العسكرية"
+      },
+      MESSAGE: {
+        NOROWFOUND: "لايوجد بيانات"
+      }
+    },
+
+    OPERATION: {
+      INPUTS: {
+        BRANCH:"أختر الفرع",
+        AREA:"أختر المنطقة",
+        BLOCK:"أختر المربع",
+        CUSTOMET:"أختر العميل",
+        EMPLOYEE:"أختر المحصل",
+        STARTDATE:"التاريخ من",
+        ENDDATE:"التاريخ إلى",
+        CUSTOMERCODE:"بحث بكود العميل",
+      },
+      BUTTONS: {
+        REVISED:"مراجعة",
+        POSTED:"ارسال"
+      },
+      TITLES: {
+        COLLECTORNAME: "اسم المحصل",
+        CUSTOMERNAME: "اسم العميل",
+        CUSTOMERCODE: "كود العميل",
+        BRANCHNAME: "اسم الفرع",
+        AREANAME:"اسم المنطقة",  
+        BLOCKNAME:"اسم المربع",
+        VALUE: "القراءة",
+        LASTREADING: "اخر قراءة",
+        IMAGE: "الصورة",
+        METERSTATUS: "حالة العداد",
+        ISSUENAME: "اسم الاصدار",
+        ISSUESTATUS: "حالة الاصدار",
+        ISSUEDATE: "تاريخ الاصدار",
+        NOTES: "ملاحظات",
+        DATE:"التاريخ",
+        DETAILS:"التفاصيل",
+        COMPLAINTYPE:"نوع الشكوى",
+        COMPLAINTYPES:"انواع الشكاوى"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"

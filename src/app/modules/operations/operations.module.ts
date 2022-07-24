@@ -8,12 +8,14 @@ import { TranslationModule } from '../i18n';
 import { OperationsRoutingModule } from './operations-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { ComplainListComponent } from './components/complain-list/complain-list.component';
+import { ViewimagesComponent } from './components/complain-list/viewimages/viewimages.component';
 
 @NgModule({
 
   declarations: [
     ReadingListComponent,
-    ComplainListComponent
+    ComplainListComponent,
+    ViewimagesComponent
   ],
   imports: [
     CommonModule,

@@ -9,7 +9,7 @@
           <div class="col">
             <span class="p-input-icon-left">
               <button class="buttonsearch" (click)="myfilter('branch')"><i class="pi pi-search"></i></button>
-              <input type="text" pInputText placeholder="search by customer Code" [(ngModel)]="searchObject.customerCode">
+              <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}" [(ngModel)]="searchObject.customerCode">
             </span>
           </div>
           <div class="col justify-content-end d-flex">
@@ -21,30 +21,32 @@
         <div class="row mx-0">
           <div class="col">
             <p-dropdown [options]="branchDropdown"  appendTo="body" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="Branch" [showClear]="true" [(ngModel)]="searchObject.branchId"></p-dropdown>
+              (onChange)="myfilter('branch')" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true" [(ngModel)]="searchObject.branchId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="areaDropdown"  appendTo="body" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="Area" [showClear]="true" [(ngModel)]="searchObject.areaId"></p-dropdown>
+              (onChange)="myfilter('area')" placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.areaId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="blockDropdown"  appendTo="body" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="Block" [showClear]="true" [(ngModel)]="searchObject.blockId"></p-dropdown>
+              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.blockId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="customerDropdown"  appendTo="body" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="Customer" [showClear]="true" [(ngModel)]="searchObject.customerId"></p-dropdown>
+              (onChange)="myfilter('customer')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.customerId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown"  appendTo="body" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="Employee" [showClear]="true" [(ngModel)]="searchObject.employee_id"></p-dropdown>
+              (onChange)="myfilter('employee')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.employee_id"></p-dropdown>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" appendTo="body" dir="ltr" placeholder="start Date" [(ngModel)]="searchObject.readingStartDate">
+            <p-calendar [showIcon]="true" inputId="icon" #st [maxDate]="end.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
+            placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}" [(ngModel)]="searchObject.readingStartDate">
             </p-calendar>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" appendTo="body" dir="ltr" placeholder="End Date" [(ngModel)]="searchObject.readingEndDate">
+            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="st.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
+            placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}" [(ngModel)]="searchObject.readingEndDate">
             </p-calendar>
           </div>
         </div>
@@ -52,23 +54,24 @@
 
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th class="text-center">CollectorName</th>
-          <th class="text-center">CustomerName</th>
-          <th class="text-center">CustomerCode</th>
-          <th class="text-center">BranchName</th>
-          <th class="text-center">Value</th>
-          <th class="text-center">Last Reading </th>
-          <th class="text-center">MeterStatus</th>
-          <th class="text-center">IssueName</th>
-          <th class="text-center">IssueStatus</th>
-          <th class="text-center">IssueDate</th>
-          <th class="text-center">Notes </th>
+          <th class="text-center">{{'OPERATION.TITLES.COLLECTORNAME'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.CUSTOMERNAME'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.CUSTOMERCODE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.BRANCHNAME'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.VALUE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.LASTREADING'|translate}} </th>
+          <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.ISSUEDATE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
                 id="kt_modal_update_role_option_0" [(ngModel)]="btnIsRevise"
                 (change)="setAllIsPostOrIsRevise('revise')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsRevise" label="revised"
+              <button pButton pRipple type="button" [disabled]="!btnIsRevise" label="{{'OPERATION.BUTTONS.REVISED'|translate}}"
                 (click)="postAllDataToChecked()" class="p-button-rounded p-button-info p-1"
                 styleClass="p-button-sm"></button>
             </div>
@@ -77,12 +80,12 @@
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
                 id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost" (change)="setAllIsPostOrIsRevise('post')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsPost" label="posted"
+              <button pButton pRipple type="button" [disabled]="!btnIsPost" label="{{'OPERATION.BUTTONS.POSTED'|translate}}"
                 (click)="postAllDataToChecked()" class="p-button-rounded p-button-success p-1"
                 styleClass="p-button-sm"></button>
             </div>
           </th>
-          <th class="text-center">action</th>
+          <th class="text-center"></th>
         </tr>
       </ng-template>
 
@@ -94,6 +97,7 @@
           <td>{{read.BranchName}}</td>
           <td>{{read.Value}}</td>
           <td>{{read.LastReading }}</td>
+          <td><img [src]="read.ReadingImagePath!=''?read.ReadingImagePath:'assets\\media\\avatars\\300-1.jpg'" [alt]="read.CustomerName" width="150" height="50" /></td>
           <td>{{read.MeterStatus}}</td>
           <td>{{read.IssueName}}</td>
           <td>{{read.IssueStatus}}</td>
@@ -135,7 +139,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="11" class="text-center">{{'EMPLOYEE.MESSAGE.NOROWFOUND'|translate}}</td>
+          <td colspan="11" class="text-center">{{'OPERATION.MESSAGE.NOROWFOUND'|translate}}</td>
         </tr>
       </ng-template>
 
