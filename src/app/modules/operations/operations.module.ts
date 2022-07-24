@@ -9,13 +9,17 @@ import { OperationsRoutingModule } from './operations-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { ComplainListComponent } from './components/complain-list/complain-list.component';
 import { CustomerUpdateManageComponent } from './components/customer-update-manage/customer-update-manage.component';
+import { updateCustomerManageComponent } from './components/customer-update-manage/update-datatable/update-datatable.component';
+import { UserLocationComponent } from './components/customer-update-manage/update-datatable/user-locations/user-location.component';
 
 @NgModule({
 
   declarations: [
     ReadingListComponent,
     ComplainListComponent,
-	CustomerUpdateManageComponent
+	CustomerUpdateManageComponent,
+	updateCustomerManageComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,

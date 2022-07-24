@@ -6,9 +6,9 @@ import { CustomerUpdateManageComponent } from './components/customer-update-mana
 import { ReadingListComponent } from './components/reading-list/reading-list.component';
 
 const routes: Routes = [
+	{path:'cutomerupdatemanage' , component:CustomerUpdateManageComponent},
     { path: 'readinglist', component: ReadingListComponent },
-    { path: 'complainlist', component: ComplainListComponent },
-	{path:'cutomerupdatemanage' , component:CustomerUpdateManageComponent}
+    { path: 'complainlist', component: ComplainListComponent }
 ];
 
 @NgModule({
