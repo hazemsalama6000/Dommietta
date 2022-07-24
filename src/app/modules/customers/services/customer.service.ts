@@ -5,7 +5,7 @@ import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { ICustomerEditManageSearch } from "../../operations/models/cutomer-editmanage/ICustomerEditManageSearch.interface";
-import { IEmployee } from "../models/customer.interface";
+import { ICustomer } from "../models/customer.interface";
 import { ISearch } from "../models/ISearch.interface";
 
 @Injectable({
@@ -15,28 +15,22 @@ import { ISearch } from "../models/ISearch.interface";
 export class CutomerService {
 	employees: LookUpModel[];
 	bSubject = new BehaviorSubject(true);
-	currentEmployeeSelected: IEmployee = {} as IEmployee;
-	
+	currentEmployeeSelected: ICustomer = {} as ICustomer;
+
 	constructor(private http: CommonHttpService) { }
 
-	getLookupEmployeeDataByParam(model: ISearch): Observable<LookUpModel[]> {
+	getLookupCustomerDataByParam(model: ISearch): Observable<LookUpModel[]> {
 		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
 					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
 		return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
 	}
 
-	getLookupEmployeeDataForCustomerEditMange(model: ICustomerEditManageSearch): Observable<LookUpModel[]> {
-		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
-		return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
-	}
-
-	getLookupEmployeeData(companyId: number): Observable<LookUpModel[]> {
+	getLookupCutomerData(companyId: number): Observable<LookUpModel[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
 			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 	// note
-	getEmployeeById(employeeId: number): Observable<IEmployee> {
+	getCutomerById(customerId: number): Observable<ICustomer> {
 		/*return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEEBY_ID}?EmployeeId=${employeeId}`).pipe(
 			map((data: HttpReponseModel) => data.data)
 		);*/
@@ -44,28 +38,25 @@ export class CutomerService {
 		return of(
 			{
 				id: 1,
-				employeeName: "zomm",
-				employeeJob: "ZZZ",
-				branchName: "zzzz",
-				userIsActive: true,
-				isTechnician: true,
-				blocks: [
-					{ areaName: "areaName", blockCode: "blockCode", blockName: "blockName" },
-					{ areaName: "areaName", blockCode: "blockCode", blockName: "blockName" }],
-				Technician: {
-					employee_Id: 1,
-					attachImageEditCustomer: true,
-					attachImageRead: true,
-					canCollect: true,
-					canComplain: true,
-					canEditCustomer: true,
-					canRead: true,
-					id: 0,
-					isActive: true,
-					maxOfflineWorkingBills: 200,
-					maxOfflineWorkingHours: 200
-				}
-			} as IEmployee);
+				name: "zomm",
+				code: "ZZZ",
+				actualName: "zzzz",
+				startIssue: new Date(),
+				activityStartIssue: new Date(),
+				actualActivity: "zzzz",
+				blockName: "zzzz",
+				areaName: "zzzz",
+				numOfUnits: 3,
+				meterChassisNum: 3,
+				meterStartReading: 3,
+				meterStartDate: new Date(),
+				meterStartIssue: new Date(),
+				hasSewage: true,
+				x: 30.5,
+				y: 30.54,
+				imagePath: '',
+				isDataComplete: true,
+			} as ICustomer);
 	}
 
 	toggleActive(employeeId: number): Observable<HttpReponseModel> {
@@ -76,9 +67,9 @@ export class CutomerService {
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();
 	}
-
+/*
 	changeEmployeeImageData(model: any): Observable<any> {
 		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_EMP_IMAGE}`);
-	}
+	}*/
 
 }

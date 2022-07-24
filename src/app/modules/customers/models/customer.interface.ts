@@ -1,6 +1,3 @@
-import { IBlock } from "./IBlock.interface"
-import { ITechnitianLog } from "./ITechnitianLog.interface"
-
 
 export interface ICustomer {
 	id: number,

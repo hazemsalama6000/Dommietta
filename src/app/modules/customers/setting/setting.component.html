@@ -62,9 +62,9 @@
 
 		<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
 			<input class="form-check-input" type="checkbox" value="" name="notifications"
-				defaultChecked="{{employeeProfile.userIsActive}}" [checked]="employeeProfile.userIsActive" (click)="toggleActive()" />
+				defaultChecked="{{employeeProfile.isDataComplete}}" [checked]="employeeProfile.isDataComplete" (click)="toggleActive()" />
 
-			<a *ngIf="employeeProfile.userIsActive == true; else inActive"
+			<a *ngIf="employeeProfile.isDataComplete == true; else inActive"
 				class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer" data-bs-toggle="modal"
 				data-bs-target="#kt_modal_upgrade_plan">
 				{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -85,9 +85,9 @@
 
 		<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
 			<input class="form-check-input" type="checkbox" value="" name="notifications"
-				defaultChecked="{{employeeProfile.isTechnician}}" [checked]="employeeProfile.isTechnician" (click)="toggleIsTechnician()"/>
+				defaultChecked="{{employeeProfile.isDataComplete}}" [checked]="employeeProfile.isDataComplete" (click)="toggleIsTechnician()"/>
 
-			<a *ngIf="employeeProfile.isTechnician == true; else inActiveForIsTechnitian"
+			<a *ngIf="employeeProfile.isDataComplete == true; else inActiveForIsTechnitian"
 				class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer" data-bs-toggle="modal"
 				data-bs-target="#kt_modal_upgrade_plan">
 				{{'HR.TITLES.COMPANYACTIVE'|translate}}
