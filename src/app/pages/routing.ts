@@ -17,6 +17,11 @@ const Routing: Routes = [
       import('../modules/employees/employees.module').then((m) => m.EmployeesModule)
   },
   {
+    path: 'customer',
+    loadChildren: () =>
+      import('../modules/customers/cutomers.module').then((m) => m.CustomerModule)
+  },
+  {
     path: 'permissions',
     loadChildren: () =>
       import('../modules/permissions/permissions.module').then(m => m.PermissionsModule)

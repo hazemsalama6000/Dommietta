@@ -25,7 +25,7 @@
 	<div class="row align-items-center mx-5">
 		<div class="col-md-2">
 			<ng-select class="customized" [items]="dropdownUpdateTypeData" formControlName="updatingTypeId" bindLabel="Name" bindValue="Id" name="updatingTypeId"
-				id="updatingTypeId" placeholder="اختر نوع التعديل"
+				placeholder="اختر نوع التعديل"
 				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
 			</ng-select>
 		</div>
