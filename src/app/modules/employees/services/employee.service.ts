@@ -21,7 +21,8 @@ export class EmployeeService {
 	constructor(private http: CommonHttpService) { }
 
 	getLookupEmployeeDataByParam(model: ISearch): Observable<LookUpModel[]> {
-				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?BranchId=${model.branchId}&areaId=${model.AreaId}&blockId=${model.Block}`)
+				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?
+				BranchId=${model.branchId}&areaId=${model.AreaId==undefined?'':model.AreaId}&blockId=${model.Block==undefined?'':model.Block}`)
 					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
