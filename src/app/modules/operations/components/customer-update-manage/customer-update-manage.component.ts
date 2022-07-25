@@ -16,7 +16,7 @@ import { customerUpdateManageService } from "../../services/customer-update-mana
 	selector: 'customer-update-manage',
 	templateUrl: './customer-update-manage.component.html',
 	styleUrls: ['./customer-update-manage.component.scss'],
-	providers:[customerUpdateManageService]
+	providers: [customerUpdateManageService]
 })
 
 export class CustomerUpdateManageComponent implements OnInit {
@@ -30,29 +30,29 @@ export class CustomerUpdateManageComponent implements OnInit {
 	searchModel: ICustomerEditManageSearch = {} as ICustomerEditManageSearch;
 
 	constructor(
-		private customerEditManageService:customerUpdateManageService,
+		private customerEditManageService: customerUpdateManageService,
 		private service: EmployeeService,
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
 		private updateTypeService: UpdateTypeService,
-		private toaster: toasterService,private fb:FormBuilder) {
+		private toaster: toasterService, private fb: FormBuilder) {
 	}
 
 	ngOnInit(): void {
-this.customerEditSearchForm = this.fb.group({
-	customerCode: [0],
-	branchId: [0],
-	areaId: [''],
-	blockId: [''],
-	customerId: [''],
-	employee_id: [''],
-	updatingStartDate: [''],
-	updatingEndDate: [''],
-	updatingTypeId: [''],
+		this.customerEditSearchForm = this.fb.group({
+			customerCode: [0],
+			branchId: [0],
+			areaId: [''],
+			blockId: [''],
+			customerId: [''],
+			employee_id: [''],
+			updatingStartDate: [''],
+			updatingEndDate: [''],
+			updatingTypeId: [''],
 
-	
-});
+
+		});
 		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
 			this.dropdownBranchData = data;
 		});
@@ -61,10 +61,10 @@ this.customerEditSearchForm = this.fb.group({
 		});
 	}
 
-	searchCustomerEdits(model:ICustomerEditManageSearch){
+	searchCustomerEdits(model: ICustomerEditManageSearch) {
 		console.log(model);
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
-			(data:ICustomerEditResponse[])=>{
+			(data: ICustomerEditResponse[]) => {
 				this.customerEditManageService.searchUpdateUserManageAction.next(data);
 			}
 		);

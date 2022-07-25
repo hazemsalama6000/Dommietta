@@ -22,10 +22,13 @@ export const locale = {
       LOGINUSERSDATA: "Users Login Information",
       TRACINGUSERSLOCATION: "Tracking users' locations",
       EMPLOYEELIST: "Employee List",
-      PERMISSION:"Permissions",
-      USERS:"Users",
-      ROLES:"Roles",
-      SUPERADMIN:"Super Admin"
+      PERMISSION: "Permissions",
+      USERS: "Users",
+      ROLES: "Roles",
+      SUPERADMIN: "Super Admin",
+      COMPLAINLIST:"Complain list",
+      READINGLIST:"Reading list",
+      COMPLAINTYPE:"Compain Type"
     },
 
     FOOTER: {
@@ -258,11 +261,11 @@ export const locale = {
         DELETE: "Delete",
         LASTLOCATION: "Last Location",
         NOTCONNECTED: "Not Connected",
-        CANCEL:"Cancel",
-        ALLUSERS:"All Users",
-        ADDROLE:"Add Role",
-        ADDUSER:"Add User",
-        EDITROLE:"Edit Role"
+        CANCEL: "Cancel",
+        ALLUSERS: "All Users",
+        ADDROLE: "Add Role",
+        ADDUSER: "Add User",
+        EDITROLE: "Edit Role"
       },
       TITLES: {
         ADDORUPDATEONLINEUSERS: "Users Login Data",
@@ -280,38 +283,38 @@ export const locale = {
         COUNTONLINEUSERFOREACHCOMPANY: "Count Connected Users Foreach Company",
         ONLINEUSERS: "Online Users",
         OFFLINEUSERS: "Offline Users",
-        ADDNEWUSER:"Add New User",
-        EMPLOYEE:"Employee",
-        FULLNAME:"Full Name",
-        PHONENUMBER:"Phone Number",
-        EMAIL:"Email",
-        PASSWORD:"password",
-        USERTYPE:"User Type",
-        ROLES:"ROLES",
-        ASSIGNROLESTOUSER:"Assign Roles To User",
-        SEARCHUSER:"Search Users",
-        STATUS:"Status",
-        LASTLOGINTIME:"Last Login Time",
-        ASSIGNEDROLES:"Assigned Roles",
-        TOTAL:"Total",
-        ONLINE:"Online",
-        OFFLINE:"Offline",
-        OVERVIEW:"Overview",
-        CARDTOTAL:"Total users with this role:",
-        MORE:"more...",
-        TABLETITLEROLEPROFILE:"Count Users In Role",
-        ADDPERMISSIONTOCOMPANY:"Add Role To Company",
-        ADDNEWROLE:"Add New Role",
-        ROLEPERMISSION:"Role Permissions",
-        ROLENAME:"Role Name",
-        UPDATEROLE:"Update Role"
+        ADDNEWUSER: "Add New User",
+        EMPLOYEE: "Employee",
+        FULLNAME: "Full Name",
+        PHONENUMBER: "Phone Number",
+        EMAIL: "Email",
+        PASSWORD: "password",
+        USERTYPE: "User Type",
+        ROLES: "ROLES",
+        ASSIGNROLESTOUSER: "Assign Roles To User",
+        SEARCHUSER: "Search Users",
+        STATUS: "Status",
+        LASTLOGINTIME: "Last Login Time",
+        ASSIGNEDROLES: "Assigned Roles",
+        TOTAL: "Total",
+        ONLINE: "Online",
+        OFFLINE: "Offline",
+        OVERVIEW: "Overview",
+        CARDTOTAL: "Total users with this role:",
+        MORE: "more...",
+        TABLETITLEROLEPROFILE: "Count Users In Role",
+        ADDPERMISSIONTOCOMPANY: "Add Role To Company",
+        ADDNEWROLE: "Add New Role",
+        ROLEPERMISSION: "Role Permissions",
+        ROLENAME: "Role Name",
+        UPDATEROLE: "Update Role"
 
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"
       },
-      PLACEHOLDER:{
-        ROLENAMEPLACEHOLDER:"Enter a role name"
+      PLACEHOLDER: {
+        ROLENAMEPLACEHOLDER: "Enter a role name"
       }
     },
 
@@ -332,22 +335,61 @@ export const locale = {
         DEPARTMENT: "Department",
         SECTION: "Section",
         JOB: "Job",
-        HIREDATE:"HireDate",
-        GRADUATIONDATE:"GraduateDate",
-        QUALIFICATION:"Qualification",
-        UNIVERSITY:"University",
-        NID:"National ID",
-        BITHDATE:"BirthDate",
-        ADDRESS:"Address",
-        STATE:"State",
-        REGION:"Region",
-        MARTIALSTATUS:"NartialStatus",
-        MILITERYSTATUS:"MiliteryStatus"
+        HIREDATE: "HireDate",
+        GRADUATIONDATE: "GraduateDate",
+        QUALIFICATION: "Qualification",
+        UNIVERSITY: "University",
+        NID: "National ID",
+        BITHDATE: "BirthDate",
+        ADDRESS: "Address",
+        STATE: "State",
+        REGION: "Region",
+        MARTIALSTATUS: "NartialStatus",
+        MILITERYSTATUS: "MiliteryStatus"
+      },
+      MESSAGE: {
+        NOROWFOUND: "No Rows Found"
+      }
+    },
+
+    OPERATION: {
+      INPUTS: {
+        BRANCH: "Branch",
+        AREA: "Area",
+        BLOCK: "Block",
+        CUSTOMET: "Customer",
+        EMPLOYEE: "Employee",
+        STARTDATE: "start Date",
+        ENDDATE: "End Date",
+        CUSTOMERCODE: "search by customer Code",
+      },
+      BUTTONS: {
+        REVISED: "Revised",
+        POSTED: "Post"
+      },
+      TITLES: {
+        COLLECTORNAME: "Collector Name",
+        CUSTOMERNAME: "Customer Name",
+        CUSTOMERCODE: "Customer Code",
+        BRANCHNAME: "Branch Name",
+        AREANAME:"AreaName",  
+        BLOCKNAME:"BlockName",
+        VALUE: "Value",
+        LASTREADING: "Last Reading",
+        IMAGE: "Image",
+        METERSTATUS: "Meter Status",
+        ISSUENAME: "Issue Name",
+        ISSUESTATUS: "Issue Status",
+        ISSUEDATE: "Issue Date",
+        NOTES: "Notes",
+        DTAE:"Date",
+        DETAILS:"Details",
+        COMPLAINTYPE:"ComplaintType",
+        COMPLAINTYPES:"Compain Type"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"
       }
     }
-
   }
 };

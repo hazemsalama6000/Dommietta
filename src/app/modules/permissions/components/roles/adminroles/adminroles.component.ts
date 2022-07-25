@@ -49,10 +49,12 @@ export class AdminrolesComponent implements OnInit {
   }
 
   getCompanyRoles() {
+    this.rolesService.permissionTree.next([]);
     this.rolesService.GetCompanyRole(this.roleForm.get('companyId')?.value).subscribe(
       (res: ICompanyRoles) => {
         this.roleForm.patchValue({ companyId: res.companyId });
-        this.rolesService.permissionTree.next(res.roleTree)
+        this.rolesService.permissionTree.next(res.roleTree);
+        this.saveButtonClickedFlag=false;
       },
       (err) => console.log(err),
       () => { }

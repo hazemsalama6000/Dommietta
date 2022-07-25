@@ -10,6 +10,8 @@ import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { Subscription } from "rxjs";
 import { AuthService } from "src/app/modules/auth";
+import { ActivatedRoute } from "@angular/router";
+import { ComplainTypeService } from "src/app/shared-module/Services/complainType.service";
 @Component({
 	selector: 'list_content',
 	templateUrl: './list_content.component.html',
@@ -30,22 +32,38 @@ export class ListContentComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	userdata: IUserData;
+
+	pageName: string = '';
 	private unsubscribe: Subscription[] = [];
 
-	constructor(private service: LookupService, private toaster: toasterService, public dialog: MatDialog, private auth: AuthService,
-		private confirmationDialogService: ConfirmationDialogService, private ref: ChangeDetectorRef) {
-
+	constructor(
+		private jobService: LookupService,
+		private compainTypeService: ComplainTypeService,
+		private toaster: toasterService,
+		public dialog: MatDialog,
+		private auth: AuthService,
+		private confirmationDialogService: ConfirmationDialogService,
+		private ref: ChangeDetectorRef,
+		private activatedRoute: ActivatedRoute
+	) {
 		this.currentSelected = { Id: 0, Name: '', company_Id: 0 };
 
+		let sub = this.activatedRoute.data.subscribe(v => { this.pageName = v.page });
+		this.unsubscribe.push(sub);
+
 		//subscribe here to invoke when insert done in upsert component
-		const data = this.service.selectFromStore().subscribe(data => {
-			const udata = this.auth.userData.subscribe(res => { this.userdata = res; this.getallData(); });
-			this.unsubscribe.push(udata);
+		const udata = this.auth.userData.subscribe(res => {
+			this.userdata = res;
+			if (this.pageName == 'jobs') {
+				const datajob = this.jobService.selectFromStore().subscribe(data => { this.getallData(); });
+				this.unsubscribe.push(datajob);
+			} else if (this.pageName == 'compainType') {
+				const datacomplain = this.compainTypeService.selectFromStore().subscribe(data => { this.getallData(); });
+				this.unsubscribe.push(datacomplain);
+			}
 		});
-
-		this.unsubscribe.push(data);
+		this.unsubscribe.push(udata);
 	}
-
 
 	addNewRow() {
 		let Item: Array<LookUpModel> = this.dataSource.data.filter((a: LookUpModel) => a.Id == 0);
@@ -79,7 +97,6 @@ export class ListContentComponent {
 		});
 	}
 
-
 	Submit(model: LookUpModel) {
 		console.log(model);
 
@@ -87,14 +104,15 @@ export class ListContentComponent {
 
 		if (model.Id == 0) {
 			model.Id = 0;
-			this.service.PostLookupData(model).
-				subscribe(
+
+			if (this.pageName == 'jobs') {
+				this.jobService.PostLookupData(model).subscribe(
 					(data: HttpReponseModel) => {
 
 						if (data.isSuccess) {
 							this.toaster.openSuccessSnackBar(data.message);
-							this.service.bSubject.next(true);
-							this.service.addFlag.next(true);
+							this.jobService.bSubject.next(true);
+							this.jobService.addFlag.next(true);
 
 						}
 						else if (data.isExists) {
@@ -105,53 +123,101 @@ export class ListContentComponent {
 						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 					}
 				);
-
+			} else if (this.pageName == 'compainType') {
+				this.compainTypeService.PostLookupData(model).subscribe(
+					(data: HttpReponseModel) => {
+						if (data.isSuccess) {
+							this.toaster.openSuccessSnackBar(data.message);
+							this.compainTypeService.bSubject.next(true);
+							this.compainTypeService.addFlag.next(true);
+						}
+						else if (data.isExists) {
+							this.toaster.openWarningSnackBar(data.message);
+						}
+					},
+					(error: any) => {
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+					}
+				);
+			}
 		}
 
 		else {
-			this.service.UpdateLookupData(model).subscribe(
-				(data: any) => {
-					this.toaster.openSuccessSnackBar(data.message);
-					//this.service.bSubject.next(true);
-				},
-				(error: any) => {
-					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-				});
+
+
+			if (this.pageName == 'jobs') {
+				this.jobService.UpdateLookupData(model).subscribe(
+					(data: any) => {
+						this.toaster.openSuccessSnackBar(data.message);
+					},
+					(error: any) => {
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+					});
+			} else if (this.pageName == 'compainType') {
+				this.compainTypeService.UpdateLookupData(model).subscribe(
+					(data: any) => {
+						this.toaster.openSuccessSnackBar(data.message);
+					},
+					(error: any) => {
+						this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+					});
+			}
 
 		}
 
 	}
 
-
 	toggleActiveDeactive(element: LookUpModel) {
-		this.service.addFlag.next(false);
-		this.service.toggleActiveDeactive(element).subscribe(
-			(data: HttpReponseModel) => {
-				this.toaster.openSuccessSnackBar(data.message);
-				this.getallData();
+		if (this.pageName == 'jobs') {
+			this.jobService.addFlag.next(false);
+			this.jobService.toggleActiveDeactive(element).subscribe(
+				(data: HttpReponseModel) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.getallData();
 
-			},
-			(error: any) => {
-				console.log(error);
-			});
+				},
+				(error: any) => {
+					console.log(error);
+				});
+		} else if (this.pageName == 'compainType') {
+			this.compainTypeService.addFlag.next(false);
+			this.compainTypeService.UpdateLookupData(element).subscribe(
+				(data: HttpReponseModel) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.getallData();
+				},
+				(error: any) => console.log(error)
+			);
+		}
+
 	}
 
-
-
 	Remove(model: LookUpModel) {
-		this.service.addFlag.next(false);
+		this.jobService.addFlag.next(false);
 
 		this.confirmationDialogService.confirm('من فضلك اكد الحذف', `هل تريد حذف ${model.Name} ? `)
 			.then((confirmed) => {
 				if (confirmed) {
-					this.service.DeleteLookupData(model.Id).subscribe(
-						(data: HttpReponseModel) => {
-							this.toaster.openSuccessSnackBar(data.message);
-							this.getallData();
-						},
-						(error: any) => {
-							this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-						});
+					if (this.pageName == 'jobs') {
+						this.jobService.DeleteLookupData(model.Id).subscribe(
+							(data: HttpReponseModel) => {
+								this.toaster.openSuccessSnackBar(data.message);
+								this.getallData();
+							},
+							(error: any) => {
+								this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+							});
+					} else if (this.pageName == 'compainType') {
+						this.compainTypeService.DeleteLookupData(model.Id).subscribe(
+							(data: HttpReponseModel) => {
+								this.toaster.openSuccessSnackBar(data.message);
+								this.getallData();
+							},
+							(error: any) => {
+								this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+							});
+					}
+
 				}
 			})
 			.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
@@ -160,30 +226,50 @@ export class ListContentComponent {
 
 	// getting data and initialize data Source and Paginator
 	getallData() {
-		this.service.getLookupData(this.userdata.companyId).subscribe(
-			(data: LookUpModel[]) => {
-				console.log(data);
-				this.dataSource = new MatTableDataSource<LookUpModel>(data);
-				this.dataSource.paginator = this.paginator;
+		this.dataSource = [];
+		if (this.pageName == 'jobs') {
+			this.jobService.getLookupData(this.userdata.companyId).subscribe(
+				(data: LookUpModel[]) => {
+					console.log(data);
+					this.dataSource = new MatTableDataSource<LookUpModel>(data);
+					this.dataSource.paginator = this.paginator;
 
-				setTimeout(() => {
-					this.service.addFlag.subscribe((data) => {
-						if (data == true) {
-							this.addNewRow();
-						}
-					});
+					setTimeout(() => {
+						this.jobService.addFlag.subscribe((data) => {
+							if (data == true) {
+								this.addNewRow();
+							}
+						});
+					}, 500);
+				}
+			);
+		} else if (this.pageName == 'compainType') {
+			this.compainTypeService.getLookupData(this.userdata.companyId).subscribe(
+				(data: LookUpModel[]) => {
+					this.dataSource = new MatTableDataSource<LookUpModel>(data);
+					this.dataSource.paginator = this.paginator;
 
-				}, 500);
+					setTimeout(() => {
+						this.compainTypeService.addFlag.subscribe((data) => {
+							if (data == true) {
+								this.addNewRow();
+							}
+						});
+					}, 500);
+				}
+			);
+		}
 
-			}
-
-		);
 	}
 
 	//filter from search Box
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
+
+	getDisplayColumns() {
+
 	}
 
 	ngOnDestroy() {

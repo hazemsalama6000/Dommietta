@@ -118,4 +118,10 @@ export enum HttpPaths {
 	API_DELETE_ROLE = "/api/v1/permissions/deleteruleforcompany/",
 	API_GET_COMPAY_ROLES="/api/v1/permissions/getpermissionforcompanyadmin/",
 	API_ADD_COMPANY_ROLES="/api/v1/permissions/managepermissionforcompanyadmin",
+
+	//ComplaintTypes
+	API_GET_COMPLAINT_TYPE="/api/v1/operation/getcomplainttypes",
+	API_ADD_COMPLAINT_TYPE="/api/v1/operation/addcomplainttype",
+	API_UPDTAE_COMPLAINT_TYPE="/api/v1/operation/updatecomplainttype/",
+	API_DELETE_COMPLAINT_TYPE="/api/v1/operation/deletecomplainttype/",
 }

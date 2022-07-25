@@ -5,7 +5,7 @@ import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
-import { EmployeeService } from 'src/app/modules/hr/services/employee.service';
+import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { JobService } from 'src/app/modules/share/Services/job.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { UsersService } from '../../../services/users.service';
