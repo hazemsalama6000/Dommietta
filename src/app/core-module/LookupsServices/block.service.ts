@@ -9,9 +9,11 @@ import { CommonHttpService } from "../httpServices/CommonHttpService.service";
 export class BlockService {
 	constructor(private http:CommonHttpService) {}
 
+
 	getLookupBlockData(areaId: number): Observable<LookUpModel[]> {
 				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BLOCK_URL}?areaId=${areaId}`)
 					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+
 	}
 
 }

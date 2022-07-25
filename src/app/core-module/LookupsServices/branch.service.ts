@@ -11,6 +11,7 @@ export class BranchService {
 	constructor(private http:CommonHttpService) {}
 
 	getLookupBranchData(companyId: number): Observable<LookUpModel[]> {
+
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BRANCH_URL}?companyId=${companyId}`)
 			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}

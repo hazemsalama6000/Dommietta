@@ -8,6 +8,7 @@ import { TranslationModule } from '../i18n';
 import { OperationsRoutingModule } from './operations-routing.module';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { ComplainListComponent } from './components/complain-list/complain-list.component';
+import { ViewimagesComponent } from './components/complain-list/viewimages/viewimages.component';
 import { CustomerUpdateManageComponent } from './components/customer-update-manage/customer-update-manage.component';
 import { updateCustomerManageComponent } from './components/customer-update-manage/update-datatable/update-datatable.component';
 import { UserLocationComponent } from './components/customer-update-manage/update-datatable/user-locations/user-location.component';
@@ -17,6 +18,7 @@ import { UserLocationComponent } from './components/customer-update-manage/updat
   declarations: [
     ReadingListComponent,
     ComplainListComponent,
+    ViewimagesComponent,
 	CustomerUpdateManageComponent,
 	updateCustomerManageComponent,
 	UserLocationComponent
