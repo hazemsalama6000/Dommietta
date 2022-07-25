@@ -20,8 +20,8 @@ import { UserLocationComponent } from './components/customer-update-manage/updat
     ComplainListComponent,
     ViewimagesComponent,
 	CustomerUpdateManageComponent,
-    updateCustomerManageComponent,
-    UserLocationComponent
+	updateCustomerManageComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,

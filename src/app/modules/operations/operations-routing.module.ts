@@ -10,7 +10,6 @@ const routes: Routes = [
     { path: 'readinglist', component: ReadingListComponent },
     { path: 'complainlist', component: ComplainListComponent },
     { path: 'compainType', component: LookupIdNameComponent, data: { page: 'compainType' } }
-
 ];
 
 @NgModule({
