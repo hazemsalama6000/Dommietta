@@ -51,10 +51,6 @@ export class ListContentComponent {
 		let sub = this.activatedRoute.data.subscribe(v => { this.pageName = v.page });
 		this.unsubscribe.push(sub);
 
-		if (this.pageName == 'compainType')
-			this.displayedColumns = ['name', 'action'];
-
-
 		//subscribe here to invoke when insert done in upsert component
 		const udata = this.auth.userData.subscribe(res => {
 			this.userdata = res;
@@ -183,6 +179,15 @@ export class ListContentComponent {
 				(error: any) => {
 					console.log(error);
 				});
+		} else if (this.pageName == 'compainType') {
+			this.compainTypeService.addFlag.next(false);
+			this.compainTypeService.UpdateLookupData(element).subscribe(
+				(data: HttpReponseModel) => {
+					this.toaster.openSuccessSnackBar(data.message);
+					this.getallData();
+				},
+				(error: any) => console.log(error)
+			);
 		}
 
 	}
@@ -221,7 +226,7 @@ export class ListContentComponent {
 
 	// getting data and initialize data Source and Paginator
 	getallData() {
-		this.dataSource=[];
+		this.dataSource = [];
 		if (this.pageName == 'jobs') {
 			this.jobService.getLookupData(this.userdata.companyId).subscribe(
 				(data: LookUpModel[]) => {
