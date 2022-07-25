@@ -1,4 +1,9 @@
 export interface IReading {
+    readingsRecords: IReadingList[],
+    pageSize: number
+} 
+
+export interface IReadingList {
     Id :number;
     CollectorId: number;
     CollectorName: string;

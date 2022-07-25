@@ -1,4 +1,9 @@
 export interface IComplain {
+    complainRecords: IComplainList[],
+    pageSize: number
+}
+
+export interface IComplainList {
     Id: number;
     Date: Date;
     CollectorName: string;

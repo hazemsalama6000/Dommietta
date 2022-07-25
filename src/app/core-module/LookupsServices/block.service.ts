@@ -9,7 +9,7 @@ export class BlockService {
 	getLookupBlockData(blockId: number): Observable<LookUpModel[]> {
 		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
 					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
-		return of([{ Id: 1, Name: 'Block1' } as LookUpModel, { Id: 1, Name: 'Block2' } as LookUpModel]);
+		return of([{ Id: 1, Name: 'Block1' } as LookUpModel, { Id:2, Name: 'Block2' } as LookUpModel]);
 	}
 
 }

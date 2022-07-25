@@ -4,7 +4,7 @@ import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpSe
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
-import { IComplain } from '../models/IComplain.interface';
+import { IComplain, IComplainList } from '../models/IComplain.interface';
 import { IComplainSearch } from '../models/IComplainSearch.interface';
 
 @Injectable({
@@ -15,14 +15,14 @@ export class ComplainService {
   constructor(private http: CommonHttpService) { }
 
 
-  getReadingsData(searchModel: IComplainSearch): Observable<IComplain[]> {
+  getComplainsData(searchModel: IComplainSearch): Observable<IComplain> {
     // return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
     //  .pipe(map(Items => Items.map((Item: any) => ({ ...Item }))));
-    let complainData: IComplain[] = [];
+    let complainData: IComplain={complainRecords:[],pageSize:100} ;
     let ispost = true;
-    for (let index = 1; index < 10; index++) {
+    for (let index = 1; index < searchModel?.pageSize; index++) {
       ispost = !ispost;
-      complainData.push({
+      complainData.complainRecords.push({
         Id: index,
         Date: new Date(),
         CollectorName: 'CollectorName' + index,
@@ -49,7 +49,7 @@ export class ComplainService {
     return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
   }
 
-  PostIsreviseOrIsPost(complain: IComplain[]): Observable<HttpReponseModel> {
+  PostIsrevise(complain: IComplainList[]): Observable<HttpReponseModel> {
     return this.http.CommonPostRequests(complain, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}`);
   }
 

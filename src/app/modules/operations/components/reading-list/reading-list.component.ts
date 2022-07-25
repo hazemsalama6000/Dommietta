@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
-import { IReading } from '../../models/IReading.interface';
+import { IReading, IReadingList } from '../../models/IReading.interface';
 import { IReadingSearch } from '../../models/IReadingSearch.interface';
 import { ReadingService } from '../../services/reading.service';
 
@@ -30,7 +30,7 @@ export class ReadingListComponent implements OnInit {
   customerDropdown: LookUpModel[];
   collectorDropdown: LookUpModel[];
 
-  readingData: IReading[] = [];
+  readingData: IReadingList[] = [];
   searchObject: IReadingSearch;
   totalRecords: number;
 
@@ -84,7 +84,7 @@ export class ReadingListComponent implements OnInit {
         this.blockService.getLookupBlockData(this.searchObject.areaId ?? 0).subscribe(
           (data: LookUpModel[]) => { this.blockDropdown = data; });
         this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId })
-          .subscribe((data: LookUpModel[]) => { this.blockDropdown = data; });
+          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "block":
         this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId, blockId: this.searchObject.blockId })
@@ -107,9 +107,9 @@ export class ReadingListComponent implements OnInit {
   getReadingData() {
     this.loading = true;
     this.readingService.getReadingsData(this.searchObject).subscribe(
-      (res: IReading[]) => {
-        this.readingData = res;
-        //this.totalRecords = res.pageSize;
+      (res: IReading) => {
+        this.readingData = res.readingsRecords;
+        this.totalRecords = res.pageSize;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -134,17 +134,17 @@ export class ReadingListComponent implements OnInit {
   }
 
   postAllDataToChecked() {
-    let reading: IReading[] = this.readingData.filter(x => !x.lastPosted);
-    reading.map((x: IReading) => { delete x.lastPosted });
+    let reading: IReadingList[] = this.readingData.filter(x => !x.lastPosted);
+    reading.map((x: IReadingList) => { delete x.lastPosted });
     console.log(reading);
     this.postReviseOrPost(reading);
   }
 
-  ActivePostOrRevise(read: IReading) {
+  ActivePostOrRevise(read: IReadingList) {
     this.postReviseOrPost([read])
   }
 
-  postReviseOrPost(reading: IReading[]) {
+  postReviseOrPost(reading: IReadingList[]) {
     this.readingService.PostIsreviseOrIsPost(reading).
       subscribe(
         (data: HttpReponseModel) => {

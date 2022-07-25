@@ -21,40 +21,38 @@
         <p-divider></p-divider>
         <div class="row mx-0">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionLabel="Name" (onChange)="myfilter('branch')"
+            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('branch')"
               placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
               [(ngModel)]="searchObject.branchId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="areaDropdown" appendTo="body" optionLabel="Name" (onChange)="myfilter('area')"
+            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
               placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.areaId">
             </p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="blockDropdown" appendTo="body" optionLabel="Name" (onChange)="myfilter('block')"
+            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
               placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
               [(ngModel)]="searchObject.blockId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="customerDropdown" appendTo="body" optionLabel="Name" (onChange)="myfilter('')"
+            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
               placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
               [(ngModel)]="searchObject.customerId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="collectorDropdown" appendTo="body" optionLabel="Name" (onChange)="myfilter('')"
+            <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
               placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
               [(ngModel)]="searchObject.employee_id"></p-dropdown>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" appendTo="body" dir="ltr"
-              placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}" [(ngModel)]="searchObject.readingStartDate"
-              (onSelect)="myfilter('')">
+            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
+            placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}" [(ngModel)]="searchObject.readingStartDate">
             </p-calendar>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" appendTo="body" dir="ltr"
-              placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}" [(ngModel)]="searchObject.readingEndDate"
-              (onSelect)="myfilter('')">
+            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
+            placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}" [(ngModel)]="searchObject.readingEndDate">
             </p-calendar>
           </div>
         </div>
@@ -74,12 +72,12 @@
           <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
           <th class="text-center">
             <div class="d-flex align-items-center">
-              <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
-                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsRevise"
-                (change)="setAllIsPostOrIsRevise('revise')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsRevise"
-                label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
-                class="p-button-rounded p-button-info p-1" styleClass="p-button-sm"></button>
+              <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox" [(ngModel)]="btnIsRevise"
+                (change)="setAllIsRevise('revise')" />
+              <!-- [disabled]="!btnIsRevise" -->
+              <button pButton pRipple type="button" label="{{'OPERATION.BUTTONS.REVISED'|translate}}"
+                (click)="postAllDataToChecked()" class="p-button-rounded p-button-info p-1"
+                styleClass="p-button-sm"></button>
             </div>
           </th>
           <th class="text-center"></th>
@@ -99,7 +97,7 @@
           <td>{{complain.ComplaintTypeName}}</td>
           <td>
             <button mat-icon-button color="accent" (click)="openDialog(complain)">
-               <mat-icon style="font-size: 22px;">visibility</mat-icon>
+              <mat-icon style="font-size: 22px;">visibility</mat-icon>
             </button>
           </td>
           <td>
@@ -108,7 +106,7 @@
           </td>
 
           <td>
-            <a mat-mini-fab color="primary" (click)="ActivePostOrRevise(complain)" id="search" type="submit"
+            <a mat-mini-fab color="primary" (click)="ActiveRevise(complain)" id="search" type="submit"
               class="mx-10">
               <mat-icon style="font-size: 20px;">edit</mat-icon>
             </a>

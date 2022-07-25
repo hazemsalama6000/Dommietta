@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
-import { IComplain } from '../../models/IComplain.interface';
+import { IComplain, IComplainList } from '../../models/IComplain.interface';
 import { IComplainSearch } from '../../models/IComplainSearch.interface';
 import { ComplainService } from '../../services/complain.service';
 import { ViewimagesComponent } from './viewimages/viewimages.component';
@@ -32,7 +32,7 @@ export class ComplainListComponent implements OnInit {
   customerDropdown: LookUpModel[];
   collectorDropdown: LookUpModel[];
 
-  complainData: IComplain[] = [];
+  complainData: IComplainList[] = [];
   searchObject: IComplainSearch;
   totalRecords: number;
 
@@ -82,6 +82,8 @@ export class ComplainListComponent implements OnInit {
       case "branch":
         this.areaService.getLookupAreaData(this.searchObject.branchId ?? 0).subscribe(
           (data: LookUpModel[]) => { this.areaDropdown = data; });
+          this.customerDropdown=[];
+          this.blockDropdown=[];
         break;
       case "area":
         this.blockService.getLookupBlockData(this.searchObject.areaId ?? 0).subscribe(
@@ -109,16 +111,16 @@ export class ComplainListComponent implements OnInit {
   //this function to get data from employee 
   getComplainData() {
     this.loading = true;
-    this.complainService.getReadingsData(this.searchObject).subscribe(
-      (res: IComplain[]) => {
-        this.complainData = res;
-        //this.totalRecords = res.pageSize;
+    this.complainService.getComplainsData(this.searchObject).subscribe(
+      (res: IComplain) => {
+        this.complainData = res.complainRecords;
+        this.totalRecords = res.pageSize;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
   }
 
-  setAllIsPostOrIsRevise(type: string) {
+  setAllIsRevise(type: string) {
     console.log(this.complainData)
     if (type == 'revise') {
       for (let index = 0; index < this.complainData.length; index++) {
@@ -128,15 +130,15 @@ export class ComplainListComponent implements OnInit {
   }
 
   postAllDataToChecked() {
-    this.postReviseOrPost(this.complainData);
+    this.postRevise(this.complainData);
   }
 
-  ActivePostOrRevise(complain: IComplain) {
-    this.postReviseOrPost([complain])
+  ActiveRevise(complain: IComplainList) {
+    this.postRevise([complain])
   }
 
-  postReviseOrPost(complain: IComplain[]) {
-    this.complainService.PostIsreviseOrIsPost(complain).
+  postRevise(complain: IComplainList[]) {
+    this.complainService.PostIsrevise(complain).
       subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {
@@ -205,7 +207,7 @@ export class ComplainListComponent implements OnInit {
     this.unsubscribe.forEach((sb) => sb.unsubscribe);
   }
 
-  openDialog(complain:IComplain){
+  openDialog(complain:IComplainList){
     // const dialogPosition: DialogPosition = {
 		// 	top: '0px',
 		// 	right: '0px'

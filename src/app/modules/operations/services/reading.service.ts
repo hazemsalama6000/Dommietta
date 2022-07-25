@@ -4,7 +4,7 @@ import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpSe
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
-import { IReading } from '../models/IReading.interface';
+import { IReading, IReadingList } from '../models/IReading.interface';
 import { IReadingSearch } from '../models/IReadingSearch.interface';
 
 @Injectable({
@@ -15,14 +15,14 @@ export class ReadingService {
   constructor(private http: CommonHttpService) { }
 
 
-  getReadingsData(searchModel: IReadingSearch): Observable<IReading[]> {
+  getReadingsData(searchModel: IReadingSearch): Observable<IReading> {
     // return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
     //  .pipe(map(Items => Items.map((Item: any) => ({ ...Item }))));
-    let readingData: IReading[] = [];
+    let readingData: IReading={pageSize:100,readingsRecords:[]};
     let ispost = true;
-    for (let index = 1; index < 10; index++) {
+    for (let index = 1; index < searchModel.pageSize; index++) {
       ispost = !ispost;
-      readingData.push({
+      readingData.readingsRecords.push({
         Id: index,
         CollectorId: index,
         BranchName: "BranchName" + index,
@@ -55,7 +55,7 @@ export class ReadingService {
     return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
   }
 
-  PostIsreviseOrIsPost(reading:IReading[]):Observable<HttpReponseModel>{
+  PostIsreviseOrIsPost(reading:IReadingList[]):Observable<HttpReponseModel>{
       return this.http.CommonPostRequests(reading, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}`); 
   }
 }

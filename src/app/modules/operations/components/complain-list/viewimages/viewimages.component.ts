@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IComplain } from '../../../models/IComplain.interface';
+import { IComplain, IComplainList } from '../../../models/IComplain.interface';
 
 @Component({
   selector: 'app-viewimages',
@@ -9,7 +9,7 @@ import { IComplain } from '../../../models/IComplain.interface';
 })
 export class ViewimagesComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { complain: IComplain }) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { complain: IComplainList }) { }
 
   ngOnInit() {
     console.log(this.data)
