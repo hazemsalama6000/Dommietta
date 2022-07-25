@@ -8,7 +8,6 @@ import { JobService } from 'src/app/modules/share/Services/job.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IBranch } from '../../hr/models/IBranch';
 import { BranchService } from '../../hr/services/branch.service';
-import { EmployeeService } from '../../hr/services/employee.service';
 import { IEmployeeList } from '../models/IEmployeeList.interface';
 import * as FileSaver from 'file-saver';
 import { IUserData } from '../../auth/models/IUserData.interface';
@@ -16,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { EmployeeService } from '../../employees/services/employee.service';
 
 
 @Component({
