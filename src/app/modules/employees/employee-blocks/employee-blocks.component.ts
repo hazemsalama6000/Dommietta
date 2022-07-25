@@ -13,19 +13,21 @@ import { AuthService } from "src/app/modules/auth";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { TechnitianService } from "../services/technitian.service";
 import { ITechnitianLog } from "../models/ITechnitianLog.interface";
+import { IBlock } from "../models/IBlock.interface";
+import { EmployeeService } from "../services/employee.service";
 @Component({
-	selector: 'technician-log',
-	templateUrl: './technician-log.component.html',
-	styleUrls: ['./technician-log.component.scss']
+	selector: 'employee-blocks',
+	templateUrl: './employee-blockscomponent.html',
+	styleUrls: ['./employee-blocks.component.scss']
 })
 
-export class technicianLogComponent {
+export class EmployeeBlocksComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
-	displayedColumns: string[] = ['canCollect', 'canRead','canComplain','canEditCustomer' , 'attachImageRead' , 'attachImageEditCustomer', 'maxOfflineWorkingHours','maxOfflineWorkingBills'];
+	displayedColumns: string[] = ['blockCode', 'blockName','areaName','startDate','endDate' ];
 
 	dataSource: any;
 
@@ -37,26 +39,20 @@ export class technicianLogComponent {
 	constructor(
 		private service: TechnitianService,
 		public dialog: MatDialog,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private employeeService : EmployeeService
 	) {
-
-		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('employeeId')!);
-		});
-
+		this.getallData(this.employeeService.currentEmployeeSelected.blocks);
 	}
 
 
-
 	// getting data and initialize data Source and Paginator
-	getallData(employeeId: number) {
-		this.service.getTechnicianLogByEmpId(employeeId).subscribe(
-			(data: ITechnitianLog[]) => {
+	getallData(data: IBlock[]) {
+		
 				console.log(data);
-				this.dataSource = new MatTableDataSource<ITechnitianLog>(data);
+				this.dataSource = new MatTableDataSource<IBlock>(data);
 				this.dataSource.paginator = this.paginator;
-			}
-		);
+		
 	}
 
 	//filter from search Box

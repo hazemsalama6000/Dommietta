@@ -1,15 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
+import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { CommonHttpService } from "../httpServices/CommonHttpService.service";
 
 @Injectable({providedIn:'root'})
 
 export class BlockService {
+	constructor(private http:CommonHttpService) {}
 
-	getLookupBlockData(blockId: number): Observable<LookUpModel[]> {
-		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
-		return of([{ Id: 1, Name: 'Block1' } as LookUpModel, { Id:2, Name: 'Block2' } as LookUpModel]);
+
+	getLookupBlockData(areaId: number): Observable<LookUpModel[]> {
+				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BLOCK_URL}?areaId=${areaId}`)
+					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 }
