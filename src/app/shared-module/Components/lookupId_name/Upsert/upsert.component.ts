@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { catchError, EMPTY, Subscription, throwError } from "rxjs";
-import { ErrorResponse } from "src/app/core-module/httpServices/ErrorResponse.service";
+import { Subscription } from "rxjs";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { AuthService } from "src/app/modules/auth";
