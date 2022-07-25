@@ -7,6 +7,8 @@ import { BranchService } from 'src/app/core-module/LookupsServices/branch.servic
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
+import { AuthService } from '../auth';
+import { IUserData } from '../auth/models/IUserData.interface';
 import { IEmployee } from './models/employee.interface';
 import { ISearch } from './models/ISearch.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
@@ -28,22 +30,29 @@ export class EmployeesComponent implements OnInit {
 	dropdownBlockData: LookUpModel[] = [];
 	searchModel: ISearch = {} as ISearch;
 	employeeDisplay: IEmployee = {} as IEmployee;
-
+	companyId: number;
 	constructor(
 		private service: EmployeeService,
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
 		private toaster: toasterService,
-		public dialog: MatDialog) {
+		public dialog: MatDialog,
+		private auth: AuthService) {
 	}
 
 	ngOnInit(): void {
-		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
-			this.dropdownBranchData = data;
-		});
+		this.getUserDataAndLoadBranchesList();
 	}
 
+	getUserDataAndLoadBranchesList(){
+		this.auth.userData.subscribe((data: IUserData) => {
+			this.companyId = data.companyId;
+			this.branchService.getLookupBranchData(this.companyId).subscribe((data: LookUpModel[]) => {
+				this.dropdownBranchData = data;
+			});
+		});
+	}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
 		this.areaService.getLookupAreaData(selectedItem.Id)
