@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg-2';
-import { EmployeesRoutingModule } from './employees-routing.module';
-import { EmployeesComponent } from './employees.component';
+import { EmployeesRoutingModule } from './cutomers-routing.module';
 import { SettingComponent } from './setting/setting.component';
 import { OverviewComponent } from './overview/overview.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { EditemployeeComponent } from './editemployee/editemployee.component';
 import { Employee_listComponent } from './employee-list/employee-list.component';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { TranslationModule } from '../i18n';
@@ -16,19 +14,17 @@ import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-tech
 import { TechnitianService } from './services/technitian.service';
 import { technicianLogComponent } from './technician-log/technician-log.component';
 import { UserLocationComponent } from './user-locations/user-location.component';
-import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.component';
+import { CutomersComponent } from './cutomers.component';
 
 @NgModule({
   declarations: [
-    EmployeesComponent,
     SettingComponent,
     OverviewComponent,
-    EditemployeeComponent,
     Employee_listComponent,
     AddTechnitianLogComponent,
     technicianLogComponent,
     UserLocationComponent,
-	EmployeeBlocksComponent
+	CutomersComponent
   ],
   imports: [
     CommonModule,
@@ -45,4 +41,4 @@ import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.compo
   providers: [TechnitianService,DatePipe]
 
 })
-export class EmployeesModule { }
+export class CustomerModule { }

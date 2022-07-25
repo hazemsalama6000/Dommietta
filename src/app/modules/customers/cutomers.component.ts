@@ -4,24 +4,22 @@ import { map } from 'rxjs';
 import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
 import { BlockService } from 'src/app/core-module/LookupsServices/block.service';
 import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
-import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
-import { AuthService } from '../auth';
-import { IUserData } from '../auth/models/IUserData.interface';
-import { IEmployee } from './models/employee.interface';
+import { EmployeeService } from '../employees/services/employee.service';
+import { ICustomer } from './models/customer.interface';
 import { ISearch } from './models/ISearch.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
-import { EmployeeService } from './services/employee.service';
+import { CutomerService } from './services/customer.service';
 import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 
 @Component({
-	selector: 'app-employees',
-	templateUrl: './employees.component.html',
-	styleUrls: ['./employees.component.scss'],
+	selector: 'app-cutomers',
+	templateUrl: './cutomers.component.html',
+	styleUrls: ['./cutomers.component.scss'],
 
 })
-export class EmployeesComponent implements OnInit {
+export class CutomersComponent implements OnInit {
 	imageFile: File;
 
 	dropdownEmployeeData: LookUpModel[] = [];
@@ -29,30 +27,25 @@ export class EmployeesComponent implements OnInit {
 	dropdownAreaData: LookUpModel[] = [];
 	dropdownBlockData: LookUpModel[] = [];
 	searchModel: ISearch = {} as ISearch;
-	employeeDisplay: IEmployee = {} as IEmployee;
-	companyId: number;
+	employeeDisplay: ICustomer = {} as ICustomer;
+
 	constructor(
-		private service: EmployeeService,
+		private service: CutomerService,
+		private employeeService: EmployeeService,
+		
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
 		private toaster: toasterService,
-		public dialog: MatDialog,
-		private auth: AuthService) {
+		public dialog: MatDialog) {
 	}
 
 	ngOnInit(): void {
-		this.getUserDataAndLoadBranchesList();
-	}
-
-	getUserDataAndLoadBranchesList(){
-		this.auth.userData.subscribe((data: IUserData) => {
-			this.companyId = data.companyId;
-			this.branchService.getLookupBranchData(this.companyId).subscribe((data: LookUpModel[]) => {
-				this.dropdownBranchData = data;
-			});
+		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
+			this.dropdownBranchData = data;
 		});
 	}
+
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
 		this.areaService.getLookupAreaData(selectedItem.Id)
@@ -63,6 +56,8 @@ export class EmployeesComponent implements OnInit {
 			);
 		this.searchModel.branchId = selectedItem.Id;
 		this.searchEmployee();
+		this.searchCustomer();
+
 	}
 
 	areaSelectListOnChange(selectedItem: LookUpModel) {
@@ -74,16 +69,23 @@ export class EmployeesComponent implements OnInit {
 			);
 		this.searchModel.AreaId = selectedItem.Id;
 		this.searchEmployee();
+		this.searchCustomer();
+
 	}
 
 
 	blockSelectListOnChange(selectedItem: LookUpModel) {
 		this.searchModel.Block = selectedItem.Id;
 		this.searchEmployee();
+		this.searchCustomer();
 	}
 
+	employeeSelectListOnChange(selectedItem: LookUpModel){
+		this.searchCustomer();
+	}
+	
 	searchEmployee() {
-		this.service.getLookupEmployeeDataByParam(this.searchModel)
+		this.employeeService.getLookupEmployeeDataByParam(this.searchModel)
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownEmployeeData = data;
@@ -91,24 +93,32 @@ export class EmployeesComponent implements OnInit {
 			);
 	}
 
-	employeeSelectListOnChange(selectedItem: LookUpModel) {
-		this.service.getEmployeeById(selectedItem.Id)
+	searchCustomer() {
+		this.service.getLookupCustomerDataByParam(this.searchModel)
 			.subscribe(
-				(data: IEmployee) => {
+				(data: LookUpModel[]) => {
+					this.dropdownEmployeeData = data;
+				}
+			);
+	}
+
+	customerSelectListOnChange(selectedItem: LookUpModel) {
+		this.service.getCutomerById(selectedItem.Id)
+			.subscribe(
+				(data: ICustomer) => {
 					this.employeeDisplay = data;
 					this.service.currentEmployeeSelected = data;
 					console.log(this.employeeDisplay);
 				}
-				, (error) => {
+				, (error:any) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				}
 			);
 	}
 
-
 	editEmployeeTechnicialData(value: ITechnitianLog) {
 
-		this.employeeDisplay.Technician = {
+	/*	this.employeeDisplay.Technician = {
 			employee_Id: 0
 			, id: 0
 			, isActive: false
@@ -132,11 +142,11 @@ export class EmployeesComponent implements OnInit {
 		this.employeeDisplay.Technician.canEditCustomer = value.attachImageRead;
 		this.employeeDisplay.Technician.canRead = value.attachImageRead;
 		this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
-		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;
+		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;*/
 	}
-
+	
 	editActiveProp(value: boolean) {
-		this.employeeDisplay.userIsActive = value;
+		this.employeeDisplay.isDataComplete = value;
 	}
 
 
@@ -162,11 +172,11 @@ export class EmployeesComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
 			if (result.employee_Id !== undefined) {
-				this.employeeDisplay.isTechnician = true;
+				this.employeeDisplay.isDataComplete = true;
 				this.editEmployeeTechnicialData(result);
 			}
 			else {
-				this.employeeDisplay.isTechnician = false;
+				this.employeeDisplay.isDataComplete = false;
 			}
 		});
 
@@ -194,11 +204,11 @@ export class EmployeesComponent implements OnInit {
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
 			if (result.employee_Id !== undefined) {
-				this.employeeDisplay.isTechnician = true;
+				this.employeeDisplay.isDataComplete = true;
 				this.editEmployeeTechnicialData(result);
 			}
 			else {
-				this.employeeDisplay.isTechnician = false;
+				this.employeeDisplay.isDataComplete = false;
 			}
 		});
 
