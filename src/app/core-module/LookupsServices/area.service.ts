@@ -1,15 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
+import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
+import { CommonHttpService } from "../httpServices/CommonHttpService.service";
 
 @Injectable({providedIn:'root'})
 
 export class AreaService {
+	
+	constructor(private http:CommonHttpService) {}
 
 	getLookupAreaData(branchId: number): Observable<LookUpModel[]> {
-		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
-		return of([{ Id: 1, Name: 'Area1' } as LookUpModel, { Id: 1, Name: 'Area2' } as LookUpModel]);
+				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_AREA_URL}?branchId=${branchId}`)
+					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 }

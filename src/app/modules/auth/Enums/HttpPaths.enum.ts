@@ -1,4 +1,11 @@
 export enum HttpPaths {
+	
+	// Geographic Data APIs
+	
+	API_BRANCH_URL = "/api/v1/shared/listofbranches",
+	API_AREA_URL = "/api/v1/shared/listofareas",
+	API_BLOCK_URL = "/api/v1/shared/listofblocks",
+
 	API_LOGIN_URL = "/api/v1/Auth/token",
 	API_COMPANYCONFIG_URL = "/api/v1/Auth/CompanyConfiguration?code=",
 	API_LOGINWITH_USERID = "/api/v1/Auth/logout/",
