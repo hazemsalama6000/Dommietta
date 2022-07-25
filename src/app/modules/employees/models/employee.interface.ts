@@ -10,5 +10,5 @@ export interface IEmployee {
 	userIsActive: boolean,
 	isTechnician:boolean,
 	blocks: IBlock[],
-	Technician:ITechnitianLog
+	technician:ITechnitianLog
 }

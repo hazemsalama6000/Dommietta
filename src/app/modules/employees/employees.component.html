@@ -139,7 +139,7 @@
 					<div class="pb-5 fs-6">
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">تحصيل فواتير
-							<a *ngIf="employeeDisplay.Technician.canCollect == true; else inActiveForCanCollect"
+							<a *ngIf="employeeDisplay.technician.canCollect == true; else inActiveForCanCollect"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -158,7 +158,7 @@
 						<!--begin::Details item-->
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">تسجيل قراءه
-							<a *ngIf="employeeDisplay.Technician.canRead == true; else inActiveForCanRead"
+							<a *ngIf="employeeDisplay.technician.canRead == true; else inActiveForCanRead"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -177,7 +177,7 @@
 
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">اضافة بلاغ
-							<a *ngIf="employeeDisplay.Technician.canComplain == true; else inActiveForCanComplain"
+							<a *ngIf="employeeDisplay.technician.canComplain == true; else inActiveForCanComplain"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -197,7 +197,7 @@
 
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">تعديل بيانات عميل
-							<a *ngIf="employeeDisplay.Technician.canEditCustomer == true; else inActiveForCanEditCustomer"
+							<a *ngIf="employeeDisplay.technician.canEditCustomer == true; else inActiveForCanEditCustomer"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -215,7 +215,7 @@
 
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">ارفاق صوره قراءه العداد
-							<a *ngIf="employeeDisplay.Technician.attachImageRead == true; else inActiveForAttachImageRead"
+							<a *ngIf="employeeDisplay.technician.attachImageRead == true; else inActiveForAttachImageRead"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -234,7 +234,7 @@
 
 						<!--begin::Details item-->
 						<div class="fw-bolder mt-5">ارفاق صوره لتعديلات اعملاء
-							<a *ngIf="employeeDisplay.Technician.attachImageEditCustomer == true; else inActiveForAttachImageEditCustomer"
+							<a *ngIf="employeeDisplay.technician.attachImageEditCustomer == true; else inActiveForAttachImageEditCustomer"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -254,14 +254,14 @@
 						<!--begin::Details item-->
 
 						<div class="fw-bolder mt-5"> (ساعة) الحد الاقصي للعمل بدون شبكة</div>
-						<span>{{employeeDisplay.Technician.maxOfflineWorkingHours}}</span>
+						<span>{{employeeDisplay.technician.maxOfflineWorkingHours}}</span>
 
 						<!--begin::Details item-->
 
 						<!--begin::Details item-->
 
 						<div class="fw-bolder mt-5"> (بالفاتورة) الحد الاقصي لعدد الفواتير المسجلة بدون شبكة</div>
-						<span>{{employeeDisplay.Technician.maxOfflineWorkingBills}}</span>
+						<span>{{employeeDisplay.technician.maxOfflineWorkingBills}}</span>
 
 						<!--begin::Details item-->
 
@@ -291,22 +291,22 @@
 			<mat-tab-group>
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<a class="nav-link text-active-primary me-6 fontForInputs"
-							[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
-							routerLinkActive="">
-							البيانات الفنية السابقة
-							<mat-icon> local_dining</mat-icon>
+						<a class="nav-link text-active-primary me-6 fontForInputs" id="blocksdisplay"
+							[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
+							[state]="employeeDisplay.blocks" routerLinkActive="">
+							مربعات الموظف
+							<mat-icon> person_pin_circle</mat-icon>
 						</a>
 					</ng-template>
 				</mat-tab>
 
 				<mat-tab>
 					<ng-template mat-tab-label>
-						<a class="nav-link text-active-primary me-6 fontForInputs"
-							[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
-							[state]="employeeDisplay.blocks" routerLinkActive="">
-							مربعات الموظف
-							<mat-icon> person_pin_circle</mat-icon>
+						<a class="nav-link text-active-primary me-6 fontForInputs" 
+							[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
+							routerLinkActive="">
+							البيانات الفنية السابقة
+							<mat-icon> local_dining</mat-icon>
 						</a>
 					</ng-template>
 				</mat-tab>

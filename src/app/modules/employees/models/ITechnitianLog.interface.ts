@@ -1,6 +1,6 @@
 export interface ITechnitianLog {
 	id: number,
-	employee_Id: number,
+	employeeId: number,
 	isActive: boolean,
 	canCollect: boolean,
 	canRead: boolean,
