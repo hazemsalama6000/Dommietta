@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { map, Observable, of } from "rxjs";
+import { map, Observable, of, tap } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
@@ -19,11 +19,11 @@ export class TechnitianService {
 	}
 
 	getTechnicianLogByEmpId(employeeId: number): Observable<ITechnitianLog[]> {
-		/*	return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_TECHNNICIAN_DATA}?EmployeeId=${employeeId}`).pipe(
-				map((data: ITechnitianLog[]) => data)
-			);*/
+			return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_TECHNNICIAN_DATA}?EmployeeId=${employeeId}`).pipe(
+				tap(data=>console.log(data)),map((data: ITechnitianLog[]) => data)
+			);
 
-		return of([{ canCollect: true, canRead: true, canComplain: false, canEditCustomer: true, attachImageRead: false, attachImageEditCustomer: true, maxOfflineWorkingHours: 50, maxOfflineWorkingBills: 40 } as ITechnitianLog]);
+		/*  */return of([{ canCollect: true, canRead: true, canComplain: false, canEditCustomer: true, attachImageRead: false, attachImageEditCustomer: true, maxOfflineWorkingHours: 50, maxOfflineWorkingBills: 40 } as ITechnitianLog]);
 
 	}
 	///

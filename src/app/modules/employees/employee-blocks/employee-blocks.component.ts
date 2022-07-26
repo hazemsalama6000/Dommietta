@@ -42,7 +42,9 @@ export class EmployeeBlocksComponent {
 		private route: ActivatedRoute,
 		private employeeService : EmployeeService
 	) {
-		this.getallData(this.employeeService.currentEmployeeSelected.blocks);
+		employeeService.subjectEmployeeChanged.subscribe((data)=>{
+			this.getallData(this.employeeService.currentEmployeeSelected.blocks);
+		});
 	}
 
 

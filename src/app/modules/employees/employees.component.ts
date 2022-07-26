@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
@@ -31,6 +31,7 @@ export class EmployeesComponent implements OnInit {
 	searchModel: ISearch = {} as ISearch;
 	employeeDisplay: IEmployee = {} as IEmployee;
 	companyId: number;
+
 	constructor(
 		private service: EmployeeService,
 		private blockService: BlockService,
@@ -45,7 +46,7 @@ export class EmployeesComponent implements OnInit {
 		this.getUserDataAndLoadBranchesList();
 	}
 
-	getUserDataAndLoadBranchesList(){
+	getUserDataAndLoadBranchesList() {
 		this.auth.userData.subscribe((data: IUserData) => {
 			this.companyId = data.companyId;
 			this.branchService.getLookupBranchData(this.companyId).subscribe((data: LookUpModel[]) => {
@@ -97,6 +98,9 @@ export class EmployeesComponent implements OnInit {
 				(data: IEmployee) => {
 					this.employeeDisplay = data;
 					this.service.currentEmployeeSelected = data;
+					this.service.subjectEmployeeChanged.next(true);
+					document.getElementById("blocksdisplay")?.click();		
+
 					console.log(this.employeeDisplay);
 				}
 				, (error) => {
@@ -107,9 +111,8 @@ export class EmployeesComponent implements OnInit {
 
 
 	editEmployeeTechnicialData(value: ITechnitianLog) {
-
-		this.employeeDisplay.Technician = {
-			employee_Id: 0
+		this.employeeDisplay.technician = {
+			employeeId: 0
 			, id: 0
 			, isActive: false
 			, attachImageEditCustomer: false
@@ -123,16 +126,16 @@ export class EmployeesComponent implements OnInit {
 		};
 
 		this.employeeDisplay.isTechnician = true;
-		this.employeeDisplay.Technician.employee_Id = value.employee_Id;
-		this.employeeDisplay.Technician.isActive = true;
-		this.employeeDisplay.Technician.attachImageEditCustomer = value.attachImageEditCustomer;
-		this.employeeDisplay.Technician.attachImageRead = value.attachImageRead;
-		this.employeeDisplay.Technician.canCollect = value.attachImageRead;
-		this.employeeDisplay.Technician.canComplain = value.attachImageRead;
-		this.employeeDisplay.Technician.canEditCustomer = value.attachImageRead;
-		this.employeeDisplay.Technician.canRead = value.attachImageRead;
-		this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
-		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;
+		this.employeeDisplay.technician.employeeId = value.employeeId;
+		this.employeeDisplay.technician.isActive = true;
+		this.employeeDisplay.technician.attachImageEditCustomer = value.attachImageEditCustomer;
+		this.employeeDisplay.technician.attachImageRead = value.attachImageRead;
+		this.employeeDisplay.technician.canCollect = value.canCollect;
+		this.employeeDisplay.technician.canComplain = value.canComplain;
+		this.employeeDisplay.technician.canEditCustomer = value.canEditCustomer;
+		this.employeeDisplay.technician.canRead = value.canRead;
+		this.employeeDisplay.technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
+		this.employeeDisplay.technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;
 	}
 
 	editActiveProp(value: boolean) {
@@ -161,7 +164,7 @@ export class EmployeesComponent implements OnInit {
 			});
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
+			if (result.employeeId !== undefined) {
 				this.employeeDisplay.isTechnician = true;
 				this.editEmployeeTechnicialData(result);
 			}
@@ -193,7 +196,7 @@ export class EmployeesComponent implements OnInit {
 			});
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
+			if (result.employeeId !== undefined) {
 				this.employeeDisplay.isTechnician = true;
 				this.editEmployeeTechnicialData(result);
 			}

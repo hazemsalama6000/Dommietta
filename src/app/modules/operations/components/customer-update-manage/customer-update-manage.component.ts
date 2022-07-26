@@ -5,6 +5,9 @@ import { BlockService } from "src/app/core-module/LookupsServices/block.service"
 import { BranchService } from "src/app/core-module/LookupsServices/branch.service";
 import { UpdateTypeService } from "src/app/core-module/LookupsServices/updateType.service";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { AuthService } from "src/app/modules/auth";
+import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
+import { ISearch } from "src/app/modules/employees/models/ISearch.interface";
 import { EmployeeService } from "src/app/modules/employees/services/employee.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { ICustomerEditManageSearch } from "../../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
@@ -36,29 +39,31 @@ export class CustomerUpdateManageComponent implements OnInit {
 		private areaService: AreaService,
 		private branchService: BranchService,
 		private updateTypeService: UpdateTypeService,
-		private toaster: toasterService, private fb: FormBuilder) {
+		private toaster: toasterService, private fb: FormBuilder,
+		private auth:AuthService) {
 	}
 
 	ngOnInit(): void {
 		this.customerEditSearchForm = this.fb.group({
 			customerCode: [0],
-			branchId: [0],
-			areaId: [''],
-			blockId: [''],
-			customerId: [''],
-			employee_id: [''],
-			updatingStartDate: [''],
-			updatingEndDate: [''],
-			updatingTypeId: [''],
-
-
+			branchId: [],
+			areaId: [],
+			blockId: [],
+			customerId: [],
+			employee_id: [],
+			updatingStartDate: [],
+			updatingEndDate: [],
+			updatingTypeId: [],
 		});
-		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
-			this.dropdownBranchData = data;
+		this.auth.userData.subscribe((data:IUserData)=>{
+			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
+				this.dropdownBranchData = data;
+			});
+			this.updateTypeService.getLookupUpdateTypeData(data.companyId).subscribe((data: LookUpModel[]) => {
+				this.dropdownUpdateTypeData = data;
+			});
 		});
-		this.updateTypeService.getLookupUpdateTypeData(1005).subscribe((data: LookUpModel[]) => {
-			this.dropdownUpdateTypeData = data;
-		});
+	
 	}
 
 	searchCustomerEdits(model: ICustomerEditManageSearch) {
@@ -99,19 +104,20 @@ export class CustomerUpdateManageComponent implements OnInit {
 	}
 
 	searchEmployeeAndCustomer() {
-		this.service.getLookupEmployeeDataForCustomerEditMange(this.searchModel)
+		let search:ISearch={branchId:this.searchModel.branchId,AreaId:this.searchModel.areaId,Block:this.searchModel.blockId};
+		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownEmployeeData = data;
 				}
 			);
 
-		this.service.getLookupEmployeeDataForCustomerEditMange(this.searchModel)
+		/*this.service.getLookupEmployeeDataForCustomerEditMange(this.searchModel)
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownCustomerData = data;
 				}
-			);
+			);*/
 
 	}
 

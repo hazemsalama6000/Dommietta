@@ -85,7 +85,7 @@ export class SettingComponent implements OnInit {
 			});
 
 		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
+			if (result.employeeId !== undefined) {
 				this.employeeProfile.isTechnician = true;
 				this.emitter.emit(result);
 			}

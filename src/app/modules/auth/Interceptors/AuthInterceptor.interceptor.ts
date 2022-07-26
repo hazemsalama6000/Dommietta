@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
             setHeaders: {
                 //	'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                "Accept-Language": "ar-EG"
+                "Accept-Language": "ar-EG",
 
                 //		"Platform": "api",
                 //		"sequence":"123",
@@ -35,11 +35,11 @@ export class AuthInterceptor implements HttpInterceptor {
                 //		"Source-Version": "1.0.23",
 
 
-                //'Access-Control-Allow-Origin': '*',
-                //'Access-Control-Allow-Credentials': 'true',
-                //'Access-Control-Allow-Headers': 'Content-Type',
-                //'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-                //'lang':'ar'
+               /* 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'lang':'ar' */
             }
         });
     }
