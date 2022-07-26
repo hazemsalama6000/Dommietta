@@ -8,9 +8,9 @@
         <div class="row mx-0 mb-2  justify-content-end">
           <div class="col">
             <span class="p-input-icon-left">
-              <button class="buttonsearch" (click)="myfilter('branch')"><i class="pi pi-search"></i></button>
+              <button class="buttonsearch" (click)="myfilter('CustomerCode');"><i class="pi pi-search"></i></button>
               <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}"
-                [(ngModel)]="searchObject.customerCode">
+                [(ngModel)]="searchObject.CustomerCode">
             </span>
           </div>
           <div class="col justify-content-end d-flex">
@@ -21,38 +21,40 @@
         <p-divider></p-divider>
         <div class="row mx-0">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('branch')"
+            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
               placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.branchId"></p-dropdown>
+              [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
-              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.areaId">
+            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('area')" placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.AreaId">
             </p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
-              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.blockId"></p-dropdown>
+            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.BlockId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.customerId"></p-dropdown>
+            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.CustomerId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.employee_id"></p-dropdown>
+            <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.Employee_id"></p-dropdown>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
-            placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}" [(ngModel)]="searchObject.readingStartDate">
+            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
+              (onSelect)="myfilter('startDate',start.value)" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}">
             </p-calendar>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr" (onSelect)="myfilter('')"
-            placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}" [(ngModel)]="searchObject.readingEndDate">
+            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
+              (onSelect)="myfilter('endDate',end.value)" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}">
             </p-calendar>
           </div>
         </div>
@@ -86,15 +88,15 @@
 
       <ng-template pTemplate="body" let-complain>
         <tr>
-          <td>{{complain.BranchName}}</td>
-          <td>{{complain.AreaName}}</td>
-          <td>{{complain.BlockName}}</td>
-          <td>{{complain.CollectorName}}</td>
-          <td>{{complain.CustomerName}}</td>
-          <td>{{complain.Date|date:'dd/MM/yyyy'}}</td>
-          <td>{{complain.IssueName}}</td>
-          <td>{{complain.Details }}</td>
-          <td>{{complain.ComplaintTypeName}}</td>
+          <td>{{complain.branchName}}</td>
+          <td>{{complain.areaName}}</td>
+          <td>{{complain.blockName}}</td>
+          <td>{{complain.collectorName}}</td>
+          <td>{{complain.customerName}}</td>
+          <td>{{complain.date|date:'dd/MM/yyyy'}}</td>
+          <td>{{complain.issueName}}</td>
+          <td>{{complain.details }}</td>
+          <td>{{complain.complaintTypeName}}</td>
           <td>
             <button mat-icon-button color="accent" (click)="openDialog(complain)">
               <mat-icon style="font-size: 22px;">visibility</mat-icon>
@@ -102,12 +104,11 @@
           </td>
           <td>
             <input class="form-check-input me-3" name="user_role" type="checkbox" id="kt_modal_update_role_option_0"
-              [checked]="complain.IsRevised" [(ngModel)]="complain.IsRevised" />
+              [checked]="complain.IsRevised" [(ngModel)]="complain.isRevised" />
           </td>
 
           <td>
-            <a mat-mini-fab color="primary" (click)="ActiveRevise(complain)" id="search" type="submit"
-              class="mx-10">
+            <a mat-mini-fab color="primary" (click)="ActiveRevise(complain)" id="search" type="submit" class="mx-10">
               <mat-icon style="font-size: 20px;">edit</mat-icon>
             </a>
           </td>

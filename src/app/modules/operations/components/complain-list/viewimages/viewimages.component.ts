@@ -8,8 +8,11 @@ import { IComplain, IComplainList } from '../../../models/IComplain.interface';
   styleUrls: ['./viewimages.component.scss']
 })
 export class ViewimagesComponent implements OnInit {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { complain: IComplainList }) { }
+url:string=localStorage.getItem("companyLink") as string;
+images:string[]=[];
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { complain: IComplainList }) {
+    this.images=data.complain.complaintImagesPath
+   }
 
   ngOnInit() {
     console.log(this.data)

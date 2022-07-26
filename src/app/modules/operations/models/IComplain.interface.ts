@@ -1,21 +1,21 @@
 export interface IComplain {
-    complainRecords: IComplainList[],
-    pageSize: number
+    data?: IComplainList[],
+    pageSize?: number
 }
 
 export interface IComplainList {
-    Id: number;
-    Date: Date;
-    CollectorName: string;
-    CustomerName: string;
-    BranchName: string;
-    AreaName: string;
-    BlockName: string;
-    IssueName: string;
-    X: number;
-    Y: number;
-    Details: string;
-    IsRevised: boolean;
-    ComplaintTypeName: string;
-    ComplaintImagesPath: string[];
+    id: number;
+    date: Date;
+    collectorName: string;
+    customerName: string;
+    branchName: string;
+    areaName: string;
+    blockName: string;
+    issueName: string;
+    x: number;
+    y: number;
+    details: string;
+    isRevised: boolean;
+    complaintTypeName: string;
+    complaintImagesPath: string[];
 }

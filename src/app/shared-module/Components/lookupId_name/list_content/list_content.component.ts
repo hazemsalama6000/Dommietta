@@ -89,7 +89,6 @@ export class ListContentComponent {
 		if (model.Id != 0) {
 			this.dataSource.data = this.dataSource.data.filter((a: LookUpModel) => a.Id != 0);
 		}
-		console.log(this.dataSource.data);
 		this.currentSelected = model;
 		this.dataSource.data.filter((a: LookUpModel) => a.Id != model.Id).forEach((element: LookUpModel) => {
 			element.isAdd = false;
@@ -98,7 +97,6 @@ export class ListContentComponent {
 	}
 
 	Submit(model: LookUpModel) {
-		console.log(model);
 
 		model.company_Id = this.userdata.companyId;
 
@@ -230,7 +228,6 @@ export class ListContentComponent {
 		if (this.pageName == 'jobs') {
 			this.jobService.getLookupData(this.userdata.companyId).subscribe(
 				(data: LookUpModel[]) => {
-					console.log(data);
 					this.dataSource = new MatTableDataSource<LookUpModel>(data);
 					this.dataSource.paginator = this.paginator;
 

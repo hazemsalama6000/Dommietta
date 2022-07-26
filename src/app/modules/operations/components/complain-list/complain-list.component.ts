@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ModuleWithComponentFactories, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import * as FileSaver from 'file-saver';
 import { Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
+import { CutomerService } from 'src/app/modules/customers/services/customer.service';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IComplain, IComplainList } from '../../models/IComplain.interface';
@@ -45,6 +46,7 @@ export class ComplainListComponent implements OnInit {
     private branchService: BranchService,
     private areaService: AreaService,
     private blockService: BlockService,
+    private CutomerService:CutomerService,
     private employeeService: EmployeeService,
     private authService: AuthService,
     private toaster: toasterService,
@@ -53,8 +55,8 @@ export class ComplainListComponent implements OnInit {
   ) {
 
     this.searchObject = {
-      pageNumber: 1,
-      pageSize: 10,
+      PageNumber: 1,
+      PageSize: 10,
     };
 
   }
@@ -70,42 +72,56 @@ export class ComplainListComponent implements OnInit {
 
   // Change pagination page
   changePage(e: any) {
-    this.searchObject.pageSize = e.rows;
-    this.searchObject.pageNumber = e.page + 1;
+    this.searchObject.PageSize = e.rows;
+    this.searchObject.PageNumber = e.page + 1;
     this.getComplainData();
   }
 
   //this function to create search object and reload data in table
-  myfilter(columnname: string) {
-    console.log(this.searchObject)
+  myfilter(columnname: string, value?: any) {
+
     switch (columnname) {
       case "branch":
-        this.areaService.getLookupAreaData(this.searchObject.branchId ?? 0).subscribe(
+        this.areaService.getLookupAreaData(this.searchObject.BranchId ?? 0).subscribe(
           (data: LookUpModel[]) => { this.areaDropdown = data; });
-          this.customerDropdown=[];
-          this.blockDropdown=[];
+        this.employeeService.getLookupEmployeeDataByParam({ branchId: this.searchObject.BranchId ?? 0 })
+          .subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
         break;
       case "area":
-        this.blockService.getLookupBlockData(this.searchObject.areaId ?? 0).subscribe(
+        this.blockService.getLookupBlockData(this.searchObject.AreaId ?? 0).subscribe(
           (data: LookUpModel[]) => { this.blockDropdown = data; });
-        this.complainService.getLookupCustomerData({ areaId: this.searchObject.areaId })
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0 })
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "block":
-        this.complainService.getLookupCustomerData({ areaId: this.searchObject.areaId, blockId: this.searchObject.blockId })
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0, Block: this.searchObject.BlockId??0 })
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+        break;
+      case "startDate":
+        this.searchObject.StartDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        break;
+      case "endDate":
+        this.searchObject.EndDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        break;
+      case "CustomerCode":
+        this.searchObject = {
+          PageNumber: this.searchObject.PageNumber,
+          PageSize: this.searchObject.PageSize,
+          CustomerCode: this.searchObject.CustomerCode
+        }
         break;
       default:
         break;
     }
+
+    if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
 
     columnname != 'branch' ? this.getComplainData() : null;
   }
 
   //this function to fill dropdowns data
   fillDropdowns() {
-    this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
-    this.employeeService.getLookupEmployeeData(this.userData.companyId).subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
+    this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
   }
 
   //this function to get data from employee 
@@ -113,8 +129,8 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
-        this.complainData = res.complainRecords;
-        this.totalRecords = res.pageSize;
+        this.complainData = res?.data??[];
+        this.totalRecords = res?.pageSize??0;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -124,7 +140,7 @@ export class ComplainListComponent implements OnInit {
     console.log(this.complainData)
     if (type == 'revise') {
       for (let index = 0; index < this.complainData.length; index++) {
-        this.complainData[index].IsRevised = this.btnIsRevise;
+        this.complainData[index].isRevised = this.btnIsRevise;
       }
     }
   }
@@ -207,24 +223,24 @@ export class ComplainListComponent implements OnInit {
     this.unsubscribe.forEach((sb) => sb.unsubscribe);
   }
 
-  openDialog(complain:IComplainList){
+  openDialog(complain: IComplainList) {
     // const dialogPosition: DialogPosition = {
-		// 	top: '0px',
-		// 	right: '0px'
-		// };
+    // 	top: '0px',
+    // 	right: '0px'
+    // };
 
-		const dialogRef = this.dialog.open(ViewimagesComponent,
-			{
-				/*maxWidth: '50vw',
-				maxHeight: '100vh',*/
-				maxHeight: '100vh',
-				height: '50%',
-        width:'50%',
+    const dialogRef = this.dialog.open(ViewimagesComponent,
+      {
+        /*maxWidth: '50vw',
+        maxHeight: '100vh',*/
+        maxHeight: '100vh',
+        minHeight:'50%',
+        width: '50%',
 
-				//panelClass: 'full-screen-modal',*/
-				// position: dialogPosition,
-				data: { complain:complain}
-			});
+        //panelClass: 'full-screen-modal',*/
+        // position: dialogPosition,
+        data: { complain: complain }
+      });
   }
 
 }
