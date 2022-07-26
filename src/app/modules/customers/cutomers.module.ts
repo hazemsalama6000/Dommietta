@@ -1,34 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg-2';
-import { EmployeesRoutingModule } from './cutomers-routing.module';
 import { SettingComponent } from './setting/setting.component';
 import { OverviewComponent } from './overview/overview.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { Employee_listComponent } from './employee-list/employee-list.component';
 import { SharedModule } from 'src/app/shared-module/shared-module.module';
 import { TranslationModule } from '../i18n';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
-import { TechnitianService } from './services/technitian.service';
-import { technicianLogComponent } from './technician-log/technician-log.component';
-import { UserLocationComponent } from './user-locations/user-location.component';
 import { CutomersComponent } from './cutomers.component';
+import { CustomerRoutingModule } from './cutomers-routing.module';
 
 @NgModule({
   declarations: [
     SettingComponent,
     OverviewComponent,
-    Employee_listComponent,
-    AddTechnitianLogComponent,
-    technicianLogComponent,
-    UserLocationComponent,
 	CutomersComponent
   ],
   imports: [
     CommonModule,
-    EmployeesRoutingModule,
+    CustomerRoutingModule,
     InlineSVGModule,
     TranslationModule,
     NgApexchartsModule,
@@ -38,7 +29,7 @@ import { CutomersComponent } from './cutomers.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [TechnitianService,DatePipe]
+  providers: [DatePipe]
 
 })
 export class CustomerModule { }

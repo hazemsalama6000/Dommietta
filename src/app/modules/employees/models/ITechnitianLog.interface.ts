@@ -9,5 +9,7 @@ export interface ITechnitianLog {
 	attachImageRead: boolean,
 	attachImageEditCustomer: boolean,
 	maxOfflineWorkingHours: number,
-	maxOfflineWorkingBills: number
+	maxOfflineWorkingBills: number,
+	startDate:Date,
+	endDate:Date
 }

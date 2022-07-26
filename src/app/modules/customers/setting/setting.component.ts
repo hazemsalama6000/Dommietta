@@ -5,8 +5,6 @@ import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { EmployeeService } from '../../employees/services/employee.service';
 import { ICustomer } from '../models/customer.interface';
 import { ITechnitianLog } from '../models/ITechnitianLog.interface';
-import { TechnitianService } from '../services/technitian.service';
-import { AddTechnitianLogComponent } from './Add-technitian-Log/add-technitian-Log.component';
 
 @Component({
 	selector: 'app-setting',
@@ -25,7 +23,7 @@ export class SettingComponent implements OnInit {
 		this.employeeProfile = value;
 	}
 
-	constructor(private service: EmployeeService, private dialog: MatDialog, private technicianService: TechnitianService, private toaster: toasterService) { }
+	constructor(private service: EmployeeService, private dialog: MatDialog,private toaster: toasterService) { }
 
 	ngOnInit(): void {
 	}
@@ -67,33 +65,6 @@ export class SettingComponent implements OnInit {
 	}
 
 
-	openDialog() {
-		const dialogPosition: DialogPosition = {
-			top: '0px',
-			right: '0px'
-		};
-
-		const dialogRef = this.dialog.open(AddTechnitianLogComponent,
-			{
-				/*maxWidth: '50vw',
-				maxHeight: '100vh',*/
-				maxHeight: '100vh',
-				height: '100%',
-				//panelClass: 'full-screen-modal',*/
-				position: dialogPosition,
-				data: { employeeId: this.employeeProfile.id }
-			});
-/*
-		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
-				this.employeeProfile.isTechnician = true;
-				this.emitter.emit(result);
-			}
-			else {
-				this.employeeProfile.isTechnician = false;
-			}
-		});*/
-
-	}
+	
 
 }

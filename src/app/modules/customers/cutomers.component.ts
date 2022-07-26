@@ -13,7 +13,6 @@ import { ICustomer } from './models/customer.interface';
 import { ISearch } from './models/ISearch.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
 import { CutomerService } from './services/customer.service';
-import { AddTechnitianLogComponent } from './setting/Add-technitian-Log/add-technitian-Log.component';
 
 @Component({
 	selector: 'app-cutomers',
@@ -153,71 +152,6 @@ export class CutomersComponent implements OnInit {
 	
 	editActiveProp(value: boolean) {
 		this.employeeDisplay.isDataComplete = value;
-	}
-
-
-
-
-	openDialogForEmployee() {
-		const dialogPosition: DialogPosition = {
-			top: '0px',
-			right: '0px'
-		};
-
-		const dialogRef = this.dialog.open(AddTechnitianLogComponent,
-			{
-				/*maxWidth: '50vw',
-				maxHeight: '100vh',*/
-				maxHeight: '100vh',
-				height: '100%',
-
-				//panelClass: 'full-screen-modal',*/
-				position: dialogPosition,
-				data: { employeeId: this.employeeDisplay.id }
-			});
-
-		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
-				this.employeeDisplay.isDataComplete = true;
-				this.editEmployeeTechnicialData(result);
-			}
-			else {
-				this.employeeDisplay.isDataComplete = false;
-			}
-		});
-
-	}
-
-
-
-	openDialog() {
-		const dialogPosition: DialogPosition = {
-			top: '0px',
-			right: '0px'
-		};
-
-		const dialogRef = this.dialog.open(AddTechnitianLogComponent,
-			{
-				/*maxWidth: '50vw',
-				maxHeight: '100vh',*/
-				maxHeight: '100vh',
-				height: '100%',
-
-				//panelClass: 'full-screen-modal',*/
-				position: dialogPosition,
-				data: { employeeId: this.employeeDisplay.id }
-			});
-
-		dialogRef.afterClosed().subscribe((result: ITechnitianLog) => {
-			if (result.employee_Id !== undefined) {
-				this.employeeDisplay.isDataComplete = true;
-				this.editEmployeeTechnicialData(result);
-			}
-			else {
-				this.employeeDisplay.isDataComplete = false;
-			}
-		});
-
 	}
 
 }
