@@ -21,7 +21,7 @@ export class CutomerService {
 	constructor(private http: CommonHttpService) { }
 
 	getLookupCustomerDataByParam(model: ISeachListOfCustomer): Observable<LookUpModel[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}?
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}
 		areaId=${model.AreaId == undefined ? '' : model.AreaId}
 		&Block=${model.Block == undefined ? '' : model.Block}
 		&branchId=${model.branchId == undefined ? '' : model.Block}

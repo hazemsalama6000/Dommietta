@@ -12,9 +12,11 @@ import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { CutomerService } from 'src/app/modules/customers/services/customer.service';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
+import { ConfirmationDialogService } from 'src/app/shared-module/Components/confirm-dialog/confirmDialog.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IComplain, IComplainList } from '../../models/IComplain.interface';
 import { IComplainSearch } from '../../models/IComplainSearch.interface';
+import { IUpdateComplain } from '../../models/IUpdateComplain.interface';
 import { ComplainService } from '../../services/complain.service';
 import { ViewimagesComponent } from './viewimages/viewimages.component';
 
@@ -24,8 +26,11 @@ import { ViewimagesComponent } from './viewimages/viewimages.component';
   styleUrls: ['./complain-list.component.scss']
 })
 export class ComplainListComponent implements OnInit {
-  btnIsPost: boolean = false;
   btnIsRevise: boolean = false;
+  showBtnIsRevise: boolean = true;
+
+  startDate: string;
+  endDate: string;
 
   branchDropdown: LookUpModel[];
   areaDropdown: LookUpModel[];
@@ -46,12 +51,14 @@ export class ComplainListComponent implements OnInit {
     private branchService: BranchService,
     private areaService: AreaService,
     private blockService: BlockService,
-    private CutomerService:CutomerService,
+    private CutomerService: CutomerService,
     private employeeService: EmployeeService,
     private authService: AuthService,
     private toaster: toasterService,
     private datePipe: DatePipe,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private confirmationDialogService: ConfirmationDialogService,
+
   ) {
 
     this.searchObject = {
@@ -78,7 +85,7 @@ export class ComplainListComponent implements OnInit {
   }
 
   //this function to create search object and reload data in table
-  myfilter(columnname: string, value?: any) {
+  myfilter(columnname: string) {
 
     switch (columnname) {
       case "branch":
@@ -90,20 +97,22 @@ export class ComplainListComponent implements OnInit {
       case "area":
         this.blockService.getLookupBlockData(this.searchObject.AreaId ?? 0).subscribe(
           (data: LookUpModel[]) => { this.blockDropdown = data; });
-        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0 })
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId ?? 0 })
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "block":
-        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0, Block: this.searchObject.BlockId??0 })
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId ?? 0, Block: this.searchObject.BlockId ?? 0 })
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "startDate":
-        this.searchObject.StartDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
         break;
       case "endDate":
-        this.searchObject.EndDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
         break;
       case "CustomerCode":
+        this.startDate = '';
+        this.endDate = '';
         this.searchObject = {
           PageNumber: this.searchObject.PageNumber,
           PageSize: this.searchObject.PageSize,
@@ -129,15 +138,14 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
-        this.complainData = res.data??[];
-        this.totalRecords = res.pageSize??0;
+        this.complainData = res?.data ?? [];
+        this.totalRecords = res?.pageSize ?? 0;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
   }
 
   setAllIsRevise(type: string) {
-    console.log(this.complainData)
     if (type == 'revise') {
       for (let index = 0; index < this.complainData.length; index++) {
         this.complainData[index].isRevised = this.btnIsRevise;
@@ -146,30 +154,38 @@ export class ComplainListComponent implements OnInit {
   }
 
   postAllDataToChecked() {
-    this.postRevise(this.complainData);
+    let complain: IUpdateComplain[] = [];
+    this.complainData.map(x => complain.push({ id: x.id, isRevised: x.isRevised }));
+    this.postRevise(complain);
   }
 
   ActiveRevise(complain: IComplainList) {
-    this.postRevise([complain])
+    let complains: IUpdateComplain[] = [{ id: complain.id, isRevised: complain.isRevised }];
+    this.postRevise(complains)
   }
 
-  postRevise(complain: IComplainList[]) {
-    this.complainService.PostIsrevise(complain).
-      subscribe(
-        (data: HttpReponseModel) => {
-          if (data.isSuccess) {
-            this.toaster.openSuccessSnackBar(data.message);
-          }
-          else if (data.isExists)
-            this.toaster.openWarningSnackBar(data.message);
-        },
-        (error: any) => {
-          console.log(error);
-          this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+  postRevise(complain: IUpdateComplain[]) {
+    this.confirmationDialogService.confirm('تأكيد المراجعة', `هل تريد تأكيد المراجعة  ? `)
+      .then((confirmed) => {
+        if (confirmed) {
+          this.complainService.PostIsrevise(complain).
+            subscribe(
+              (data: HttpReponseModel) => {
+                if (data.isSuccess) {
+                  this.toaster.openSuccessSnackBar(data.message);
+                }
+                else if (data.isExists)
+                  this.toaster.openWarningSnackBar(data.message);
+              },
+              (error: any) => {
+                console.log(error);
+                this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+              }
+            )
         }
-      )
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
-
 
   exportExcel() {
     let selectedColumns: string[] = [
@@ -234,7 +250,7 @@ export class ComplainListComponent implements OnInit {
         /*maxWidth: '50vw',
         maxHeight: '100vh',*/
         maxHeight: '100vh',
-        minHeight:'50%',
+        minHeight: '50%',
         width: '50%',
 
         //panelClass: 'full-screen-modal',*/

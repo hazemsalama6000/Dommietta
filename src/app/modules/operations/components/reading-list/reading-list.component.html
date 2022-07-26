@@ -4,6 +4,7 @@
 
     <p-table [value]="readingData" responsiveLayout="scroll" [loading]="loading">
 
+
       <ng-template pTemplate="caption">
         <div class="row mx-0 mb-2  justify-content-end">
           <div class="col">
@@ -49,12 +50,14 @@
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('startDate',start.value)" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}">
+              (onSelect)="myfilter('startDate')" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}"
+              [(ngModel)]="startDate">
             </p-calendar>
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('endDate',end.value)" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}">
+              (onSelect)="myfilter('endDate')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
+               [(ngModel)]="endDate">
             </p-calendar>
           </div>
         </div>
@@ -99,27 +102,27 @@
 
       <ng-template pTemplate="body" let-read>
         <tr>
-          <td>{{read.CollectorName}}</td>
-          <td>{{read.CustomerName}}</td>
-          <td>{{read.CustomerCode}}</td>
-          <td>{{read.BranchName}}</td>
-          <td>{{read.Value}}</td>
-          <td>{{read.LastReading }}</td>
-          <td><img [src]="read.ReadingImagePath!=''?read.ReadingImagePath:'assets\\media\\avatars\\300-1.jpg'"
-              [alt]="read.CustomerName" width="150" height="50" /></td>
-          <td>{{read.MeterStatus}}</td>
-          <td>{{read.IssueName}}</td>
-          <td>{{read.IssueStatus}}</td>
-          <td>{{read.IssueDate|date:'dd/MM/yyyy'}}</td>
-          <td>{{read.Notes }}</td>
+          <td>{{read.collectorName}}</td>
+          <td>{{read.customerName}}</td>
+          <td>{{read.customerCode}}</td>
+          <td>{{read.branchName}}</td>
+          <td>{{read.value}}</td>
+          <td>{{read.lastReading }}</td>
+          <td><img [src]="read.readingImagePath!=''?read.readingImagePath:'assets\\media\\avatars\\300-1.jpg'"
+              [alt]="read.customerName" width="150" height="50" /></td>
+          <td>{{read.meterStatus}}</td>
+          <td>{{read.issueName}}</td>
+          <td>{{read.issueStatus}}</td>
+          <td>{{read.issueDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{read.notes }}</td>
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.IsRevised" [(ngModel)]="read.IsRevised" />
+              id="kt_modal_update_role_option_0" [checked]="read.isRevised" [(ngModel)]="read.isRevised" />
           </td>
 
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.IsPotsed" [(ngModel)]="read.IsPotsed" />
+              id="kt_modal_update_role_option_0" [checked]="read.isPotsed" [(ngModel)]="read.isPotsed" />
           </td>
 
           <td>
@@ -138,8 +141,8 @@
       <!-- Start Pagenation -->
       <ng-template pTemplate="footer">
         <tr>
-          <td colspan="12">
-            <p-paginator dropdownAppendTo="body" [rows]="5" [totalRecords]="totalRecords"
+          <td colspan="15">
+            <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
@@ -148,7 +151,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="11" class="text-center">{{'OPERATION.MESSAGE.NOROWFOUND'|translate}}</td>
+          <td colspan="15" class="text-center">{{'OPERATION.MESSAGE.NOROWFOUND'|translate}}</td>
         </tr>
       </ng-template>
 
