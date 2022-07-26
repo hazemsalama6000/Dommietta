@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from "@angular/core";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Component, Inject, OnDestroy } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google } from "google-maps";
 import { Subscription } from "rxjs";
@@ -17,7 +17,6 @@ declare var google: google;
 export class UserLocationComponent implements OnDestroy {
 	subscribe: Subscription;
 	idInterval: any;
-	employeeId: number;
 
 	styles = [
 		{
@@ -249,11 +248,13 @@ export class UserLocationComponent implements OnDestroy {
 			]
 		}
 	];
+	x: number;
+	y: number;
 
-	constructor(private route: ActivatedRoute, private service: OnlineUsersService) {
-		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.employeeId = +data.get('employeeId')!
-		});
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: OnlineUsersService) {
+		this.x = data.x;
+		this.y = data.y;
+		console.log(this.x+' '+this.y);
 	}
 
 	ngOnDestroy(): void {
@@ -276,26 +277,18 @@ export class UserLocationComponent implements OnDestroy {
 
 		loader.load().then(() => {
 
-			this.idInterval = setInterval(() => {
+			let location = { lat: this.x, lng: this.y }
+			this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+				center: location,
+				zoom: 10,
+				styles: this.styles
+			});
 
-				this.subscribe = this.service.getOnlineUsersCurrentLocationData(this.employeeId).subscribe((data: ILocationXY[]) => {
-
-					let location = { lat: data[0].x, lng: data[0].y }
-					this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-						center: location,
-						zoom: 10,
-						styles: this.styles
-					});
-
-					const marker = new google.maps.Marker({
-						position: location,
-						map: this.map,
-						title: data[0].empName + "\n" + data[0].date
-					});
-
-				});
-
-			}, 8000);
+			const marker = new google.maps.Marker({
+				position: location,
+				map: this.map
+				//title: data[0].empName + "\n" + data[0].date
+			});
 
 		});
 

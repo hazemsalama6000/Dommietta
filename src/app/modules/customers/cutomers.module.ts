@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CutomersComponent } from './cutomers.component';
 import { CustomerRoutingModule } from './cutomers-routing.module';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 @NgModule({
   declarations: [
     SettingComponent,
     OverviewComponent,
-	CutomersComponent
+	CutomersComponent,
+	UserLocationComponent
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,7 @@ import { ICustomer } from './models/customer.interface';
 import { ISearch } from './models/ISearch.interface';
 import { ITechnitianLog } from './models/ITechnitianLog.interface';
 import { CutomerService } from './services/customer.service';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 @Component({
 	selector: 'app-cutomers',
@@ -147,7 +148,28 @@ export class CutomersComponent implements OnInit {
 		this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
 		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;*/
 	}
-	
+	currentLocation(x:number,y:number){
+
+		const dialogPosition: DialogPosition = {
+			top:'0px',
+			right:'0px'
+		  };
+
+		const dialogRef = this.dialog.open(UserLocationComponent,
+			{
+				/*maxWidth: '50vw',
+				maxHeight: '100vh',*/
+				maxHeight: '100vh',
+				height: '100%',
+
+				//panelClass: 'full-screen-modal',*/
+				position:dialogPosition,
+				data: { x: x,y:y}
+			});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(`Dialog result: ${result}`);
+		});	}
 	editActiveProp(value: boolean) {
 		this.employeeDisplay.isDataComplete = value;
 	}
