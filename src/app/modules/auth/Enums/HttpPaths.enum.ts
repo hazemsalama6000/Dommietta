@@ -133,4 +133,5 @@ export enum HttpPaths {
 
 	//Customer
 	API_GET_LISTOFCUSTOMER="/api/v1/cust/listofcustomer?",
+	API_GET_CUSTOMERBY_ID="/api/v1/cust/getcustomerdataprofile/"
 }

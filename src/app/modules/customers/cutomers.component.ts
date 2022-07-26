@@ -61,8 +61,6 @@ export class CutomersComponent implements OnInit {
 			);
 		this.searchModel.branchId = selectedItem.Id;
 		this.searchEmployee();
-		this.searchCustomer();
-
 	}
 
 	areaSelectListOnChange(selectedItem: LookUpModel) {

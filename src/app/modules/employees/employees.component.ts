@@ -123,8 +123,8 @@ export class EmployeesComponent implements OnInit {
 			, canRead: false
 			, maxOfflineWorkingBills: 0
 			, maxOfflineWorkingHours: 0
-			,startDate:new Date(),
-			endDate:new Date()
+			,insertDate:new Date(),
+			updateDate:new Date()
 		};
 
 		this.employeeDisplay.isTechnician = true;

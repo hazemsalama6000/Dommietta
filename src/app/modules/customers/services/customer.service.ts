@@ -21,12 +21,12 @@ export class CutomerService {
 	constructor(private http: CommonHttpService) { }
 
 	getLookupCustomerDataByParam(model: ISeachListOfCustomer): Observable<LookUpModel[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}?
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}
 		areaId=${model.AreaId == undefined ? '' : model.AreaId}
-		&Block=${model.Block == undefined ? '' : model.Block}
-		&branchId=${model.branchId == undefined ? '' : model.Block}
-		&employeeId=${model.employeeId == undefined ? '' : model.Block}`)
-		.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+		&BlockId=${model.Block == undefined ? '' : model.Block}
+		&branchId=${model.branchId == undefined ? '' : model.branchId}
+		&employeeId=${model.employeeId == undefined ? '' : model.employeeId}`)
+		.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.title }) as LookUpModel)));
 	}
 
 	getLookupCutomerData(companyId: number): Observable<LookUpModel[]> {
@@ -35,32 +35,9 @@ export class CutomerService {
 	}
 	// note
 	getCutomerById(customerId: number): Observable<ICustomer> {
-		/*return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEEBY_ID}?EmployeeId=${employeeId}`).pipe(
-			map((data: HttpReponseModel) => data.data)
-		);*/
-
-		return of(
-			{
-				id: 1,
-				name: "zomm",
-				code: "ZZZ",
-				actualName: "zzzz",
-				startIssue: new Date(),
-				activityStartIssue: new Date(),
-				actualActivity: "zzzz",
-				blockName: "zzzz",
-				areaName: "zzzz",
-				numOfUnits: 3,
-				meterChassisNum: 3,
-				meterStartReading: 3,
-				meterStartDate: new Date(),
-				meterStartIssue: new Date(),
-				hasSewage: true,
-				x: 30.5,
-				y: 30.54,
-				imagePath: '',
-				isDataComplete: true,
-			} as ICustomer);
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERBY_ID}${customerId}`).pipe(
+			map((data: HttpReponseModel) => data.data as ICustomer)
+		);
 	}
 
 	toggleActive(employeeId: number): Observable<HttpReponseModel> {

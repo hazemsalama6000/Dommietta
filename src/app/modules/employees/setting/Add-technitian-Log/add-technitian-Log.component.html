@@ -106,6 +106,15 @@
 				<mat-label class="fontForInputs">الحد الاقصي للعمل بدون شبكة </mat-label>
 				<input matInput placeholder="" name="maxOfflineWorkingHours"
 					formControlName="maxOfflineWorkingHours">
+					<mat-hint>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID_NUMBER' | translate : {name:'' | translate},
+										control: AddTechnicianForm.controls['maxOfflineWorkingHours']
+									  }"></ng-container>
+
+					</mat-hint>
 			</mat-form-field>
 
 		</div>
@@ -115,6 +124,15 @@
 				<mat-label class="fontForInputs">  الحد الاقصي لعدد الفواتير المسجلة بدون شبكة </mat-label>
 				<input matInput placeholder="" name="maxOfflineWorkingBills"
 					formControlName="maxOfflineWorkingBills">
+					<mat-hint>
+
+						<ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+										validation: 'pattern',
+										message: 'AUTH.VALIDATION.INVALID_NUMBER' | translate : {name:'' | translate},
+										control: AddTechnicianForm.controls['maxOfflineWorkingBills']
+									  }"></ng-container>
+
+					</mat-hint>
 			</mat-form-field>
 		</div>
 
@@ -140,3 +158,14 @@
 		</div>
 	</ng-container>
 </ng-template>-->
+
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+	<ng-container *ngIf="control.hasError(validation) && ( saveButtonClickedFlag || control.touched)">
+		<div class="fv-plugins-message-container">
+			<span role="alert">
+				{{ message }}
+			</span>
+		</div>
+	</ng-container>
+</ng-template>

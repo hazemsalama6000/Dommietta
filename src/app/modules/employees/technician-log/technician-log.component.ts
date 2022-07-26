@@ -25,7 +25,8 @@ export class technicianLogComponent {
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
-	displayedColumns: string[] = ['canCollect', 'canRead','canComplain','canEditCustomer' , 'attachImageRead' , 'attachImageEditCustomer', 'maxOfflineWorkingHours','maxOfflineWorkingBills'];
+	displayedColumns: string[] = ['canCollect', 'canRead','canComplain','canEditCustomer' , 'attachImageRead'
+	 , 'attachImageEditCustomer', 'maxOfflineWorkingHours','maxOfflineWorkingBills','insertDate','updateDate'];
 
 	dataSource: any;
 

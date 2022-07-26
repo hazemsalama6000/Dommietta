@@ -10,6 +10,6 @@ export interface ITechnitianLog {
 	attachImageEditCustomer: boolean,
 	maxOfflineWorkingHours: number,
 	maxOfflineWorkingBills: number,
-	startDate:Date,
-	endDate:Date
+	insertDate:Date,
+	updateDate:Date
 }
