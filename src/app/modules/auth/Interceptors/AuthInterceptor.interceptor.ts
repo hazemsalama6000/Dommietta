@@ -35,11 +35,11 @@ export class AuthInterceptor implements HttpInterceptor {
                 //		"Source-Version": "1.0.23",
 
 
-                'Access-Control-Allow-Origin': '*',
+               /* 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Credentials': 'true',
-                //'Access-Control-Allow-Headers': 'Content-Type',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-                //'lang':'ar'
+                'Access-Control-Allow-Headers': 'Content-Type',
+                  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                'lang':'ar' */
             }
         });
     }
