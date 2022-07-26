@@ -127,6 +127,7 @@ export enum HttpPaths {
 
 	//Complaints
 	API_GET_COMPLAINTS="/api/v1/operation/getcomplaints?",
+	API_UPDATE_COMPLAINTS="/api/v1/operation/updatecomplaint",
 
 	//Readings
 	API_GET_READINGS="/api/v1/operation/getmeterreadings?",

@@ -49,12 +49,14 @@
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('startDate',start.value)" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}">
+              (onSelect)="myfilter('startDate')" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}"
+              [(ngModel)]="startDate">
             </p-calendar>
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('endDate',end.value)" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}">
+              (onSelect)="myfilter('endDate')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
+               [(ngModel)]="endDate">
             </p-calendar>
           </div>
         </div>
@@ -75,9 +77,9 @@
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox" [(ngModel)]="btnIsRevise"
-                (change)="setAllIsRevise('revise')" />
+                (change)="setAllIsRevise('revise');showBtnIsRevise=false;" />
               <!-- [disabled]="!btnIsRevise" -->
-              <button pButton pRipple type="button" label="{{'OPERATION.BUTTONS.REVISED'|translate}}"
+              <button pButton pRipple type="button" [disabled]="showBtnIsRevise" label="{{'OPERATION.BUTTONS.REVISED'|translate}}"
                 (click)="postAllDataToChecked()" class="p-button-rounded p-button-info p-1"
                 styleClass="p-button-sm"></button>
             </div>
@@ -109,7 +111,7 @@
 
           <td>
             <a mat-mini-fab color="primary" (click)="ActiveRevise(complain)" id="search" type="submit" class="mx-10">
-              <mat-icon style="font-size: 20px;">edit</mat-icon>
+              <mat-icon style="font-size: 25px;">wifi_protected_setup</mat-icon>
             </a>
           </td>
         </tr>
@@ -119,7 +121,7 @@
       <ng-template pTemplate="footer">
         <tr>
           <td colspan="12">
-            <p-paginator dropdownAppendTo="body" [rows]="5" [totalRecords]="totalRecords"
+            <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
@@ -128,7 +130,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="11" class="text-center">{{'EMPLOYEE.MESSAGE.NOROWFOUND'|translate}}</td>
+          <td colspan="12" class="text-center">{{'EMPLOYEE.MESSAGE.NOROWFOUND'|translate}}</td>
         </tr>
       </ng-template>
 

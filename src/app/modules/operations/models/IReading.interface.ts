@@ -1,27 +1,27 @@
 export interface IReading {
-    readingsRecords: IReadingList[],
-    pageSize: number
+    data?: IReadingList[],
+    pageSize?: number
 } 
 
 export interface IReadingList {
-    Id :number;
-    CollectorId: number;
-    CollectorName: string;
-    CustomerId: number;
-    CustomerName: string;
-    CustomerCode: string;
-    BranchName: string;
-    Value: number;
-    LastReading :number;
-    X: number;
-    Y: number;
-    MeterStatus: string;
-    ReadingImagePath: string;
-    IssueName: string;
-    IssueStatus: string;
-    IssueDate: Date;
-    IsRevised: boolean;
-    IsPotsed: boolean;
+    id :number;
+    collectorId: number;
+    collectorName: string;
+    customerId: number;
+    customerName: string;
+    customerCode: string;
+    branchName: string;
+    value: number;
+    lastReading :number;
+    x: number;
+    y: number;
+    meterStatus: string;
+    readingImagePath: string;
+    issueName: string;
+    issueStatus: string;
+    issueDate: Date;
+    isRevised: boolean;
+    isPotsed: boolean;
     lastPosted?:boolean;
-    Notes :string
+    notes :string
 } 

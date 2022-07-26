@@ -11,9 +11,11 @@ import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { CutomerService } from 'src/app/modules/customers/services/customer.service';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
+import { ConfirmationDialogService } from 'src/app/shared-module/Components/confirm-dialog/confirmDialog.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IReading, IReadingList } from '../../models/IReading.interface';
 import { IReadingSearch } from '../../models/IReadingSearch.interface';
+import { IUpdateReading } from '../../models/IUpdateReading.interface';
 import { ReadingService } from '../../services/reading.service';
 
 @Component({
@@ -24,6 +26,8 @@ import { ReadingService } from '../../services/reading.service';
 export class ReadingListComponent implements OnInit {
   btnIsPost: boolean = false;
   btnIsRevise: boolean = false;
+  startDate: string;
+  endDate: string;
 
   branchDropdown: LookUpModel[];
   areaDropdown: LookUpModel[];
@@ -44,11 +48,12 @@ export class ReadingListComponent implements OnInit {
     private branchService: BranchService,
     private areaService: AreaService,
     private blockService: BlockService,
-    private CutomerService:CutomerService,
+    private CutomerService: CutomerService,
     private employeeService: EmployeeService,
     private authService: AuthService,
     private toaster: toasterService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private confirmationDialogService: ConfirmationDialogService,
   ) {
 
     this.searchObject = {
@@ -74,60 +79,65 @@ export class ReadingListComponent implements OnInit {
     this.getReadingData();
   }
 
- //this function to create search object and reload data in table
- myfilter(columnname: string, value?: any) {
+  //this function to create search object and reload data in table
+  myfilter(columnname: string) {
 
-  switch (columnname) {
-    case "branch":
-      this.areaService.getLookupAreaData(this.searchObject.BranchId ?? 0).subscribe(
-        (data: LookUpModel[]) => { this.areaDropdown = data; });
-      this.employeeService.getLookupEmployeeDataByParam({ branchId: this.searchObject.BranchId ?? 0 })
-        .subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
-      break;
-    case "area":
-      this.blockService.getLookupBlockData(this.searchObject.AreaId ?? 0).subscribe(
-        (data: LookUpModel[]) => { this.blockDropdown = data; });
-      this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0 })
-        .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
-      break;
-    case "block":
-      this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0, Block: this.searchObject.BlockId??0 })
-        .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
-      break;
-    case "startDate":
-      this.searchObject.StartDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
-      break;
-    case "endDate":
-      this.searchObject.EndDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
-      break;
-    case "CustomerCode":
-      this.searchObject = {
-        PageNumber: this.searchObject.PageNumber,
-        PageSize: this.searchObject.PageSize,
-        CustomerCode: this.searchObject.CustomerCode
-      }
-      break;
-    default:
-      break;
+    switch (columnname) {
+      case "branch":
+        this.areaService.getLookupAreaData(this.searchObject.BranchId ?? 0).subscribe(
+          (data: LookUpModel[]) => { this.areaDropdown = data; });
+        this.employeeService.getLookupEmployeeDataByParam({ branchId: this.searchObject.BranchId ?? 0 })
+          .subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
+        break;
+      case "area":
+        this.blockService.getLookupBlockData(this.searchObject.AreaId ?? 0).subscribe(
+          (data: LookUpModel[]) => { this.blockDropdown = data; });
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId ?? 0 })
+          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+        break;
+      case "block":
+        this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId ?? 0, Block: this.searchObject.BlockId ?? 0 })
+          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+        break;
+      case "startDate":
+        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        break;
+      case "endDate":
+        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        break;
+      case "CustomerCode":
+        this.startDate = '';
+        this.endDate = '';
+        this.searchObject = {
+          PageNumber: this.searchObject.PageNumber,
+          PageSize: this.searchObject.PageSize,
+          CustomerCode: this.searchObject.CustomerCode
+        }
+        break;
+      default:
+        break;
+    }
+
+    if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
+
+    columnname != 'branch' ? this.getReadingData() : null;
   }
 
-  if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-
-  columnname != 'branch' ? this.getReadingData() : null;
-}
-
-//this function to fill dropdowns data
-fillDropdowns() {
-  this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
-}
+  //this function to fill dropdowns data
+  fillDropdowns() {
+    this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
+  }
 
   //this function to get data from employee 
   getReadingData() {
     this.loading = true;
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
-        this.readingData = res.readingsRecords;
-        this.totalRecords = res.pageSize;
+        let data: IReadingList[] = res.data ?? [];
+        data.map(x => x.lastPosted == x.isPotsed);
+        this.readingData = data;
+        this.totalRecords = res.pageSize ?? 0;
+        console.log(res.data)
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -137,13 +147,13 @@ fillDropdowns() {
     if (type == 'revise') {
       for (let index = 0; index < this.readingData.length; index++) {
         if (!this.readingData[index].lastPosted) {
-          this.readingData[index].IsRevised = this.btnIsRevise;
+          this.readingData[index].isRevised = this.btnIsRevise;
         }
       }
     } else if (type == 'post') {
       for (let index = 0; index < this.readingData.length; index++) {
         if (!this.readingData[index].lastPosted) {
-          this.readingData[index].IsPotsed = this.btnIsPost;
+          this.readingData[index].isPotsed = this.btnIsPost;
         }
       }
     }
@@ -152,21 +162,25 @@ fillDropdowns() {
   }
 
   postAllDataToChecked() {
-    let reading: IReadingList[] = this.readingData.filter(x => !x.lastPosted);
-    reading.map((x: IReadingList) => { delete x.lastPosted });
+    let reading: IUpdateReading[] = [];
+    this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPotsed: o.isPotsed }));
     console.log(reading);
     this.postReviseOrPost(reading);
   }
 
   ActivePostOrRevise(read: IReadingList) {
-    this.postReviseOrPost([read])
+    let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPotsed: read.isPotsed }];
+    this.postReviseOrPost(reading)
   }
 
-  postReviseOrPost(reading: IReadingList[]) {
-    this.readingService.PostIsreviseOrIsPost(reading).
-      subscribe(
+  postReviseOrPost(reading: IUpdateReading[]) {
+
+    this.readingService.PostIsreviseOrIsPost(reading).subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {
+            data.data?.map((x:any)=>{
+
+            });
             this.toaster.openSuccessSnackBar(data.message);
           }
           else if (data.isExists)
@@ -181,25 +195,25 @@ fillDropdowns() {
 
   exportExcel() {
     let selectedColumns: string[] = [
-      'Id' ,
-      'CollectorId',
-      'CollectorName',
-      'CustomerId',
-      'CustomerName',
-      'CustomerCode',
-      'BranchName',
-      'Value',
-      'LastReading' ,
-      'X',
-      'Y',
-      'MeterStatus',
-      'IssueName',
-      'IssueStatus',
-      'IssueDate',
-      'IsRevised',
-      'IsPotsed',
+      'id',
+      'collectorId',
+      'collectorName',
+      'customerId',
+      'customerName',
+      'customerCode',
+      'branchName',
+      'value',
+      'lastReading',
+      'x',
+      'y',
+      'meterStatus',
+      'issueName',
+      'issueStatus',
+      'issueDate',
+      'isRevised',
+      'isPotsed',
       'lastPosted',
-      'Notes' ,
+      'notes',
     ];
     let readingFiltered: any[] = [];
     this.readingData.map((x: any) => {
