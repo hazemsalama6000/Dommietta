@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OverviewComponent } from './overview/overview.component';
 import { CutomersComponent } from './cutomers.component';
-import { technicianLogComponent } from './technician-log/technician-log.component';
 
 const routes: Routes = [
 	{
@@ -13,10 +12,10 @@ const routes: Routes = [
 				path: 'overview',
 				component: OverviewComponent,
 			},
-			{
+			/*{
 				path: 'technicianlog/:employeeId',
 				component: technicianLogComponent
-			},
+			},*/
 		/*	{
 				path: 'employeeblocks',
 				component: EmployeeBlocksComponent
@@ -33,4 +32,4 @@ const routes: Routes = [
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
-export class EmployeesRoutingModule { }
+export class CustomerRoutingModule { }
