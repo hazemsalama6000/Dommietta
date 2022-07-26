@@ -129,8 +129,8 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
-        this.complainData = res?.data??[];
-        this.totalRecords = res?.pageSize??0;
+        this.complainData = res.data??[];
+        this.totalRecords = res.pageSize??0;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -173,19 +173,19 @@ export class ComplainListComponent implements OnInit {
 
   exportExcel() {
     let selectedColumns: string[] = [
-      'Id',
-      'Date',
-      'CollectorName',
-      'CustomerName',
-      'BranchName',
-      'AreaName',
-      'BlockName',
-      'IssueName',
-      'X',
-      'Y',
-      'Details',
-      'IsRevised',
-      'ComplaintTypeName'];
+      'id',
+      'date',
+      'collectorName',
+      'customerName',
+      'branchName',
+      'areaName',
+      'blockName',
+      'issueName',
+      'x',
+      'y',
+      'details',
+      'isRevised',
+      'complaintTypeName'];
     let complainFiltered: any[] = [];
     this.complainData.map((x: any) => {
       let obj: any = {};

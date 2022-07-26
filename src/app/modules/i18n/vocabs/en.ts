@@ -74,8 +74,8 @@ export const locale = {
         EMPLOYEE: "Employee",
         RESPONSIBLEEMPLOYEE: "Manager Name",
         SALESSTATELOGIN: "Stop Logining For representative",
-        STATUS: "Status"
-
+        STATUS: "Status",
+        ISUPLOADIMAGE:"Upload Image"
 
       },
       BUTTONS: {

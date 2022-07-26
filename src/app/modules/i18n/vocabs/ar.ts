@@ -75,7 +75,8 @@ export const locale = {
         EMPLOYEE: "الموظف",
         RESPONSIBLEEMPLOYEE: "اسم المسؤول",
         STATUS: "حالة التفعيل",
-        SALESSTATELOGIN: "ايقاف تسجيل الدخول للمناديب"
+        SALESSTATELOGIN: "ايقاف تسجيل الدخول للمناديب",
+        ISUPLOADIMAGE:"رفع الصور"
       },
       BUTTONS: {
         ADD: "اضافة",
