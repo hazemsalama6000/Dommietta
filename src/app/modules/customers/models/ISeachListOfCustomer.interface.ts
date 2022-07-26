@@ -1,4 +1,6 @@
 export interface ISeachListOfCustomer{
      AreaId?: number, 
-     Block?: number
+     Block?: number,
+	 branchId?: number,
+	 employeeId?:number
 }

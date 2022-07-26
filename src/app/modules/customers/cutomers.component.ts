@@ -6,6 +6,8 @@ import { BlockService } from 'src/app/core-module/LookupsServices/block.service'
 import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
+import { AuthService } from '../auth';
+import { IUserData } from '../auth/models/IUserData.interface';
 import { EmployeeService } from '../employees/services/employee.service';
 import { ICustomer } from './models/customer.interface';
 import { ISearch } from './models/ISearch.interface';
@@ -23,6 +25,8 @@ export class CutomersComponent implements OnInit {
 	imageFile: File;
 
 	dropdownEmployeeData: LookUpModel[] = [];
+	dropdownCustomerData: LookUpModel[] = [];
+
 	dropdownBranchData: LookUpModel[] = [];
 	dropdownAreaData: LookUpModel[] = [];
 	dropdownBlockData: LookUpModel[] = [];
@@ -32,7 +36,7 @@ export class CutomersComponent implements OnInit {
 	constructor(
 		private service: CutomerService,
 		private employeeService: EmployeeService,
-		
+		private auth : AuthService,
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
@@ -41,8 +45,10 @@ export class CutomersComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => {
-			this.dropdownBranchData = data;
+		this.auth.userData.subscribe((data:IUserData)=>{
+			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
+				this.dropdownBranchData = data;
+			});
 		});
 	}
 
@@ -97,7 +103,7 @@ export class CutomersComponent implements OnInit {
 		this.service.getLookupCustomerDataByParam(this.searchModel)
 			.subscribe(
 				(data: LookUpModel[]) => {
-					this.dropdownEmployeeData = data;
+					this.dropdownCustomerData = data;
 				}
 			);
 	}

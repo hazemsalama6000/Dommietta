@@ -22,8 +22,11 @@ export class CutomerService {
 
 	getLookupCustomerDataByParam(model: ISeachListOfCustomer): Observable<LookUpModel[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}?
-			areaId=${model.AreaId == undefined ? '' : model.AreaId}&blockId=${model.Block == undefined ? '' : model.Block}`)
-			.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+		areaId=${model.AreaId == undefined ? '' : model.AreaId}
+		&Block=${model.Block == undefined ? '' : model.Block}
+		&branchId=${model.branchId == undefined ? '' : model.Block}
+		&employeeId=${model.employeeId == undefined ? '' : model.Block}`)
+		.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 	getLookupCutomerData(companyId: number): Observable<LookUpModel[]> {
