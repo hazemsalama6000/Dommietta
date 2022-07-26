@@ -1,6 +1,6 @@
 <div mat-dialog-title>
   <div class="row mx-0">
-    <div class="col"> {{data.complain.CustomerName}}</div>
+    <div class="col"> {{data.complain.customerName}}</div>
     <div class="col-2"> <button mat-button mat-dialog-close>
         <span class="material-icons">
           close
@@ -9,5 +9,11 @@
     </div>
   </div>
 </div>
-<div mat-dialog-content>
+<div mat-dialog-content class=" overflow-auto">
+  <h2 *ngIf="images.length==0">لا</h2>
+  <div class="row mx-0" *ngIf="images.length>0">
+    <div class="col-md-6" *ngFor="let img of images">
+      <img [src]="url+img" alt="">
+    </div>
+  </div>
 </div>

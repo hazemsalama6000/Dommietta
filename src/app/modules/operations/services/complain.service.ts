@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
 import { IComplain, IComplainList } from '../models/IComplain.interface';
-import { IComplainSearch } from '../models/IComplainSearch.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,32 +14,13 @@ export class ComplainService {
   constructor(private http: CommonHttpService) { }
 
 
-  getComplainsData(searchModel: IComplainSearch): Observable<IComplain> {
-    // return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
-    //  .pipe(map(Items => Items.map((Item: any) => ({ ...Item }))));
-    let complainData: IComplain={complainRecords:[],pageSize:100} ;
-    let ispost = true;
-    for (let index = 1; index < searchModel?.pageSize; index++) {
-      ispost = !ispost;
-      complainData.complainRecords.push({
-        Id: index,
-        Date: new Date(),
-        CollectorName: 'CollectorName' + index,
-        CustomerName: 'CustomerName' + index,
-        BranchName: 'BranchName' + index,
-        AreaName: 'AreaName' + index,
-        BlockName: 'BlockName' + index,
-        IssueName: 'IssueName' + index,
-        X: 54645,
-        Y: 36646,
-        Details: 'Details' + index,
-        IsRevised: ispost,
-        ComplaintTypeName: 'ComplaintTypeName' + index,
-        ComplaintImagesPath: ['r' + index, 's' + index],
-      })
-    }
-    return of(complainData);
+  getComplainsData(searchModel: any): Observable<IComplain> {
+    let queryString = Object.keys(searchModel).map((key: string) =>
+      searchModel[key] != null && searchModel[key] != '' && searchModel[key] != undefined ? key + '=' + searchModel[key] : null
+    ).filter(x => x != null).join('&');
 
+    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS}${queryString}`)
+      .pipe(map(Items =>  Items.data  as IComplain));
   }
 
   getLookupCustomerData(search: any): Observable<LookUpModel[]> {

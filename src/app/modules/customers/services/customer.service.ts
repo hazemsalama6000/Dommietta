@@ -6,6 +6,7 @@ import { HttpPaths } from "src/app/modules/auth/Enums/HttpPaths.enum";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { ICustomerEditManageSearch } from "../../operations/models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ICustomer } from "../models/customer.interface";
+import { ISeachListOfCustomer } from "../models/ISeachListOfCustomer.interface";
 import { ISearch } from "../models/ISearch.interface";
 
 @Injectable({
@@ -19,10 +20,10 @@ export class CutomerService {
 
 	constructor(private http: CommonHttpService) { }
 
-	getLookupCustomerDataByParam(model: ISearch): Observable<LookUpModel[]> {
-		/*		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
-					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));*/
-		return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
+	getLookupCustomerDataByParam(model: ISeachListOfCustomer): Observable<LookUpModel[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_LISTOFCUSTOMER}?
+			areaId=${model.AreaId == undefined ? '' : model.AreaId}&blockId=${model.Block == undefined ? '' : model.Block}`)
+			.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 	getLookupCutomerData(companyId: number): Observable<LookUpModel[]> {
@@ -67,9 +68,9 @@ export class CutomerService {
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();
 	}
-/*
-	changeEmployeeImageData(model: any): Observable<any> {
-		return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_EMP_IMAGE}`);
-	}*/
+	/*
+		changeEmployeeImageData(model: any): Observable<any> {
+			return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_EMP_IMAGE}`);
+		}*/
 
 }

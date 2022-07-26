@@ -22,17 +22,18 @@ export class ComplainTypeService {
 
 	PostLookupData(model: LookUpModel): Observable<any> {
 		let obj:complainType={id:model.Id,name:model.Name,isAttachedImage:model.isActive};
-		return this.http.CommonPostRequests(obj, `${localStorage.getItem("companyLink")}${HttpPaths.API_ADD_COMPLAINT_TYPE}}`);
+		return this.http.CommonPostRequests(obj, `${localStorage.getItem("companyLink")}${HttpPaths.API_ADD_COMPLAINT_TYPE}`);
 	}
 
 
 	UpdateLookupData(model: LookUpModel): Observable<any> {
-		let obj:complainType={id:model.Id,name:model.Name,isAttachedImage:model.isActive};
-		return this.http.CommonPutRequests(obj, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDTAE_COMPLAINT_TYPE}}${model.Id}`);
+		let obj:complainType={id:model.Id,name:model.Name,isAttachedImage:!model.isActive};
+		//console.log(obj,model)
+		return this.http.CommonPutRequests(obj, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDTAE_COMPLAINT_TYPE}${model.Id}`);
 	}
 
 	DeleteLookupData(id: number): Observable<any> {
-		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_DELETE_COMPLAINT_TYPE}}${id}`);
+		return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_DELETE_COMPLAINT_TYPE}${id}`);
 	}
 
 	selectFromStore(): Observable<any> {

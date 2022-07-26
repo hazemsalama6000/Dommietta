@@ -1,12 +1,12 @@
 export interface IReadingSearch {
-    customerCode?: string;
-    branchId?: number;
-    areaId?: number;
-    blockId?: number
-    customerId?: number;
-    employee_id?: number;
-    readingStartDate?: Date;
-    readingEndDate?: Date;
-    pageNumber: number;
-    pageSize: number;
+    CustomerCode?: string;
+    BranchId?: number;
+    AreaId?: number;
+    BlockId?: number;
+    CustomerId?: number;
+    Employee_id?: number;
+    StartDate?: string;
+    EndDate?: string;
+    PageNumber: number;
+    PageSize: number;
 }

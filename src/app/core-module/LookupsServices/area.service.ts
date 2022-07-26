@@ -12,7 +12,7 @@ export class AreaService {
 
 	getLookupAreaData(branchId: number): Observable<LookUpModel[]> {
 				return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_AREA_URL}?branchId=${branchId}`)
-					.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
+					.pipe(map(Items => Items.data.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 }

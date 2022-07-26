@@ -9,6 +9,7 @@ import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
+import { CutomerService } from 'src/app/modules/customers/services/customer.service';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IReading, IReadingList } from '../../models/IReading.interface';
@@ -43,6 +44,7 @@ export class ReadingListComponent implements OnInit {
     private branchService: BranchService,
     private areaService: AreaService,
     private blockService: BlockService,
+    private CutomerService:CutomerService,
     private employeeService: EmployeeService,
     private authService: AuthService,
     private toaster: toasterService,
@@ -50,8 +52,8 @@ export class ReadingListComponent implements OnInit {
   ) {
 
     this.searchObject = {
-      pageNumber: 1,
-      pageSize: 10,
+      PageNumber: 1,
+      PageSize: 10,
     };
 
   }
@@ -67,41 +69,57 @@ export class ReadingListComponent implements OnInit {
 
   // Change pagination page
   changePage(e: any) {
-    this.searchObject.pageSize = e.rows;
-    this.searchObject.pageNumber = e.page + 1;
+    this.searchObject.PageSize = e.rows;
+    this.searchObject.PageNumber = e.page + 1;
     this.getReadingData();
   }
 
-  //this function to create search object and reload data in table
-  myfilter(columnname: string) {
-    console.log(this.searchObject)
-    switch (columnname) {
-      case "branch":
-        this.areaService.getLookupAreaData(this.searchObject.branchId ?? 0).subscribe(
-          (data: LookUpModel[]) => { this.areaDropdown = data; });
-        break;
-      case "area":
-        this.blockService.getLookupBlockData(this.searchObject.areaId ?? 0).subscribe(
-          (data: LookUpModel[]) => { this.blockDropdown = data; });
-        this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId })
-          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
-        break;
-      case "block":
-        this.readingService.getLookupCustomerData({ areaId: this.searchObject.areaId, blockId: this.searchObject.blockId })
-          .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
-        break;
-      default:
-        break;
-    }
+ //this function to create search object and reload data in table
+ myfilter(columnname: string, value?: any) {
 
-    columnname != 'branch' ? this.getReadingData() : null;
+  switch (columnname) {
+    case "branch":
+      this.areaService.getLookupAreaData(this.searchObject.BranchId ?? 0).subscribe(
+        (data: LookUpModel[]) => { this.areaDropdown = data; });
+      this.employeeService.getLookupEmployeeDataByParam({ branchId: this.searchObject.BranchId ?? 0 })
+        .subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
+      break;
+    case "area":
+      this.blockService.getLookupBlockData(this.searchObject.AreaId ?? 0).subscribe(
+        (data: LookUpModel[]) => { this.blockDropdown = data; });
+      this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0 })
+        .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+      break;
+    case "block":
+      this.CutomerService.getLookupCustomerDataByParam({ AreaId: this.searchObject.AreaId??0, Block: this.searchObject.BlockId??0 })
+        .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
+      break;
+    case "startDate":
+      this.searchObject.StartDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+      break;
+    case "endDate":
+      this.searchObject.EndDate = this.datePipe.transform(new Date(value ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+      break;
+    case "CustomerCode":
+      this.searchObject = {
+        PageNumber: this.searchObject.PageNumber,
+        PageSize: this.searchObject.PageSize,
+        CustomerCode: this.searchObject.CustomerCode
+      }
+      break;
+    default:
+      break;
   }
 
-  //this function to fill dropdowns data
-  fillDropdowns() {
-    this.branchService.getLookupBranchData(1005).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
-    this.employeeService.getLookupEmployeeData(this.userData.companyId).subscribe((res: LookUpModel[]) => this.collectorDropdown = res);
-  }
+  if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
+
+  columnname != 'branch' ? this.getReadingData() : null;
+}
+
+//this function to fill dropdowns data
+fillDropdowns() {
+  this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
+}
 
   //this function to get data from employee 
   getReadingData() {

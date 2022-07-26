@@ -124,4 +124,13 @@ export enum HttpPaths {
 	API_ADD_COMPLAINT_TYPE="/api/v1/operation/addcomplainttype",
 	API_UPDTAE_COMPLAINT_TYPE="/api/v1/operation/updatecomplainttype/",
 	API_DELETE_COMPLAINT_TYPE="/api/v1/operation/deletecomplainttype/",
+
+	//Complaints
+	API_GET_COMPLAINTS="/api/v1/operation/getcomplaints?",
+
+	//Readings
+	API_GET_READINGS="/api/v1/operation/getmeterreadings?",
+
+	//Customer
+	API_GET_LISTOFCUSTOMER="/api/v1/cust/listofcustomer?",
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
@@ -15,38 +15,13 @@ export class ReadingService {
   constructor(private http: CommonHttpService) { }
 
 
-  getReadingsData(searchModel: IReadingSearch): Observable<IReading> {
-    // return this.http.CommonPostRequests(searchModel, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
-    //  .pipe(map(Items => Items.map((Item: any) => ({ ...Item }))));
-    let readingData: IReading={pageSize:100,readingsRecords:[]};
-    let ispost = true;
-    for (let index = 1; index < searchModel.pageSize; index++) {
-      ispost = !ispost;
-      readingData.readingsRecords.push({
-        Id: index,
-        CollectorId: index,
-        BranchName: "BranchName" + index,
-        CollectorName: "CollectorName" + index,
-        CustomerCode: "CustomerCode" + index,
-        IsPotsed: ispost,
-        IsRevised: !ispost,
-        CustomerName: "CustomerName" + index,
-        IssueDate: new Date(),
-        MeterStatus: "MeterStatus" + index,
-        IssueName: "202204" + index,
-        CustomerId: 2 + index,
-        Value: 96325,
-        IssueStatus: "IssueStatus" + index,
-        ReadingImagePath:'',
-        X: 1245242 + index,
-        Y: 6464646 + index,
-        LastReading: 4556456,
-        Notes: "Notes" + index,
-        lastPosted: ispost
-      })
-    }
-    return of(readingData);
+  getReadingsData(searchModel: any): Observable<IReading> {
+    let queryString = Object.keys(searchModel).map((key: string) =>
+    searchModel[key] != null && searchModel[key] != '' && searchModel[key] != undefined ? key + '=' + searchModel[key] : null
+  ).filter(x => x != null).join('&');
 
+  return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_READINGS}${queryString}`)
+    .pipe(map(Items => ({ ...Items.data }) as IReading));
   }
 
   getLookupCustomerData(search: any): Observable<LookUpModel[]> {

@@ -8,9 +8,9 @@
         <div class="row mx-0 mb-2  justify-content-end">
           <div class="col">
             <span class="p-input-icon-left">
-              <button class="buttonsearch" (click)="myfilter('branch')"><i class="pi pi-search"></i></button>
+              <button class="buttonsearch" (click)="myfilter('CustomerCode');"><i class="pi pi-search"></i></button>
               <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}"
-                [(ngModel)]="searchObject.customerCode">
+                [(ngModel)]="searchObject.CustomerCode">
             </span>
           </div>
           <div class="col justify-content-end d-flex">
@@ -22,45 +22,39 @@
         <div class="row mx-0">
           <div class="col">
             <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('branch')" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.branchId"></p-dropdown>
+              (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
+              placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('area')" placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.areaId"></p-dropdown>
+              [(ngModel)]="searchObject.AreaId">
+            </p-dropdown>
           </div>
           <div class="col">
-            <p-multiSelect [options]="blockDropdown" optionLabel="Name" appendTo="body" optionValue="Id"
-              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [(ngModel)]="searchObject.blockId">
-              <ng-template let-option pTemplate="item">
-                <span>{{option.Name}}</span>
-              </ng-template>
-            </p-multiSelect>
-            <!-- <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('block')"  [showClear]="true"
-              [(ngModel)]="searchObject.blockId"></p-dropdown> -->
+            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.BlockId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('customer')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}"
-              [showClear]="true" [(ngModel)]="searchObject.customerId"></p-dropdown>
+              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.CustomerId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('employee')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}"
-              [showClear]="true" [(ngModel)]="searchObject.employee_id"></p-dropdown>
+              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.Employee_id"></p-dropdown>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #st [maxDate]="end.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('')" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}"
-              [(ngModel)]="searchObject.readingStartDate">
+            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
+              (onSelect)="myfilter('startDate',start.value)" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}">
             </p-calendar>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="st.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
-              [(ngModel)]="searchObject.readingEndDate">
+            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
+              (onSelect)="myfilter('endDate',end.value)" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}">
             </p-calendar>
           </div>
         </div>
