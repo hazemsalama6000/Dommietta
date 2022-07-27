@@ -26,6 +26,6 @@ export class ReadingService {
   }
 
   PostIsreviseOrIsPost(reading:IUpdateReading[]):Observable<HttpReponseModel>{
-      return this.http.CommonPostRequests(reading, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}`); 
+      return this.http.CommonPutRequests(reading, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDATE_READINGS}`); 
   }
 }

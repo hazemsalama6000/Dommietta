@@ -131,7 +131,13 @@ export enum HttpPaths {
 
 	//Readings
 	API_GET_READINGS="/api/v1/operation/getmeterreadings?",
+	API_UPDATE_READINGS="/api/v1/operation/updatemeterreading",
 
 	//Customer
 	API_GET_LISTOFCUSTOMER="/api/v1/cust/listofcustomer?",
+
+	//Issue
+	API_GET_ISSUEMASTER="/api/v1/shared/getissues/",
+	API_GET_ISSUEDETAILS="/api/v1/shared/getissuesdetails/",
+
 }

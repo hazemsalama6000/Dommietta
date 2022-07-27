@@ -12,6 +12,9 @@ import { ViewimagesComponent } from './components/complain-list/viewimages/viewi
 import { CustomerUpdateManageComponent } from './components/customer-update-manage/customer-update-manage.component';
 import { updateCustomerManageComponent } from './components/customer-update-manage/update-datatable/update-datatable.component';
 import { UserLocationComponent } from './components/customer-update-manage/update-datatable/user-locations/user-location.component';
+import { IssueComponent } from './components/issue/issue.component';
+import { IssuemasterComponent } from './components/issue/issuemaster/issuemaster.component';
+import { IssuedetailsComponent } from './components/issue/issuedetails/issuedetails.component';
 
 @NgModule({
 
@@ -19,9 +22,12 @@ import { UserLocationComponent } from './components/customer-update-manage/updat
     ReadingListComponent,
     ComplainListComponent,
     ViewimagesComponent,
-	CustomerUpdateManageComponent,
-	updateCustomerManageComponent,
-	UserLocationComponent
+    CustomerUpdateManageComponent,
+    updateCustomerManageComponent,
+    UserLocationComponent,
+    IssueComponent,
+    IssuemasterComponent,
+    IssuedetailsComponent
   ],
   imports: [
     CommonModule,

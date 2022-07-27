@@ -26,9 +26,10 @@ export const locale = {
       USERS: "Users",
       ROLES: "Roles",
       SUPERADMIN: "Super Admin",
-      COMPLAINLIST:"Complain list",
-      READINGLIST:"Reading list",
-      COMPLAINTYPE:"Compain Type"
+      COMPLAINLIST: "Complain list",
+      READINGLIST: "Reading list",
+      COMPLAINTYPE: "Compain Type",
+      ISSUES: "Issues"
     },
 
     FOOTER: {
@@ -75,7 +76,7 @@ export const locale = {
         RESPONSIBLEEMPLOYEE: "Manager Name",
         SALESSTATELOGIN: "Stop Logining For representative",
         STATUS: "Status",
-        ISUPLOADIMAGE:"Upload Image"
+        ISUPLOADIMAGE: "Upload Image"
 
       },
       BUTTONS: {
@@ -372,8 +373,8 @@ export const locale = {
         CUSTOMERNAME: "Customer Name",
         CUSTOMERCODE: "Customer Code",
         BRANCHNAME: "Branch Name",
-        AREANAME:"AreaName",  
-        BLOCKNAME:"BlockName",
+        AREANAME: "AreaName",
+        BLOCKNAME: "BlockName",
         VALUE: "Value",
         LASTREADING: "Last Reading",
         IMAGE: "Image",
@@ -382,10 +383,15 @@ export const locale = {
         ISSUESTATUS: "Issue Status",
         ISSUEDATE: "Issue Date",
         NOTES: "Notes",
-        DTAE:"Date",
-        DETAILS:"Details",
-        COMPLAINTYPE:"ComplaintType",
-        COMPLAINTYPES:"Compain Type"
+        DTAE: "Date",
+        DETAILS: "Details",
+        COMPLAINTYPE: "ComplaintType",
+        COMPLAINTYPES: "Compain Type",
+        BILLSTARTNUM: "Start S/N",
+        BILLENDNUM: "End S/N",
+        ISSUETITLE: "Issues",
+        READINGS: "Readings",
+        COMPLAINTS: "Complaints"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"
