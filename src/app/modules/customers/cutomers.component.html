@@ -15,7 +15,7 @@
 		<div class="row align-items-center mx-5">
 			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
-				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
+				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();">
 			</ng-select>
 			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
@@ -27,12 +27,20 @@
 			</ng-select>
 			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
-				(change)="employeeSelectListOnChange($event)">
+				(change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
 			</ng-select>
+
 			<ng-select #customerselect class="customized mt-md-2" style="width:250px ;" [items]="dropdownCustomerData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر العميل"
 				(change)="customerSelectListOnChange($event)">
 			</ng-select>
+
+			<mat-form-field style="width:250px;" class="mt-md-6" appearance="fill">
+				<mat-label>كود الموظف</mat-label>
+				<input #codeInput type="text" name="code" matInput >
+				<mat-icon matSuffix (click)="getCustomerProfileByCode(codeInput.value);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();" style="cursor: pointer;">search</mat-icon>
+			</mat-form-field>
+
 		</div>
 
 	</div>
@@ -72,7 +80,7 @@
                                   mb-2
                                   cursor-pointer
                                 ">
-								<mat-icon> vpn_key</mat-icon>
+							<mat-icon> vpn_key</mat-icon>
 
 							{{employeeDisplay.code}}
 						</a>
@@ -89,7 +97,7 @@
                                   mb-2
                                   cursor-pointer
                                 ">
-								<mat-icon>portrait</mat-icon>
+							<mat-icon>portrait</mat-icon>
 
 							{{employeeDisplay.actualName}}
 						</a>
@@ -99,7 +107,8 @@
 					</div>
 
 
-					<div class="d-flex flex-stack fw-bold fs-6 mb-2 pe-2" (click)="currentLocation(employeeDisplay.x,employeeDisplay.y)">
+					<div class="d-flex flex-stack fw-bold fs-6 mb-2 pe-2"
+						(click)="currentLocation(employeeDisplay.x,employeeDisplay.y)">
 						<a class="
                                   d-flex
                                   align-items-start
@@ -107,7 +116,7 @@
                                   mb-2
                                   cursor-pointer
                                 ">
-								<mat-icon> pin_drop</mat-icon>
+							<mat-icon color="primary"> pin_drop</mat-icon>
 
 							اضغط
 						</a>
@@ -146,50 +155,50 @@
 				</div>
 
 				<div class="separator separator-dashed my-3"></div>
-				<div class="fw-bolder mt-5"> النشاط   : 
+				<div class="fw-bolder mt-5"> النشاط :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
 							{{employeeDisplay.actualActivity}}
 						</a>
 					</span>
-					 </div>
+				</div>
 
-				<div class="fw-bolder mt-5"> عدد الوحدات : 
+				<div class="fw-bolder mt-5"> عدد الوحدات :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
 							{{employeeDisplay.numOfUnits}}
 						</a>
 					</span>
-					 </div>
-				<div class="fw-bolder mt-5"> رقم الشاسية : 
+				</div>
+				<div class="fw-bolder mt-5"> رقم الشاسية :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
-							{{employeeDisplay.meterChassisNum}} 
+							{{employeeDisplay.meterChassisNum}}
 						</a>
 					</span>
-					</div>
-				<div class="fw-bolder mt-5"> قراءه العداد : 
+				</div>
+				<div class="fw-bolder mt-5"> قراءه العداد :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
 							{{employeeDisplay.meterStartReading}}
 						</a>
 					</span>
-					 </div>
-				<div class="fw-bolder mt-5"> بدء تشغيل العداد : 
+				</div>
+				<div class="fw-bolder mt-5"> بدء تشغيل العداد :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
 							{{employeeDisplay.meterStartDate | date:'dd/MM/yyyy'}}
 						</a>
 					</span>
-					
+
 				</div>
-				<div class="fw-bolder mt-5"> بدء خدمة العداد : 
+				<div class="fw-bolder mt-5"> بدء خدمة العداد :
 					<span class="text-gray-600">
 						<a href="#" class="text-gray-600 text-hover-primary">
 							{{employeeDisplay.meterStartIssue | date:'dd/MM/yyyy'}}
 						</a>
 					</span>
-					
+
 				</div>
 
 				<div class="fw-bolder mt-5"> تاريخ البدء :
@@ -251,30 +260,41 @@
 		<!--begin:::Tabs-->
 		<div class="d-flex overflow-auto h-55px">
 			<mat-tab-group>
+
 				<mat-tab>
 					<ng-template mat-tab-label>
 						<a class="nav-link text-active-primary me-6 fontForInputs"
-							[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
+							[routerLink]="['/customer/cutomerprofile/complains/', employeeDisplay.id ]"
 							routerLinkActive="">
-							البيانات الفنية السابقة
-							<mat-icon> local_dining</mat-icon>
+							الشكاوى
+							<mat-icon>receipt</mat-icon>
 						</a>
 					</ng-template>
 				</mat-tab>
 
-				<!--<mat-tab>
+				<mat-tab>
 					<ng-template mat-tab-label>
 						<a class="nav-link text-active-primary me-6 fontForInputs"
-							[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
-							[state]="employeeDisplay.blocks" routerLinkActive="">
-							مربعات الموظف
-							<mat-icon> person_pin_circle</mat-icon>
+							[routerLink]="['/customer/cutomerprofile/reading/', employeeDisplay.id ]"
+							routerLinkActive="">
+							القراءات
+							<mat-icon>visibility</mat-icon>
 						</a>
 					</ng-template>
-				</mat-tab>-->
+				</mat-tab>
+
+				<mat-tab>
+					<ng-template mat-tab-label>
+						<a class="nav-link text-active-primary me-6 fontForInputs"
+							[routerLink]="['/customer/cutomerprofile/updatelog/', employeeDisplay.id ]"
+							routerLinkActive="">
+							طلبات التعديلات
+							<mat-icon>mode_edit</mat-icon>
+						</a>
+					</ng-template>
+				</mat-tab>
 
 			</mat-tab-group>
-
 			<ul class="
                         nav nav-stretch nav-line-tabs nav-line-tabs-2x
                         border-transparent

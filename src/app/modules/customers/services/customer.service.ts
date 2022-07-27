@@ -26,31 +26,38 @@ export class CutomerService {
 		&BlockId=${model.Block == undefined ? '' : model.Block}
 		&branchId=${model.branchId == undefined ? '' : model.branchId}
 		&employeeId=${model.employeeId == undefined ? '' : model.employeeId}`)
-		.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.title }) as LookUpModel)));
+		.pipe(map((Items:HttpReponseModel) => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.title }) as LookUpModel)));
+	}
+
+	getLookupCutomerDataByEmployee(employeeId: number): Observable<LookUpModel[]> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMER_BY_EMPID}${employeeId}`)
+			.pipe(map((Items:HttpReponseModel) => Items.data.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 	getLookupCutomerData(companyId: number): Observable<LookUpModel[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEELOOKUP}?companyId=${companyId}`)
 			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
-	// note
+
 	getCutomerById(customerId: number): Observable<ICustomer> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERBY_ID}${customerId}`).pipe(
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERBY_ID}CustomerId=${customerId}`).pipe(
 			map((data: HttpReponseModel) => data.data as ICustomer)
 		);
 	}
 
-	toggleActive(employeeId: number): Observable<HttpReponseModel> {
-		return this.http.CommonPostRequests(null, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}?EmployeeId=${employeeId}`);
+	getCutomerByCode(code: string): Observable<ICustomer> {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERBY_CODE}CustomerCode=${code}`).pipe(
+			map((data: HttpReponseModel) => data.data as ICustomer)
+		);
 	}
-	//
+
+	toggleActive(customerId: number): Observable<HttpReponseModel> {
+		return this.http.CommonPutRequests(null, `${localStorage.getItem("companyLink")}${HttpPaths.API_CUSTOMER_ISCOMPLETE}${customerId}`);
+	}
 
 	selectFromStore(): Observable<any> {
 		return this.bSubject.asObservable();
 	}
-	/*
-		changeEmployeeImageData(model: any): Observable<any> {
-			return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_EMP_IMAGE}`);
-		}*/
+
 
 }

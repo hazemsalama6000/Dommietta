@@ -7,6 +7,5 @@
 
 .data {
 	max-width: 100%;
-	overflow: scroll;
-	scrollbar-width: none !important;
+	overflow: auto;
 }

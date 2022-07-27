@@ -39,27 +39,27 @@
 			<div class="col-md-2">
 				<ng-select #areaselect class="customized" formControlName="areaId" [items]="dropdownAreaData"
 					bindLabel="Name" bindValue="Id" name="areaId" id="areaId" placeholder="اختر المنطقة"
-					(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();">
+					(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
 				<ng-select #blockselect class="customized" formControlName="blockId" [items]="dropdownBlockData"
 					bindLabel="Name" bindValue="Id" name="blockId" id="blockId" placeholder="اختر المربع"
-					(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();">
+					(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
 				<ng-select #employeeselect class="customized" formControlName="employee_id"
 					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="employee_id" id="employee_id"
-					placeholder="اختر الموظف" (change)="employeeSelectListOnChange($event)">
+					placeholder="اختر الموظف" (change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
-				<ng-select #employeeselect class="customized" formControlName="customerId"
-					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="customerId" id="customerId"
+				<ng-select #customerselect class="customized" formControlName="customerId"
+					[items]="dropdownCustomerData" bindLabel="Name" bindValue="Id" name="customerId" id="customerId"
 					placeholder="اختر العميل" (change)="employeeSelectListOnChange($event)">
 				</ng-select>
 			</div>

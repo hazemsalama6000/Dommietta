@@ -36,7 +36,7 @@ export class CutomersComponent implements OnInit {
 	constructor(
 		private service: CutomerService,
 		private employeeService: EmployeeService,
-		private auth : AuthService,
+		private auth: AuthService,
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
@@ -45,7 +45,7 @@ export class CutomersComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.auth.userData.subscribe((data:IUserData)=>{
+		this.auth.userData.subscribe((data: IUserData) => {
 			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
@@ -84,10 +84,10 @@ export class CutomersComponent implements OnInit {
 		this.searchCustomer();
 	}
 
-	employeeSelectListOnChange(selectedItem: LookUpModel){
-		this.searchCustomer();
+	employeeSelectListOnChange(selectedItem: LookUpModel) {
+		this.searchCustomerByEmployee(selectedItem.Id);
 	}
-	
+
 	searchEmployee() {
 		this.employeeService.getLookupEmployeeDataByParam(this.searchModel)
 			.subscribe(
@@ -106,6 +106,15 @@ export class CutomersComponent implements OnInit {
 			);
 	}
 
+	searchCustomerByEmployee(employeeId: number) {
+		this.service.getLookupCutomerDataByEmployee(employeeId)
+			.subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownCustomerData = data;
+				}
+			);
+	}
+
 	customerSelectListOnChange(selectedItem: LookUpModel) {
 		this.service.getCutomerById(selectedItem.Id)
 			.subscribe(
@@ -114,46 +123,69 @@ export class CutomersComponent implements OnInit {
 					this.service.currentEmployeeSelected = data;
 					console.log(this.employeeDisplay);
 				}
-				, (error:any) => {
+				, (error: any) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				}
 			);
 	}
 
+	getCustomerProfileByCode(code: string) {
+
+		this.service.getCutomerByCode(code)
+			.subscribe(
+				(data: ICustomer) => {
+					this.employeeDisplay = data;
+					this.service.currentEmployeeSelected = data;
+
+					this.dropdownEmployeeData = [];
+					this.dropdownCustomerData = [];
+					this.dropdownAreaData = [];
+					this.dropdownBlockData = [];
+
+					console.log(this.employeeDisplay);
+				}
+				, (error: any) => {
+					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+				}
+			);
+
+	}
+
+
 	editEmployeeTechnicialData(value: ITechnitianLog) {
 
-	/*	this.employeeDisplay.Technician = {
-			employee_Id: 0
-			, id: 0
-			, isActive: false
-			, attachImageEditCustomer: false
-			, attachImageRead: false
-			, canCollect: false
-			, canComplain: false
-			, canEditCustomer: false
-			, canRead: false
-			, maxOfflineWorkingBills: 0
-			, maxOfflineWorkingHours: 0
-		};
-
-		this.employeeDisplay.isTechnician = true;
-		this.employeeDisplay.Technician.employee_Id = value.employee_Id;
-		this.employeeDisplay.Technician.isActive = true;
-		this.employeeDisplay.Technician.attachImageEditCustomer = value.attachImageEditCustomer;
-		this.employeeDisplay.Technician.attachImageRead = value.attachImageRead;
-		this.employeeDisplay.Technician.canCollect = value.attachImageRead;
-		this.employeeDisplay.Technician.canComplain = value.attachImageRead;
-		this.employeeDisplay.Technician.canEditCustomer = value.attachImageRead;
-		this.employeeDisplay.Technician.canRead = value.attachImageRead;
-		this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
-		this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;*/
+		/*	this.employeeDisplay.Technician = {
+				employee_Id: 0
+				, id: 0
+				, isActive: false
+				, attachImageEditCustomer: false
+				, attachImageRead: false
+				, canCollect: false
+				, canComplain: false
+				, canEditCustomer: false
+				, canRead: false
+				, maxOfflineWorkingBills: 0
+				, maxOfflineWorkingHours: 0
+			};
+	
+			this.employeeDisplay.isTechnician = true;
+			this.employeeDisplay.Technician.employee_Id = value.employee_Id;
+			this.employeeDisplay.Technician.isActive = true;
+			this.employeeDisplay.Technician.attachImageEditCustomer = value.attachImageEditCustomer;
+			this.employeeDisplay.Technician.attachImageRead = value.attachImageRead;
+			this.employeeDisplay.Technician.canCollect = value.attachImageRead;
+			this.employeeDisplay.Technician.canComplain = value.attachImageRead;
+			this.employeeDisplay.Technician.canEditCustomer = value.attachImageRead;
+			this.employeeDisplay.Technician.canRead = value.attachImageRead;
+			this.employeeDisplay.Technician.maxOfflineWorkingBills = value.maxOfflineWorkingBills;
+			this.employeeDisplay.Technician.maxOfflineWorkingHours = value.maxOfflineWorkingHours;*/
 	}
-	currentLocation(x:number,y:number){
+	currentLocation(x: number, y: number) {
 
 		const dialogPosition: DialogPosition = {
-			top:'0px',
-			right:'0px'
-		  };
+			top: '0px',
+			right: '0px'
+		};
 
 		const dialogRef = this.dialog.open(UserLocationComponent,
 			{
@@ -163,13 +195,14 @@ export class CutomersComponent implements OnInit {
 				height: '100%',
 
 				//panelClass: 'full-screen-modal',*/
-				position:dialogPosition,
-				data: { x: x,y:y}
+				position: dialogPosition,
+				data: { x: x, y: y }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
-		});	}
+		});
+	}
 	editActiveProp(value: boolean) {
 		this.employeeDisplay.isDataComplete = value;
 	}

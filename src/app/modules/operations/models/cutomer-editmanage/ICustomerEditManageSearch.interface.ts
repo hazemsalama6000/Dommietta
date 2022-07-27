@@ -5,9 +5,9 @@ export interface ICustomerEditManageSearch
 	branchId :number, 
 	areaId :number,
 	blockId:number,
-	customerId:number,
+	CustomerId:number,
 	employee_id:number,
-	updatingStartDate:Date,
-	updatingEndDate:Date,
+	updatingStartDate:string,
+	updatingEndDate:string,
     updatingTypeId:number
 }

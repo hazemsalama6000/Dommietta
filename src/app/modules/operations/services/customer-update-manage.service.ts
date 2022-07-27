@@ -1,30 +1,33 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, of, Subject } from "rxjs";
+import { BehaviorSubject, map, of, Subject } from "rxjs";
+import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
+import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
 import { ICustomerEditManageSearch } from "../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEditResponse.interface";
 
 
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 
 export class customerUpdateManageService {
 
-	searchUpdateUserManageAction:Subject<ICustomerEditResponse[]> = new Subject<ICustomerEditResponse[]>();
+	searchUpdateUserManageAction: Subject<ICustomerEditResponse[]> = new Subject<ICustomerEditResponse[]>();
 
 	searchUpdateUserManageStream$ = this.searchUpdateUserManageAction.asObservable();
 
-	constructor(){
+	constructor(private http: CommonHttpService) { }
 
+
+	searchCustomerUpdate(model: any) {
+		
+		let queryString = Object.keys(model).map((key: string) =>
+		model[key] != null && model[key] != '' && model[key] != undefined ? key + '=' + model[key] : null
+		).filter(x => x != null).join('&');
+
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERDATA}${queryString}`)
+			.pipe(map(Items => Items.data as ICustomerEditResponse[]));
+		
 	}
-	
-   searchCustomerUpdate(model:ICustomerEditManageSearch){
-   return of([
-	{areaName:'area1',blockName:'block1',branchName:'branch1',collectorName:'collector1',customerActivity:'activity1',customerCode:'0154',customerName:'customer1',imagePath:'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',numOfUnits:2,updatedTypeName:'موقع',updatedTypeSysName:'location',x:30.245,y:30.54,requestDate:new Date()} as ICustomerEditResponse,
-	{areaName:'area1',blockName:'block1',branchName:'branch1',collectorName:'collector1',customerActivity:'activity1',customerCode:'0154',customerName:'customer1',imagePath:'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',numOfUnits:2,updatedTypeName:'صورة',updatedTypeSysName:'customerimage',x:30.245,y:30.54,requestDate:new Date()} as ICustomerEditResponse,
-	{areaName:'area1',blockName:'block1',branchName:'branch1',collectorName:'collector1',customerActivity:'activity1',customerCode:'0154',customerName:'customer1',imagePath:'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',numOfUnits:2,updatedTypeName:'الوحدات',updatedTypeSysName:'unitsnumber',x:30.245,y:30.54,requestDate:new Date()} as ICustomerEditResponse,
-	{areaName:'area1',blockName:'block1',branchName:'branch1',collectorName:'collector1',customerActivity:'activity1',customerCode:'0154',customerName:'customer1',imagePath:'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',numOfUnits:2,updatedTypeName:'نشاط',updatedTypeSysName:'activity',x:30.245,y:30.54,requestDate:new Date()} as ICustomerEditResponse,
-])
-   }
 
 
 }

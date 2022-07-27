@@ -58,13 +58,13 @@
     </button>
   </div>-->
 	<div class="mb-10">
-		<label class="form-label fw-bold">تنشيط:</label>
+		<label class="form-label fw-bold">اكتمال البيانات:</label>
 
 		<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
 			<input class="form-check-input" type="checkbox" value="" name="notifications"
-				defaultChecked="{{employeeProfile.isDataComplete}}" [checked]="employeeProfile.isDataComplete" (click)="toggleActive()" />
+				defaultChecked="{{customerProfile.isDataComplete}}" [checked]="customerProfile.isDataComplete" (click)="toggleActive()" />
 
-			<a *ngIf="employeeProfile.isDataComplete == true; else inActive"
+			<a *ngIf="customerProfile.isDataComplete == true; else inActive"
 				class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer" data-bs-toggle="modal"
 				data-bs-target="#kt_modal_upgrade_plan">
 				{{'HR.TITLES.COMPANYACTIVE'|translate}}
@@ -79,45 +79,4 @@
 		</div>
 	</div>
 
-	<div class="mb-10">
-		<label class="form-label fw-bold">فنى:</label>
-
-
-		<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-			<input class="form-check-input" type="checkbox" value="" name="notifications"
-				defaultChecked="{{employeeProfile.isDataComplete}}" [checked]="employeeProfile.isDataComplete" (click)="toggleIsTechnician()"/>
-
-			<a *ngIf="employeeProfile.isDataComplete == true; else inActiveForIsTechnitian"
-				class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer" data-bs-toggle="modal"
-				data-bs-target="#kt_modal_upgrade_plan">
-				{{'HR.TITLES.COMPANYACTIVE'|translate}}
-			</a>
-
-			<ng-template #inActiveForIsTechnitian>
-				<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
-					data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-					{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
-				</a>
-			</ng-template>
-		</div>
-	</div>
-	<!-- 
-  <div class="mb-10">
-    <label class="form-label fw-bold">Notifications:</label>
-
-    <div
-      class="
-        form-check form-switch form-switch-sm form-check-custom form-check-solid
-      "
-    >
-      <input
-        class="form-check-input"
-        type="checkbox"
-        value=""
-        name="notifications"
-        defaultChecked="{true}"
-      />
-      <label class="form-check-label">Enabled</label>
-    </div>
-  </div>-->
 </div>

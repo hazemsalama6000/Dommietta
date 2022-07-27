@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AreaService } from "src/app/core-module/LookupsServices/area.service";
@@ -7,6 +8,7 @@ import { UpdateTypeService } from "src/app/core-module/LookupsServices/updateTyp
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { AuthService } from "src/app/modules/auth";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
+import { CutomerService } from "src/app/modules/customers/services/customer.service";
 import { ISearch } from "src/app/modules/employees/models/ISearch.interface";
 import { EmployeeService } from "src/app/modules/employees/services/employee.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
@@ -19,7 +21,6 @@ import { customerUpdateManageService } from "../../services/customer-update-mana
 	selector: 'customer-update-manage',
 	templateUrl: './customer-update-manage.component.html',
 	styleUrls: ['./customer-update-manage.component.scss'],
-	providers: [customerUpdateManageService]
 })
 
 export class CustomerUpdateManageComponent implements OnInit {
@@ -35,12 +36,13 @@ export class CustomerUpdateManageComponent implements OnInit {
 	constructor(
 		private customerEditManageService: customerUpdateManageService,
 		private service: EmployeeService,
+		private customerService: CutomerService,
 		private blockService: BlockService,
 		private areaService: AreaService,
 		private branchService: BranchService,
 		private updateTypeService: UpdateTypeService,
 		private toaster: toasterService, private fb: FormBuilder,
-		private auth:AuthService) {
+		private auth: AuthService,private datePipe: DatePipe) {
 	}
 
 	ngOnInit(): void {
@@ -51,22 +53,26 @@ export class CustomerUpdateManageComponent implements OnInit {
 			blockId: [],
 			customerId: [],
 			employee_id: [],
-			updatingStartDate: [],
-			updatingEndDate: [],
+			updatingStartDate: [new Date().toISOString()],
+			updatingEndDate: [new Date().toISOString()],
 			updatingTypeId: [],
 		});
-		this.auth.userData.subscribe((data:IUserData)=>{
+
+		this.auth.userData.subscribe((data: IUserData) => {
 			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
+			
 			this.updateTypeService.getLookupUpdateTypeData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownUpdateTypeData = data;
 			});
 		});
-	
+
 	}
 
 	searchCustomerEdits(model: ICustomerEditManageSearch) {
+		model.updatingStartDate = this.datePipe.transform(model.updatingStartDate, 'MM/dd/yyyy')!;
+		model.updatingEndDate = this.datePipe.transform(model.updatingEndDate, 'MM/dd/yyyy')!;
 		console.log(model);
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
 			(data: ICustomerEditResponse[]) => {
@@ -104,7 +110,7 @@ export class CustomerUpdateManageComponent implements OnInit {
 	}
 
 	searchEmployeeAndCustomer() {
-		let search:ISearch={branchId:this.searchModel.branchId,AreaId:this.searchModel.areaId,Block:this.searchModel.blockId};
+		let search: ISearch = { branchId: this.searchModel.branchId, AreaId: this.searchModel.areaId, Block: this.searchModel.blockId };
 		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(
 				(data: LookUpModel[]) => {
@@ -112,18 +118,27 @@ export class CustomerUpdateManageComponent implements OnInit {
 				}
 			);
 
-		/*this.service.getLookupEmployeeDataForCustomerEditMange(this.searchModel)
+		this.customerService.getLookupCustomerDataByParam(this.searchModel)
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownCustomerData = data;
 				}
-			);*/
-
+			);
 	}
 
 	employeeSelectListOnChange(selectedItem: LookUpModel) {
-
+		this.searchCustomerByEmployee(selectedItem.Id);
 	}
+
+	searchCustomerByEmployee(employeeId: number) {
+		this.customerService.getLookupCutomerDataByEmployee(employeeId)
+			.subscribe(
+				(data: LookUpModel[]) => {
+					this.dropdownCustomerData = data;
+				}
+			);
+	}
+
 
 
 }

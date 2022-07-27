@@ -11,13 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { CutomersComponent } from './cutomers.component';
 import { CustomerRoutingModule } from './cutomers-routing.module';
 import { UserLocationComponent } from './user-locations/user-location.component';
+import { ComplainsComponent } from './complains/complains.component';
+import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
+import { UpdateRequestComponent } from './updates-request/updates-request.component';
 
 @NgModule({
   declarations: [
     SettingComponent,
     OverviewComponent,
 	CutomersComponent,
-	UserLocationComponent
+	UserLocationComponent,
+	ComplainsComponent,
+	CustomerReadingComponent,
+	UpdateRequestComponent
   ],
   imports: [
     CommonModule,
