@@ -79,7 +79,7 @@
           <th class="text-center">{{'OPERATION.TITLES.BRANCHNAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.VALUE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.LASTREADING'|translate}} </th>
-          <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.IMAGERERADING'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
@@ -118,10 +118,10 @@
           <td>{{read.value}}</td>
           <td>{{read.lastReading }}</td>
           <td>
-            <p-image
-              [src]="read.readingImagePath!=null&&read.readingImagePath!=''?read.readingImagePath:'assets\\media\\avatars\\300-1.jpg'"
+            <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="read.readingImagePath"
               width="150" height="50" [preview]="true">
             </p-image>
+            <img src="assets\\media\\icons\\images.png" width="60" height="50">
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
