@@ -1,4 +1,12 @@
-<section class="row">
+<div class="row mx-0 mb-5">
+  <mat-card>
+    <div style="width:100%" class="d-flex justify-content-between align-items-center fontsection">
+      <span >{{"OPERATION.TITLES.COMPLAINTS" | translate}}</span>
+    </div>
+  </mat-card>
+</div>
+
+<section class="row m-0">
 
   <div class="col-md-12 overflow-auto mat-elevation-z8">
 
@@ -101,7 +109,7 @@
           <td>{{complain.complaintTypeName}}</td>
           <td>
             <button mat-icon-button color="accent" (click)="openDialog(complain)">
-              <mat-icon style="font-size: 22px;">visibility</mat-icon>
+              <mat-icon style="font-size: 22px;">filter</mat-icon>
             </button>
           </td>
           <td>
@@ -111,7 +119,7 @@
 
           <td>
             <a mat-mini-fab color="primary" (click)="ActiveRevise(complain)" id="search" type="submit" class="mx-10">
-              <mat-icon style="font-size: 25px;">wifi_protected_setup</mat-icon>
+              <mat-icon style="font-size: 25px;">visibility</mat-icon>
             </a>
           </td>
         </tr>

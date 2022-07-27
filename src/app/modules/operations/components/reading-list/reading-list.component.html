@@ -1,4 +1,12 @@
-<section class="row">
+<div class="row mx-0 mb-5">
+  <mat-card>
+    <div style="width:100%" class="d-flex justify-content-between align-items-center fontsection">
+      <span>{{"OPERATION.TITLES.READINGS" | translate}}</span>
+    </div>
+  </mat-card>
+</div>
+
+<section class="row mx-0">
 
   <div class="col-md-12 overflow-auto mat-elevation-z8">
 
@@ -57,7 +65,7 @@
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
               (onSelect)="myfilter('endDate')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
-               [(ngModel)]="endDate">
+              [(ngModel)]="endDate">
             </p-calendar>
           </div>
         </div>
@@ -81,8 +89,8 @@
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
                 id="kt_modal_update_role_option_0" [(ngModel)]="btnIsRevise"
-                (change)="setAllIsPostOrIsRevise('revise')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsRevise"
+                (change)="setAllIsPostOrIsRevise('revise');showBtnIsRevise=false" />
+              <button pButton pRipple type="button" [disabled]="showBtnIsRevise"
                 label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
                 class="p-button-rounded p-button-info p-1" styleClass="p-button-sm"></button>
             </div>
@@ -90,8 +98,9 @@
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
-                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost" (change)="setAllIsPostOrIsRevise('post')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsPost"
+                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost"
+                (change)="setAllIsPostOrIsRevise('post');showBtnIsPost=false" />
+              <button pButton pRipple type="button" [disabled]="showBtnIsPost"
                 label="{{'OPERATION.BUTTONS.POSTED'|translate}}" (click)="postAllDataToChecked()"
                 class="p-button-rounded p-button-success p-1" styleClass="p-button-sm"></button>
             </div>
@@ -108,8 +117,11 @@
           <td>{{read.branchName}}</td>
           <td>{{read.value}}</td>
           <td>{{read.lastReading }}</td>
-          <td><img [src]="read.readingImagePath!=''?read.readingImagePath:'assets\\media\\avatars\\300-1.jpg'"
-              [alt]="read.customerName" width="150" height="50" /></td>
+          <td>
+            <p-image
+              [src]="read.readingImagePath!=null&&read.readingImagePath!=''?read.readingImagePath:'assets\\media\\avatars\\300-1.jpg'"
+              width="150" height="50" [preview]="true">
+            </p-image>
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
@@ -128,7 +140,7 @@
           <td>
             <a mat-mini-fab color="primary" *ngIf="!read.lastPosted" (click)="ActivePostOrRevise(read)" id="search"
               type="submit" class="mx-10">
-              <mat-icon style="font-size: 20px;">edit</mat-icon>
+              <mat-icon style="font-size: 22px;">visibility</mat-icon>
             </a>
             <div *ngIf="read.lastPosted">
               <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-success"

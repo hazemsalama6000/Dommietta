@@ -25,7 +25,10 @@ import { ReadingService } from '../../services/reading.service';
 })
 export class ReadingListComponent implements OnInit {
   btnIsPost: boolean = false;
+  showBtnIsPost: boolean = true;
   btnIsRevise: boolean = false;
+  showBtnIsRevise: boolean = true;
+
   startDate: string;
   endDate: string;
 
@@ -134,10 +137,9 @@ export class ReadingListComponent implements OnInit {
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
         let data: IReadingList[] = res.data ?? [];
-        data.map(x => x.lastPosted == x.isPotsed);
+        data.map(x => x.lastPosted = x.isPotsed);
         this.readingData = data;
         this.totalRecords = res.pageSize ?? 0;
-        console.log(res.data)
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -164,7 +166,6 @@ export class ReadingListComponent implements OnInit {
   postAllDataToChecked() {
     let reading: IUpdateReading[] = [];
     this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPotsed: o.isPotsed }));
-    console.log(reading);
     this.postReviseOrPost(reading);
   }
 
@@ -174,23 +175,34 @@ export class ReadingListComponent implements OnInit {
   }
 
   postReviseOrPost(reading: IUpdateReading[]) {
+    this.confirmationDialogService.confirm('تأكيد المراجعة أو الارسال', `هل تريد تأكيد المراجعة أو الارسال ? `)
+      .then((confirmed) => {
+        if (confirmed) {
 
-    this.readingService.PostIsreviseOrIsPost(reading).subscribe(
-        (data: HttpReponseModel) => {
-          if (data.isSuccess) {
-            data.data?.map((x:any)=>{
+          this.readingService.PostIsreviseOrIsPost(reading).subscribe(
+            (data: HttpReponseModel) => {
+              if (data.isSuccess) {
+                data.data?.map((x: IUpdateReading) => {
+                  let indexRead = this.readingData.findIndex(r => r.id == x.id);
+                  this.readingData[indexRead].isPotsed = x.isPotsed;
+                  this.readingData[indexRead].lastPosted = x.isPotsed;
+                  this.readingData[indexRead].isRevised = x.isRevised;
+                });
+                this.toaster.openSuccessSnackBar(data.message);
+              }
+              else if (data.isExists)
+                this.toaster.openWarningSnackBar(data.message);
+            },
+            (error: any) => {
+              console.log(error);
+              this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+            }
+          )
 
-            });
-            this.toaster.openSuccessSnackBar(data.message);
-          }
-          else if (data.isExists)
-            this.toaster.openWarningSnackBar(data.message);
-        },
-        (error: any) => {
-          console.log(error);
-          this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
         }
-      )
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
   }
 
   exportExcel() {
