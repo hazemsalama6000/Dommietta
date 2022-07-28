@@ -136,14 +136,14 @@
       </ng-template>
 
       <!-- Start Pagenation -->
-      <ng-template pTemplate="footer">
+      <!-- <ng-template pTemplate="footer">
         <tr>
           <td colspan="12">
             <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
-      </ng-template>
+      </ng-template> -->
       <!-- End Pagenation -->
 
       <ng-template pTemplate="emptymessage">
@@ -153,6 +153,10 @@
       </ng-template>
 
     </p-table>
+    <div>
+      <p-paginator  [rows]="10" [totalRecords]="totalRecords"
+      (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
+    </div>
   </div>
 
 </section>
