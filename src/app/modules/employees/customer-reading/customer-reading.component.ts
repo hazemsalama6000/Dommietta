@@ -6,12 +6,13 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { Subscription } from "rxjs";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { IComplainDisplay } from "../models/IComplain.interface";
+import { ComplainService } from "../../operations/services/complain.service";
 import { UserLocationComponent } from "../user-locations/user-location.component";
-import { ReadingService } from "../../operations/services/reading.service";
-import { IReadingSearch } from '../../operations/models/IReadingSearch.interface';
+import { IComplainDisplay } from "../../customers/models/IComplain.interface";
+import { IReadingSearch } from "../../operations/models/IReadingSearch.interface";
 import { IReading, IReadingList } from "../../operations/models/IReading.interface";
-
+import { ReadingService } from "../../operations/services/reading.service";
+import { UserLocationXYComponent } from "../user-locationsxy/user-locationxy.component";
 @Component({
 	selector: 'customer-reading',
 	templateUrl: './customer-reading.component.html',
@@ -24,7 +25,7 @@ export class CustomerReadingComponent {
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
-	displayedColumns: string[] = ['collectorName', 'value', 
+	displayedColumns: string[] = ['customerName', 'value', 
 	'lastReading', 'meterStatus' , 'readingImagePath'
 	 , 'issueName','issueStatus','XY','issueDate','isRevised','isPotsed','notes'];
 
@@ -42,7 +43,7 @@ export class CustomerReadingComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('customerId')!);
+			this.getallData(+data.get('employeeId')!);
 		});
 
 	}
@@ -54,7 +55,7 @@ export class CustomerReadingComponent {
 			right:'0px'
 		  };
 
-		const dialogRef = this.dialog.open(UserLocationComponent,
+		const dialogRef = this.dialog.open(UserLocationXYComponent,
 			{
 				/*maxWidth: '50vw',
 				maxHeight: '100vh',*/
@@ -71,9 +72,7 @@ export class CustomerReadingComponent {
 		});	}
 	// getting data and initialize data Source and Paginator
 	getallData(employeeId: number) {
-
 		let search: IReadingSearch = {Employee_id:employeeId};
-
 		this.service.getReadingsData(search).subscribe(
 			(data: IReading) => {
 				console.log(data);

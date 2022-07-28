@@ -7,7 +7,7 @@ export interface ICustomerEditManageSearch
 	BlockId:number,
 	CustomerId:number,
 	Employee_id:number,
-	StartDate:string,
-	EndDate:string,
-    UpdatingTypeId:number
+	StartDate?:string,
+	EndDate?:string,
+    UpdatingTypeId?:number
 }

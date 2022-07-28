@@ -21,7 +21,7 @@ export class customerUpdateManageService {
 	searchCustomerUpdate(model: any) {
 		
 		let queryString = Object.keys(model).map((key: string) =>
-		model[key] != null && model[key] != '' && model[key] != undefined ? key + '=' + model[key] : null
+		model[key] != null && model[key] != ''&& model[key] != 0 && model[key] != undefined ? key + '=' + model[key] : null
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERDATA}${queryString}`)

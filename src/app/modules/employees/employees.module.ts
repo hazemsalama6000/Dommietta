@@ -17,6 +17,10 @@ import { TechnitianService } from './services/technitian.service';
 import { technicianLogComponent } from './technician-log/technician-log.component';
 import { UserLocationComponent } from './user-locations/user-location.component';
 import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.component';
+import { ComplainsComponent } from './complains/complains.component';
+import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
+import { UserLocationXYComponent } from './user-locationsxy/user-locationxy.component';
+import { UpdateRequestComponent } from './updates-request/updates-request.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.compo
     AddTechnitianLogComponent,
     technicianLogComponent,
     UserLocationComponent,
-	EmployeeBlocksComponent
+	EmployeeBlocksComponent,
+	ComplainsComponent,
+	CustomerReadingComponent,
+	UserLocationXYComponent,
+	UpdateRequestComponent
   ],
   imports: [
     CommonModule,
