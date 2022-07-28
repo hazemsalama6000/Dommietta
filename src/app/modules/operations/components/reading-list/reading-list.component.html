@@ -122,7 +122,8 @@
             <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="read.readingImagePath"
               width="150" height="50" [preview]="true">
             </p-image>
-            <img src="assets\\media\\icons\\images.png" width="60" height="50">
+            <img src="assets\\media\\icons\\images.png"
+              width="60" height="50" *ngIf="read.readingImagePath==null||read.readingImagePath==''">
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
@@ -160,14 +161,14 @@
       </ng-template>
 
       <!-- Start Pagenation -->
-      <ng-template pTemplate="footer">
+      <!-- <ng-template pTemplate="footer">
         <tr>
           <td colspan="15">
             <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
-      </ng-template>
+      </ng-template> -->
       <!-- End Pagenation -->
 
       <ng-template pTemplate="emptymessage">
@@ -177,6 +178,10 @@
       </ng-template>
 
     </p-table>
+    <div>
+        <p-paginator [rows]="10" [totalRecords]="totalRecords"
+          (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
+    </div>
   </div>
 
 </section>
