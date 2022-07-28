@@ -139,10 +139,9 @@ export class ReadingListComponent implements OnInit {
     this.loading = true;
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
-        let data: IReadingList[] = res.data ?? [];
-        data.map(x => x.lastPosted = x.isPotsed);
-        this.readingData = data;
-        this.totalRecords = res.pageSize ?? 0;
+        res.data.map(x => x.lastPosted = x.isPotsed);
+        this.readingData = res.data;
+        this.totalRecords = res.totalRecords;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -227,7 +226,7 @@ export class ReadingListComponent implements OnInit {
         data: { x: x, y: y }
       });
 
-    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {

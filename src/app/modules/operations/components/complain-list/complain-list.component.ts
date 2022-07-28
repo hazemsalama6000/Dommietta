@@ -138,8 +138,8 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
-        this.complainData = res?.data ?? [];
-        this.totalRecords = res?.pageSize ?? 0;
+        this.complainData = res.data;
+        this.totalRecords = res.totalRecords;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -206,7 +206,7 @@ export class ComplainListComponent implements OnInit {
         data: { x: x, y: y }
       });
 
-    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {
