@@ -71,8 +71,8 @@ export class CustomerUpdateManageComponent implements OnInit {
 	}
 
 	searchCustomerEdits(model: ICustomerEditManageSearch) {
-		model.updatingStartDate = this.datePipe.transform(model.updatingStartDate, 'MM/dd/yyyy')!;
-		model.updatingEndDate = this.datePipe.transform(model.updatingEndDate, 'MM/dd/yyyy')!;
+		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
+		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		console.log(model);
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
 			(data: ICustomerEditResponse[]) => {
@@ -88,7 +88,7 @@ export class CustomerUpdateManageComponent implements OnInit {
 					this.dropdownAreaData = data;
 				}
 			);
-		this.searchModel.branchId = selectedItem.Id;
+		this.searchModel.BranchId = selectedItem.Id;
 		this.searchEmployeeAndCustomer();
 	}
 
@@ -99,18 +99,20 @@ export class CustomerUpdateManageComponent implements OnInit {
 					this.dropdownBlockData = data;
 				}
 			);
-		this.searchModel.areaId = selectedItem.Id;
+		this.searchModel.AreaId = selectedItem.Id;
 		this.searchEmployeeAndCustomer();
 	}
 
 
 	blockSelectListOnChange(selectedItem: LookUpModel) {
-		this.searchModel.blockId = selectedItem.Id;
+		this.searchModel.BlockId = selectedItem.Id;
 		this.searchEmployeeAndCustomer();
 	}
 
 	searchEmployeeAndCustomer() {
-		let search: ISearch = { branchId: this.searchModel.branchId, AreaId: this.searchModel.areaId, Block: this.searchModel.blockId };
+		let search: ISearch = { branchId: this.searchModel.BranchId, AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId };
+		let searchCustomer: any = {AreaId:this.searchModel.AreaId ,Block:this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId:this.searchModel.Employee_id}
+		
 		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(
 				(data: LookUpModel[]) => {
@@ -118,9 +120,10 @@ export class CustomerUpdateManageComponent implements OnInit {
 				}
 			);
 
-		this.customerService.getLookupCustomerDataByParam(this.searchModel)
+		this.customerService.getLookupCustomerDataByParam(searchCustomer)
 			.subscribe(
 				(data: LookUpModel[]) => {
+					console.log(data);
 					this.dropdownCustomerData = data;
 				}
 			);

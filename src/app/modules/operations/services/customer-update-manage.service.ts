@@ -25,7 +25,7 @@ export class customerUpdateManageService {
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERDATA}${queryString}`)
-			.pipe(map(Items => Items.data as ICustomerEditResponse[]));
+			.pipe(map(Items => Items.data.data as ICustomerEditResponse[]));
 		
 	}
 

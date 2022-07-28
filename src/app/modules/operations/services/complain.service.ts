@@ -26,7 +26,7 @@ export class ComplainService {
 
 	getComplainsByCustomerId(customerId:number) {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}`)
-		.pipe(map((Items:HttpReponseModel) => Items.data as IComplainDisplay[]));
+		.pipe(map((Items:HttpReponseModel) => Items.data.data as IComplainDisplay[]));
 	}
 
 	getLookupCustomerData(search: any): Observable<LookUpModel[]> {

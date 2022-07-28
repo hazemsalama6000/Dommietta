@@ -1,13 +1,13 @@
 
 export interface ICustomerEditManageSearch
 {
-	customerCode :string
-	branchId :number, 
-	areaId :number,
-	blockId:number,
+	CustomerCode :string,
+	BranchId :number, 
+	AreaId :number,
+	BlockId:number,
 	CustomerId:number,
-	employee_id:number,
-	updatingStartDate:string,
-	updatingEndDate:string,
-    updatingTypeId:number
+	Employee_id:number,
+	StartDate:string,
+	EndDate:string,
+    UpdatingTypeId:number
 }

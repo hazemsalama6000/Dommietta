@@ -57,7 +57,7 @@ export class UpdateRequestComponent {
 	// getting data and initialize data Source and Paginator
 	getallData(customerId: number) {
 
-        let modelSearch : ICustomerEditManageSearch = {CustomerId:customerId,areaId:0,blockId:0,branchId:0,customerCode:'',employee_id:0,updatingEndDate:'',updatingStartDate:'',updatingTypeId:0};
+        let modelSearch : ICustomerEditManageSearch = {CustomerId:customerId,AreaId:0,BlockId:0,BranchId:0,CustomerCode:'',Employee_id:0,EndDate:'',StartDate:'',UpdatingTypeId:0};
 		
 		this.service.searchCustomerUpdate(modelSearch).subscribe(
 			(data: ICustomerEditResponse[]) => {

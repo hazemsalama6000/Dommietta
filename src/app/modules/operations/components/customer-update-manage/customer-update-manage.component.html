@@ -24,42 +24,41 @@
 
 		<div class="row align-items-center mx-5">
 			<div class="col-md-2">
-				<ng-select class="customized" [items]="dropdownUpdateTypeData" formControlName="updatingTypeId"
-					bindLabel="Name" bindValue="Id" name="updatingTypeId" placeholder="اختر نوع التعديل"
-					(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
+				<ng-select class="customized" [items]="dropdownUpdateTypeData" formControlName="UpdatingTypeId"
+					bindLabel="Name" bindValue="Id" name="UpdatingTypeId" placeholder="اختر نوع التعديل">
 				</ng-select>
 			</div>
 			<div class="col-md-2">
-				<ng-select class="customized" [items]="dropdownBranchData" formControlName="branchId" bindLabel="Name"
-					bindValue="Id" name="region_Id" id="branchId" placeholder="اختر الفرع"
+				<ng-select class="customized" [items]="dropdownBranchData" formControlName="BranchId" bindLabel="Name"
+					bindValue="Id" name="region_Id" id="BranchId" placeholder="اختر الفرع"
 					(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
-				<ng-select #areaselect class="customized" formControlName="areaId" [items]="dropdownAreaData"
-					bindLabel="Name" bindValue="Id" name="areaId" id="areaId" placeholder="اختر المنطقة"
+				<ng-select #areaselect class="customized" formControlName="AreaId" [items]="dropdownAreaData"
+					bindLabel="Name" bindValue="Id" name="AreaId" id="AreaId" placeholder="اختر المنطقة"
 					(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
-				<ng-select #blockselect class="customized" formControlName="blockId" [items]="dropdownBlockData"
-					bindLabel="Name" bindValue="Id" name="blockId" id="blockId" placeholder="اختر المربع"
+				<ng-select #blockselect class="customized" formControlName="BlockId" [items]="dropdownBlockData"
+					bindLabel="Name" bindValue="Id" name="BlockId" id="BlockId" placeholder="اختر المربع"
 					(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
-				<ng-select #employeeselect class="customized" formControlName="employee_id"
-					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="employee_id" id="employee_id"
+				<ng-select #employeeselect class="customized" formControlName="Employee_id"
+					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="Employee_id" id="Employee_id"
 					placeholder="اختر الموظف" (change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
 			<div class="col-md-2">
 				<ng-select #customerselect class="customized" formControlName="customerId"
-					[items]="dropdownCustomerData" bindLabel="Name" bindValue="Id" name="customerId" id="customerId"
+					[items]="dropdownCustomerData" bindLabel="Name" bindValue="Id" name="CustomerId" id="CustomerId"
 					placeholder="اختر العميل" (change)="employeeSelectListOnChange($event)">
 				</ng-select>
 			</div>
@@ -72,7 +71,7 @@
 			<div class="col-md-2">
 				<mat-form-field appearance="outline">
 					<mat-label> كود العميل </mat-label>
-					<input matInput placeholder="Placeholder" name="customerCode" formControlName="customerCode">
+					<input matInput placeholder="Placeholder" name="CustomerCode" formControlName="CustomerCode">
 				</mat-form-field>
 			</div>
 
@@ -80,7 +79,7 @@
 
 				<mat-form-field color="accent" appearance="fill">
 					<mat-label>{{'PERMISSIONS.INPUTS.FROMDATE'|translate}}</mat-label>
-					<input matInput [matDatepicker]="picker1" formControlName="updatingStartDate">
+					<input matInput [matDatepicker]="picker1" formControlName="StartDate">
 					<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
 					<mat-datepicker #picker1></mat-datepicker>
 				</mat-form-field>
@@ -90,7 +89,7 @@
 			<div class="col-md-2">
 				<mat-form-field color="accent" appearance="fill">
 					<mat-label>{{'PERMISSIONS.INPUTS.TODATE'|translate}}</mat-label>
-					<input matInput [matDatepicker]="picker2" formControlName="updatingEndDate">
+					<input matInput [matDatepicker]="picker2" formControlName="EndDate">
 					<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
 					<mat-datepicker #picker2></mat-datepicker>
 				</mat-form-field>

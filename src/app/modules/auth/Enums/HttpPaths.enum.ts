@@ -141,5 +141,7 @@ export enum HttpPaths {
 
 	//Customer update
 	API_GET_CUSTOMERDATA="/api/v1/operation/getupdatedcustomers?",
+	API_GET_CUSTOMERUPDATETYPE="/api/v1/operation/listofupdatedcustomertypes",
+
 
 }
