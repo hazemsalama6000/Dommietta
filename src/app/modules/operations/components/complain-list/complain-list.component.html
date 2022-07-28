@@ -27,9 +27,9 @@
           </div>
         </div>
         <p-divider></p-divider>
-        <div class="row mx-0">
+        <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" 
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
               placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
               [(ngModel)]="searchObject.BranchId"></p-dropdown>

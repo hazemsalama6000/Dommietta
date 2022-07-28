@@ -178,6 +178,11 @@ th {
 	align-content: center;
 }
 
+app-complain-list .p-dropdown.p-component,
+app-reading-list .p-dropdown.p-component {
+	max-width: unset !important;
+}
+
 .p-dropdown {
 	width: 100% !important;
 	max-width: 150px;
