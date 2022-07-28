@@ -11,7 +11,7 @@ import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { CutomerService } from 'src/app/modules/customers/services/customer.service';
-import { UserLocationComponent } from 'src/app/modules/customers/user-locations/user-location.component';
+import { UserLocationComponent } from '../customer-update-manage/update-datatable/user-locations/user-location.component';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { ConfirmationDialogService } from 'src/app/shared-module/Components/confirm-dialog/confirmDialog.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
