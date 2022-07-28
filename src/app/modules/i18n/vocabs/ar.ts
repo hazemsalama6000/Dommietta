@@ -30,7 +30,8 @@ export const locale = {
       COMPLAINLIST: "الشكاوى",
       READINGLIST: "القراءات",
       COMPLAINTYPE: "انواع الشكاوى",
-      ISSUES: "الأصدارات"
+      ISSUES: "الأصدارات",
+      RECEIVEDATA:"سحب البيانات"
 
     },
 
@@ -403,7 +404,9 @@ export const locale = {
         READINGS: "القراءات",
         COMPLAINTS:"الشكاوى",
         IMAGERERADING: "صورة القراءة",
-        LOCATION:"الموقع"
+        LOCATION:"الموقع",
+        READINGDATE:"تاريخ القراءة",
+        RECEIVEDATA:"سحب البيانات"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"

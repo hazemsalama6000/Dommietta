@@ -125,7 +125,7 @@ export class ReadingListComponent implements OnInit {
     }
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-
+console.log(this.searchObject)
     columnname != 'branch' ? this.getReadingData() : null;
   }
 
@@ -139,7 +139,8 @@ export class ReadingListComponent implements OnInit {
     this.loading = true;
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
-        res.data.map(x => x.lastPosted = x.isPotsed);
+        let data: IReadingList[] = res.data ?? [];
+        data.map(x => x.lastPosted = x.isPotsed);
         this.readingData = res.data;
         this.totalRecords = res.totalRecords;
       },

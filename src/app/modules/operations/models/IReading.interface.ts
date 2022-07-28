@@ -23,5 +23,6 @@ export interface IReadingList {
     isRevised: boolean;
     isPotsed: boolean;
     lastPosted?:boolean;
-    notes :string
+    notes :string;
+    meterReadingDate:Date;
 } 

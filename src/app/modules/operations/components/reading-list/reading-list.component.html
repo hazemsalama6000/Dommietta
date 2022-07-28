@@ -28,7 +28,7 @@
           </div>
         </div>
         <p-divider></p-divider>
-        <div class="row mx-0">
+        <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
             <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
@@ -83,7 +83,7 @@
           <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
-          <th class="text-center">{{'OPERATION.TITLES.ISSUEDATE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.READINGDATE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
           <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
@@ -127,7 +127,7 @@
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
-          <td>{{read.issueDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{read.meterReadingDate|date:'dd/MM/yyyy'}}</td>
           <td>{{read.notes }}</td>
           <td>
             <button (click)="currentLocation(read.x,read.y)" matTooltip="موقع المستخدم" mat-mini-fab color="primary"
