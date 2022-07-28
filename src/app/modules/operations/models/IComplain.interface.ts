@@ -1,6 +1,6 @@
 export interface IComplain {
-    data?: IComplainList[],
-    pageSize?: number
+    data: IComplainList[],
+    totalRecords: number
 }
 
 export interface IComplainList {

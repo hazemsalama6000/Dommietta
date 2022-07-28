@@ -1,6 +1,6 @@
 export interface IReading {
-    data?: IReadingList[],
-    pageSize?: number
+    data: IReadingList[],
+    totalRecords: number
 } 
 
 export interface IReadingList {
