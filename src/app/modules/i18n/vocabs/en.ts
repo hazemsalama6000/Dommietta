@@ -377,7 +377,7 @@ export const locale = {
         BLOCKNAME: "BlockName",
         VALUE: "Value",
         LASTREADING: "Last Reading",
-        IMAGE: "Image",
+        IMAGE: "Complaint Images",
         METERSTATUS: "Meter Status",
         ISSUENAME: "Issue Name",
         ISSUESTATUS: "Issue Status",
@@ -391,7 +391,9 @@ export const locale = {
         BILLENDNUM: "End S/N",
         ISSUETITLE: "Issues",
         READINGS: "Readings",
-        COMPLAINTS: "Complaints"
+        COMPLAINTS: "Complaints",
+        IMAGERERADING:"Image Reading",
+        LOCATION:"Location"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"

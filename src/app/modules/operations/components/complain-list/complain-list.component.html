@@ -77,11 +77,13 @@
           <th class="text-center">{{'OPERATION.TITLES.BLOCKNAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.COLLECTORNAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.CUSTOMERNAME'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.CUSTOMERCODE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.DATE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.DETAILS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.COMPLAINTYPE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox" [(ngModel)]="btnIsRevise"
@@ -103,6 +105,7 @@
           <td>{{complain.blockName}}</td>
           <td>{{complain.collectorName}}</td>
           <td>{{complain.customerName}}</td>
+          <td>{{complain.customerCode}}</td>
           <td>{{complain.date|date:'dd/MM/yyyy'}}</td>
           <td>{{complain.issueName}}</td>
           <td>{{complain.details }}</td>
@@ -110,6 +113,13 @@
           <td>
             <button mat-icon-button color="accent" (click)="openDialog(complain)">
               <mat-icon style="font-size: 22px;">filter</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button (click)="currentLocation(complain.x,complain.y)" matTooltip="اخر موقع للمستخدم" mat-mini-fab color="primary"
+              class="justify-content-center align-items-center"
+              aria-label="Example icon button with a filter list icon">
+              <mat-icon style="font-size:20px ;"> location_on</mat-icon>
             </button>
           </td>
           <td>

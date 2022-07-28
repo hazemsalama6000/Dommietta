@@ -387,7 +387,7 @@ export const locale = {
         BLOCKNAME: "اسم المربع",
         VALUE: "القراءة",
         LASTREADING: "اخر قراءة",
-        IMAGE: "الصورة",
+        IMAGE: "صور الشكوى",
         METERSTATUS: "حالة العداد",
         ISSUENAME: "اسم الاصدار",
         ISSUESTATUS: "حالة الاصدار",
@@ -401,7 +401,9 @@ export const locale = {
         BILLENDNUM: "نهاية التسلسل",
         ISSUETITLE: "الأصدارات",
         READINGS: "القراءات",
-        COMPLAINTS:"الشكاوى"
+        COMPLAINTS:"الشكاوى",
+        IMAGERERADING: "صورة القراءة",
+        LOCATION:"الموقع"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"

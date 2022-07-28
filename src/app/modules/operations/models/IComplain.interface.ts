@@ -8,6 +8,7 @@ export interface IComplainList {
     date: Date;
     collectorName: string;
     customerName: string;
+    customerCode:string;
     branchName: string;
     areaName: string;
     blockName: string;

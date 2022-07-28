@@ -11,6 +11,7 @@ import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { CutomerService } from 'src/app/modules/customers/services/customer.service';
+import { UserLocationComponent } from 'src/app/modules/customers/user-locations/user-location.component';
 import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { ConfirmationDialogService } from 'src/app/shared-module/Components/confirm-dialog/confirmDialog.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
@@ -58,7 +59,6 @@ export class ComplainListComponent implements OnInit {
     private datePipe: DatePipe,
     public dialog: MatDialog,
     private confirmationDialogService: ConfirmationDialogService,
-
   ) {
 
     this.searchObject = {
@@ -185,6 +185,28 @@ export class ComplainListComponent implements OnInit {
         }
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+  currentLocation(x: number, y: number) {
+
+    const dialogPosition: DialogPosition = {
+      top: '0px',
+      right: '0px'
+    };
+
+    const dialogRef = this.dialog.open(UserLocationComponent,
+      {
+        /*maxWidth: '50vw',
+        maxHeight: '100vh',*/
+        maxHeight: '100vh',
+        height: '100%',
+
+        //panelClass: 'full-screen-modal',*/
+        position: dialogPosition,
+        data: { x: x, y: y }
+      });
+
+    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {

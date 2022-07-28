@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import * as FileSaver from 'file-saver';
 import { Subscription } from 'rxjs';
 import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
@@ -17,6 +18,7 @@ import { IReading, IReadingList } from '../../models/IReading.interface';
 import { IReadingSearch } from '../../models/IReadingSearch.interface';
 import { IUpdateReading } from '../../models/IUpdateReading.interface';
 import { ReadingService } from '../../services/reading.service';
+import { UserLocationComponent } from '../customer-update-manage/update-datatable/user-locations/user-location.component';
 
 @Component({
   selector: 'app-reading-list',
@@ -57,6 +59,7 @@ export class ReadingListComponent implements OnInit {
     private toaster: toasterService,
     private datePipe: DatePipe,
     private confirmationDialogService: ConfirmationDialogService,
+    public dialog: MatDialog
   ) {
 
     this.searchObject = {
@@ -203,6 +206,28 @@ export class ReadingListComponent implements OnInit {
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
 
+  }
+
+  currentLocation(x: number, y: number) {
+
+    const dialogPosition: DialogPosition = {
+      top: '0px',
+      right: '0px'
+    };
+
+    const dialogRef = this.dialog.open(UserLocationComponent,
+      {
+        /*maxWidth: '50vw',
+        maxHeight: '100vh',*/
+        maxHeight: '100vh',
+        height: '100%',
+
+        //panelClass: 'full-screen-modal',*/
+        position: dialogPosition,
+        data: { x: x, y: y }
+      });
+
+    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {

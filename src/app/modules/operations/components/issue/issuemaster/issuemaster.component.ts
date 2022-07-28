@@ -63,6 +63,7 @@ export class IssuemasterComponent {
   }
 
   ngOnDestroy() {
+    this.issueService.IssueMaster.next({ id: 0 });
     this.unsubscribe.forEach((sb) => sb.unsubscribe())
   }
 
