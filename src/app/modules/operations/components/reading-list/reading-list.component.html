@@ -1,8 +1,17 @@
-<section class="row">
+<div class="row mx-0 mb-5">
+  <mat-card>
+    <div style="width:100%" class="d-flex justify-content-between align-items-center fontsection">
+      <span>{{"OPERATION.TITLES.READINGS" | translate}}</span>
+    </div>
+  </mat-card>
+</div>
+
+<section class="row mx-0">
 
   <div class="col-md-12 overflow-auto mat-elevation-z8">
 
     <p-table [value]="readingData" responsiveLayout="scroll" [loading]="loading">
+
 
       <ng-template pTemplate="caption">
         <div class="row mx-0 mb-2  justify-content-end">
@@ -49,12 +58,14 @@
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('startDate',start.value)" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}">
+              (onSelect)="myfilter('startDate')" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}"
+              [(ngModel)]="startDate">
             </p-calendar>
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('endDate',end.value)" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}">
+              (onSelect)="myfilter('endDate')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
+              [(ngModel)]="endDate">
             </p-calendar>
           </div>
         </div>
@@ -68,18 +79,19 @@
           <th class="text-center">{{'OPERATION.TITLES.BRANCHNAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.VALUE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.LASTREADING'|translate}} </th>
-          <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.IMAGERERADING'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUEDATE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
+          <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
                 id="kt_modal_update_role_option_0" [(ngModel)]="btnIsRevise"
-                (change)="setAllIsPostOrIsRevise('revise')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsRevise"
+                (change)="setAllIsPostOrIsRevise('revise');showBtnIsRevise=false" />
+              <button pButton pRipple type="button" [disabled]="showBtnIsRevise"
                 label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
                 class="p-button-rounded p-button-info p-1" styleClass="p-button-sm"></button>
             </div>
@@ -87,8 +99,9 @@
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
-                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost" (change)="setAllIsPostOrIsRevise('post')" />
-              <button pButton pRipple type="button" [disabled]="!btnIsPost"
+                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost"
+                (change)="setAllIsPostOrIsRevise('post');showBtnIsPost=false" />
+              <button pButton pRipple type="button" [disabled]="showBtnIsPost"
                 label="{{'OPERATION.BUTTONS.POSTED'|translate}}" (click)="postAllDataToChecked()"
                 class="p-button-rounded p-button-success p-1" styleClass="p-button-sm"></button>
             </div>
@@ -99,33 +112,44 @@
 
       <ng-template pTemplate="body" let-read>
         <tr>
-          <td>{{read.CollectorName}}</td>
-          <td>{{read.CustomerName}}</td>
-          <td>{{read.CustomerCode}}</td>
-          <td>{{read.BranchName}}</td>
-          <td>{{read.Value}}</td>
-          <td>{{read.LastReading }}</td>
-          <td><img [src]="read.ReadingImagePath!=''?read.ReadingImagePath:'assets\\media\\avatars\\300-1.jpg'"
-              [alt]="read.CustomerName" width="150" height="50" /></td>
-          <td>{{read.MeterStatus}}</td>
-          <td>{{read.IssueName}}</td>
-          <td>{{read.IssueStatus}}</td>
-          <td>{{read.IssueDate|date:'dd/MM/yyyy'}}</td>
-          <td>{{read.Notes }}</td>
+          <td>{{read.collectorName}}</td>
+          <td>{{read.customerName}}</td>
+          <td>{{read.customerCode}}</td>
+          <td>{{read.branchName}}</td>
+          <td>{{read.value}}</td>
+          <td>{{read.lastReading }}</td>
           <td>
-            <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.IsRevised" [(ngModel)]="read.IsRevised" />
+            <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="read.readingImagePath"
+              width="150" height="50" [preview]="true">
+            </p-image>
+            <img src="assets\\media\\icons\\images.png" width="60" height="50">
+          <td>{{read.meterStatus}}</td>
+          <td>{{read.issueName}}</td>
+          <td>{{read.issueStatus}}</td>
+          <td>{{read.issueDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{read.notes }}</td>
+          <td>
+            <button (click)="currentLocation(read.x,read.y)" matTooltip="اخر موقع للمستخدم" mat-mini-fab color="primary"
+              class="justify-content-center align-items-center"
+              aria-label="Example icon button with a filter list icon">
+              <mat-icon style="font-size:20px ;"> location_on</mat-icon>
+            </button>
           </td>
 
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.IsPotsed" [(ngModel)]="read.IsPotsed" />
+              id="kt_modal_update_role_option_0" [checked]="read.isRevised" [(ngModel)]="read.isRevised" />
+          </td>
+
+          <td>
+            <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
+              id="kt_modal_update_role_option_0" [checked]="read.isPotsed" [(ngModel)]="read.isPotsed" />
           </td>
 
           <td>
             <a mat-mini-fab color="primary" *ngIf="!read.lastPosted" (click)="ActivePostOrRevise(read)" id="search"
               type="submit" class="mx-10">
-              <mat-icon style="font-size: 20px;">edit</mat-icon>
+              <mat-icon style="font-size: 22px;">visibility</mat-icon>
             </a>
             <div *ngIf="read.lastPosted">
               <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-success"
@@ -138,8 +162,8 @@
       <!-- Start Pagenation -->
       <ng-template pTemplate="footer">
         <tr>
-          <td colspan="12">
-            <p-paginator dropdownAppendTo="body" [rows]="5" [totalRecords]="totalRecords"
+          <td colspan="15">
+            <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
@@ -148,7 +172,7 @@
 
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="11" class="text-center">{{'OPERATION.MESSAGE.NOROWFOUND'|translate}}</td>
+          <td colspan="15" class="text-center">{{'OPERATION.MESSAGE.NOROWFOUND'|translate}}</td>
         </tr>
       </ng-template>
 

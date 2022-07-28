@@ -17,7 +17,7 @@ export class ComplainTypeService {
 
 	getLookupData(companyId: number): Observable<LookUpModel[]> {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINT_TYPE}`)
-			.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name, isActive: Item.isAttachedImage, isEdit: false, isAdd: false }) as LookUpModel)));
+			.pipe(map(Items => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name, isActive: Item.isAttachedImage, isEdit: false, isAdd: false }) as LookUpModel)));
 	}
 
 	PostLookupData(model: LookUpModel): Observable<any> {

@@ -6,6 +6,7 @@ import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
 import { IReading, IReadingList } from '../models/IReading.interface';
 import { IReadingSearch } from '../models/IReadingSearch.interface';
+import { IUpdateReading } from '../models/IUpdateReading.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +22,10 @@ export class ReadingService {
   ).filter(x => x != null).join('&');
 
   return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_READINGS}${queryString}`)
-    .pipe(map(Items => ({ ...Items.data }) as IReading));
+    .pipe(map(Items => Items.data as IReading));
   }
 
-  getLookupCustomerData(search: any): Observable<LookUpModel[]> {
-    // this.http.CommonPostRequests(search, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
-    // 	.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
-    return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
-  }
-
-  PostIsreviseOrIsPost(reading:IReadingList[]):Observable<HttpReponseModel>{
-      return this.http.CommonPostRequests(reading, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}`); 
+  PostIsreviseOrIsPost(reading:IUpdateReading[]):Observable<HttpReponseModel>{
+      return this.http.CommonPutRequests(reading, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDATE_READINGS}`); 
   }
 }

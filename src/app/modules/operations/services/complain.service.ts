@@ -6,6 +6,7 @@ import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
 import { IComplainDisplay } from '../../customers/models/IComplain.interface';
 import { IComplain, IComplainList } from '../models/IComplain.interface';
+import { IUpdateComplain } from '../models/IUpdateComplain.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,9 +25,9 @@ export class ComplainService {
 			.pipe(map(Items => Items.data as IComplain));
 	}
 
-	getComplainsByCustomerId(customerId:number) {
+	getComplainsByCustomerId(customerId: number) {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}`)
-		.pipe(map((Items:HttpReponseModel) => Items.data.data as IComplainDisplay[]));
+			.pipe(map((Items: HttpReponseModel) => Items.data.data as IComplainDisplay[]));
 	}
 
 	getLookupCustomerData(search: any): Observable<LookUpModel[]> {
@@ -35,8 +36,8 @@ export class ComplainService {
 		return of([{ Id: 1, Name: 'Zomm' } as LookUpModel, { Id: 1, Name: 'Ahmed' } as LookUpModel]);
 	}
 
-	PostIsrevise(complain: IComplainList[]): Observable<HttpReponseModel> {
-		return this.http.CommonPostRequests(complain, `${localStorage.getItem("companyLink")}${HttpPaths.API_TOGGLE_EMPLOYEE_ACTIVE}`);
+	PostIsrevise(complain: IUpdateComplain[]): Observable<HttpReponseModel> {
+		return this.http.CommonPutRequests(complain, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDATE_COMPLAINTS}`);
 	}
 
 }

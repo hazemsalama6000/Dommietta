@@ -265,10 +265,6 @@ export class ListContentComponent {
 		this.dataSource.filter = filterValue.trim().toLowerCase();
 	}
 
-	getDisplayColumns() {
-
-	}
-
 	ngOnDestroy() {
 		this.unsubscribe.forEach((sb) => sb.unsubscribe());
 	}

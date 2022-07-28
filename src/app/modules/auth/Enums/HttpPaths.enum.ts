@@ -128,12 +128,15 @@ export enum HttpPaths {
 	//Complaints
 	API_GET_COMPLAINTS="/api/v1/operation/getcomplaints?",
 	API_GET_COMPLAINTS_BY_CUSTOMERID="/api/v1/operation/getcomplaints?",
+	API_UPDATE_COMPLAINTS="/api/v1/operation/updatecomplaint",
 
 	//Readings
 	API_GET_READINGS="/api/v1/operation/getmeterreadings?",
+	API_UPDATE_READINGS="/api/v1/operation/updatemeterreading",
 
 	//Customer
 	API_GET_LISTOFCUSTOMER="/api/v1/cust/listofcustomer?",
+<<<<<<< HEAD
 	API_GET_CUSTOMERBY_ID="/api/v1/cust/getcustomerdataprofile?",
 	API_GET_CUSTOMERBY_CODE="/api/v1/cust/getcustomerdataprofile?",
 	API_GET_CUSTOMER_BY_EMPID="/api/v1/cust/getcustomerdatabycollector/",
@@ -143,5 +146,11 @@ export enum HttpPaths {
 	API_GET_CUSTOMERDATA="/api/v1/operation/getupdatedcustomers?",
 	API_GET_CUSTOMERUPDATETYPE="/api/v1/operation/listofupdatedcustomertypes",
 
+=======
+
+	//Issue
+	API_GET_ISSUEMASTER="/api/v1/shared/getissues/",
+	API_GET_ISSUEDETAILS="/api/v1/shared/getissuesdetails/",
+>>>>>>> 4012ce010c29a50a21b4569a1c1c4fc5db6fb129
 
 }

@@ -27,9 +27,10 @@ export const locale = {
       USERS: "المستخدمين",
       ROLES: "الأدوار",
       SUPERADMIN: "صلاحيات المدير",
-      COMPLAINLIST:"الشكاوى",
-      READINGLIST:"القراءات",
-      COMPLAINTYPE:"انواع الشكاوى"
+      COMPLAINLIST: "الشكاوى",
+      READINGLIST: "القراءات",
+      COMPLAINTYPE: "انواع الشكاوى",
+      ISSUES: "الأصدارات"
 
     },
 
@@ -76,7 +77,7 @@ export const locale = {
         RESPONSIBLEEMPLOYEE: "اسم المسؤول",
         STATUS: "حالة التفعيل",
         SALESSTATELOGIN: "ايقاف تسجيل الدخول للمناديب",
-        ISUPLOADIMAGE:"رفع الصور"
+        ISUPLOADIMAGE: "رفع الصور"
       },
       BUTTONS: {
         ADD: "اضافة",
@@ -364,38 +365,45 @@ export const locale = {
 
     OPERATION: {
       INPUTS: {
-        BRANCH:"أختر الفرع",
-        AREA:"أختر المنطقة",
-        BLOCK:"أختر المربع",
-        CUSTOMET:"أختر العميل",
-        EMPLOYEE:"أختر المحصل",
-        STARTDATE:"التاريخ من",
-        ENDDATE:"التاريخ إلى",
-        CUSTOMERCODE:"بحث بكود العميل",
+        BRANCH: "أختر الفرع",
+        AREA: "أختر المنطقة",
+        BLOCK: "أختر المربع",
+        CUSTOMET: "أختر العميل",
+        EMPLOYEE: "أختر المحصل",
+        STARTDATE: "التاريخ من",
+        ENDDATE: "التاريخ إلى",
+        CUSTOMERCODE: "بحث بكود العميل",
       },
       BUTTONS: {
-        REVISED:"مراجعة",
-        POSTED:"ارسال"
+        REVISED: "مراجعة",
+        POSTED: "ارسال"
       },
       TITLES: {
         COLLECTORNAME: "اسم المحصل",
         CUSTOMERNAME: "اسم العميل",
         CUSTOMERCODE: "كود العميل",
         BRANCHNAME: "اسم الفرع",
-        AREANAME:"اسم المنطقة",  
-        BLOCKNAME:"اسم المربع",
+        AREANAME: "اسم المنطقة",
+        BLOCKNAME: "اسم المربع",
         VALUE: "القراءة",
         LASTREADING: "اخر قراءة",
-        IMAGE: "الصورة",
+        IMAGE: "صور الشكوى",
         METERSTATUS: "حالة العداد",
         ISSUENAME: "اسم الاصدار",
         ISSUESTATUS: "حالة الاصدار",
         ISSUEDATE: "تاريخ الاصدار",
         NOTES: "ملاحظات",
-        DATE:"التاريخ",
-        DETAILS:"التفاصيل",
-        COMPLAINTYPE:"نوع الشكوى",
-        COMPLAINTYPES:"انواع الشكاوى"
+        DATE: "التاريخ",
+        DETAILS: "التفاصيل",
+        COMPLAINTYPE: "نوع الشكوى",
+        COMPLAINTYPES: "انواع الشكاوى",
+        BILLSTARTNUM: "بدء التسلسل",
+        BILLENDNUM: "نهاية التسلسل",
+        ISSUETITLE: "الأصدارات",
+        READINGS: "القراءات",
+        COMPLAINTS:"الشكاوى",
+        IMAGERERADING: "صورة القراءة",
+        LOCATION:"الموقع"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"
