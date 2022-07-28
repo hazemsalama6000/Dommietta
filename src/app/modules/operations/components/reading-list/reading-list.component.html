@@ -85,6 +85,7 @@
           <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUEDATE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
+          <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
             <div class="d-flex align-items-center">
               <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
@@ -127,6 +128,14 @@
           <td>{{read.issueStatus}}</td>
           <td>{{read.issueDate|date:'dd/MM/yyyy'}}</td>
           <td>{{read.notes }}</td>
+          <td>
+            <button (click)="currentLocation(read.x,read.y)" matTooltip="اخر موقع للمستخدم" mat-mini-fab color="primary"
+              class="justify-content-center align-items-center"
+              aria-label="Example icon button with a filter list icon">
+              <mat-icon style="font-size:20px ;"> location_on</mat-icon>
+            </button>
+          </td>
+
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
               id="kt_modal_update_role_option_0" [checked]="read.isRevised" [(ngModel)]="read.isRevised" />

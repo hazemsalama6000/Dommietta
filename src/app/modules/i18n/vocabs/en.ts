@@ -392,7 +392,8 @@ export const locale = {
         ISSUETITLE: "Issues",
         READINGS: "Readings",
         COMPLAINTS: "Complaints",
-        IMAGERERADING:"Image Reading"
+        IMAGERERADING:"Image Reading",
+        LOCATION:"Location"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"

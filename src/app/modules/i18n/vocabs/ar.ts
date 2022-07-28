@@ -403,6 +403,7 @@ export const locale = {
         READINGS: "القراءات",
         COMPLAINTS:"الشكاوى",
         IMAGERERADING: "صورة القراءة",
+        LOCATION:"الموقع"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"
