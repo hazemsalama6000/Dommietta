@@ -140,7 +140,7 @@ console.log(this.searchObject)
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
         let data: IReadingList[] = res.data ?? [];
-        data.map(x => x.lastPosted = x.isPotsed);
+        data.map(x => x.lastPosted = x.isPosted);
         this.readingData = res.data;
         this.totalRecords = res.totalRecords;
       },
@@ -158,7 +158,7 @@ console.log(this.searchObject)
     } else if (type == 'post') {
       for (let index = 0; index < this.readingData.length; index++) {
         if (!this.readingData[index].lastPosted) {
-          this.readingData[index].isPotsed = this.btnIsPost;
+          this.readingData[index].isPosted = this.btnIsPost;
         }
       }
     }
@@ -168,12 +168,12 @@ console.log(this.searchObject)
 
   postAllDataToChecked() {
     let reading: IUpdateReading[] = [];
-    this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPotsed: o.isPotsed }));
+    this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPotsed: o.isPosted }));
     this.postReviseOrPost(reading);
   }
 
   ActivePostOrRevise(read: IReadingList) {
-    let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPotsed: read.isPotsed }];
+    let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPotsed: read.isPosted }];
     this.postReviseOrPost(reading)
   }
 
@@ -187,7 +187,7 @@ console.log(this.searchObject)
               if (data.isSuccess) {
                 data.data?.map((x: IUpdateReading) => {
                   let indexRead = this.readingData.findIndex(r => r.id == x.id);
-                  this.readingData[indexRead].isPotsed = x.isPotsed;
+                  this.readingData[indexRead].isPosted = x.isPotsed;
                   this.readingData[indexRead].lastPosted = x.isPotsed;
                   this.readingData[indexRead].isRevised = x.isRevised;
                 });
@@ -248,7 +248,7 @@ console.log(this.searchObject)
       'issueStatus',
       'issueDate',
       'isRevised',
-      'isPotsed',
+      'isPosted',
       'lastPosted',
       'notes',
     ];

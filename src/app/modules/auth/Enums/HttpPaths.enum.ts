@@ -150,4 +150,5 @@ export enum HttpPaths {
 	API_GET_ISSUEMASTER="/api/v1/shared/getissues/",
 	API_GET_ISSUEDETAILS="/api/v1/shared/getissuesdetails/",
 
+
 }
