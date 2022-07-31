@@ -8,6 +8,7 @@ import { EmployeeBlocksComponent } from './employee-blocks/employee-blocks.compo
 import { ComplainsComponent } from './complains/complains.component';
 import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
 import { UpdateRequestComponent } from './updates-request/updates-request.component';
+import { UserLocationComponent } from './user-locations/user-location.component';
 
 const routes: Routes = [
 	{ path: 'employeelist', component: Employee_listComponent, pathMatch: 'full' },
@@ -38,6 +39,10 @@ const routes: Routes = [
 			{
 				path: 'updateRequest/:employeeId',
 				component: UpdateRequestComponent
+			},
+			{
+				path: 'userlocation/:employeeId',
+				component: UserLocationComponent
 			},
 
 			{ path: '', redirectTo: 'overview', pathMatch: 'full' },

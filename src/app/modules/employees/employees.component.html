@@ -15,15 +15,19 @@
 		<div class="row align-items-center mx-5">
 			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
-				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();">
+				(change) = "branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();"
+				(clear) = "clearBranches();blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();clearBranches()"
+				>
 			</ng-select>
 			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
-				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();">
+				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();"
+				(clear) = "clearArea();blockselect.handleClearClick();employeeselect.handleClearClick();">
 			</ng-select>
 			<ng-select #blockselect class="customized" style="width:250px ;" [items]="dropdownBlockData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المربع"
-				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();">
+				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();"
+				(clear) ="clearBlocks();employeeselect.handleClearClick();">
 			</ng-select>
 			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
@@ -338,6 +342,17 @@
 							 <span >طلب التعديل</span>
 							<mat-icon>format_list_numbered</mat-icon>
 						</a>
+					</ng-template>
+				</mat-tab>
+
+				<mat-tab style="width:250px !important;">
+					<ng-template mat-tab-label >
+						<a  class="nav-link text-primary me-6 fontForInputs" 
+							[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
+							routerLinkActive="">
+							 <span> الموقع </span>
+							 <mat-icon>location_on</mat-icon>
+							</a>
 					</ng-template>
 				</mat-tab>
 

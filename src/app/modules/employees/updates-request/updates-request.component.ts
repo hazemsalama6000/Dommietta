@@ -23,7 +23,7 @@ export class UpdateRequestComponent {
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
-	displayedColumns: string[] = ['customerName',
+	displayedColumns: string[] = ['customerCode','customerName',
 	'RequestDate',
 	'UpdatedTypeName',
 	'UpdatedTypeSysName'];

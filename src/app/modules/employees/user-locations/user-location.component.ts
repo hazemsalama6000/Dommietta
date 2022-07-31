@@ -250,17 +250,13 @@ export class UserLocationComponent implements OnDestroy {
 		}
 	];
 
+	message = "";
+
 	constructor(private route: ActivatedRoute, private service: OnlineUsersService) {
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.employeeId = +data.get('employeeId')!
+			this.employeeId = +data.get('employeeId')!;
+			console.log(this.employeeId);
 		});
-	}
-
-	ngOnDestroy(): void {
-		this.subscribe.unsubscribe();
-		if (this.idInterval) {
-			clearInterval(this.idInterval);
-		}
 	}
 
 
@@ -279,29 +275,43 @@ export class UserLocationComponent implements OnDestroy {
 			this.idInterval = setInterval(() => {
 
 				this.subscribe = this.service.getOnlineUsersCurrentLocationData(this.employeeId).subscribe((data: ILocationXY[]) => {
+					this.message = "";
 
-					let location = { lat: data[0].x, lng: data[0].y }
-					this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-						center: location,
-						zoom: 10,
-						styles: this.styles
-					});
+					if (data.length < 1) {
+						this.message = "لايوجد بيانات";
+					}
+					else {
+						let location = { lat: data[0].x, lng: data[0].y }
+						this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+							center: location,
+							zoom: 10,
+							styles: this.styles
+						});
 
-					const marker = new google.maps.Marker({
-						position: location,
-						map: this.map,
-						title: data[0].empName + "\n" + data[0].date
-					});
+						const marker = new google.maps.Marker({
+							position: location,
+							map: this.map,
+							title: data[0].empName + "\n" + data[0].date
+						});
+					}
 
 				});
 
-			}, 8000);
+			}, 10000);
 
 		});
 
+	}
 
 
-
+	ngOnDestroy(): void {
+		if (this.subscribe) {
+			console.log('asdasd');
+		this.subscribe.unsubscribe();
+		if (this.idInterval) {
+			clearInterval(this.idInterval);
+		}
+	}
 	}
 
 

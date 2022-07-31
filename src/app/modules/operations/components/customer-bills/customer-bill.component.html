@@ -4,11 +4,11 @@
 		<div class="d-flex align-items-center justify-content-between">
 
 			<div class="d-flex align-items-center">
-				<span class="fontsection"> تعديلات العملاء</span>
+				<span class="fontsection"> فواتير العملاء</span>
 
 				<mat-icon class="text-primary mx-5" style="font-size:30px ;">assignment_ind</mat-icon>
 
-				<mat-form-field class="mx-10 mb-3" style="width:190px; height: 40px;" appearance="outline">
+				<mat-form-field class="mx-10 mb-6" style="width:190px; height: 30px;" appearance="outline">
 					<mat-label>كود العميل</mat-label>
 					<input #codeInput type="text" name="code" matInput>
 					<mat-icon matSuffix color="primary" (click)="getCustomerDataByCode(codeInput.value)" style="cursor: pointer;">search
@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="col-md-2">
-				<ng-select #customerselect class="customized" formControlName="customerId"
+				<ng-select #customerselect class="customized" formControlName="CustomerId"
 					[items]="dropdownCustomerData" bindLabel="Name" bindValue="Id" name="CustomerId" id="CustomerId"
 					placeholder="اختر العميل" (change)="employeeSelectListOnChange($event)">
 				</ng-select>
@@ -111,5 +111,5 @@
 </form>
 
 <div class="mt-5">
-	<customer-update-datatable></customer-update-datatable>
+	<customer-bill-datatable></customer-bill-datatable>
 </div>

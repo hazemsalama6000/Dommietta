@@ -17,24 +17,31 @@
 			<mat-form-field style="width:250px;"  appearance="fill">
 				<mat-label>كود العميل</mat-label>
 				<input #codeInput type="text" name="code" matInput >
-				<mat-icon matSuffix (click)="getCustomerProfileByCode(codeInput.value);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();" style="cursor: pointer;">search</mat-icon>
+				<mat-icon matSuffix (click) = "getCustomerProfileByCode(codeInput.value);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();" style="cursor: pointer;">search</mat-icon>
 			</mat-form-field>
 
 			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
-				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();">
+				(change) = "branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();"
+				(clear) = "clearBranches();blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();customerselect.handleClearClick();"
+				>
 			</ng-select>
+
 			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
 				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
-				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();">
+				(change) = "areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();"
+				(clear) = "clearArea();blockselect.handleClearClick();employeeselect.handleClearClick();">
 			</ng-select>
 			<ng-select #blockselect class="customized" style="width:250px ;" [items]="dropdownBlockData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المربع"
-				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();">
+				(change) = "blockSelectListOnChange($event);employeeselect.handleClearClick();"
+				(clear) = "clearBlocks();employeeselect.handleClearClick();">
 			</ng-select>
+
 			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
-				(change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
+				(change)="employeeSelectListOnChange($event);customerselect.handleClearClick();"
+				(clear)="clearEmployee();customerselect.handleClearClick();">
 			</ng-select>
 
 			<ng-select #customerselect class="customized" style="width:250px ;" [items]="dropdownCustomerData"
@@ -42,7 +49,6 @@
 				(change)="customerSelectListOnChange($event)">
 			</ng-select>
 
-		
 
 		</div>
 

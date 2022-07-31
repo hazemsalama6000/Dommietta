@@ -52,6 +52,24 @@ export class CutomersComponent implements OnInit {
 		});
 	}
 
+	clearBranches(){
+		this.dropdownEmployeeData = [];
+		this.dropdownAreaData = [];
+		this.dropdownBlockData = [];
+		this.dropdownCustomerData=[];
+	}
+	clearArea(){
+		this.dropdownEmployeeData = [];
+		this.dropdownBlockData = [];
+		this.dropdownCustomerData=[];
+	}
+	clearBlocks(){
+		this.dropdownEmployeeData = [];
+		this.dropdownCustomerData=[];
+	}
+	clearEmployee(){
+		this.dropdownCustomerData=[];
+		}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
 		this.areaService.getLookupAreaData(selectedItem.Id)

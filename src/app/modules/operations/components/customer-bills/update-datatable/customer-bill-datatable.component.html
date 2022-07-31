@@ -1,7 +1,7 @@
 <div class="col-md-12">
 
-<!--
-	<div class="col-md-4">
+
+	<!--<div class="col-md-4">
 
 		<mat-form-field appearance="standard">
 			<mat-label> {{"HR.INPUTS.FILTER" | translate}}</mat-label>
@@ -19,7 +19,7 @@
 				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef> الفرع </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<span>
-						{{element.branchName}}
+						{{element.branch}}
 					</span>
 				</td>
 			</ng-container>
@@ -27,14 +27,14 @@
 			<ng-container matColumnDef="AreaName">
 				<th mat-header-cell *matHeaderCellDef> المنطقة </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-					{{element.areaName}}
+					{{element.area}}
 				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="BlockName">
 				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef> المربع </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-					{{element.blockName}}
+					{{element.block}}
 				</td>
 			</ng-container>
 
@@ -67,77 +67,25 @@
 				</td>
 			</ng-container>
 
-			<ng-container matColumnDef="RequestDate">
-				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef> تاريخ الطلب</th>
+			<ng-container matColumnDef="payDate">
+				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef> تاريخ دفع الفاتورة </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<span class="badge badge-info badge-sm">
-						{{element.requestDate | date:'short'}}
+						{{element.payDate | date:'short'}}
 					</span>
 				</td>
 			</ng-container>
 
-			<ng-container matColumnDef="UpdatedTypeName">
-				<th mat-header-cell *matHeaderCellDef> نوع التعديل </th>
+			<ng-container matColumnDef="notes">
+				<th mat-header-cell *matHeaderCellDef> الملاحظات</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 
-					{{element.updatedTypeName}}
+					{{element.notes}}
 
 				</td>
 			</ng-container>
 
 
-			<ng-container matColumnDef="UpdatedTypeSysName">
-				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef>التعديل </th>
-				<td mat-cell class="text-center" *matCellDef="let element">
-
-					<div *ngIf="element.updatedTypeSysName == 'location';">
-						<div class="">
-							<button (click)="currentLocation(element.x,element.y)" matTooltip="اخر موقع للمستخدم"
-								mat-mini-fab color="primary" class="justify-content-center align-items-center"
-								aria-label="Example icon button with a filter list icon">
-								<mat-icon style="font-size:20px ;"> location_on</mat-icon>
-							</button>
-						</div>
-					</div>
-
-					<div *ngIf="element.updatedTypeSysName == 'activity';">
-						<span class="badge badge-sm badge-secondary">
-							{{element.customerActivity}}
-						</span>
-					</div>
-
-					<div *ngIf="element.updatedTypeSysName == 'unitsnumber';">
-						<span class="badge badge-sm badge-secondary">
-							{{element.numOfUnits}}
-						</span>
-					</div>
-
-					<div *ngIf="element.updatedTypeSysName == 'customerimage';">
-
-
-
-						<div class="">
-							<!--	<a style="text-decoration:none;" #down download="custom-filename.jpg"
-								[href]="element.imagePath" class="download-btn" title="ImageName">
-							</a>
-							<button matTooltip="تنزيل الصورة " (click)="down.click()" mat-mini-fab color="accent"
-								class="justify-content-center align-items-center"
-								aria-label="Example icon button with a filter list icon">
-								<mat-icon style="font-size:20px ;"> image</mat-icon>
-							</button>-->
-
-							<button matTooltip="تنزيل الصورة " (click)="openDialogDisplayImages(element.imagePath)"
-								mat-mini-fab color="accent" class="justify-content-center align-items-center"
-								aria-label="Example icon button with a filter list icon">
-								<mat-icon style="font-size:20px ;"> image</mat-icon>
-							</button>
-
-						</div>
-					</div>
-
-
-				</td>
-			</ng-container>
 
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 			<tr mat-row *matRowDef="let row; columns: displayedColumns; let entry" (click)="rowClicked(row)"

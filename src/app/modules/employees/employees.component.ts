@@ -42,6 +42,7 @@ export class EmployeesComponent implements OnInit {
 		private auth: AuthService) {
 	}
 
+
 	ngOnInit(): void {
 		this.getUserDataAndLoadBranchesList();
 	}
@@ -53,6 +54,19 @@ export class EmployeesComponent implements OnInit {
 				this.dropdownBranchData = data;
 			});
 		});
+	}
+
+	clearBranches(){
+		this.dropdownEmployeeData = [];
+		this.dropdownAreaData = [];
+		this.dropdownBlockData = [];
+	}
+	clearArea(){
+		this.dropdownEmployeeData = [];
+		this.dropdownBlockData = [];
+	}
+	clearBlocks(){
+		this.dropdownEmployeeData = [];
 	}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {

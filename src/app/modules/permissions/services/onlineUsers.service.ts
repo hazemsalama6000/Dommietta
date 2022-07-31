@@ -62,7 +62,7 @@ export class OnlineUsersService {
 
 
 	getOnlineUsersCurrentLocationData(userId: number): Observable<ILocationXY[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERES_LASTLOCATION}?empsIds=1005`)
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_ONLINE_USERES_LASTLOCATION}?empsIds=${userId}`)
 			.pipe(map((data: HttpReponseModel) => data.data as ILocationXY[]));
 	}
 
