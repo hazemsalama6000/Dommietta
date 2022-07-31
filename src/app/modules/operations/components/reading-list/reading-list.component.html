@@ -28,7 +28,7 @@
           </div>
         </div>
         <p-divider></p-divider>
-        <div class="row mx-0">
+        <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
             <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
@@ -83,7 +83,7 @@
           <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUESTATUS'|translate}}</th>
-          <th class="text-center">{{'OPERATION.TITLES.ISSUEDATE'|translate}}</th>
+          <th class="text-center">{{'OPERATION.TITLES.READINGDATE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
           <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
@@ -122,14 +122,15 @@
             <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="read.readingImagePath"
               width="150" height="50" [preview]="true">
             </p-image>
-            <img src="assets\\media\\icons\\images.png" width="60" height="50">
+            <img src="assets\\media\\icons\\images.png"
+              width="60" height="50" *ngIf="read.readingImagePath==null||read.readingImagePath==''">
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
-          <td>{{read.issueDate|date:'dd/MM/yyyy'}}</td>
+          <td>{{read.meterReadingDate|date:'dd/MM/yyyy'}}</td>
           <td>{{read.notes }}</td>
           <td>
-            <button (click)="currentLocation(read.x,read.y)" matTooltip="اخر موقع للمستخدم" mat-mini-fab color="primary"
+            <button (click)="currentLocation(read.x,read.y)" matTooltip="موقع المستخدم" mat-mini-fab color="primary"
               class="justify-content-center align-items-center"
               aria-label="Example icon button with a filter list icon">
               <mat-icon style="font-size:20px ;"> location_on</mat-icon>
@@ -160,14 +161,14 @@
       </ng-template>
 
       <!-- Start Pagenation -->
-      <ng-template pTemplate="footer">
+      <!-- <ng-template pTemplate="footer">
         <tr>
           <td colspan="15">
             <p-paginator dropdownAppendTo="body" [rows]="10" [totalRecords]="totalRecords"
               (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
           </td>
         </tr>
-      </ng-template>
+      </ng-template> -->
       <!-- End Pagenation -->
 
       <ng-template pTemplate="emptymessage">
@@ -177,6 +178,10 @@
       </ng-template>
 
     </p-table>
+    <div>
+        <p-paginator [rows]="10" [totalRecords]="totalRecords"
+          (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
+    </div>
   </div>
 
 </section>

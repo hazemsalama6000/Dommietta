@@ -16,6 +16,7 @@ import { IssueComponent } from './components/issue/issue.component';
 import { IssuemasterComponent } from './components/issue/issuemaster/issuemaster.component';
 import { IssuedetailsComponent } from './components/issue/issuedetails/issuedetails.component';
 import { ViewimagesForCustomerComponent } from './components/customer-update-manage/update-datatable/viewimages/viewimages.component';
+import { ReceivedataComponent } from './components/receivedata/receivedata.component';
 
 @NgModule({
 
@@ -29,7 +30,8 @@ import { ViewimagesForCustomerComponent } from './components/customer-update-man
     IssueComponent,
     IssuemasterComponent,
     IssuedetailsComponent,
-	ViewimagesForCustomerComponent
+	ViewimagesForCustomerComponent,
+    ReceivedataComponent
   ],
   imports: [
     CommonModule,

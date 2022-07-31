@@ -105,10 +105,10 @@ export class ComplainListComponent implements OnInit {
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "startDate":
-        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'yyyy-MM-dd') + "T00:00:00" ?? '';
         break;
       case "endDate":
-        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'yyyy-MM-dd') + "T00:00:00" ?? '';
         break;
       case "CustomerCode":
         this.startDate = '';
@@ -138,8 +138,8 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
-        this.complainData = res?.data ?? [];
-        this.totalRecords = res?.pageSize ?? 0;
+        this.complainData = res.data;
+        this.totalRecords = res.totalRecords;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -206,7 +206,7 @@ export class ComplainListComponent implements OnInit {
         data: { x: x, y: y }
       });
 
-    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {

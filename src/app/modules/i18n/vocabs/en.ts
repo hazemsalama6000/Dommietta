@@ -29,7 +29,8 @@ export const locale = {
       COMPLAINLIST: "Complain list",
       READINGLIST: "Reading list",
       COMPLAINTYPE: "Compain Type",
-      ISSUES: "Issues"
+      ISSUES: "Issues",
+      RECEIVEDATA: "Receive Data"
     },
 
     FOOTER: {
@@ -392,8 +393,10 @@ export const locale = {
         ISSUETITLE: "Issues",
         READINGS: "Readings",
         COMPLAINTS: "Complaints",
-        IMAGERERADING:"Image Reading",
-        LOCATION:"Location"
+        IMAGERERADING: "Image Reading",
+        LOCATION: "Location",
+        READINGDATE: "Reading Date",
+        RECEIVEDATA: "Receive Data"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"

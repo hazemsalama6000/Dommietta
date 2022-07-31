@@ -1,6 +1,6 @@
 export interface IReading {
-    data?: IReadingList[],
-    pageSize?: number
+    data: IReadingList[],
+    totalRecords: number
 } 
 
 export interface IReadingList {
@@ -23,5 +23,6 @@ export interface IReadingList {
     isRevised: boolean;
     isPotsed: boolean;
     lastPosted?:boolean;
-    notes :string
+    notes :string;
+    meterReadingDate:Date;
 } 

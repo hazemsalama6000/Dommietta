@@ -125,7 +125,7 @@ export class ReadingListComponent implements OnInit {
     }
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-
+console.log(this.searchObject)
     columnname != 'branch' ? this.getReadingData() : null;
   }
 
@@ -141,8 +141,8 @@ export class ReadingListComponent implements OnInit {
       (res: IReading) => {
         let data: IReadingList[] = res.data ?? [];
         data.map(x => x.lastPosted = x.isPotsed);
-        this.readingData = data;
-        this.totalRecords = res.pageSize ?? 0;
+        this.readingData = res.data;
+        this.totalRecords = res.totalRecords;
       },
       (err: any) => { console.log(err); this.loading = false },
       () => { this.loading = false });
@@ -227,7 +227,7 @@ export class ReadingListComponent implements OnInit {
         data: { x: x, y: y }
       });
 
-    dialogRef.afterClosed().subscribe((result :any)=> { console.log(`Dialog result: ${result}`); });
+    dialogRef.afterClosed().subscribe((result: any) => { console.log(`Dialog result: ${result}`); });
   }
 
   exportExcel() {
