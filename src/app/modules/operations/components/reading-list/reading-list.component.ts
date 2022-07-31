@@ -168,12 +168,12 @@ console.log(this.searchObject)
 
   postAllDataToChecked() {
     let reading: IUpdateReading[] = [];
-    this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPotsed: o.isPosted }));
+    this.readingData.filter(x => !x.lastPosted).map(o => reading.push({ id: o.id, isRevised: o.isRevised, isPosted: o.isPosted }));
     this.postReviseOrPost(reading);
   }
 
   ActivePostOrRevise(read: IReadingList) {
-    let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPotsed: read.isPosted }];
+    let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPosted: read.isPosted }];
     this.postReviseOrPost(reading)
   }
 
@@ -187,8 +187,8 @@ console.log(this.searchObject)
               if (data.isSuccess) {
                 data.data?.map((x: IUpdateReading) => {
                   let indexRead = this.readingData.findIndex(r => r.id == x.id);
-                  this.readingData[indexRead].isPosted = x.isPotsed;
-                  this.readingData[indexRead].lastPosted = x.isPotsed;
+                  this.readingData[indexRead].isPosted = x.isPosted;
+                  this.readingData[indexRead].lastPosted = x.isPosted;
                   this.readingData[indexRead].isRevised = x.isRevised;
                 });
                 this.toaster.openSuccessSnackBar(data.message);

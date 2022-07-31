@@ -90,17 +90,17 @@
 			</ng-container>
 
 
-			<ng-container matColumnDef="isPotsed">
+			<ng-container matColumnDef="isPosted">
 				<th mat-header-cell *matHeaderCellDef> تمت الارسال</th>
 				<td mat-cell *matCellDef="let element; let x=index">
 					<span>
-						<a *ngIf="element.isRevised == true; else inActiveForisPotsed"
+						<a *ngIf="element.isRevised == true; else inActiveForisPosted"
 							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 							نعم
 						</a>
 
-						<ng-template #inActiveForisPotsed>
+						<ng-template #inActiveForisPosted>
 							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								لا
