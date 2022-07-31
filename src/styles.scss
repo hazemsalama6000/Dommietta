@@ -183,6 +183,11 @@ app-reading-list .p-dropdown.p-component {
 	max-width: unset !important;
 }
 
+.p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+	padding-right: 1.75rem;
+	margin-right: unset !important;
+}
+
 .p-dropdown {
 	width: 100% !important;
 	max-width: 150px;
@@ -338,7 +343,7 @@ p-paginator button {
 	}
 }
 
-.stylingHeader{
+.stylingHeader {
 	background-color: #b4b3b3;
 	border-radius: 30px;
 	font-weight: bold;
