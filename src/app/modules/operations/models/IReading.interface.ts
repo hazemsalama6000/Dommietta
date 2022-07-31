@@ -21,7 +21,7 @@ export interface IReadingList {
     issueStatus: string;
     issueDate: Date;
     isRevised: boolean;
-    isPotsed: boolean;
+    isPosted: boolean;
     lastPosted?:boolean;
     notes :string;
     meterReadingDate:Date;
