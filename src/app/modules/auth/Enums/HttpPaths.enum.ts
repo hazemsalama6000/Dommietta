@@ -154,5 +154,11 @@ export enum HttpPaths {
 	API_GET_BILLS = "/api/v1/shared/getpaymentdata?",
 
 
+	//Pull Data
+	API_PULL_GEOGRAPHIC_DATA = "",
+	API_PULL_EMPLOYEE_DATA = "",
+	API_PULL_CUSTOMER_DATA = "",
+	API_PULL_ISSUES_DATA = "",
+
 
 }

@@ -110,7 +110,7 @@
         </tr>
       </ng-template>
 
-      <ng-template pTemplate="body" let-read>
+      <ng-template pTemplate="body" let-read let-rowIndex="rowIndex">
         <tr>
           <td>{{read.collectorName}}</td>
           <td>{{read.customerName}}</td>
@@ -144,7 +144,8 @@
 
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.isPosted" [(ngModel)]="read.isPosted" />
+              id="kt_modal_update_role_option_0" [checked]="read.isPosted" [(ngModel)]="read.isPosted" 
+              (change)="changeIsPost(read,rowIndex)" />
           </td>
 
           <td>
