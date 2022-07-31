@@ -10,23 +10,19 @@ export class ReceivedataService {
 
   constructor(private http: CommonHttpService) { }
 
-  syncBranchData(): Observable<HttpReponseModel> {
+  syncGeographicData(): Observable<HttpReponseModel> {
     return this.http.CommonPostRequests(null, '')
   }
-  
-  syncAreaData(): Observable<HttpReponseModel> {
+
+  syncEmployeeData(): Observable<HttpReponseModel> {
     return this.http.CommonPostRequests(null, '')
-  } 
-  
-  syncBlockData(): Observable<HttpReponseModel> {
-    return this.http.CommonPostRequests(null, '')
-  }  
-  
-  syncIssueData(): Observable<HttpReponseModel> {
-    return this.http.CommonPostRequests(null, '')
-  }  
-  
+  }
+
   syncCustomerData(): Observable<HttpReponseModel> {
+    return this.http.CommonPostRequests(null, '')
+  }
+
+  syncIssueData(): Observable<HttpReponseModel> {
     return this.http.CommonPostRequests(null, '')
   }
 

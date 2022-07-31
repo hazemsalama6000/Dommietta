@@ -54,7 +54,7 @@
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.Employee_id"></p-dropdown>
+              [(ngModel)]="searchObject.Employee_id" [filter]="true" filterBy="name"></p-dropdown>
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"

@@ -71,7 +71,7 @@ export class UpsertComponent {
 		this.UpsertForm = this.fb.group({
 			Id: [''],
 			Name: ['', Validators.compose([Validators.required])],
-			isActive: ['',]
+			isActive: ['']
 		});
 	}
 
@@ -101,7 +101,7 @@ export class UpsertComponent {
 		model.isActive = true;
 		if (model.Id == 0) {
 			model.Id = 0;
-			
+
 			if (this.pageName == 'jobs') {
 				this.jobService.PostLookupData(model).
 					subscribe(

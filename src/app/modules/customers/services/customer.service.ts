@@ -26,7 +26,7 @@ export class CutomerService {
 		&BlockId=${model.Block == undefined ? '' : model.Block}
 		&branchId=${model.branchId == undefined ? '' : model.branchId}
 		&employeeId=${model.employeeId == undefined ? '' : model.employeeId}`)
-		.pipe(map((Items:HttpReponseModel) => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.title }) as LookUpModel)));
+		.pipe(map((Items:HttpReponseModel) => Items.data?.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
 	getLookupCutomerDataByEmployee(employeeId: number): Observable<LookUpModel[]> {

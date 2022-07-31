@@ -20,19 +20,17 @@ import { ComplainTypeService } from "src/app/shared-module/Services/complainType
 })
 
 export class ListContentComponent {
-
+	saveButtonClickedFlag = false;
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
 	displayedColumns: string[] = ['name', 'state', 'action'];
-
 	dataSource: any;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	userdata: IUserData;
-
 	pageName: string = '';
 	private unsubscribe: Subscription[] = [];
 
@@ -63,6 +61,7 @@ export class ListContentComponent {
 			}
 		});
 		this.unsubscribe.push(udata);
+
 	}
 
 	addNewRow() {
@@ -245,7 +244,6 @@ export class ListContentComponent {
 				(data: LookUpModel[]) => {
 					this.dataSource = new MatTableDataSource<LookUpModel>(data);
 					this.dataSource.paginator = this.paginator;
-
 					setTimeout(() => {
 						this.compainTypeService.addFlag.subscribe((data) => {
 							if (data == true) {
