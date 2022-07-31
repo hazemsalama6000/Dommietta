@@ -7,6 +7,6 @@ export interface IReadingSearch {
     Employee_id?: number;
     StartDate?: string;
     EndDate?: string;
-    PageNumber: number;
-    PageSize: number;
+    PageNumber?: number;
+    PageSize?: number;
 }

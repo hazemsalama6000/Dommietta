@@ -11,7 +11,6 @@
 
 		</div>
 
-
 	</div>
 
 </mat-card>
@@ -20,7 +19,14 @@
 
 	<form [formGroup]="customerEditSearchForm" (ngSubmit)="searchCustomerEdits(customerEditSearchForm.value)">
 
-		<div class="row align-items-center mx-5">
+		<div class="row ">
+
+			<mat-form-field style="width:200px;"  appearance="fill">
+				<mat-label>كود العميل</mat-label>
+				<input #codeInput type="text" name="code" matInput >
+				<mat-icon matSuffix (click)="getCustomerDataByCode(codeInput.value)" style="cursor: pointer;">search</mat-icon>
+			</mat-form-field>
+
 			<div class="col-md-2">
 				<ng-select class="customized" [items]="dropdownUpdateTypeData" formControlName="UpdatingTypeId"
 					bindLabel="Name" bindValue="Id" name="UpdatingTypeId" placeholder="اختر نوع التعديل">
@@ -50,7 +56,8 @@
 			<div class="col-md-2">
 				<ng-select #employeeselect class="customized" formControlName="Employee_id"
 					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="Employee_id" id="Employee_id"
-					placeholder="اختر الموظف" (change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
+					placeholder="اختر الموظف"
+					(change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">
 				</ng-select>
 			</div>
 
@@ -62,16 +69,7 @@
 			</div>
 
 
-		</div>
-
-		<div class="row align-items-center mx-5 mt-1">
-
-			<div class="col-md-2">
-				<mat-form-field appearance="outline">
-					<mat-label> كود العميل </mat-label>
-					<input matInput placeholder="Placeholder" name="CustomerCode" formControlName="CustomerCode">
-				</mat-form-field>
-			</div>
+	
 
 			<div class="col-md-2">
 

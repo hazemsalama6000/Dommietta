@@ -47,15 +47,15 @@ export class CustomerUpdateManageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.customerEditSearchForm = this.fb.group({
-			customerCode: [0],
-			branchId: [],
-			areaId: [],
-			blockId: [],
-			customerId: [],
-			employee_id: [],
-			updatingStartDate: [new Date().toISOString()],
-			updatingEndDate: [new Date().toISOString()],
-			updatingTypeId: [],
+			CustomerCode: [0],
+			BranchId: [],
+			AreaId: [],
+			BlockId: [],
+			CustomerId: [],
+			Employee_id: [],
+			UpdatingStartDate: [new Date().toISOString()],
+			UpdatingEndDate: [new Date().toISOString()],
+			UpdatingTypeId: [],
 		});
 
 		this.auth.userData.subscribe((data: IUserData) => {
@@ -74,6 +74,16 @@ export class CustomerUpdateManageComponent implements OnInit {
 		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		console.log(model);
+		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
+			(data: ICustomerEditResponse[]) => {
+				this.customerEditManageService.searchUpdateUserManageAction.next(data);
+			}
+		);
+	}
+
+	getCustomerDataByCode(customerCode:string){
+
+		let model: ICustomerEditManageSearch = {AreaId:0,BlockId:0,BranchId:0,CustomerCode:customerCode,CustomerId:0,Employee_id:0} as ICustomerEditManageSearch;
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
 			(data: ICustomerEditResponse[]) => {
 				this.customerEditManageService.searchUpdateUserManageAction.next(data);
