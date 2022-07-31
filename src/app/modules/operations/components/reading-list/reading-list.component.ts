@@ -125,7 +125,7 @@ export class ReadingListComponent implements OnInit {
     }
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-console.log(this.searchObject)
+
     columnname != 'branch' ? this.getReadingData() : null;
   }
 
@@ -140,7 +140,10 @@ console.log(this.searchObject)
     this.readingService.getReadingsData(this.searchObject).subscribe(
       (res: IReading) => {
         let data: IReadingList[] = res.data ?? [];
-        data.map(x => x.lastPosted = x.isPosted);
+        data.map(x => {
+          x.lastPosted = x.isPosted;
+          x.lastRevised = x.isRevised
+        });
         this.readingData = res.data;
         this.totalRecords = res.totalRecords;
       },
@@ -285,6 +288,13 @@ console.log(this.searchObject)
     FileSaver.saveAs(data, fileName + '_export_' + this.datePipe.transform(new Date(), 'MM/dd/yyyy') + EXCEL_EXTENSION);
   }
   // End Export Functions
+
+  changeIsPost(read: IReadingList, index: number) {
+    if (read.isPosted)
+      this.readingData[index].isRevised = true;
+    else
+      this.readingData[index].isRevised = this.readingData[index].lastRevised ?? false;
+  }
 
   ngOnDestroy(): void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe);
