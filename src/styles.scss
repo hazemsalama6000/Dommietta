@@ -317,10 +317,12 @@ p-paginator button {
 	background-color: #F5F5F5;
 }
 
+.data::-webkit-scrollbar-thumb,
+.ng-dropdown-panel-items::-webkit-scrollbar-thumb,
 .hover-scroll-overlay-y::-webkit-scrollbar-thumb,
 .p-dropdown-items-wrapper::-webkit-scrollbar-thumb,
 .p-datatable-wrapper::-webkit-scrollbar-thumb {
-	border-radius: 10px;
+	border-radius: 20px;
 	background-image: -webkit-gradient(linear,
 			left bottom,
 			left top,
@@ -334,4 +336,10 @@ p-paginator button {
 		margin-inline-end: 21px !important;
 		margin-inline-start: 40px !important;
 	}
+}
+
+.stylingHeader{
+	background-color: #b4b3b3;
+	border-radius: 30px;
+	font-weight: bold;
 }

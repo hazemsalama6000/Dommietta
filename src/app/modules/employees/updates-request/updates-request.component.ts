@@ -2,18 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ou
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
-import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
 import { Subscription } from "rxjs";
-import { AuthService } from "src/app/modules/auth";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { ITechnitianLog } from "../models/ITechnitianLog.interface";
-import { ComplainService } from "../../operations/services/complain.service";
-import { IComplainDisplay } from "../models/IComplain.interface";
 import { UserLocationComponent } from "../user-locations/user-location.component";
 import { ICustomerEditResponse } from "../../operations/models/cutomer-editmanage/ICustomerEditResponse.interface";
 import { customerUpdateManageService } from "../../operations/services/customer-update-manage.service";
@@ -31,7 +23,7 @@ export class UpdateRequestComponent {
 	NameForAdd: string;
 	currentSelected: LookUpModel;
 
-	displayedColumns: string[] = ['CollectorName',
+	displayedColumns: string[] = ['customerName',
 	'RequestDate',
 	'UpdatedTypeName',
 	'UpdatedTypeSysName'];
@@ -50,7 +42,7 @@ export class UpdateRequestComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('customerId')!);
+			this.getallData(+data.get('employeeId')!);
 		});
 
 	}
@@ -76,9 +68,9 @@ export class UpdateRequestComponent {
 					});
 			}
 	// getting data and initialize data Source and Paginator
-	getallData(customerId: number) {
+	getallData(employeeId: number) {
 
-        let modelSearch : ICustomerEditManageSearch = {CustomerId:customerId,AreaId:0,BlockId:0,BranchId:0,CustomerCode:'',Employee_id:0,EndDate:'',StartDate:'',UpdatingTypeId:0};
+        let modelSearch : ICustomerEditManageSearch = {CustomerId:0,AreaId:0,BlockId:0,BranchId:0,CustomerCode:'',Employee_id:employeeId,EndDate:'',StartDate:'',UpdatingTypeId:0};
 		
 		this.service.searchCustomerUpdate(modelSearch).subscribe(
 			(data: ICustomerEditResponse[]) => {

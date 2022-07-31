@@ -13,7 +13,7 @@
 
 			<!-- Name Column -->
 			<ng-container matColumnDef="canCollect">
-				<th mat-header-cell *matHeaderCellDef> تحصيل فواتير </th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> تحصيل فواتير </th>
 				<td mat-cell *matCellDef="let element; let x=index">
 					<span>
 						<a *ngIf="element.canCollect == true; else inActiveForCanCollect"
@@ -51,7 +51,7 @@
 			</ng-container>
 
 			<ng-container matColumnDef="canComplain">
-				<th mat-header-cell *matHeaderCellDef> اضافة بلاغ</th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> اضافة بلاغ</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<a *ngIf="element.canComplain == true; else inActiveForCanComplain"
 						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
@@ -70,7 +70,7 @@
 
 
 			<ng-container matColumnDef="canEditCustomer">
-				<th mat-header-cell *matHeaderCellDef> تعديل بيانات عميل</th>
+				<th  mat-header-cell *matHeaderCellDef> تعديل بيانات عميل</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<a *ngIf="element.canEditCustomer == true; else inActiveForCanEditCustomer"
 						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
@@ -89,7 +89,7 @@
 
 
 			<ng-container matColumnDef="attachImageRead">
-				<th mat-header-cell *matHeaderCellDef> ارفاق صوره قراءه العداد</th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> ارفاق صوره قراءه العداد</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<a *ngIf="element.attachImageRead == true; else inActiveForAttachImageRead"
 						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
@@ -108,7 +108,7 @@
 
 
 			<ng-container matColumnDef="attachImageEditCustomer">
-				<th mat-header-cell *matHeaderCellDef> ارفاق صوره لتعديلات اعملاء </th>
+				<th  mat-header-cell *matHeaderCellDef> ارفاق صوره لتعديلات اعملاء </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					<a *ngIf="element.attachImageEditCustomer == true; else inActiveForAttachImageEditCustomer"
 						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
@@ -127,7 +127,7 @@
 
 
 			<ng-container matColumnDef="maxOfflineWorkingHours">
-				<th mat-header-cell *matHeaderCellDef> الحد الاقصي للعمل بدون شبكة</th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> الحد الاقصي للعمل بدون شبكة</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.maxOfflineWorkingHours}}
 				</td>
@@ -141,13 +141,13 @@
 			</ng-container>
 
 			<ng-container matColumnDef="insertDate">
-				<th mat-header-cell *matHeaderCellDef>من تاريخ</th>
+				<th class="stylingHeader"  mat-header-cell *matHeaderCellDef>من تاريخ</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.insertDate | date:'dd/MM/yy'}}
 				</td>
 			</ng-container>
 			<ng-container matColumnDef="updateDate">
-				<th mat-header-cell *matHeaderCellDef>الى تاريخ</th>
+				<th  mat-header-cell *matHeaderCellDef>الى تاريخ</th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.updateDate | date:'dd/MM/yy'}}
 				</td>

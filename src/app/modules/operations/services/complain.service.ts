@@ -29,7 +29,10 @@ export class ComplainService {
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}`)
 			.pipe(map((Items: HttpReponseModel) => Items.data.data as IComplainDisplay[]));
 	}
-
+	getComplainsByEmployeeId(employeeId: number) {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}Employee_id=${employeeId}`)
+			.pipe(map((Items: HttpReponseModel) => Items.data.data as IComplainDisplay[]));
+	}
 	getLookupCustomerData(search: any): Observable<LookUpModel[]> {
 		// this.http.CommonPostRequests(search, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)
 		// 	.pipe(map(Items => Items.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
