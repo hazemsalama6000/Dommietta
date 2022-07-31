@@ -154,4 +154,5 @@ export enum HttpPaths {
 	API_GET_BILLS = "/api/v1/shared/getpaymentdata?",
 
 
+
 }

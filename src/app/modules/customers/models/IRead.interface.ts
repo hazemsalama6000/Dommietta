@@ -16,7 +16,7 @@ export interface IRead {
     issueStatus: string;
     issueDate: Date;
     isRevised: boolean;
-    isPotsed: boolean;
+    isPosted: boolean;
     iastPosted?:boolean;
     notes :string
 } 

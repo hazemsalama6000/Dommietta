@@ -26,7 +26,7 @@ export class CustomerReadingComponent {
 
 	displayedColumns: string[] = ['collectorName', 'value', 
 	'lastReading', 'meterStatus' , 'readingImagePath'
-	 , 'issueName','issueStatus','XY','issueDate','isRevised','isPotsed','notes'];
+	 , 'issueName','issueStatus','XY','issueDate','isRevised','isPosted','notes'];
 
 	dataSource: any;
 
