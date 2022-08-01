@@ -57,7 +57,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
   ngOnInit(): void { }
 
   fillDropdowns() {
-    this.employeeService.getLookupEmployeeData(this.userData.companyId).subscribe(
+    this.employeeService.getLookupEmployeeDataByParam().subscribe(
       (data: LookUpModel[]) => this.employeeDropdown = data,
       (err) => console.log(err),
       () => { }

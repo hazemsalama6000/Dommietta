@@ -5,6 +5,7 @@ import { AuthService } from '../../auth';
 import { IUserData } from '../../auth/models/IUserData.interface';
 import { ICompany } from '../../hr/models/ICompany';
 import { CompanyService } from '../../hr/services/company.service';
+import { IUsers } from '../models/IRolesProfile.interface';
 import { IUserList } from '../models/IUserLList.interface';
 import { UsersService } from '../services/users.service';
 
@@ -17,7 +18,7 @@ export class PermissionsComponent implements OnInit {
 
   userData: IUserData;
   companyData: ICompany;
-  url: string = '';
+  url:string=localStorage.getItem("companyLink")??""
 
   countUsers: any = { userTotal: 0, countOnlineUser: 0, countOfflineUser: 0 };
 
@@ -47,7 +48,7 @@ export class PermissionsComponent implements OnInit {
 
   getUsersData() {
     this.userService.GetCompanyUsers(this.userData.companyId).subscribe(
-      (res: IUserList[]) => {
+      (res: IUsers[]) => {
         this.countUsers.userTotal = res.length;
         this.countUsers.countOnlineUser = res.filter(x => x.onlineOrNot).length;
         this.countUsers.countOfflineUser = res.filter(x => !x.onlineOrNot).length;

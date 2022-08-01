@@ -119,7 +119,7 @@
           <td>{{read.value}}</td>
           <td>{{read.lastReading }}</td>
           <td>
-            <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="read.readingImagePath"
+            <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="url+read.readingImagePath"
               width="150" height="50" [preview]="true">
             </p-image>
             <img src="assets\\media\\icons\\images.png"

@@ -352,11 +352,39 @@ p-paginator button {
 list_content input {
 	font-family: Arial, Helvetica, sans-serif !important;
 	font-size: 16px !important;
-	font-weight:600 !important ;
+	font-weight: 600 !important;
 }
 
-list_content .mat-table{
+list_content .mat-table {
 	font-family: Arial, Helvetica, sans-serif !important;
 	font-size: 16px !important;
-	font-weight:600 !important ;
+	font-weight: 600 !important;
+}
+
+mat-nested-tree-node[aria-level="1"] {
+	margin-bottom: 10px !important;
+}
+
+mat-nested-tree-node[aria-level="1"]>li>div[class='mat-tree-node'] {
+	background-color: #b4b3b3 !important;
+	color: white !important;
+
+}
+
+mat-nested-tree-node[aria-level="1"]>li>div[class='mat-tree-node'] .mat-checkbox-label {
+	color: white !important;
+	font-weight: bold !important;
+}
+mat-nested-tree-node[aria-level="2"]>li>div[class='mat-tree-node'] .mat-checkbox-label {
+	font-weight: bold !important;
+}
+
+.mat-checkbox-label {
+	font-family: 'cairo';
+}
+
+.p-confirm-popup-footer>button{
+padding: 5px 15px !important;
+margin: 0 !important;
+margin-inline-end: 10px !important;
 }

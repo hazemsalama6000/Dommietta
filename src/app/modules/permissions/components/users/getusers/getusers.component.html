@@ -65,9 +65,10 @@
 
             <thead>
 
-                <tr class="text-end text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                <tr class="text-end text-gray-400 fs-7 text-uppercase gs-0">
                     <th class="min-w-275px">{{'PERMISSIONS.TITLES.USERNAME'|translate}}</th>
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.USERTYPE'|translate}}</th>
+                    <!-- <th class="min-w-70px">{{'PERMISSIONS.TITLES.JOB'|translate}}</th> -->
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.STATUS'|translate}}</th>
                     <th class="min-w-200px">{{'PERMISSIONS.TITLES.LASTLOGINTIME'|translate}}</th>
                     <th class="min-w-300px">{{'PERMISSIONS.TITLES.ASSIGNEDROLES'|translate}}</th>
@@ -93,10 +94,10 @@
                         <div class="d-flex flex-column">
                             <label href="javascript:;" class="text-gray-800 text-hover-primary mb-1">{{user.name}}
                                 <span
-                                    class="badge {{user.isActive?'badge-light-primary':'badge-light-danger'}} fs-9">{{user.isActive?'Active':'Not
-                                    Active'}}</span>
+                                    class="badge {{user.isActive?'badge-light-primary':'badge-light-danger'}} fs-9">
+                                    {{user.isActive?'Active':'NotActive'}}</span>
                             </label>
-                            <span>{{user.email}}</span>
+                            <span>{{user.job}}</span>
                         </div>
 
                     </td>
@@ -106,25 +107,45 @@
                     </td>
 
                     <td>
-                        <div *ngIf="user.onlineOrNot">
+                        <div *ngIf="user.onlineOrNot" class="d-flex align-items-center">
                             <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
                             <label class="badge badge-light-success fs-7 m-1">Online</label>
                         </div>
-                        <div *ngIf="!user.onlineOrNot">
+                        <div *ngIf="!user.onlineOrNot" class="d-flex align-items-center">
                             <span class="badge badge-danger badge-circle w-10px h-10px me-1"></span>
                             <label class="badge badge-light-danger fs-7 m-1">Offline</label>
                         </div>
                     </td>
 
-                    <td style="direction: initial;">{{user?.userLogs?.insertDate|date:'dd/MM/yyyy hh:mm a '}}</td>
+                    <td style="direction: initial; " class="text-center">
+                        <span>{{user?.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm a '}}</span>
+                        <div class="d-flex fs-7 m-1 justify-content-center" *ngIf="user?.userLastLog?.remainingTime">
+                            <div style="direction: rtl;" >
+                                <span>
+                                    {{user?.userLastLog?.remainingTime?.days+('PERMISSIONS.TITLES.DAY'|translate)}}
+                                </span>:
+
+                                <span>
+                                    {{user?.userLastLog?.remainingTime?.hours+('PERMISSIONS.TITLES.HOUR'|translate)}}
+                                </span>:
+
+                                <span>
+                                    {{user?.userLastLog?.remainingTime?.minutes+('PERMISSIONS.TITLES.MINUTE'|translate)}}
+                                </span>
+                            </div>
+                            &nbsp; | &nbsp; <span> {{'PERMISSIONS.TITLES.REMININIG'|translate}} </span>
+
+                        </div>
+                    </td>
 
                     <td>
-                        <a href="../../demo1/dist/apps/user-management/roles/view.html"
+                        <!-- <a href="../../demo1/dist/apps/user-management/roles/view.html"
                             class="badge badge-light-primary fs-7 m-1">Administrator</a>
                         <a href="../../demo1/dist/apps/user-management/roles/view.html"
                             class="badge badge-light-danger fs-7 m-1">Developer</a>
                         <a href="../../demo1/dist/apps/user-management/roles/view.html"
-                            class="badge badge-light-success fs-7 m-1">Analyst</a>
+                            class="badge badge-light-success fs-7 m-1">Analyst</a> -->
+                        <span class="badge badge-light-success fs-7 m-1" *ngFor="let role of user.roles">{{role}}</span>
 
                     </td>
 
@@ -133,7 +154,8 @@
                         <button
                             class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex"
                             data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission"
-                            id="kt_assignrolestouser_toggle" (click)="assignUserIdToRole(user)">
+                            id="kt_assignrolestouser_toggle" (click)="assignUserIdToRole(user)"
+                            matTooltip="{{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}">
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -147,27 +169,26 @@
                             </span>
                         </button>
 
+                        <p-confirmPopup></p-confirmPopup>
+                       
                         <button
                             class="btn btn-icon btn-active-light-primary 4-30px h-40px me-1 align-items-center d-flex"
-                            (click)="resetPassword(user)">
+                            (click)="resetPassword($event,user)"
+                            matTooltip="{{'PERMISSIONS.BUTTONS.RESETPASSWORD'|translate}}">
                             <span class="material-icons">lock_reset</span>
                         </button>
 
-                        <section
+                        <mat-slide-toggle color="red" (click)="toggleActiveDeactive($event,user,i)" [checked]="user.isActive"
                             matTooltip="{{user.isActive === true? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
                             class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex">
-                            <mat-slide-toggle class="example-margin" color="red" (click)="toggleActiveDeactive(user)"
-                                [checked]="user.isActive">
-                            </mat-slide-toggle>
-                        </section>
-
+                        </mat-slide-toggle>
                     </td>
 
                 </tr>
             </tbody>
 
         </table>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
             </div>
             <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -188,7 +209,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

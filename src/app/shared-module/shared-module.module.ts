@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationDialogComponent } from './Components/confirm-dialog/confirmation-dialog.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { PrimengModule } from './PrimengModule';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
 	declarations: [
@@ -36,7 +37,7 @@ import { PrimengModule } from './PrimengModule';
 		ConfirmationDialogComponent
 	],
 	entryComponents: [ConfirmationDialogComponent],
-	providers: [
+	providers: [ ConfirmationService,
 		{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
 	]
 })
