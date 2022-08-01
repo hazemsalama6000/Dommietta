@@ -7,7 +7,7 @@
 
                     <div class="card-header">
                         <div class="card-title">
-                            <h2 class="mb-0">{{roleData?.roleName}}</h2>
+                            <h2 class="mb-0 fontsection fs-2">{{roleData?.roleName}}</h2>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
 
                     <div class="card-header pt-5">
                         <div class="card-title">
-                            <h2 class="d-flex align-items-center">
+                            <h2 class="d-flex align-items-center fontsection fs-2">
                                 {{'PERMISSIONS.TITLES.TABLETITLEROLEPROFILE'|translate}}
                                 <span class="text-gray-600 fs-6 ms-1">({{roleData?.usersCount}})</span>
                             </h2>
@@ -119,7 +119,26 @@
                                             <label class="badge badge-light-danger fs-7 m-1">Offline</label>
                                         </div>
                                     </td>
-                                    <td style="direction: initial;">{{user.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm a '}}</td>
+                                    <td style="direction: initial; " class="text-center">
+                                        <span>{{user?.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm a '}}</span>
+                                        <div class="d-flex fs-7 m-1 justify-content-center" *ngIf="user?.userLastLog?.remainingTime">
+                                            <div style="direction: rtl;" >
+                                                <span>
+                                                    {{user?.userLastLog?.remainingTime?.days+('PERMISSIONS.TITLES.DAY'|translate)}}
+                                                </span>:
+                
+                                                <span>
+                                                    {{user?.userLastLog?.remainingTime?.hours+('PERMISSIONS.TITLES.HOUR'|translate)}}
+                                                </span>:
+                
+                                                <span>
+                                                    {{user?.userLastLog?.remainingTime?.minutes+('PERMISSIONS.TITLES.MINUTE'|translate)}}
+                                                </span>
+                                            </div>
+                                            &nbsp; | &nbsp; <span> {{'PERMISSIONS.TITLES.REMININIG'|translate}} </span>
+                
+                                        </div>
+                                    </td>
 
                                 </tr>
                             </tbody>

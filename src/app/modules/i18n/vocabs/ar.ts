@@ -31,7 +31,7 @@ export const locale = {
       READINGLIST: "القراءات",
       COMPLAINTYPE: "انواع الشكاوى",
       ISSUES: "الأصدارات",
-      RECEIVEDATA:"سحب البيانات"
+      RECEIVEDATA: "سحب البيانات"
 
     },
 
@@ -274,7 +274,9 @@ export const locale = {
         ALLUSERS: "كل المستخدمين",
         ADDROLE: "اضافة صلاحية",
         ADDUSER: "اضافة مستخدم",
-        EDITROLE: "تعديل الصلاحية"
+        EDITROLE: "تعديل الصلاحية",
+        VIEW: "عرض التفاصيل",
+        RESETPASSWORD: "استعادة كلمة المرور"
 
       },
       TITLES: {
@@ -285,7 +287,8 @@ export const locale = {
         BRANCHNAME: "اسم الفرع",
         USERNAME: "اسم المستخدم",
         LOGINTIME: "وقت الدخول",
-        REMININIGTIME: "الوقت المتبقي",
+        REMININIGTIME: " الوقت المتبقي",
+        REMININIG: "المتبقي",
         DAY: "ي",
         HOUR: "س",
         MINUTE: "د",
@@ -295,14 +298,14 @@ export const locale = {
         OFFLINEUSERS: "المستخدمين الغير متصلين",
         ADDNEWUSER: "اضافة مستخدم جديد",
         EMPLOYEE: "الموظف",
-        FULLNAME: "الاسم بالكامل",
+        FULLNAME: "اسم المستخدم",
         PHONENUMBER: "رقم الهاتف",
         EMAIL: "البريد الالكترونى",
         PASSWORD: "كلمة المرور",
         USERTYPE: "نوع المستخدم",
         ROLES: "الأدوار",
         ASSIGNROLESTOUSER: "اضافة صلاحيات إلى مستخدم",
-        SEARCHUSER: "يمكنك البحث بالاسم أو بالتليفون",
+        SEARCHUSER: "يمكنك البحث بالاسم ",
         STATUS: "الحالة",
         LASTLOGINTIME: "أخر تسجيل دخول",
         ASSIGNEDROLES: "صلاحيات المستخدم",
@@ -317,7 +320,9 @@ export const locale = {
         ADDNEWROLE: "اضافة دور جديد",
         ROLEPERMISSION: "صلاحيات الدور",
         ROLENAME: "أسم الدور",
-        UPDATEROLE: "تعديل الدور"
+        UPDATEROLE: "تعديل الدور",
+        JOB: "الوظيفة",
+        USERONLINE: ""
 
       },
       MESSAGE: {
@@ -402,16 +407,16 @@ export const locale = {
         BILLENDNUM: "نهاية التسلسل",
         ISSUETITLE: "الأصدارات",
         READINGS: "القراءات",
-        COMPLAINTS:"الشكاوى",
+        COMPLAINTS: "الشكاوى",
         IMAGERERADING: "صورة القراءة",
-        LOCATION:"الموقع",
-        READINGDATE:"تاريخ القراءة",
-        RECEIVEDATA:"سحب البيانات",
-        GEOGRAPHICDATA:" البيانات الجغرافية",
-        COLLECTORDATA:"بيانات المحصلين",
-        CUSTOMERDATA:"بيانات العملاء",
-        ISSUEDATA:" بيانات الاصدارات",
-        PULLDATA:"سحب البيانات"
+        LOCATION: "الموقع",
+        READINGDATE: "تاريخ القراءة",
+        RECEIVEDATA: "سحب البيانات",
+        GEOGRAPHICDATA: " البيانات الجغرافية",
+        COLLECTORDATA: "بيانات المحصلين",
+        CUSTOMERDATA: "بيانات العملاء",
+        ISSUEDATA: " بيانات الاصدارات",
+        PULLDATA: "سحب البيانات"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"

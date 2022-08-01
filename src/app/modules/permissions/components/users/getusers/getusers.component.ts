@@ -1,10 +1,12 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
+import { IUsers } from '../../../models/IRolesProfile.interface';
 import { IUserList } from '../../../models/IUserLList.interface';
 import { UsersService } from '../../../services/users.service';
 
@@ -14,17 +16,21 @@ import { UsersService } from '../../../services/users.service';
   styleUrls: ['./getusers.component.scss']
 })
 export class GetusersComponent implements OnInit, OnDestroy {
-  usersList: IUserList[];
+  usersList: IUsers[];
   userData: IUserData;
   private unsubscribe: Subscription[] = [];
 
-  url: string = '';
+  url:string=localStorage.getItem("companyLink")??""
+
 
   constructor(
     private userservice: UsersService,
     private authservice: AuthService,
     private toaster: toasterService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private confirmationService: ConfirmationService,
+
+  ) {
     let getdata = this.authservice.userData.subscribe(
       res => {
         this.userData = res;
@@ -40,7 +46,7 @@ export class GetusersComponent implements OnInit, OnDestroy {
 
   getUserData(search: string = '') {
     this.userservice.GetCompanyUsers(this.userData.companyId, search).subscribe(
-      (res: IUserList[]) => { this.usersList = res; console.log(res) },
+      (res: IUsers[]) => { this.usersList = res; console.log(res) },
       (err) => console.log(err),
       () => { }
     )
@@ -50,14 +56,27 @@ export class GetusersComponent implements OnInit, OnDestroy {
     this.getUserData(`?UserName=${search}`);
   }
 
-  resetPassword(user: IUserList) {
-    this.userservice.resetPassword(user.id).subscribe(
-      (data: HttpReponseModel) => { this.toaster.openSuccessSnackBar(data.message); },
-      (error: any) => { this.toaster.openWarningSnackBar(error.toString().replace("Error:", "")); }
-    );
+  resetPassword(event: Event, user: IUsers) {
+    this.confirmationService.confirm({
+      target: event.target || undefined,
+      defaultFocus: 'none',
+      acceptLabel: 'موافق',
+      rejectLabel: 'ألغاء',
+      message: 'هل تريد استعادة كلمة المرور؟',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.userservice.resetPassword(user.id).subscribe(
+          (data: HttpReponseModel) => { this.toaster.openSuccessSnackBar(data.message); },
+          (error: any) => { this.toaster.openWarningSnackBar(error.toString().replace("Error:", "")); }
+        );
+      },
+      reject: () => { console.log('rejected') }
+    });
+
   }
 
-  toggleActiveDeactive(user: IUserList) {
+  toggleActiveDeactive(event: Event, user: IUsers, index: number) {
+
     this.userservice.activeOrNot(user.id).subscribe(
       (data: HttpReponseModel) => {
         this.toaster.openSuccessSnackBar(data.message);
@@ -68,7 +87,7 @@ export class GetusersComponent implements OnInit, OnDestroy {
       });
   }
 
-  assignUserIdToRole(user: IUserList) {
+  assignUserIdToRole(user: IUsers) {
     this.userservice.userid.next(user.id);
   }
 
