@@ -4,13 +4,14 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
-import { Subscription } from "rxjs";
+import { map, merge, Subscription, switchMap } from "rxjs";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { IComplainDisplay } from "../models/IComplain.interface";
 import { UserLocationComponent } from "../user-locations/user-location.component";
 import { ReadingService } from "../../operations/services/reading.service";
 import { IReadingSearch } from '../../operations/models/IReadingSearch.interface';
 import { IReading, IReadingList } from "../../operations/models/IReading.interface";
+import { MatSort } from "@angular/material/sort";
 
 @Component({
 	selector: 'customer-reading',
@@ -22,7 +23,13 @@ export class CustomerReadingComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
-	currentSelected: LookUpModel;
+	currentSelected: LookUpModel;resultsLength = 0;
+	isLoadingResults = true;
+	isRateLimitReached = false;
+
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+
 
 	displayedColumns: string[] = ['collectorName', 'value', 
 	'lastReading', 'meterStatus' , 'readingImagePath'
@@ -30,10 +37,10 @@ export class CustomerReadingComponent {
 
 	dataSource: any;
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	userdata: IUserData;
 	private unsubscribe: Subscription[] = [];
+	customerId: number;
 
 	constructor(
 		private service: ReadingService,
@@ -42,11 +49,33 @@ export class CustomerReadingComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('customerId')!);
+			this.customerId = +data.get('customerId')!;
 		});
 
 	}
+	ngAfterViewInit() {
 
+		merge(this.paginator.page, this.service.searchUpdate$)
+			.pipe(
+				switchMap(() => {
+					let search: IReadingSearch = {CustomerId:this.customerId,PageNumber:this.paginator.pageIndex + 1 };
+					this.isLoadingResults = true;
+					return this.service.getReadingsData(search);
+				}),
+				map((data: IReading) => {
+					this.isLoadingResults = false;
+					this.isRateLimitReached = data === null;
+					if (data === null) {
+						return [];
+					}
+					this.resultsLength = data.totalRecords;
+					return data.data;
+				}),
+			)
+			.subscribe((data) => { this.dataSource = data;});
+
+			this.service.searchUpdateAction.next(true);
+	}
 	currentLocation(x:number,y:number){
 
 		const dialogPosition: DialogPosition = {

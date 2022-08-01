@@ -12,8 +12,7 @@ import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEdi
 
 export class customerUpdateManageService {
 
-	searchUpdateUserManageAction: Subject<ItemsWithPages> = new Subject<ItemsWithPages>();
-
+	searchUpdateUserManageAction: Subject<boolean> = new Subject<boolean>();
 	searchUpdateUserManageStream$ = this.searchUpdateUserManageAction.asObservable();
 
 	searchParameterAction: Subject<ICustomerEditManageSearch> = new Subject<ICustomerEditManageSearch>();

@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AreaService } from "src/app/core-module/LookupsServices/area.service";
 import { BlockService } from "src/app/core-module/LookupsServices/block.service";
@@ -17,6 +17,7 @@ import { ICustomerEditManageSearch } from "../../models/cutomer-editmanage/ICust
 import { ICustomerEditResponse } from "../../models/cutomer-editmanage/ICustomerEditResponse.interface";
 import { CustomerBillsService } from "../../services/customer-bills.service";
 import { customerUpdateManageService } from "../../services/customer-update-manage.service";
+import { ItemsWithPagesCustomeBills } from "./update-datatable/customer-bill-datatable.component";
 
 
 @Component({
@@ -25,7 +26,7 @@ import { customerUpdateManageService } from "../../services/customer-update-mana
 	styleUrls: ['./customer-bill.component.scss'],
 })
 
-export class BillComponent implements OnInit {
+export class BillComponent implements OnInit , AfterViewInit {
 	dropdownEmployeeData: LookUpModel[] = [];
 	dropdownCustomerData: LookUpModel[] = [];
 	dropdownBranchData: LookUpModel[] = [];
@@ -44,10 +45,14 @@ export class BillComponent implements OnInit {
 		private branchService: BranchService,
 		private updateTypeService: UpdateTypeService,
 		private toaster: toasterService, private fb: FormBuilder,
-		private auth: AuthService,private datePipe: DatePipe) {
+		private auth: AuthService, private datePipe: DatePipe) {
+	}
+	ngAfterViewInit(): void {
+		this.getCustomerDataByCode('');
 	}
 
 	ngOnInit(): void {
+
 		this.customerEditSearchForm = this.fb.group({
 			CustomerCode: [0],
 			BranchId: [],
@@ -64,7 +69,7 @@ export class BillComponent implements OnInit {
 			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
-			
+
 			this.updateTypeService.getLookupUpdateTypeData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownUpdateTypeData = data;
 			});
@@ -76,21 +81,19 @@ export class BillComponent implements OnInit {
 		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		console.log(model);
-		this.customerEditManageService.searchCustomerBills(model).subscribe(
-			(data: ICustomerBIllsReponse[]) => {
-				this.customerEditManageService.searchUpdateUserManageAction.next(data);
-			}
-		);
+
+		this.customerEditManageService.searchParameterAction.next(model);
+		this.customerEditManageService.searchUpdateUserManageAction.next(true);
+
 	}
 
-	getCustomerDataByCode(customerCode:string){
+	getCustomerDataByCode(customerCode: string) {
 
-		let model: ICustomerEditManageSearch = {AreaId:0,BlockId:0,BranchId:0,CustomerCode:customerCode,CustomerId:0,Employee_id:0} as ICustomerEditManageSearch;
-		this.customerEditManageService.searchCustomerBills(model).subscribe(
-			(data: ICustomerBIllsReponse[]) => {
-				this.customerEditManageService.searchUpdateUserManageAction.next(data);
-			}
-		);
+		let model: ICustomerEditManageSearch = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: customerCode, CustomerId: 0, Employee_id: 0 } as ICustomerEditManageSearch;
+
+		this.customerEditManageService.searchParameterAction.next(model);
+		this.customerEditManageService.searchUpdateUserManageAction.next(true);
+
 	}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
@@ -123,8 +126,8 @@ export class BillComponent implements OnInit {
 
 	searchEmployeeAndCustomer() {
 		let search: ISearch = { branchId: this.searchModel.BranchId, AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId };
-		let searchCustomer: any = {AreaId:this.searchModel.AreaId ,Block:this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId:this.searchModel.Employee_id}
-		
+		let searchCustomer: any = { AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId: this.searchModel.Employee_id }
+
 		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(
 				(data: LookUpModel[]) => {

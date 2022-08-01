@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, Subject } from 'rxjs';
 import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
@@ -13,9 +13,10 @@ import { IUpdateComplain } from '../models/IUpdateComplain.interface';
 })
 export class ComplainService {
 
+	searchUpdateAction: Subject<boolean> = new Subject<boolean>();
+	searchUpdate$ = this.searchUpdateAction.asObservable();
+
 	constructor(private http: CommonHttpService) { }
-
-
 	getComplainsData(searchModel: any): Observable<IComplain> {
 		let queryString = Object.keys(searchModel).map((key: string) =>
 			searchModel[key] != null && searchModel[key] != '' && searchModel[key] != undefined ? key + '=' + searchModel[key] : null
@@ -25,13 +26,13 @@ export class ComplainService {
 			.pipe(map(Items => Items.data as IComplain));
 	}
 
-	getComplainsByCustomerId(customerId: number) {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}`)
-			.pipe(map((Items: HttpReponseModel) => Items.data.data as IComplainDisplay[]));
+	getComplainsByCustomerId(customerId: number , pageNumber:number) {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}&PageNumber=${pageNumber}`)
+			.pipe(map((Items: HttpReponseModel) => Items.data as IComplain));
 	}
-	getComplainsByEmployeeId(employeeId: number) {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}Employee_id=${employeeId}`)
-			.pipe(map((Items: HttpReponseModel) => Items.data.data as IComplainDisplay[]));
+	getComplainsByEmployeeId(employeeId: number , pageNumber:number) {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}Employee_id=${employeeId}&PageNumber=${pageNumber}`)
+			.pipe(map((Items: HttpReponseModel) => Items.data as IComplain));
 	}
 	getLookupCustomerData(search: any): Observable<LookUpModel[]> {
 		// this.http.CommonPostRequests(search, `${localStorage.getItem("companyLink")}${HttpPaths.API_GET_EMPLOYEES_DATA}`)

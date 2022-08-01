@@ -1,15 +1,14 @@
-<div class="col-md-4">
-	<mat-form-field appearance="standard">
-		<mat-label> {{"HR.INPUTS.FILTER" | translate}}</mat-label>
-		<input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-	</mat-form-field>
-</div>
-<div class="data">
-
-	<div class="col-md-12">
-
-
-		<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="example-container mat-elevation-z8">
+	<div class="example-loading-shade"
+		 *ngIf="isLoadingResults || isRateLimitReached">
+	  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+	  <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+		GitHub's API rate limit has been reached. It will be reset in one minute.
+	  </div>
+	</div>
+  
+	<div class="example-table-container">
+				<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 			<ng-container matColumnDef="customerName">
 				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> العميل</th>
@@ -145,14 +144,11 @@
 
 			<!-- Row shown when there is no matching data. -->
 			<tr class="mat-row" *matNoDataRow>
-				<td class="mat-cell" colspan="4"> {{'SHARE.MESSAGE.NOROWFOUND'|translate}} "{{input.value}}"</td>
+				<td class="mat-cell" colspan="4"> {{'SHARE.MESSAGE.NOROWFOUND'|translate}}</td>
 			</tr>
 		</table>
 
-		<mat-paginator class="mt-5" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-			aria-label="Select page of periodic elements">
-		</mat-paginator>
-
-
 	</div>
-</div>
+  
+	<mat-paginator [length]="resultsLength" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>
+  </div>

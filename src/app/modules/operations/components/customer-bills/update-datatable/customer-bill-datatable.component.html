@@ -1,4 +1,15 @@
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<div class="example-container mat-elevation-z8">
+	<div class="example-loading-shade"
+		 *ngIf="isLoadingResults || isRateLimitReached">
+	  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+	  <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+		GitHub's API rate limit has been reached. It will be reset in one minute.
+	  </div>
+	</div>
+  
+	<div class="example-table-container">
+
+<table mat-table [dataSource]="data" multiTemplateDataRows class="mat-elevation-z8">
 	<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
 		<th style="background-color:rgb(207, 209, 209) ;" [ngSwitch]="column" mat-header-cell *matHeaderCellDef>
 			<span *ngSwitchCase="'payDate'"> تاريخ الدفع </span>
@@ -87,3 +98,8 @@
 	</tr>
 	<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+
+</div>
+  
+<mat-paginator [length]="resultsLength" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>
+</div>

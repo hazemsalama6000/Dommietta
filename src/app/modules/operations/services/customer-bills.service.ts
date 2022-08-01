@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, of, Subject } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
+import { ItemsWithPagesCustomeBills } from "../components/customer-bills/update-datatable/customer-bill-datatable.component";
 import { ICustomerBIllsReponse } from "../models/bills/ICustomerBillsReponse.interface";
 import { ICustomerEditManageSearch } from "../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEditResponse.interface";
@@ -12,9 +13,11 @@ import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEdi
 
 export class CustomerBillsService {
 
-	searchUpdateUserManageAction: Subject<ICustomerBIllsReponse[]> = new Subject<ICustomerBIllsReponse[]>();
-
+	searchUpdateUserManageAction: Subject<boolean> = new Subject<boolean>();
 	searchUpdateUserManageStream$ = this.searchUpdateUserManageAction.asObservable();
+	
+	searchParameterAction: Subject<ICustomerEditManageSearch> = new Subject<ICustomerEditManageSearch>();
+	searchParameterStream$ = this.searchParameterAction.asObservable();
 
 	constructor(private http: CommonHttpService) { }
 
@@ -26,7 +29,7 @@ export class CustomerBillsService {
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_BILLS}${queryString}`)
-			.pipe(map(Items => Items.data as ICustomerBIllsReponse[]));
+			.pipe(map(Items => Items as ItemsWithPagesCustomeBills));
 		
 	}
 

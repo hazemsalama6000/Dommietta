@@ -43,7 +43,7 @@ export class CustomerUpdateManageComponent implements OnInit {
 		private branchService: BranchService,
 		private updateTypeService: UpdateTypeService,
 		private toaster: toasterService, private fb: FormBuilder,
-		private auth: AuthService,private datePipe: DatePipe) {
+		private auth: AuthService, private datePipe: DatePipe) {
 	}
 
 	ngOnInit(): void {
@@ -63,35 +63,30 @@ export class CustomerUpdateManageComponent implements OnInit {
 			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
-			
+
 			this.updateTypeService.getLookupUpdateTypeData(data.companyId).subscribe((data: LookUpModel[]) => {
 				this.dropdownUpdateTypeData = data;
 			});
 		});
 
 	}
-
+	ngAfterViewInit(): void {
+		this.getCustomerDataByCode('');
+	}
 	searchCustomerEdits(model: ICustomerEditManageSearch) {
 		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
-		console.log(model);
-		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
-			(data: ItemsWithPages) => {
-				this.customerEditManageService.searchUpdateUserManageAction.next(data);
-				this.customerEditManageService.searchParameterAction.next(model);
-			}
-		);
+	
+		this.customerEditManageService.searchParameterAction.next(model);
+		this.customerEditManageService.searchUpdateUserManageAction.next(true);
+	
 	}
 
-	getCustomerDataByCode(customerCode:string){
+	getCustomerDataByCode(customerCode: string) {
 
-		let model: ICustomerEditManageSearch = {AreaId:0,BlockId:0,BranchId:0,CustomerCode:customerCode,CustomerId:0,Employee_id:0} as ICustomerEditManageSearch;
-		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
-			(data: ItemsWithPages) => {
-				this.customerEditManageService.searchUpdateUserManageAction.next(data);
-				this.customerEditManageService.searchParameterAction.next(model);
-			}
-		);
+		let model: ICustomerEditManageSearch = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: customerCode, CustomerId: 0, Employee_id: 0 } as ICustomerEditManageSearch;
+		this.customerEditManageService.searchParameterAction.next(model);
+		this.customerEditManageService.searchUpdateUserManageAction.next(true);
 	}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
@@ -124,8 +119,8 @@ export class CustomerUpdateManageComponent implements OnInit {
 
 	searchEmployeeAndCustomer() {
 		let search: ISearch = { branchId: this.searchModel.BranchId, AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId };
-		let searchCustomer: any = {AreaId:this.searchModel.AreaId ,Block:this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId:this.searchModel.Employee_id}
-		
+		let searchCustomer: any = { AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId: this.searchModel.Employee_id }
+
 		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(
 				(data: LookUpModel[]) => {

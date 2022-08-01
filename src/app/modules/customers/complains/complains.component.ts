@@ -2,18 +2,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ou
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
-import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
-import { Subscription } from "rxjs";
-import { AuthService } from "src/app/modules/auth";
+import { map, merge, Subscription, switchMap } from "rxjs";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { ITechnitianLog } from "../models/ITechnitianLog.interface";
 import { ComplainService } from "../../operations/services/complain.service";
 import { IComplainDisplay } from "../models/IComplain.interface";
+import { MatSort } from "@angular/material/sort";
+import { IComplain } from "../../operations/models/IComplain.interface";
 @Component({
 	selector: 'complain-log',
 	templateUrl: './complains.component.html',
@@ -21,10 +17,12 @@ import { IComplainDisplay } from "../models/IComplain.interface";
 })
 
 export class ComplainsComponent {
+	resultsLength = 0;
+	isLoadingResults = true;
+	isRateLimitReached = false;
 
-	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
-	NameForAdd: string;
-	currentSelected: LookUpModel;
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
 
 	displayedColumns: string[] = ['Date', 'ComplaintTypeName', 
 	'CollectorName', 'IssueName' , 'Details'
@@ -32,10 +30,9 @@ export class ComplainsComponent {
 
 	dataSource: any;
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-
 	userdata: IUserData;
 	private unsubscribe: Subscription[] = [];
+	customerId: number;
 
 	constructor(
 		private service: ComplainService,
@@ -44,13 +41,36 @@ export class ComplainsComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('customerId')!);
+			this.customerId = +data.get('customerId')!;
 		});
 
 	}
 
+	ngAfterViewInit() {
+
+		merge(this.paginator.page, this.service.searchUpdate$)
+			.pipe(
+				switchMap(() => {
+					this.isLoadingResults = true;
+					return this.service.getComplainsByCustomerId(this.customerId,this.paginator.pageIndex + 1);
+				}),
+				map((data: IComplain) => {
+					this.isLoadingResults = false;
+					this.isRateLimitReached = data === null;
+					if (data === null) {
+						return [];
+					}
+					this.resultsLength = data.totalRecords;
+					return data.data;
+				}),
+			)
+			.subscribe((data) => { this.dataSource = data; console.log(this.dataSource);});
+
+			this.service.searchUpdateAction.next(true);
+	}
+
 	// getting data and initialize data Source and Paginator
-	getallData(employeeId: number) {
+/*	getallData(employeeId: number) {
 		this.service.getComplainsByCustomerId(employeeId).subscribe(
 			(data: IComplainDisplay[]) => {
 				console.log(data);
@@ -58,7 +78,7 @@ export class ComplainsComponent {
 				this.dataSource.paginator = this.paginator;
 			}
 		);
-	}
+	}*/
 
 	//filter from search Box
 	applyFilter(event: Event) {

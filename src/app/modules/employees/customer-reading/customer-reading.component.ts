@@ -4,15 +4,13 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
-import { Subscription } from "rxjs";
+import { map, merge, Subscription, switchMap, switchMapTo } from "rxjs";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { ComplainService } from "../../operations/services/complain.service";
-import { UserLocationComponent } from "../user-locations/user-location.component";
-import { IComplainDisplay } from "../../customers/models/IComplain.interface";
 import { IReadingSearch } from "../../operations/models/IReadingSearch.interface";
 import { IReading, IReadingList } from "../../operations/models/IReading.interface";
 import { ReadingService } from "../../operations/services/reading.service";
 import { UserLocationXYComponent } from "../user-locationsxy/user-locationxy.component";
+import { MatSort } from "@angular/material/sort";
 @Component({
 	selector: 'customer-reading',
 	templateUrl: './customer-reading.component.html',
@@ -21,9 +19,12 @@ import { UserLocationXYComponent } from "../user-locationsxy/user-locationxy.com
 
 export class CustomerReadingComponent {
 
-	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
-	NameForAdd: string;
-	currentSelected: LookUpModel;
+	resultsLength = 0;
+	isLoadingResults = true;
+	isRateLimitReached = false;
+
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
 
 	displayedColumns: string[] = ['customerName', 'value', 
 	'lastReading', 'meterStatus' , 'readingImagePath'
@@ -31,10 +32,9 @@ export class CustomerReadingComponent {
 
 	dataSource: any;
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-
 	userdata: IUserData;
 	private unsubscribe: Subscription[] = [];
+	employeeId: number;
 
 	constructor(
 		private service: ReadingService,
@@ -43,11 +43,33 @@ export class CustomerReadingComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('employeeId')!);
+			this.employeeId = +data.get('employeeId')!;
 		});
 
 	}
+	ngAfterViewInit() {
 
+		merge(this.paginator.page, this.service.searchUpdate$)
+			.pipe(
+				switchMap(() => {
+					let search: IReadingSearch = {Employee_id:this.employeeId,PageNumber:this.paginator.pageIndex + 1 };
+					this.isLoadingResults = true;
+					return this.service.getReadingsData(search);
+				}),
+				map((data: IReading) => {
+					this.isLoadingResults = false;
+					this.isRateLimitReached = data === null;
+					if (data === null) {
+						return [];
+					}
+					this.resultsLength = data.totalRecords;
+					return data.data;
+				}),
+			)
+			.subscribe((data) => { this.dataSource = data;});
+
+			this.service.searchUpdateAction.next(true);
+	}
 	currentLocation(x:number,y:number){
 
 		const dialogPosition: DialogPosition = {
@@ -71,7 +93,7 @@ export class CustomerReadingComponent {
 			console.log(`Dialog result: ${result}`);
 		});	}
 	// getting data and initialize data Source and Paginator
-	getallData(employeeId: number) {
+	/*getallData(employeeId: number) {
 		let search: IReadingSearch = {Employee_id:employeeId};
 		this.service.getReadingsData(search).subscribe(
 			(data: IReading) => {
@@ -80,7 +102,7 @@ export class CustomerReadingComponent {
 				this.dataSource.paginator = this.paginator;
 			}
 		);
-	}
+	}*/
 
 	//filter from search Box
 	applyFilter(event: Event) {

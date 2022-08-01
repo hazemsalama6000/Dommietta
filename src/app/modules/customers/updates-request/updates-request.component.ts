@@ -1,25 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
-import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
-import { ConfirmationDialogService } from "src/app/shared-module/Components/confirm-dialog/confirmDialog.service";
-import { LookupService } from "src/app/shared-module/Services/Lookup.service";
 import { IUserData } from "src/app/modules/auth/models/IUserData.interface";
-import { Subscription } from "rxjs";
-import { AuthService } from "src/app/modules/auth";
+import { map, merge, Subscription, switchMap } from "rxjs";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { ITechnitianLog } from "../models/ITechnitianLog.interface";
-import { ComplainService } from "../../operations/services/complain.service";
-import { IComplainDisplay } from "../models/IComplain.interface";
 import { UserLocationComponent } from "../user-locations/user-location.component";
 import { ICustomerEditResponse } from "../../operations/models/cutomer-editmanage/ICustomerEditResponse.interface";
 import { customerUpdateManageService } from "../../operations/services/customer-update-manage.service";
 import { ICustomerEditManageSearch } from "../../operations/models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ViewimagesForCustomerComponent } from "../../operations/components/customer-update-manage/update-datatable/viewimages/viewimages.component";
 import { ItemsWithPages } from "../../operations/components/customer-update-manage/update-datatable/update-datatable.component";
+import { MatSort } from "@angular/material/sort";
 @Component({
 	selector: 'update-request',
 	templateUrl: './updates-request.component.html',
@@ -37,12 +29,17 @@ export class UpdateRequestComponent {
 	'UpdatedTypeName',
 	'UpdatedTypeSysName'];
 
-	dataSource: any;
+	dataSource: ICustomerEditResponse[] = [];
+	resultsLength = 0;
+	isLoadingResults = true;
+	isRateLimitReached = false;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
 
 	userdata: IUserData;
 	private unsubscribe: Subscription[] = [];
+	customerId: number;
 
 	constructor(
 		private service: customerUpdateManageService,
@@ -51,11 +48,36 @@ export class UpdateRequestComponent {
 	) {
 
 		this.route.paramMap.subscribe((data: ParamMap) => {
-			this.getallData(+data.get('customerId')!);
+			this.customerId = +data.get('customerId')!;
 		});
 
 	}
 
+	ngAfterViewInit() {
+
+		let modelSearch: ICustomerEditManageSearch = { CustomerId: this.customerId, AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', Employee_id: 0 , EndDate: '', StartDate: '', UpdatingTypeId: 0 };
+
+		merge(this.paginator.page, this.service.searchUpdateUserManageStream$)
+			.pipe(
+				switchMap(() => {
+					this.isLoadingResults = true;
+					modelSearch.PageNumber = this.paginator.pageIndex + 1;
+					return this.service.searchCustomerUpdate(modelSearch);
+				}),
+				map((data: ItemsWithPages) => {
+					this.isLoadingResults = false;
+					this.isRateLimitReached = data === null;
+					if (data === null) {
+						return [];
+					}
+					this.resultsLength = data.totalRecords;
+					return data.data;
+				}),
+			)
+			.subscribe((data) => { this.dataSource = data; console.log(this.dataSource);});
+
+			this.service.searchUpdateUserManageAction.next(true);
+	}
 	openDialogDisplayImages(imagePath: string) {
 		console.log(imagePath);
 				// const dialogPosition: DialogPosition = {
@@ -77,7 +99,7 @@ export class UpdateRequestComponent {
 					});
 			}
 	// getting data and initialize data Source and Paginator
-	getallData(customerId: number) {
+	/*getallData(customerId: number) {
 
         let modelSearch : ICustomerEditManageSearch = {CustomerId:customerId,AreaId:0,BlockId:0,BranchId:0,CustomerCode:'',Employee_id:0,EndDate:'',StartDate:'',UpdatingTypeId:0};
 		
@@ -89,7 +111,7 @@ export class UpdateRequestComponent {
 			}
 		);
 	}
-
+*/
 	currentLocation(x:number,y:number){
 
 		const dialogPosition: DialogPosition = {
@@ -115,10 +137,10 @@ export class UpdateRequestComponent {
 
 
 	//filter from search Box
-	applyFilter(event: Event) {
+	/*applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
-	}
+	}*/
 
 	ngOnDestroy() {
 		this.unsubscribe.forEach((sb) => sb.unsubscribe());
