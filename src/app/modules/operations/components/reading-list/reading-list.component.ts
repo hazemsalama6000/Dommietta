@@ -31,6 +31,8 @@ export class ReadingListComponent implements OnInit {
   btnIsRevise: boolean = false;
   showBtnIsRevise: boolean = true;
 
+url:string=localStorage.getItem("companyLink")??""
+
   startDate: string;
   endDate: string;
 

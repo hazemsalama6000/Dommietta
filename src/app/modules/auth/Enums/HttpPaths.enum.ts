@@ -145,14 +145,12 @@ export enum HttpPaths {
 	API_GET_CUSTOMERDATA = "/api/v1/operation/getupdatedcustomers?",
 	API_GET_CUSTOMERUPDATETYPE = "/api/v1/operation/listofupdatedcustomertypes",
 
-
 	//Issue
 	API_GET_ISSUEMASTER = "/api/v1/shared/getissues/",
 	API_GET_ISSUEDETAILS = "/api/v1/shared/getissuesdetails/",
 
 	//Bills API
 	API_GET_BILLS = "/api/v1/shared/getpaymentdata?",
-
 
 	//Pull Data
 	API_PULL_GEOGRAPHIC_DATA = "",

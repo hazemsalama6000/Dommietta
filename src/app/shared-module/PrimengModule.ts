@@ -17,6 +17,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {PasswordModule} from 'primeng/password';
 import {BadgeModule} from 'primeng/badge';
 import {ImageModule} from 'primeng/image';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 export const PrimengModule = [
   ConfirmDialogModule,
@@ -37,5 +38,6 @@ export const PrimengModule = [
   PaginatorModule,
   PasswordModule,
   BadgeModule,
-  ImageModule
+  ImageModule,
+  ConfirmPopupModule
 ]

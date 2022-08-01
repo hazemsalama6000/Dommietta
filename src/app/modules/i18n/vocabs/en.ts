@@ -267,7 +267,9 @@ export const locale = {
         ALLUSERS: "All Users",
         ADDROLE: "Add Role",
         ADDUSER: "Add User",
-        EDITROLE: "Edit Role"
+        EDITROLE: "Edit Role",
+        VIEW: "View Details",
+        RESETPASSWORD:"Reset Password"
       },
       TITLES: {
         ADDORUPDATEONLINEUSERS: "Users Login Data",
@@ -278,6 +280,7 @@ export const locale = {
         USERNAME: "User Name",
         LOGINTIME: "Login Time",
         REMININIGTIME: "Remining Time",
+        REMININIG: "Remining",
         DAY: "D",
         HOUR: "H",
         MINUTE: "M",
@@ -287,7 +290,7 @@ export const locale = {
         OFFLINEUSERS: "Offline Users",
         ADDNEWUSER: "Add New User",
         EMPLOYEE: "Employee",
-        FULLNAME: "Full Name",
+        FULLNAME: "User Name",
         PHONENUMBER: "Phone Number",
         EMAIL: "Email",
         PASSWORD: "password",
@@ -309,7 +312,8 @@ export const locale = {
         ADDNEWROLE: "Add New Role",
         ROLEPERMISSION: "Role Permissions",
         ROLENAME: "Role Name",
-        UPDATEROLE: "Update Role"
+        UPDATEROLE: "Update Role",
+        JOB: "Job"
 
       },
       MESSAGE: {
@@ -397,11 +401,11 @@ export const locale = {
         LOCATION: "Location",
         READINGDATE: "Reading Date",
         RECEIVEDATA: "Receive Data",
-        GEOGRAPHICDATA:"Geographic Data",
-        COLLECTORDATA:"Collector Data",
-        CUSTOMERDATA:"Customer Data",
-        ISSUEDATA:"Issues Data",
-        PULLDATA:"Pull Data"
+        GEOGRAPHICDATA: "Geographic Data",
+        COLLECTORDATA: "Collector Data",
+        CUSTOMERDATA: "Customer Data",
+        ISSUEDATA: "Issues Data",
+        PULLDATA: "Pull Data"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"

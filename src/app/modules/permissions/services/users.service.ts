@@ -3,6 +3,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { HttpPaths } from '../../auth/Enums/HttpPaths.enum';
+import { IUsers } from '../models/IRolesProfile.interface';
 import { IUserList } from '../models/IUserLList.interface';
 import { IUserRole } from '../models/IUserRole.interface';
 
@@ -16,9 +17,9 @@ export class UsersService {
   constructor(private http: CommonHttpService) { }
 
   //Get Users By CompanyID
-  GetCompanyUsers(companyId: number, search: string=''): Observable<IUserList[]> {
+  GetCompanyUsers(companyId: number, search: string=''): Observable<IUsers[]> {
     return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPANY_USERS}${companyId}${search}`)
-      .pipe(map((Items: any) => Items.data as IUserList[]));
+      .pipe(map((Items: any) => Items.data as IUsers[]));
   }
 
   //Add New User

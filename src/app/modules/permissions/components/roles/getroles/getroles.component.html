@@ -20,8 +20,8 @@
                 <div class="card card-flush h-md-100">
 
                     <div class="card-header">
-                        <div class="card-title">
-                            <h2>{{role.roleName}}</h2>
+                        <div class="card-title fw-bolder text-primary">
+                            {{role.roleName}}
                         </div>
                     </div>
 
@@ -44,14 +44,17 @@
 
                     <div class="card-footer d-flex pt-0">
                         <a class="btn btn-light btn-active-primary my-1 me-2" routerLink="/permissions/roleprofile"
-                            [queryParams]="{roleId:role.roleId}"> <i class="material-icons fs-2x">remove_red_eye</i></a>
+                            [queryParams]="{roleId:role.roleId}"
+                            matTooltip="{{'PERMISSIONS.BUTTONS.VIEW'|translate}}"> <i class="material-icons fs-2x">remove_red_eye</i></a>
 
                         <button type="button" class="btn btn-light btn-active-primary my-1 me-2" data-bs-toggle="modal"
                             data-bs-target="#kt_modal_update_role" id="kt_updaterole_toggle"
-                            (click)="editRole(role.roleId)"><i
+                            (click)="editRole(role.roleId)"
+                            matTooltip="{{'PERMISSIONS.BUTTONS.EDIT'|translate}}"><i
                                 class="material-icons fs-2x">mode_edit_outline</i></button>
 
                         <button type="button" class="btn btn-light btn-active-primary my-1 me-2"
+                        matTooltip="{{'PERMISSIONS.BUTTONS.DELETE'|translate}}"
                             (click)="deleteRole(role)"><i class="material-icons fs-2x">delete</i></button>
 
                     </div>

@@ -18,7 +18,8 @@ export class RoleprofileComponent implements OnInit {
   roleId: string;
   userData: IUserData;
   unsubscribe: Subscription[] = [];
-  url: string = '';
+  url:string=localStorage.getItem("companyLink")??""
+
 
   constructor(
     public activatedRoute: ActivatedRoute,

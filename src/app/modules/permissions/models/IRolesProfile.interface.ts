@@ -25,6 +25,7 @@ export interface IUsers {
     onlineOrNot: false;
     imagePath: string;
     userLastLog: IUserLog;
+    roles:string[]
 }
 
 export interface IUserLog {
