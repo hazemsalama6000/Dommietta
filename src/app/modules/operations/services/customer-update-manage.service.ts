@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, of, Subject } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
 import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
+import { ItemsWithPages } from "../components/customer-update-manage/update-datatable/update-datatable.component";
 import { ICustomerEditManageSearch } from "../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEditResponse.interface";
 
@@ -11,9 +12,12 @@ import { ICustomerEditResponse } from "../models/cutomer-editmanage/ICustomerEdi
 
 export class customerUpdateManageService {
 
-	searchUpdateUserManageAction: Subject<ICustomerEditResponse[]> = new Subject<ICustomerEditResponse[]>();
+	searchUpdateUserManageAction: Subject<ItemsWithPages> = new Subject<ItemsWithPages>();
 
 	searchUpdateUserManageStream$ = this.searchUpdateUserManageAction.asObservable();
+
+	searchParameterAction: Subject<ICustomerEditManageSearch> = new Subject<ICustomerEditManageSearch>();
+	searchParameterStream$ = this.searchParameterAction.asObservable();
 
 	constructor(private http: CommonHttpService) { }
 
@@ -25,7 +29,7 @@ export class customerUpdateManageService {
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_CUSTOMERDATA}${queryString}`)
-			.pipe(map(Items => Items.data.data as ICustomerEditResponse[]));
+			.pipe(map(Items => Items.data as ItemsWithPages));
 		
 	}
 

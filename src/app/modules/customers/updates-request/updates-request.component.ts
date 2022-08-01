@@ -19,6 +19,7 @@ import { ICustomerEditResponse } from "../../operations/models/cutomer-editmanag
 import { customerUpdateManageService } from "../../operations/services/customer-update-manage.service";
 import { ICustomerEditManageSearch } from "../../operations/models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ViewimagesForCustomerComponent } from "../../operations/components/customer-update-manage/update-datatable/viewimages/viewimages.component";
+import { ItemsWithPages } from "../../operations/components/customer-update-manage/update-datatable/update-datatable.component";
 @Component({
 	selector: 'update-request',
 	templateUrl: './updates-request.component.html',
@@ -81,13 +82,12 @@ export class UpdateRequestComponent {
         let modelSearch : ICustomerEditManageSearch = {CustomerId:customerId,AreaId:0,BlockId:0,BranchId:0,CustomerCode:'',Employee_id:0,EndDate:'',StartDate:'',UpdatingTypeId:0};
 		
 		this.service.searchCustomerUpdate(modelSearch).subscribe(
-			(data: ICustomerEditResponse[]) => {
+			(data: ItemsWithPages) => {
 				console.log(data);
-				this.dataSource = new MatTableDataSource<ICustomerEditResponse>(data);
+				this.dataSource = new MatTableDataSource<ICustomerEditResponse>(data.data);
 				this.dataSource.paginator = this.paginator;
 			}
 		);
-
 	}
 
 	currentLocation(x:number,y:number){

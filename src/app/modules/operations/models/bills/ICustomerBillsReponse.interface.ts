@@ -1,3 +1,4 @@
+import { IBillTransactions } from "./IBillTransactions.interface"
 
 export interface ICustomerBIllsReponse {
 	branch: string,
@@ -10,5 +11,6 @@ export interface ICustomerBIllsReponse {
 	customerData_Id: number
 	employee_Id: number,
 	notes: string,
-	payDate: Date
+	payDate: Date,
+	billTransactions:IBillTransactions[]
 }

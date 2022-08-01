@@ -7,47 +7,94 @@ import { ICustomerEditResponse } from "../../../models/cutomer-editmanage/ICusto
 import { UserLocationComponent } from "./user-locations/user-location.component";
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { ViewimagesForCustomerComponent } from "./viewimages/viewimages.component";
+import { MatSort, SortDirection } from "@angular/material/sort";
+import { HttpClient } from "@angular/common/http";
+import { catchError, EMPTY, map, merge, Observable, startWith, switchMap } from "rxjs";
+import { ICustomerEditManageSearch } from "../../../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 @Component({
 	selector: 'customer-update-datatable',
 	templateUrl: './update-datatable.component.html',
 	styleUrls: ['./update-datatable.component.scss']
 })
-export class updateCustomerManageComponent implements OnInit {
+export class updateCustomerManageComponent {
 
-	displayedColumns: string[] =
-		['BranchName',
-			'AreaName',
-			'BlockName',
-			'CustomerName',
-			'CustomerCode',
-			'CollectorName',
-			'RequestDate',
-			'UpdatedTypeName',
-			'UpdatedTypeSysName'];
+	displayedColumns: string[] = ['BranchName',
+		'AreaName',
+		'BlockName',
+		'CustomerName',
+		'CustomerCode',
+		'CollectorName',
+		'RequestDate',
+		'UpdatedTypeName',
+		'UpdatedTypeSysName'];
+
+	data: ICustomerEditResponse[] = [];
+	currentSearchParameter: ICustomerEditManageSearch = {} as ICustomerEditManageSearch;
+	resultsLength = 0;
+	isLoadingResults = true;
+	isRateLimitReached = false;
+
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+
+	constructor(private _httpClient: HttpClient, private service: customerUpdateManageService, public dialog: MatDialog) {
+		this.currentSearchParameter = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', CustomerId: 0, Employee_id: 0, PageNumber: 0, UpdatingTypeId: 0, EndDate: '', StartDate: '' };
+	}
+
+	ngAfterViewInit() {
+		// If the user changes the sort order, reset back to the first page.
+		this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+		merge(this.paginator.page, this.service.searchUpdateUserManageStream$)
+			.pipe(
+				switchMap(() => {
+					this.isLoadingResults = true;
+					this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
+					console.log(this.currentSearchParameter);
+					return this.service.searchCustomerUpdate(this.currentSearchParameter);
+				}),
+				map((data:ItemsWithPages) => {
+					this.isLoadingResults = false;
+					this.isRateLimitReached = data === null;
+					if (data === null) {
+						return [];
+					}
+					this.resultsLength = data.totalRecords;
+					return data.data;
+				}),
+			)
+			.subscribe((data) => {this.data = data;  });
+	}
+
 
 	dataSource: any;
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-
-	constructor(private service: customerUpdateManageService, public dialog: MatDialog) { }
 
 	ngOnInit(): void {
-		this.service.searchUpdateUserManageStream$.subscribe(
-			(data: ICustomerEditResponse[]) => {
-				console.log(data);
-				if (data) {
-					this.dataSource = new MatTableDataSource<ICustomerEditResponse>(data);
-					this.dataSource.paginator = this.paginator;
-				}
-				else {
-					this.dataSource.data = [];
-				}
+		/*
+				this.service.searchUpdateUserManageStream$.subscribe(
+					(data: ItemsWithPages) => {
+						console.log(data);
+						if (data) {
+							this.data = data.items;
+						}
+						else {
+							this.dataSource.data = [];
+						}
+					}
+				);*/
+
+		this.service.searchParameterStream$.subscribe(
+			(data: ICustomerEditManageSearch) => {
+				this.currentSearchParameter = data;
 			}
 		);
 	}
 
+
+
 	openDialogDisplayImages(imagePath: string) {
-console.log(imagePath);
+		console.log(imagePath);
 		// const dialogPosition: DialogPosition = {
 		// 	top: '0px',
 		// 	right: '0px'
@@ -94,10 +141,23 @@ console.log(imagePath);
 			console.log(`Dialog result: ${result}`);
 		});
 	}
-	//filter from search Box
-	applyFilter(event: Event) {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-	}
 
 }
+
+export interface ItemsWithPages {
+	data: ICustomerEditResponse[];
+	totalRecords: number;
+}
+
+/*export class ExampleHttpDatabase {
+
+	constructor(private _httpClient: HttpClient) { }
+
+	getRepoIssues(sort: string, order: SortDirection, page: number): Observable<ItemsWithPages> {
+		const href = 'https://api.github.com/search/issues';
+		const requestUrl = `${href}?q=repo:angular/components&sort=${sort}&order=${order}&page=${page + 1
+			}`;
+
+		return this._httpClient.get<ItemsWithPages>(requestUrl);
+	}
+}*/

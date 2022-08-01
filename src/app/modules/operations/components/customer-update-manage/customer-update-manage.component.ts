@@ -15,6 +15,7 @@ import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { ICustomerEditManageSearch } from "../../models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { ICustomerEditResponse } from "../../models/cutomer-editmanage/ICustomerEditResponse.interface";
 import { customerUpdateManageService } from "../../services/customer-update-manage.service";
+import { ItemsWithPages } from "./update-datatable/update-datatable.component";
 
 
 @Component({
@@ -53,8 +54,8 @@ export class CustomerUpdateManageComponent implements OnInit {
 			BlockId: [],
 			CustomerId: [],
 			Employee_id: [],
-			UpdatingStartDate: [new Date().toISOString()],
-			UpdatingEndDate: [new Date().toISOString()],
+			StartDate: [new Date().toISOString()],
+			EndDate: [new Date().toISOString()],
 			UpdatingTypeId: [],
 		});
 
@@ -75,8 +76,9 @@ export class CustomerUpdateManageComponent implements OnInit {
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		console.log(model);
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
-			(data: ICustomerEditResponse[]) => {
+			(data: ItemsWithPages) => {
 				this.customerEditManageService.searchUpdateUserManageAction.next(data);
+				this.customerEditManageService.searchParameterAction.next(model);
 			}
 		);
 	}
@@ -85,8 +87,9 @@ export class CustomerUpdateManageComponent implements OnInit {
 
 		let model: ICustomerEditManageSearch = {AreaId:0,BlockId:0,BranchId:0,CustomerCode:customerCode,CustomerId:0,Employee_id:0} as ICustomerEditManageSearch;
 		this.customerEditManageService.searchCustomerUpdate(model).subscribe(
-			(data: ICustomerEditResponse[]) => {
+			(data: ItemsWithPages) => {
 				this.customerEditManageService.searchUpdateUserManageAction.next(data);
+				this.customerEditManageService.searchParameterAction.next(model);
 			}
 		);
 	}

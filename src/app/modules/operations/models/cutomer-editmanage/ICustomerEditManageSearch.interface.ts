@@ -9,5 +9,6 @@ export interface ICustomerEditManageSearch
 	Employee_id:number,
 	StartDate?:string,
 	EndDate?:string,
-    UpdatingTypeId?:number
+    UpdatingTypeId?:number,
+	PageNumber?:number
 }
