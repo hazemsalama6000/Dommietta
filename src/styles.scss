@@ -183,6 +183,11 @@ app-reading-list .p-dropdown.p-component {
 	max-width: unset !important;
 }
 
+.p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+	padding-right: 1.75rem;
+	margin-right: unset !important;
+}
+
 .p-dropdown {
 	width: 100% !important;
 	max-width: 150px;
@@ -338,8 +343,20 @@ p-paginator button {
 	}
 }
 
-.stylingHeader{
+.stylingHeader {
 	background-color: #b4b3b3;
 	border-radius: 30px;
 	font-weight: bold;
+}
+
+list_content input {
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 16px !important;
+	font-weight:600 !important ;
+}
+
+list_content .mat-table{
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-size: 16px !important;
+	font-weight:600 !important ;
 }

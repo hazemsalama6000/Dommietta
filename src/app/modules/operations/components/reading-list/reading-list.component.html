@@ -54,7 +54,7 @@
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.Employee_id"></p-dropdown>
+              [(ngModel)]="searchObject.Employee_id" [filter]="true" filterBy="name"></p-dropdown>
           </div>
           <div class="col">
             <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
@@ -110,7 +110,7 @@
         </tr>
       </ng-template>
 
-      <ng-template pTemplate="body" let-read>
+      <ng-template pTemplate="body" let-read let-rowIndex="rowIndex">
         <tr>
           <td>{{read.collectorName}}</td>
           <td>{{read.customerName}}</td>
@@ -144,7 +144,8 @@
 
           <td>
             <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.isPosted" [(ngModel)]="read.isPosted" />
+              id="kt_modal_update_role_option_0" [checked]="read.isPosted" [(ngModel)]="read.isPosted" 
+              (change)="changeIsPost(read,rowIndex)" />
           </td>
 
           <td>

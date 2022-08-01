@@ -396,7 +396,12 @@ export const locale = {
         IMAGERERADING: "Image Reading",
         LOCATION: "Location",
         READINGDATE: "Reading Date",
-        RECEIVEDATA: "Receive Data"
+        RECEIVEDATA: "Receive Data",
+        GEOGRAPHICDATA:"Geographic Data",
+        COLLECTORDATA:"Collector Data",
+        CUSTOMERDATA:"Customer Data",
+        ISSUEDATA:"Issues Data",
+        PULLDATA:"Pull Data"
       },
       MESSAGE: {
         NOROWFOUND: "No Rows Found"

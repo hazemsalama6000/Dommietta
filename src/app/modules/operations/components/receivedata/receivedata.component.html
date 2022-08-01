@@ -8,34 +8,25 @@
   <mat-card-content class="mt-10">
 
     <div class="col-md-4 fs-1 p-2">
-      <!-- <span> {{"OPERATION.TITLES.RECEIVEDATA" | translate}}</span> -->
-      <span> سحب البيانات</span>
-      <button mat-raised-button color="primary" class="mt-2" (click)="getBranchData()" [disabled]="buttons.btnBranch">Branch</button>
+      <span> {{"OPERATION.TITLES.GEOGRAPHICDATA" | translate}}</span>
+      <button mat-raised-button color="primary" class="mt-2" (click)="getGeographicData()" [disabled]="buttons.btnGeographic">{{"OPERATION.TITLES.PULLDATA" | translate}}</button>
     </div>
 
     <div class="col-md-4 fs-1 p-2">
-      <!-- <span> {{"OPERATION.TITLES.RECEIVEDATA" | translate}}</span> -->
-      <span> سحب البيانات</span>
-      <button mat-raised-button color="primary" class="mt-2" (click)="getAreaData()" [disabled]="buttons.btnArea">Area</button>
+      <span> {{"OPERATION.TITLES.COLLECTORDATA" | translate}}</span>
+      <button mat-raised-button color="primary" class="mt-2" (click)="getEmployeeData()" [disabled]="buttons.btnEmployee">{{"OPERATION.TITLES.PULLDATA" | translate}}</button>
     </div>
 
     <div class="col-md-4 fs-1 p-2">
-      <!-- <span> {{"OPERATION.TITLES.RECEIVEDATA" | translate}}</span> -->
-      <span> سحب البيانات</span>
-      <button mat-raised-button color="primary" class="mt-2" (click)="getBlockData()" [disabled]="buttons.btnBlock">Block</button>
+      <span> {{"OPERATION.TITLES.CUSTOMERDATA" | translate}}</span>
+      <button mat-raised-button color="primary" class="mt-2" (click)="getCustomerData()" [disabled]="buttons.btnCustomer">{{"OPERATION.TITLES.PULLDATA" | translate}}</button>
     </div>
 
     <div class="col-md-4 fs-1 p-2">
-      <!-- <span> {{"OPERATION.TITLES.RECEIVEDATA" | translate}}</span> -->
-      <span> سحب البيانات</span>
-      <button mat-raised-button color="primary" class="mt-2" (click)="getIssueData()" [disabled]="buttons.btnIssue">Issue</button>
+      <span> {{"OPERATION.TITLES.ISSUEDATA" | translate}}</span>
+      <button mat-raised-button color="primary" class="mt-2" (click)="getIssueData()" [disabled]="buttons.btnIssue">{{"OPERATION.TITLES.PULLDATA" | translate}}</button>
     </div>
 
-  <div class="col-md-4 fs-1 p-2">
-      <!-- <span> {{"OPERATION.TITLES.RECEIVEDATA" | translate}}</span> -->
-      <span> سحب البيانات</span>
-      <button mat-raised-button color="primary" class="mt-2" (click)="getCustomerData()" [disabled]="buttons.btnCustomer">Customer</button>
-    </div>
   </mat-card-content>
 
 </mat-card>

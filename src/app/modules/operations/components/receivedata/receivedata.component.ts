@@ -11,107 +11,85 @@ import { ReceivedataService } from '../../services/receivedata.service';
 export class ReceivedataComponent implements OnInit {
 
   buttons = {
-    btnBranch: false,
-    btnBlock: true,
+    btnGeographic: false,
+    btnEmployee: true,
     btnCustomer: true,
     btnIssue: true,
-    btnArea: true
   }
 
-  constructor(
-    private toaster: toasterService,
-    private receiveData: ReceivedataService
-  ) { }
+  constructor(private toaster: toasterService, private receiveData: ReceivedataService) { }
 
   ngOnInit() { }
 
-  getBranchData() {
-    // this.receiveData.syncBranchData().subscribe(
-    //   (data: HttpReponseModel) => {
-    //     if (data.isSuccess) {
-    //       this.toaster.openSuccessSnackBar(data.message);
-    //     }
-    //     else if (data.isExists)
-    //       this.toaster.openWarningSnackBar(data.message);
-    //   },
-    //   (error: any) => {
-    //     this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-    //   }
-    // )
-    setTimeout(() => {
-      this.buttons.btnArea = false
-    }, 500);
+  getGeographicData() {
+    this.receiveData.syncGeographicData().subscribe(
+      (data: HttpReponseModel) => {
+        if (data.isSuccess) {
+          this.toaster.openSuccessSnackBar(data.message);
+          this.buttons.btnGeographic=true
+          this.buttons.btnEmployee = false;
+        }
+        else if (data.isExists)
+          this.toaster.openWarningSnackBar(data.message);
+      },
+      (error: any) => {
+        this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+      }
+    )
+
   }
 
-  getAreaData() {
-    //  this.receiveData.syncAreaData().subscribe(
-    //   (data: HttpReponseModel) => {
-    //     if (data.isSuccess) {
-    //       this.toaster.openSuccessSnackBar(data.message);
-    //     }
-    //     else if (data.isExists)
-    //       this.toaster.openWarningSnackBar(data.message);
-    //   },
-    //   (error: any) => {
-    //     this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-    //   }
-    // )
-    setTimeout(() => {
-      this.buttons.btnBlock = false
-    }, 500);
-  }
+  getEmployeeData() {
+    this.receiveData.syncEmployeeData().subscribe(
+      (data: HttpReponseModel) => {
+        if (data.isSuccess) {
+          this.buttons.btnEmployee=true;
+          this.buttons.btnCustomer = false;
+          this.toaster.openSuccessSnackBar(data.message);
+        }
+        else if (data.isExists)
+          this.toaster.openWarningSnackBar(data.message);
+      },
+      (error: any) => {
+        this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+      }
+    )
 
-  getBlockData() {
-    //  this.receiveData.syncBlockData().subscribe(
-    //   (data: HttpReponseModel) => {
-    //     if (data.isSuccess) {
-    //       this.toaster.openSuccessSnackBar(data.message);
-    //     }
-    //     else if (data.isExists)
-    //       this.toaster.openWarningSnackBar(data.message);
-    //   },
-    //   (error: any) => {
-    //     this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-    //   }
-    // )
-    setTimeout(() => {
-      this.buttons.btnCustomer = false
-      this.buttons.btnIssue = false
-    }, 500);
-  }
-
-  getIssueData() {
-    //  this.receiveData.syncIssueData().subscribe(
-    //   (data: HttpReponseModel) => {
-    //     if (data.isSuccess) {
-    //       this.toaster.openSuccessSnackBar(data.message);
-    //     }
-    //     else if (data.isExists)
-    //       this.toaster.openWarningSnackBar(data.message);
-    //   },
-    //   (error: any) => {
-    //     this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-    //   }
-    // )
-    setTimeout(() => {
-    }, 500);
   }
 
   getCustomerData() {
-    // this.receiveData.syncCustomerData().subscribe(
-    //   (data: HttpReponseModel) => {
-    //     if (data.isSuccess) {
-    //       this.toaster.openSuccessSnackBar(data.message);
-    //     }
-    //     else if (data.isExists)
-    //       this.toaster.openWarningSnackBar(data.message);
-    //   },
-    //   (error: any) => {
-    //     this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
-    //   }
-    // )
-    setTimeout(() => {
-    }, 500);
+    this.receiveData.syncCustomerData().subscribe(
+      (data: HttpReponseModel) => {
+        if (data.isSuccess) {
+          this.buttons.btnCustomer=true;
+          this.buttons.btnIssue = false;
+          this.toaster.openSuccessSnackBar(data.message);
+        }
+        else if (data.isExists)
+          this.toaster.openWarningSnackBar(data.message);
+      },
+      (error: any) => {
+        this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+      }
+    )
+
+  }
+
+  getIssueData() {
+    this.receiveData.syncIssueData().subscribe(
+      (data: HttpReponseModel) => {
+        if (data.isSuccess) {
+          this.buttons.btnIssue=true;
+          this.toaster.openSuccessSnackBar(data.message);
+        }
+        else if (data.isExists)
+          this.toaster.openWarningSnackBar(data.message);
+      },
+      (error: any) => {
+        this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+      }
+    )
+
   }
 
 }

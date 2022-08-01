@@ -406,7 +406,12 @@ export const locale = {
         IMAGERERADING: "صورة القراءة",
         LOCATION:"الموقع",
         READINGDATE:"تاريخ القراءة",
-        RECEIVEDATA:"سحب البيانات"
+        RECEIVEDATA:"سحب البيانات",
+        GEOGRAPHICDATA:" البيانات الجغرافية",
+        COLLECTORDATA:"بيانات المحصلين",
+        CUSTOMERDATA:"بيانات العملاء",
+        ISSUEDATA:" بيانات الاصدارات",
+        PULLDATA:"سحب البيانات"
       },
       MESSAGE: {
         NOROWFOUND: "لايوجد بيانات"
