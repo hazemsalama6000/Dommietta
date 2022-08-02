@@ -56,7 +56,7 @@
     <img *ngIf="!userdata" [src]="'./assets/media/svg/avatars/001-boy.svg'" alt="" />
 
     <img *ngIf="userdata" [src]="url+(userdata?.imgPath??'./assets/media/svg/avatars/001-boy.svg')"
-      alt="{{userdata.fullName}}" />
+      alt="{{userdata.fullName}}" (error)="img.src = 'assets\\media\\avatars\\300-3.png'" #img/>
   </div>
   <!-- end::Toggle  -->
   <app-user-inner></app-user-inner>
