@@ -93,8 +93,7 @@
 
                         <div class="d-flex flex-column">
                             <label href="javascript:;" class="text-gray-800 text-hover-primary mb-1">{{user.name}}
-                                <span
-                                    class="badge {{user.isActive?'badge-light-primary':'badge-light-danger'}} fs-9">
+                                <span class="badge {{user.isActive?'badge-light-primary':'badge-light-danger'}} fs-9">
                                     {{user.isActive?'Active':'NotActive'}}</span>
                             </label>
                             <span>{{user.job}}</span>
@@ -109,18 +108,20 @@
                     <td>
                         <div *ngIf="user.onlineOrNot" class="d-flex align-items-center">
                             <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                            <label class="badge badge-light-success fs-7 m-1">Online</label>
+                            <label
+                                class="badge badge-light-success fs-7 m-1">{{'PERMISSIONS.TITLES.USERONLINE'|translate}}</label>
                         </div>
                         <div *ngIf="!user.onlineOrNot" class="d-flex align-items-center">
                             <span class="badge badge-danger badge-circle w-10px h-10px me-1"></span>
-                            <label class="badge badge-light-danger fs-7 m-1">Offline</label>
+                            <label
+                                class="badge badge-light-danger fs-7 m-1">{{'PERMISSIONS.TITLES.USEROFFLINE'|translate}}</label>
                         </div>
                     </td>
 
                     <td style="direction: initial; " class="text-center">
                         <span>{{user?.userLastLog?.startDate|date:'dd/MM/yyyy hh:mm a '}}</span>
                         <div class="d-flex fs-7 m-1 justify-content-center" *ngIf="user?.userLastLog?.remainingTime">
-                            <div style="direction: rtl;" >
+                            <div style="direction: rtl;">
                                 <span>
                                     {{user?.userLastLog?.remainingTime?.days+('PERMISSIONS.TITLES.DAY'|translate)}}
                                 </span>:
@@ -149,39 +150,43 @@
 
                     </td>
 
-                    <td class="text-end d-flex">
+                    <td>
+                        
+                        <div class="text-end d-flex">
+                            <button
+                                class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex"
+                                data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission"
+                                id="kt_assignrolestouser_toggle" (click)="assignUserIdToRole(user)"
+                                matTooltip="{{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}">
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <path
+                                            d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z"
+                                            fill="currentColor" />
+                                        <path opacity="0.3"
+                                            d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </button>
 
-                        <button
-                            class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex"
-                            data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission"
-                            id="kt_assignrolestouser_toggle" (click)="assignUserIdToRole(user)"
-                            matTooltip="{{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}">
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <path
-                                        d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z"
-                                        fill="currentColor" />
-                                    <path opacity="0.3"
-                                        d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z"
-                                        fill="currentColor" />
-                                </svg>
-                            </span>
-                        </button>
+                            <p-confirmPopup></p-confirmPopup>
 
-                        <p-confirmPopup></p-confirmPopup>
-                       
-                        <button
-                            class="btn btn-icon btn-active-light-primary 4-30px h-40px me-1 align-items-center d-flex"
-                            (click)="resetPassword($event,user)"
-                            matTooltip="{{'PERMISSIONS.BUTTONS.RESETPASSWORD'|translate}}">
-                            <span class="material-icons">lock_reset</span>
-                        </button>
+                            <button
+                                class="btn btn-icon btn-active-light-primary 4-30px h-40px me-1 align-items-center d-flex"
+                                (click)="resetPassword($event,user)"
+                                matTooltip="{{'PERMISSIONS.BUTTONS.RESETPASSWORD'|translate}}">
+                                <span class="material-icons">lock_reset</span>
+                            </button>
 
-                        <mat-slide-toggle color="red" (click)="toggleActiveDeactive($event,user,i)" [checked]="user.isActive"
-                            matTooltip="{{user.isActive === true? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
-                            class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex">
-                        </mat-slide-toggle>
+                            <mat-slide-toggle color="red" (click)="toggleActiveDeactive($event,user,i)"
+                                [checked]="user.isActive"
+                                matTooltip="{{user.isActive === true? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
+                                class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex">
+                            </mat-slide-toggle>
+                        </div>
+
                     </td>
 
                 </tr>
