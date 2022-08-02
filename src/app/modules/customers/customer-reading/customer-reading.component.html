@@ -43,7 +43,12 @@
 			<ng-container matColumnDef="readingImagePath">
 				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> الصورة </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
-					{{element.readingImagePath}}
+					<p-image *ngIf="element.actualreadingImagePath!=null && element.actualreadingImagePath!=''"
+						[src]="element.readingImagePath" width="150" height="50" [preview]="true">
+					</p-image>
+
+					<img *ngIf="element.actualreadingImagePath==null || element.actualreadingImagePath==''" src="assets\\media\\icons\\images.png" width="60" height="50">
+				
 				</td>
 			</ng-container>
 

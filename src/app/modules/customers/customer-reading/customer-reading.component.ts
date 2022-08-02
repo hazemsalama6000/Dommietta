@@ -1,4 +1,4 @@
-import {  Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -23,7 +23,7 @@ export class CustomerReadingComponent {
 
 	@Output() edit: EventEmitter<LookUpModel> = new EventEmitter();
 	NameForAdd: string;
-	currentSelected: LookUpModel;resultsLength = 0;
+	currentSelected: LookUpModel; resultsLength = 0;
 	isLoadingResults = true;
 	isRateLimitReached = false;
 
@@ -31,9 +31,9 @@ export class CustomerReadingComponent {
 	@ViewChild(MatSort) sort: MatSort;
 
 
-	displayedColumns: string[] = ['collectorName', 'value', 
-	'lastReading', 'meterStatus' , 'readingImagePath'
-	 , 'issueName','issueStatus','XY','issueDate','isRevised','isPosted','notes'];
+	displayedColumns: string[] = ['collectorName', 'value',
+		'lastReading', 'meterStatus', 'readingImagePath'
+		, 'issueName', 'issueStatus', 'XY', 'issueDate', 'isRevised', 'isPosted', 'notes'];
 
 	dataSource: any;
 
@@ -58,7 +58,7 @@ export class CustomerReadingComponent {
 		merge(this.paginator.page, this.service.searchUpdate$)
 			.pipe(
 				switchMap(() => {
-					let search: IReadingSearch = {CustomerId:this.customerId,PageNumber:this.paginator.pageIndex + 1 };
+					let search: IReadingSearch = { CustomerId: this.customerId, PageNumber: this.paginator.pageIndex + 1 };
 					this.isLoadingResults = true;
 					return this.service.getReadingsData(search);
 				}),
@@ -69,19 +69,21 @@ export class CustomerReadingComponent {
 						return [];
 					}
 					this.resultsLength = data.totalRecords;
-					return data.data;
+					return data.data.map((item) => {
+						return { ...item,actualreadingImagePath:item.readingImagePath, readingImagePath: localStorage.getItem("companyLink")?.toString().concat(item.readingImagePath) }
+					})
 				}),
 			)
-			.subscribe((data) => { this.dataSource = data;});
+			.subscribe((data) => { this.dataSource = data; });
 
-			this.service.searchUpdateAction.next(true);
+		this.service.searchUpdateAction.next(true);
 	}
-	currentLocation(x:number,y:number){
+	currentLocation(x: number, y: number) {
 
 		const dialogPosition: DialogPosition = {
-			top:'0px',
-			right:'0px'
-		  };
+			top: '0px',
+			right: '0px'
+		};
 
 		const dialogRef = this.dialog.open(UserLocationComponent,
 			{
@@ -91,25 +93,33 @@ export class CustomerReadingComponent {
 				height: '100%',
 
 				//panelClass: 'full-screen-modal',*/
-				position:dialogPosition,
-				data: { x: x,y:y}
+				position: dialogPosition,
+				data: { x: x, y: y }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
-		});	}
+		});
+	}
 	// getting data and initialize data Source and Paginator
 	getallData(employeeId: number) {
 
-		let search: IReadingSearch = {Employee_id:employeeId};
+		let search: IReadingSearch = { Employee_id: employeeId };
 
-		this.service.getReadingsData(search).subscribe(
-			(data: IReading) => {
-				console.log(data);
-				this.dataSource = new MatTableDataSource<IReadingList>(data.data);
-				this.dataSource.paginator = this.paginator;
-			}
-		);
+		this.service.getReadingsData(search).pipe(
+			map(
+				(data: IReading) => {
+					return data.data.map((item) => {
+						return { ...item, readingImagePath: localStorage.getItem("companyLink")?.toString().concat(item.readingImagePath) }
+					})
+				}
+			)).subscribe(
+				(data: any) => {
+					console.log(data.data);
+					this.dataSource = new MatTableDataSource<IReadingList>(data.data);
+					this.dataSource.paginator = this.paginator;
+				}
+			);
 	}
 
 	//filter from search Box

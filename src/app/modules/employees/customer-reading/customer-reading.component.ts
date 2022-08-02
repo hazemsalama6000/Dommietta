@@ -1,4 +1,4 @@
-import {  Component, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Output, ViewChild } from "@angular/core";
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
@@ -26,9 +26,9 @@ export class CustomerReadingComponent {
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
-	displayedColumns: string[] = ['customerName', 'value', 
-	'lastReading', 'meterStatus' , 'readingImagePath'
-	 , 'issueName','issueStatus','XY','issueDate','isRevised','isPotsed','notes'];
+	displayedColumns: string[] = ['customerName', 'value',
+		'lastReading', 'meterStatus', 'readingImagePath'
+		, 'issueName', 'issueStatus', 'XY', 'issueDate', 'isRevised', 'isPotsed', 'notes'];
 
 	dataSource: any;
 
@@ -52,7 +52,7 @@ export class CustomerReadingComponent {
 		merge(this.paginator.page, this.service.searchUpdate$)
 			.pipe(
 				switchMap(() => {
-					let search: IReadingSearch = {Employee_id:this.employeeId,PageNumber:this.paginator.pageIndex + 1 };
+					let search: IReadingSearch = { Employee_id: this.employeeId, PageNumber: this.paginator.pageIndex + 1 };
 					this.isLoadingResults = true;
 					return this.service.getReadingsData(search);
 				}),
@@ -63,19 +63,21 @@ export class CustomerReadingComponent {
 						return [];
 					}
 					this.resultsLength = data.totalRecords;
-					return data.data;
+					return data.data.map((item) => {
+						return { ...item, actualreadingImagePath: item.readingImagePath, readingImagePath: localStorage.getItem("companyLink")?.toString().concat(item.readingImagePath) }
+					})
 				}),
 			)
-			.subscribe((data) => { this.dataSource = data;});
+			.subscribe((data) => { this.dataSource = data; });
 
-			this.service.searchUpdateAction.next(true);
+		this.service.searchUpdateAction.next(true);
 	}
-	currentLocation(x:number,y:number){
+	currentLocation(x: number, y: number) {
 
 		const dialogPosition: DialogPosition = {
-			top:'0px',
-			right:'0px'
-		  };
+			top: '0px',
+			right: '0px'
+		};
 
 		const dialogRef = this.dialog.open(UserLocationXYComponent,
 			{
@@ -85,13 +87,14 @@ export class CustomerReadingComponent {
 				height: '100%',
 
 				//panelClass: 'full-screen-modal',*/
-				position:dialogPosition,
-				data: { x: x,y:y}
+				position: dialogPosition,
+				data: { x: x, y: y }
 			});
 
 		dialogRef.afterClosed().subscribe(result => {
 			console.log(`Dialog result: ${result}`);
-		});	}
+		});
+	}
 	// getting data and initialize data Source and Paginator
 	/*getallData(employeeId: number) {
 		let search: IReadingSearch = {Employee_id:employeeId};

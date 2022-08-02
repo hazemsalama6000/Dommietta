@@ -17,6 +17,7 @@ export interface IReadingList {
     y: number;
     meterStatus: string;
     readingImagePath: string;
+	actualreadingImagePath?:string,
     issueName: string;
     issueStatus: string;
     issueDate: Date;

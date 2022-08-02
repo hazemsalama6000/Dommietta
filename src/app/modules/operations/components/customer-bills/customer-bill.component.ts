@@ -81,7 +81,6 @@ export class BillComponent implements OnInit , AfterViewInit {
 		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		
-		console.log('sssssss');
 		console.log(model);
 
 		this.customerEditManageService.searchParameterAction.next(model);
