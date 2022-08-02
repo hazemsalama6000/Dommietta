@@ -375,6 +375,7 @@ mat-nested-tree-node[aria-level="1"]>li>div[class='mat-tree-node'] .mat-checkbox
 	color: white !important;
 	font-weight: bold !important;
 }
+
 mat-nested-tree-node[aria-level="2"]>li>div[class='mat-tree-node'] .mat-checkbox-label {
 	font-weight: bold !important;
 }
@@ -383,12 +384,22 @@ mat-nested-tree-node[aria-level="2"]>li>div[class='mat-tree-node'] .mat-checkbox
 	font-family: 'cairo';
 }
 
-.p-confirm-popup-footer>button{
-padding: 5px 15px !important;
-margin: 0 !important;
-margin-inline-end: 10px !important;
+.p-confirm-popup-footer>button {
+	padding: 5px 15px !important;
+	margin: 0 !important;
+	margin-inline-end: 10px !important;
 }
 
-.p-datepicker-title{
+.p-datepicker-title {
 	display: flex !important;
+}
+
+@media (min-width: 992px) {
+	.aside .aside-logo {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 95px !important;
+		padding: 0 25px;
+	}
 }

@@ -18,7 +18,7 @@ export class PermissionsComponent implements OnInit {
 
   userData: IUserData;
   companyData: ICompany;
-  url:string=localStorage.getItem("companyLink")??""
+  url: string = localStorage.getItem("companyLink") ?? ""
 
   countUsers: any = { userTotal: 0, countOnlineUser: 0, countOfflineUser: 0 };
 
@@ -40,7 +40,10 @@ export class PermissionsComponent implements OnInit {
 
   getCompanyData() {
     this.companyService.getCompanyDataById(this.userData.companyId).subscribe(
-      (res) => { this.companyData = res },
+      (res: ICompany) => {
+        this.companyData = res;
+        console.log(res.companyName)
+      },
       (err) => console.log(err),
       () => { }
     )
@@ -63,7 +66,7 @@ export class PermissionsComponent implements OnInit {
   }
 
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }
