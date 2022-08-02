@@ -322,7 +322,8 @@ export const locale = {
         ROLENAME: "أسم الدور",
         UPDATEROLE: "تعديل الدور",
         JOB: "الوظيفة",
-        USERONLINE: ""
+        USERONLINE: "متصل",
+        USEROFFLINE: "غير متصل"
 
       },
       MESSAGE: {

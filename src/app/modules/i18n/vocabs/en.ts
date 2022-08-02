@@ -269,7 +269,7 @@ export const locale = {
         ADDUSER: "Add User",
         EDITROLE: "Edit Role",
         VIEW: "View Details",
-        RESETPASSWORD:"Reset Password"
+        RESETPASSWORD: "Reset Password"
       },
       TITLES: {
         ADDORUPDATEONLINEUSERS: "Users Login Data",
@@ -313,7 +313,9 @@ export const locale = {
         ROLEPERMISSION: "Role Permissions",
         ROLENAME: "Role Name",
         UPDATEROLE: "Update Role",
-        JOB: "Job"
+        JOB: "Job",
+        USERONLINE: "Online",
+        USEROFFLINE: "Offline"
 
       },
       MESSAGE: {

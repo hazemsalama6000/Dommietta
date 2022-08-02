@@ -108,10 +108,10 @@ url:string=localStorage.getItem("companyLink")??""
           .subscribe((data: LookUpModel[]) => { this.customerDropdown = data; });
         break;
       case "startDate":
-        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.StartDate = this.datePipe.transform(new Date(this.startDate ?? ''), 'yyyy-MM-dd') + "T00:00:00" ?? '';
         break;
       case "endDate":
-        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'MM-dd-yyyy') + " 00:00:00" ?? '';
+        this.searchObject.EndDate = this.datePipe.transform(new Date(this.endDate ?? ''), 'yyyy-MM-dd') + "T00:00:00" ?? '';
         break;
       case "CustomerCode":
         this.startDate = '';
