@@ -41,7 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 				}
 
 				if (requestError.status == 403) {
-					this.toaster.openSuccessSnackBar(requestError.message);
+					this.toaster.openErrorSnackBar('ليس لديك صلاحية الدخول');
 					console.log(requestError)
 				}
 
