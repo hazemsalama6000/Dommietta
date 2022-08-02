@@ -2,6 +2,7 @@ import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { AuthService } from "src/app/modules/auth";
 import { EmployeeService } from "src/app/modules/employees/services/employee.service";
 import { LookUpModel } from "src/app/shared-module/models/lookup";
 import { IOnlineUsers } from "../../../models/IOnlineUsers.interface";
@@ -20,9 +21,21 @@ export class SearchUserLogsComponent implements OnInit {
 	SearchUsersConnectionLogsForm: FormGroup;
 	dropUsersData: LookUpModel[] = []
 
-	constructor(private fb: FormBuilder, private toaster: toasterService, private service: OnlineUsersService, private employeeService: EmployeeService, private datePipe: DatePipe) { }
+	constructor(private fb: FormBuilder, private toaster: toasterService, private service: OnlineUsersService,
+		private auth:AuthService,
+		private employeeService: EmployeeService, private datePipe: DatePipe) { }
 
 	ngOnInit(): void {
+
+		this.auth.userData.subscribe((data)=>{
+			
+			this.employeeService.getLookupEmployeeData(data.companyId).subscribe(
+				(data: LookUpModel[]) => {
+					this.dropUsersData = data;
+				}
+			);
+	
+		});
 
 		this.service.clickSearch$.subscribe((data: boolean) => {
 			if (data) {
@@ -36,11 +49,6 @@ export class SearchUserLogsComponent implements OnInit {
 			endDate: [new Date().toISOString()]
 		});
 
-		this.employeeService.getLookupEmployeeData(1005).subscribe(
-			(data: LookUpModel[]) => {
-				this.dropUsersData = data;
-			}
-		);
 
 		//this.searchOnlineUsers({companyId:undefined , userStates:true});
 
