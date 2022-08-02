@@ -210,7 +210,7 @@ export class CompanyUpsertComponent implements OnInit {
 	// initialize Form With Validations
 	initForm() {
 
-		this.company = {
+		this.company = {companyServiceName:'',
 			id: 0, code: '', companyName: '', activity: '', address: '', mobileUsersCount: 0, region_Id: 0, isActive: false, logoPrint: '',
 			logoWeb: '', phoneNumber: '0', email: '', managerName: '', managerPosition: '', commercialRecord: '', taxCardNo: '', vatTax: '',
 			isValTaxActive: false, hasDirectTransferForStocks: false, wTax: '', state_Id: 0, isWTaxActive: false, taxFileNo: '', vatTaxNum: '', employee_Id: 0
