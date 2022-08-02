@@ -20,10 +20,8 @@ export class TechnitianService {
 
 	getTechnicianLogByEmpId(employeeId: number): Observable<ITechnitianLog[]> {
 			return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_TECHNNICIAN_DATA}?EmployeeId=${employeeId}`).pipe(
-				tap(data=>console.log(data)),map((data: ITechnitianLog[]) => data)
+				map((data: HttpReponseModel) => data.data)
 			);
-
-		/*  */return of([{ canCollect: true, canRead: true, canComplain: false, canEditCustomer: true, attachImageRead: false, attachImageEditCustomer: true, maxOfflineWorkingHours: 50, maxOfflineWorkingBills: 40 } as ITechnitianLog]);
 
 	}
 	///

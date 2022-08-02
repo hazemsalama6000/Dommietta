@@ -66,6 +66,7 @@ export class BillDatatableComponent {
 				switchMap(() => {
 					this.isLoadingResults = true;
 					this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
+					console.log('sssss');
 					console.log(this.currentSearchParameter);
 
 					return this.service.searchCustomerBills(this.currentSearchParameter);
@@ -83,35 +84,20 @@ export class BillDatatableComponent {
 			.subscribe((data) => {this.data = data;  });
 	}
 
-/*
+
 	ngOnInit(): void {
-		this.service.searchUpdateUserManageStream$.subscribe(
-			(data: ICustomerBIllsReponse[]) => {
-				console.log(data);
-				if (data) {
-					this.dataSource = new MatTableDataSource<ICustomerBIllsReponse>(data);
-					this.dataSource.paginator = this.paginator;
-				}
-				else {
-					this.dataSource.data = [];
-				}
+
+		this.service.searchParameterStream$.subscribe(
+			(data: ICustomerEditManageSearch) => {
+				this.currentSearchParameter = data;
 			}
 		);
-	}*/
-
-
+	}
 
 	rowClicked(model: ICustomerEditResponse) {
 
 	}
 
-	
-	//filter from search Box
-/*	applyFilter(event: Event) {
-		const filterValue = (event.target as HTMLInputElement).value;
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-	}
-*/
 }
 
 export interface ItemsWithPagesCustomeBills {
