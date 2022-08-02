@@ -29,6 +29,10 @@ export class SettingComponent implements OnInit {
 	}
 
 	toggleActive() {
+		if(this.customerProfile.id==undefined){
+			this.toaster.openWarningSnackBar('اختر عميل');
+			return;
+		}
 		this.service.toggleActive(this.customerProfile.id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);

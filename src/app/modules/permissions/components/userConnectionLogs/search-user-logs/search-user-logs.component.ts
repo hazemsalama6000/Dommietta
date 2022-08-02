@@ -29,7 +29,7 @@ export class SearchUserLogsComponent implements OnInit {
 
 		this.auth.userData.subscribe((data)=>{
 			
-			this.employeeService.getLookupEmployeeData(data.companyId).subscribe(
+			this.employeeService.getLookupEmployeeDataByParam().subscribe(
 				(data: LookUpModel[]) => {
 					this.dropUsersData = data;
 				}

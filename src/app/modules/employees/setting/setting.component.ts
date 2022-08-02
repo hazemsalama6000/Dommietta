@@ -31,6 +31,10 @@ export class SettingComponent implements OnInit {
 	}
 
 	toggleActive() {
+		if(this.employeeProfile.id==undefined){
+			this.toaster.openWarningSnackBar('اختر عميل');
+			return;
+		}
 		this.service.toggleActive(this.employeeProfile.id).subscribe(
 			(data: HttpReponseModel) => {
 				this.toaster.openSuccessSnackBar(data.message);
@@ -45,7 +49,10 @@ export class SettingComponent implements OnInit {
 
 
 	toggleIsTechnician() {
-
+		if(this.employeeProfile.id==undefined){
+			this.toaster.openWarningSnackBar('اختر موظف');
+			return;
+		}
 		if (this.employeeProfile.isTechnician == true) {
 
 			this.technicianService.toggleIsTechnician(this.employeeProfile.id).subscribe(
@@ -68,6 +75,10 @@ export class SettingComponent implements OnInit {
 
 
 	openDialog() {
+		if(this.employeeProfile.id==undefined){
+			this.toaster.openWarningSnackBar('اختر موظف');
+			return;
+		}
 		const dialogPosition: DialogPosition = {
 			top: '0px',
 			right: '0px'

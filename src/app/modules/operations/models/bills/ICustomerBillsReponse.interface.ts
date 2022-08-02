@@ -12,5 +12,6 @@ export interface ICustomerBIllsReponse {
 	employee_Id: number,
 	notes: string,
 	payDate: Date,
+	totalAmount:number,
 	billTransactions:IBillTransactions[]
 }

@@ -13,6 +13,7 @@
 	<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
 		<th style="background-color:rgb(207, 209, 209) ;" [ngSwitch]="column" mat-header-cell *matHeaderCellDef>
 			<span *ngSwitchCase="'payDate'"> تاريخ الدفع </span>
+			<span *ngSwitchCase="'totalAmount'"> اجمالى قيمة الدفع  </span>
 			<span *ngSwitchCase="'branch'"> الفرع </span>
 			<span *ngSwitchCase="'area'"> المنطقة </span>
 			<span *ngSwitchCase="'block'"> المربع </span>
@@ -24,6 +25,7 @@
 
 		<td class="text-center" mat-cell [ngSwitch]="column" *matCellDef="let element">
 			<span class="badge badge-danger" *ngSwitchCase="'payDate'"> {{element[column] | date:'dd/MM/yyyy'}}</span>
+			<span class="badge badge-primary" *ngSwitchCase="'totalAmount'"> {{element[column] }} </span>
 			<span *ngSwitchCase="'branch'"> {{element[column] }} </span>
 			<span *ngSwitchCase="'area'"> {{element[column] }} </span>
 			<span *ngSwitchCase="'block'"> {{element[column] }} </span>

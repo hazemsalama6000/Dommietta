@@ -37,7 +37,7 @@ export interface PeriodicElement {
 export class BillDatatableComponent {
 
 	//dataSource = ELEMENT_DATA;
-	columnsToDisplay = ['payDate','branch',
+	columnsToDisplay = ['payDate','totalAmount','branch',
 	'area',
 	'block',
 	'customerCode',
