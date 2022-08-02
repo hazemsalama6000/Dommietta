@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import * as FileSaver from 'file-saver';
 import { Subscription } from 'rxjs';
@@ -31,7 +31,7 @@ export class ReadingListComponent implements OnInit {
   btnIsRevise: boolean = false;
   showBtnIsRevise: boolean = true;
 
-url:string=localStorage.getItem("companyLink")??""
+  url: string = localStorage.getItem("companyLink") ?? ""
 
   startDate: string;
   endDate: string;
@@ -61,7 +61,8 @@ url:string=localStorage.getItem("companyLink")??""
     private toaster: toasterService,
     private datePipe: DatePipe,
     private confirmationDialogService: ConfirmationDialogService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private elementRef: ElementRef
   ) {
 
     this.searchObject = {
@@ -296,6 +297,20 @@ url:string=localStorage.getItem("companyLink")??""
       this.readingData[index].isRevised = true;
     else
       this.readingData[index].isRevised = this.readingData[index].lastRevised ?? false;
+  }
+
+  @HostListener('error', ['$event']) onClick(event:Event) {
+    console.log('component is clicked');
+    console.log(event);
+ }
+
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.querySelector('img')
+      .addEventListener('error', this.onClick1.bind(this));
+  }
+
+  onClick1(event: Event) {
+    console.log(event);
   }
 
   ngOnDestroy(): void {

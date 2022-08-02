@@ -119,11 +119,11 @@
           <td>{{read.value}}</td>
           <td>{{read.lastReading }}</td>
           <td>
+            
             <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="url+read.readingImagePath"
-              width="150" height="50" [preview]="true">
+              width="150" height="50" [preview]="true"  >
             </p-image>
-            <img src="assets\\media\\icons\\images.png"
-              width="60" height="50" *ngIf="read.readingImagePath==null||read.readingImagePath==''">
+            <img src="assets\\media\\icons\\images.png" width="60" height="50" *ngIf="read.readingImagePath==null||read.readingImagePath==''">
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
