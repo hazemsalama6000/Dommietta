@@ -76,6 +76,7 @@ export class TreepermissionComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.roleService.permissionTree.next([]);
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 

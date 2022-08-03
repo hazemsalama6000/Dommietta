@@ -70,7 +70,7 @@
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.USERTYPE'|translate}}</th>
                     <!-- <th class="min-w-70px">{{'PERMISSIONS.TITLES.JOB'|translate}}</th> -->
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.STATUS'|translate}}</th>
-                    <th class="min-w-200px">{{'PERMISSIONS.TITLES.LASTLOGINTIME'|translate}}</th>
+                    <th class="min-w-170px">{{'PERMISSIONS.TITLES.LASTLOGINTIME'|translate}}</th>
                     <th class="min-w-300px">{{'PERMISSIONS.TITLES.ASSIGNEDROLES'|translate}}</th>
                     <th class="text-end min-w-100px"></th>
                 </tr>
@@ -85,8 +85,7 @@
                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                             <a [href]="user.imagePath">
                                 <div class="symbol-label">
-                                    <img [src]="url+(user?.imagePath??'assets/media/avatars/300-1.jpg')"
-                                        alt="{{user.name}}" class="w-100">
+                                    <img [src]="url+user?.imagePath" (error)="img.src='assets/media/user.png'" #img class="w-100">
                                 </div>
                             </a>
                         </div>
