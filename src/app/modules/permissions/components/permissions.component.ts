@@ -40,10 +40,7 @@ export class PermissionsComponent implements OnInit {
 
   getCompanyData() {
     this.companyService.getCompanyDataById(this.userData.companyId).subscribe(
-      (res: ICompany) => {
-        this.companyData = res;
-        console.log(res.companyName)
-      },
+      (res: ICompany) => { this.companyData = res; },
       (err) => console.log(err),
       () => { }
     )

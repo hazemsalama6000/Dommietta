@@ -13,7 +13,7 @@
                 <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
                     <!--begin::Image-->
                     <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-100px h-lg-100px me-7 mb-4">
-                        <img class="mw-50px mw-lg-75px" [src]="url+(companyData?.logoWeb??'')" alt="{{companyData?.companyName}}" />
+                        <img class="mw-50px mw-lg-75px" [src]="url+(companyData?.logoWeb)" (error)="comimg.src='assets/media/company.png'" #comimg alt="{{companyData?.companyName}}" />
                     </div>
                     <!--end::Image-->
                     <!--begin::Wrapper-->
