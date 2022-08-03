@@ -23,20 +23,22 @@ export class TablesWidget10Component implements OnInit {
 	constructor(private service: StaticsService, private auth: AuthService, private datePipe: DatePipe) { }
 
 	ngOnInit(): void {
-		this.auth.userData.subscribe((data) => {
-			this.companyId = data.companyId
-		});
+		
 	}
 
 	ngAfterViewInit() {
-
-		merge(this.paginator.page)
+		this.auth.userData.subscribe((data) => {
+			this.companyId = data.companyId
+		
+		merge(this.paginator.page,this.service.searchUpdate$)
 			.pipe(
 				switchMap(() => {
-					let model: ISearchModel = { CompanyId: this.companyId, } as ISearchModel;
+					let model: ISearchModel = { } as ISearchModel;
 					model.StartDate = this.datePipe.transform(new Date(), 'MM/dd/yyyy')!;
 					model.EndDate = this.datePipe.transform(new Date(), 'MM/dd/yyyy')!;
 					model.PageNumber = this.paginator.pageIndex + 1;
+					model.CompanyId= this.companyId;
+					console.log(model);
 					return this.service.getEmployeesStatic(model);
 				}),
 				map((data: IEmployeeStatics) => {
@@ -49,9 +51,10 @@ export class TablesWidget10Component implements OnInit {
 					return data.data;
 				}),
 			)
-			.subscribe((data) => { this.dailyStatics = data; });
+			.subscribe((data) => { this.dailyStatics = data;console.log(data); });
 
 		this.service.searchUpdateAction.next(true);
+	});
 	}
 }
 

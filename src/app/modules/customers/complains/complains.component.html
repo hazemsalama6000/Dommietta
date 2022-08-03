@@ -19,7 +19,7 @@
 			</ng-container>
 
 			<ng-container matColumnDef="ComplaintTypeName">
-				<th  mat-header-cell *matHeaderCellDef> نوع الشكوى </th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> نوع الشكوى </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.complaintTypeName}}
 				</td>
@@ -34,7 +34,7 @@
 			</ng-container>
 
 			<ng-container matColumnDef="IssueName">
-				<th mat-header-cell *matHeaderCellDef> اسم الاصدار </th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> اسم الاصدار </th>
 				<td mat-cell *matCellDef="let element; let x=index" style="cursor: pointer;">
 					{{element.issueName}}
 				</td>
@@ -50,7 +50,7 @@
 
 			<!-- Name Column -->
 			<ng-container matColumnDef="IsRevised">
-				<th mat-header-cell *matHeaderCellDef> تمت المراجعة</th>
+				<th class="stylingHeader" mat-header-cell *matHeaderCellDef> تمت المراجعة</th>
 				<td mat-cell *matCellDef="let element; let x=index">
 					<span>
 						<a *ngIf="element.isRevised == true; else inActiveForisRevised"
