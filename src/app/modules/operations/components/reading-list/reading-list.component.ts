@@ -299,20 +299,6 @@ export class ReadingListComponent implements OnInit {
       this.readingData[index].isRevised = this.readingData[index].lastRevised ?? false;
   }
 
-  @HostListener('error', ['$event']) onClick(event:Event) {
-    console.log('component is clicked');
-    console.log(event);
- }
-
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.querySelector('img')
-      .addEventListener('error', this.onClick1.bind(this));
-  }
-
-  onClick1(event: Event) {
-    console.log(event);
-  }
-
   ngOnDestroy(): void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe);
   }

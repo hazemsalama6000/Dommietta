@@ -18,6 +18,8 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   Currentlang: string;
   CurrentLangImage: string;
 
+  url: string = localStorage.getItem('companyLink') as string;
+
   language: LanguageFlag;
   userdata: IUserData;
   langs = languages;
