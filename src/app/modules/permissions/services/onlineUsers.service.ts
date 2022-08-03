@@ -67,7 +67,7 @@ export class OnlineUsersService {
 	}
 
 	getUsersLocationLogs(userLogsSearchModel: IUserLogsSearchBox): Observable<ILocationXY[]> {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_USRS_LOCATION_LOGS}?employeeId=${userLogsSearchModel.empId}&&startDate=${userLogsSearchModel.startDate}&&endDate=${userLogsSearchModel.endDate}&&companyBranchId=1005`)
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_USRS_LOCATION_LOGS}?employeeId=${userLogsSearchModel.empId}&&startDate=${userLogsSearchModel.startDate}&&endDate=${userLogsSearchModel.endDate}`)
 			.pipe(map((data: HttpReponseModel) => data.data.map((item: any) => ({ x: item.x, y: item.y, date: item.date, empName: item.name, status: item.status }) as ILocationXY)));
 	}
 
