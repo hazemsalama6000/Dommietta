@@ -26,9 +26,7 @@ export class TreepermissionComponent implements OnInit {
     this.unsubscribe.push(getTree);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   hasChild = (_: number, node: ITreeRoles) => !!node.children && node.children.length > 0;
 
@@ -44,7 +42,6 @@ export class TreepermissionComponent implements OnInit {
 
   checkAllParents(node: ITreeRoles) {
     if (node.parent) {
-      // console.log(this.treeControl.getChildren(node))
       const descendants = this.treeControl.getDescendants(node.parent);
       node.parent.isSelected = descendants.every((child: any) => child.isSelected);
       node.parent.indeterminate = descendants.some((child: any) => child.isSelected);
@@ -58,20 +55,10 @@ export class TreepermissionComponent implements OnInit {
     if (node.children) {
       node.children.forEach((child: any) => { this.itemToggle(checked, child); });
     } else {
-      node.parent?.children?.forEach((child) => {
-        if (node.name == 'Full' && node.isSelected) {
-          child.name != 'Full' ? child.isSelected = false : null;
-        }
-        else if (node.name != 'Full' && node.isSelected) {
-          let istrue = node.parent?.children?.filter(x => x.name != 'Full' && x.isSelected);
-          if (istrue?.length == 4) {
-            node.parent?.children?.map((x) => { x.name != 'Full' ? x.isSelected = false : x.isSelected = true; })
-          } else {
-            child.name == 'Full' ? child.isSelected = false : null;
-          }
-        }
-      })
+      if (node.name == 'Full') 
+        node.parent?.children?.forEach((child) => { node.isSelected ? child.isSelected = true : child.isSelected = false });
     }
+    
     this.checkAllParents(node);
   }
 
