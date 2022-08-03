@@ -62,7 +62,7 @@ export class TreepermissionComponent implements OnInit {
         if (istrue?.length == 3) {
           node.parent?.children?.map((x) => { x.name == 'Full' ? x.isSelected = true : null })
         } else {
-                    node.parent?.children?.map((x) => { x.name == 'Full' ? x.isSelected = false : null })
+          node.parent?.children?.map((x) => { x.name == 'Full' ? x.isSelected = false : null })
         }
       }
 
