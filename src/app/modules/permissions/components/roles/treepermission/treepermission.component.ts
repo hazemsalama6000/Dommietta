@@ -55,10 +55,12 @@ export class TreepermissionComponent implements OnInit {
     if (node.children) {
       node.children.forEach((child: any) => { this.itemToggle(checked, child); });
     } else {
-      if (node.name == 'Full') 
+      if (node.name == 'Full')
         node.parent?.children?.forEach((child) => { node.isSelected ? child.isSelected = true : child.isSelected = false });
+      else
+        node.parent?.children?.forEach((child) => { node.name != 'Full' ? child.isSelected = true : child.isSelected = false });
     }
-    
+
     this.checkAllParents(node);
   }
 
@@ -68,5 +70,19 @@ export class TreepermissionComponent implements OnInit {
   }
 
 }
+
+      // node.parent?.children?.forEach((child) => {
+      //   if (node.name == 'Full' && node.isSelected) {
+      //     child.name != 'Full' ? child.isSelected = false : null;
+      //   }
+      //   else if (node.name != 'Full' && node.isSelected) {
+      //     let istrue = node.parent?.children?.filter(x => x.name != 'Full' && x.isSelected);
+      //     if (istrue?.length == 4) {
+      //       node.parent?.children?.map((x) => { x.name != 'Full' ? x.isSelected = false : x.isSelected = true; })
+      //     } else {
+      //       child.name == 'Full' ? child.isSelected = false : null;
+      //     }
+      //   }
+      // })
 
 

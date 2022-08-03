@@ -55,10 +55,10 @@
     data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
     <img *ngIf="!userdata" [src]="'./assets/media/svg/avatars/001-boy.svg'" alt="" />
 
-    <img *ngIf="userdata" [src]="url+(userdata?.imgPath??'./assets/media/svg/avatars/001-boy.svg')"
-      alt="{{userdata.fullName}}" (error)="img.src = 'assets\\media\\avatars\\300-3.png'" #img/>
+    <img *ngIf="userdata" [src]="url+(userdata?.imgPath)"
+      alt="{{userdata.fullName}}" (error)="img.src = '../../../assets/media/svg/avatars/001-boy.svg'" #img/>
   </div>
-  <!-- end::Toggle  -->
+  <!-- end::Toggle <img src="../../../assets/media/svg/avatars/001-boy.svg" alt="image" /> -->
   <app-user-inner></app-user-inner>
 </div>
 <!-- end::User -->
