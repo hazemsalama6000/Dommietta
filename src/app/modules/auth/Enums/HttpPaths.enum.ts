@@ -159,4 +159,11 @@ export enum HttpPaths {
 	API_PULL_ISSUES_DATA = "",
 
 
+	//statics
+	API_GET_EMPLOYEE_STATICS = "/api/v1/shared/getdailystatisticsperemployee",
+	API_GET_TWELVE_ISSUES_STATICS = "/api/v1/bill/gettoptwelveissues/",
+	API_GET_DAILY_STATICS = "/api/v1/shared/getdailystatistics",
+
+
+
 }

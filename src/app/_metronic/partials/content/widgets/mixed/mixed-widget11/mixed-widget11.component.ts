@@ -1,5 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/modules/auth';
 import { getCSSVariableValue } from '../../../../../kt/_utils';
+import { IDailyStatics } from '../../models/IDailyStatics.interface';
+import { ISearchModel } from '../../models/ISearchModel.interface';
+import { StaticsService } from '../../services/statics.service';
 @Component({
   selector: 'app-mixed-widget11',
   templateUrl: './mixed-widget11.component.html',
@@ -8,15 +13,29 @@ export class MixedWidget11Component implements OnInit {
   @Input() chartColor: string = '';
   @Input() chartHeight: string;
   chartOptions: any = {};
+companyName:string;
 
-  constructor() {}
+  constructor(private auth:AuthService, private datePipe: DatePipe, private service: StaticsService) {}
 
   ngOnInit(): void {
-    this.chartOptions = getChartOptions(this.chartHeight, this.chartColor);
+		this.auth.userData.subscribe((data) => {
+
+			let model: ISearchModel = { CompanyId: data.companyId } as ISearchModel;
+			model.StartDate = this.datePipe.transform(new Date(), 'MM/dd/yyyy')!;
+			model.EndDate = this.datePipe.transform(new Date(), 'MM/dd/yyyy')!;
+
+			this.service.getDailyStatic(model).subscribe((dataa: IDailyStatics[]) => {
+				this.companyName = dataa[0].companyName;
+			console.log(dataa[0]);
+				this.chartOptions = getChartOptions(this.chartHeight, this.chartColor, dataa );
+			});
+		});
+
+    
   }
 }
 
-function getChartOptions(chartHeight: string, chartColor: string) {
+function getChartOptions(chartHeight: string, chartColor: string,dataa:IDailyStatics[]) {
   const labelColor = getCSSVariableValue('--bs-gray-500');
   const borderColor = getCSSVariableValue('--bs-gray-200');
   const secondaryColor = getCSSVariableValue('--bs-gray-300');
@@ -25,13 +44,10 @@ function getChartOptions(chartHeight: string, chartColor: string) {
   return {
     series: [
       {
-        name: 'Net Profit',
-        data: [50, 60, 70, 80, 60, 50, 70, 60],
+        name: 'العدد ',
+        data: [dataa[0].complaintsCount, dataa[0].meterReadingsCount, dataa[0].updatedCustomersCount],
       },
-      {
-        name: 'Revenue',
-        data: [50, 60, 70, 80, 60, 50, 70, 60],
-      },
+    
     ],
     chart: {
       fontFamily: 'inherit',
@@ -60,7 +76,7 @@ function getChartOptions(chartHeight: string, chartColor: string) {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      categories: ['الشكاوى', 'قراءة العداد', 'تعديلات العملاء'],
       axisBorder: {
         show: false,
       },
@@ -112,7 +128,7 @@ function getChartOptions(chartHeight: string, chartColor: string) {
       },
       y: {
         formatter: function (val: number) {
-          return '$' + val + ' revenue';
+          return  val;
         },
       },
     },

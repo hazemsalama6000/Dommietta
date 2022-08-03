@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 // Advanced Tables
@@ -77,6 +77,7 @@ import { TablesWidget11Component } from './tables/tables-widget11/tables-widget1
 import { TablesWidget12Component } from './tables/tables-widget12/tables-widget12.component';
 import { TablesWidget13Component } from './tables/tables-widget13/tables-widget13.component';
 import { TablesWidget14Component } from './tables/tables-widget14/tables-widget14.component';
+import { SharedModule } from 'src/app/shared-module/shared-module.module';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { TablesWidget14Component } from './tables/tables-widget14/tables-widget1
     InlineSVGModule,
     NgApexchartsModule,
     NgbDropdownModule,
+	SharedModule
   ],
   exports: [
     // Advanced Tables
@@ -235,6 +237,7 @@ import { TablesWidget14Component } from './tables/tables-widget14/tables-widget1
     TablesWidget12Component,
     TablesWidget13Component,
     TablesWidget14Component,
-  ],
+  ], providers:[DatePipe]
+
 })
 export class WidgetsModule {}
