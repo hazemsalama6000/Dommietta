@@ -57,9 +57,17 @@ export class TreepermissionComponent implements OnInit {
     } else {
       if (node.name == 'Full')
         node.parent?.children?.forEach((child) => { node.isSelected ? child.isSelected = true : child.isSelected = false });
-      else
-        node.parent?.children?.forEach((child) => { node.name != 'Full' ? child.isSelected = true : child.isSelected = false });
+      else {
+        let istrue = node.parent?.children?.filter(x => x.name != 'Full' && x.isSelected);
+        if (istrue?.length == 4) {
+          node.parent?.children?.map((x) => { x.name != 'Full' ? x.isSelected = false : x.isSelected = true; })
+        } else {
+          //child.name == 'Full' ? child.isSelected = false : null;
+        }
+      }
+
     }
+
 
     this.checkAllParents(node);
   }
