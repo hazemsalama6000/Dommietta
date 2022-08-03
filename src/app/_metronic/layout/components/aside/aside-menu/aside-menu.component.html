@@ -6,6 +6,139 @@
     </span><span class="menu-title"> الرئيسية </span></a>
 </div>
 
+<div class="menu-item">
+  <div class="menu-content pb-2">
+    <!-- {{'MENU.PERMISSION'|translate}} -->
+    <span class="text-muted text-uppercase fs-8" style="color: #009ef7 !important;">صلاحيات المدير العام</span>
+  </div>
+</div>
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+  <span class="menu-link"><span class="menu-icon">
+      <mat-icon style="font-size:25px;">manage_accounts</mat-icon>
+    </span><span class="menu-title">إعدادات</span><span class="menu-arrow"></span></span>
+  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/hr/company" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">business</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title">{{"MENU.COMPANIES" | translate}}</span>
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/permissions/superadminroles" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">supervised_user_circle</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title">{{'MENU.SUPERADMIN'|translate}}</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+  <span class="menu-link"><span class="menu-icon">
+      <mat-icon style="font-size:25px;">people_outline</mat-icon>
+    </span><span class="menu-title">متابعة المستخدمين</span><span class="menu-arrow"></span></span>
+  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/permissions/onlineUsers" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">record_voice_over</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title">{{"MENU.ONLINEUSERS" | translate}}</span>
+      </a>
+    </div>
+
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/permissions/userconnectionlogs" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">admin_panel_settings</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title">{{"MENU.LOGINUSERSDATA" | translate}} </span>
+      </a>
+    </div>
+
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/permissions/userLocationLogs" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">person_pin</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title"> {{'MENU.TRACINGUSERSLOCATION'|translate}} </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="menu-item">
+  <div class="menu-content pb-2">
+    <!-- {{'MENU.PERMISSION'|translate}} -->
+    <span class="text-muted text-uppercase fs-8" style="color: #009ef7 !important;">شئون العاملين</span>
+  </div>
+</div>
+
+<div class="menu-item">
+  <a class="menu-link without-sub" routerLink="/employee/employeeprofile" routerLinkActive="active">
+    <span class="menu-icon">
+      <mat-icon style="font-size:25px;">perm_identity</mat-icon>
+    </span>
+    <span class="menu-title"> بيانات الموظف </span></a>
+</div>
+
+<div class="menu-item">
+  <div class="menu-content pb-2">
+    <!-- {{'MENU.PERMISSION'|translate}} -->
+    <span class="text-muted text-uppercase fs-8" style="color: #009ef7 !important;">إعدادات العملاء</span>
+  </div>
+</div>
+<!-- menu for customer -->
+<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
+  <span class="menu-link">
+    <span class="menu-icon">
+      <mat-icon style="font-size:25px;">supervisor_account</mat-icon>
+    </span>
+    <span class="menu-title">العملاء</span>
+    <span class="menu-arrow"></span>
+  </span>
+  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/customer/cutomerprofile" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">supervisor_account</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title"> بيانات العملاء </span>
+      </a>
+    </div>
+
+
+    <div class="menu-item">
+      <a class="menu-link without-sub" routerLink="/operation/cutomerupdatemanage" routerLinkActive="active">
+        <!-- <span class="menu-icon">
+          <mat-icon style="font-size:25px;">mode_edit</mat-icon>
+        </span> -->
+        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+        <span class="menu-title"> ادارة تعديلات العملاء </span>
+      </a>
+    </div>
+
+  </div>
+</div>
+<!-- menu for customer -->
 
 <div class="menu-item">
   <div class="menu-content pb-2">
@@ -38,7 +171,8 @@
           <mat-icon style="font-size:25px;">article</mat-icon>
         </span> -->
         <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title"> {{'MENU.COMPLAINLIST'|translate}} </span></a>
+        <span class="menu-title"> {{'MENU.COMPLAINLIST'|translate}} </span>
+      </a>
     </div>
   </div>
 </div>
@@ -63,40 +197,7 @@
 </div>
 <!-- menu for received Data -->
 
-<!-- menu for customer -->
-<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
-  <span class="menu-link">
-    <span class="menu-icon">
-      <mat-icon style="font-size:25px;">supervisor_account</mat-icon>
-    </span>
-    <span class="menu-title">العملاء</span>
-    <span class="menu-arrow"></span>
-  </span>
-  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
 
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/customer/cutomerprofile" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">supervisor_account</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title"> بيانات العملاء </span></a>
-    </div>
-
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/operation/cutomerupdatemanage" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">mode_edit</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title"> ادارة تعديلات العملاء </span></a>
-    </div>
-
-  </div>
-</div>
-
-<!-- menu for customer -->
 
 <div class="menu-item">
   <div class="menu-content pb-2">
@@ -118,7 +219,8 @@
           <mat-icon style="font-size:25px;">receipt_long</mat-icon>
         </span> -->
         <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title"> فواتير العملاء </span></a>
+        <span class="menu-title"> فواتير العملاء </span>
+      </a>
     </div>
 
     <div class="menu-item">
@@ -167,86 +269,11 @@
   </div>
 </div>
 
-<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
-  <span class="menu-link"><span class="menu-icon">
-      <mat-icon style="font-size:25px;">people_outline</mat-icon>
-    </span><span class="menu-title">متابعة المستخدمين</span><span class="menu-arrow"></span></span>
-  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/permissions/onlineUsers" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">record_voice_over</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title">{{"MENU.ONLINEUSERS" | translate}}</span></a>
-    </div>
-
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/permissions/userconnectionlogs" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">admin_panel_settings</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title">{{"MENU.LOGINUSERSDATA" | translate}} </span></a>
-    </div>
-
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/permissions/userLocationLogs" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">person_pin</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title"> {{'MENU.TRACINGUSERSLOCATION'|translate}} </span></a>
-    </div>
-  </div>
-</div>
-
-<div class="menu-item menu-accordion" data-kt-menu-trigger="click" routerLinkActive="here show">
-  <span class="menu-link"><span class="menu-icon">
-      <mat-icon style="font-size:25px;">manage_accounts</mat-icon>
-    </span><span class="menu-title">صلاحيات المدير العام</span><span class="menu-arrow"></span></span>
-  <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/hr/company" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">business</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title">{{"MENU.COMPANIES" | translate}}</span></a>
-    </div>
-
-    <div class="menu-item">
-      <a class="menu-link without-sub" routerLink="/permissions/superadminroles" routerLinkActive="active">
-        <!-- <span class="menu-icon">
-          <mat-icon style="font-size:25px;">supervised_user_circle</mat-icon>
-        </span> -->
-        <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
-        <span class="menu-title">{{'MENU.SUPERADMIN'|translate}}</span></a>
-    </div>
-
-  </div>
-</div>
 
 
 
-<div class="menu-item">
-  <div class="menu-content pb-2">
-    <!-- {{'MENU.PERMISSION'|translate}} -->
-    <span class="text-muted text-uppercase fs-8" style="color: #009ef7 !important;">شئون العاملين</span>
-  </div>
-</div>
 
-<div class="menu-item">
-  <a class="menu-link without-sub" routerLink="/employee/employeeprofile" routerLinkActive="active">
-    <span class="menu-icon">
-      <mat-icon style="font-size:25px;">perm_identity</mat-icon>
-    </span>
-    <span class="menu-title"> بيانات الموظف </span></a>
-</div>
+
 
 
 
