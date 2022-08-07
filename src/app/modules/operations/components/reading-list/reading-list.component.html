@@ -1,10 +1,10 @@
-<div class="row mx-0 mb-5">
+<!-- <div class="row mx-0 mb-5">
   <mat-card>
     <div style="width:100%" class="d-flex justify-content-between align-items-center fontsection">
       <span>{{"OPERATION.TITLES.READINGS" | translate}}</span>
     </div>
   </mat-card>
-</div>
+</div> -->
 
 <section class="row mx-0">
 
@@ -14,13 +14,21 @@
 
 
       <ng-template pTemplate="caption">
-        <div class="row mx-0 mb-2  justify-content-end">
+        <div class="row mx-0 mb-2  justify-content-end align-items-center">
           <div class="col">
-            <span class="p-input-icon-left">
-              <button class="buttonsearch" (click)="myfilter('CustomerCode');"><i class="pi pi-search"></i></button>
-              <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}"
-                [(ngModel)]="searchObject.CustomerCode">
-            </span>
+
+            <div class="d-flex">
+              <span class="fontsection me-2 align-self-center">{{"OPERATION.TITLES.READINGS" | translate}}</span>
+
+              <p-divider layout="vertical" class="mx-2"></p-divider>
+
+              <span class="p-input-icon-left">
+                <button class="buttonsearch" (click)="myfilter('CustomerCode');"><i class="pi pi-search"></i></button>
+                <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}"
+                  [(ngModel)]="searchObject.CustomerCode">
+              </span>
+            </div>
+
           </div>
           <div class="col justify-content-end d-flex">
             <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mx-1"
@@ -87,24 +95,19 @@
           <th class="text-center">{{'OPERATION.TITLES.NOTES'|translate}} </th>
           <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
-            <div class="d-flex align-items-center">
-              <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
-                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsRevise"
-                (change)="setAllIsPostOrIsRevise('revise');showBtnIsRevise=false" />
-              <button pButton pRipple type="button" [disabled]="showBtnIsRevise"
-                label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
-                class="p-button-rounded p-button-info p-1" styleClass="p-button-sm"></button>
-            </div>
+            <button pButton pRipple type="button" [disabled]="showBtnIsRevise"
+              label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
+              class="p-button-rounded p-button-info p-1 d-block mb-2" styleClass="p-button-sm"></button>
+            <input class="form-check-input" name="user_role" type="checkbox" id="kt_modal_update_role_option_0"
+              [(ngModel)]="btnIsRevise" (change)="setAllIsPostOrIsRevise('revise');showBtnIsRevise=false" />
           </th>
           <th class="text-center">
-            <div class="d-flex align-items-center">
-              <input class="form-check-input me-3 w-40px" name="user_role" type="checkbox"
-                id="kt_modal_update_role_option_0" [(ngModel)]="btnIsPost"
-                (change)="setAllIsPostOrIsRevise('post');showBtnIsPost=false" />
-              <button pButton pRipple type="button" [disabled]="showBtnIsPost"
-                label="{{'OPERATION.BUTTONS.POSTED'|translate}}" (click)="postAllDataToChecked()"
-                class="p-button-rounded p-button-success p-1" styleClass="p-button-sm"></button>
-            </div>
+            <button pButton pRipple type="button" [disabled]="showBtnIsPost"
+              label="{{'OPERATION.BUTTONS.POSTED'|translate}}" (click)="postAllDataToChecked()"
+              class="p-button-rounded p-button-success p-1 d-block mb-2" styleClass="p-button-sm"></button>
+            <input class="form-check-input" name="user_role" type="checkbox" id="kt_modal_update_role_option_0"
+              [(ngModel)]="btnIsPost" (change)="setAllIsPostOrIsRevise('post');showBtnIsPost=false" />
+
           </th>
           <th class="text-center"></th>
         </tr>
@@ -119,11 +122,12 @@
           <td>{{read.value}}</td>
           <td>{{read.lastReading }}</td>
           <td>
-            
+
             <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="url+read.readingImagePath"
-              width="150" height="50" [preview]="true"  >
+              width="75" height="50" [preview]="true">
             </p-image>
-            <img src="assets\\media\\icons\\images.png" width="60" height="50" *ngIf="read.readingImagePath==null||read.readingImagePath==''">
+            <img src="assets\\media\\icons\\images.png" width="60" height="50"
+              *ngIf="read.readingImagePath==null||read.readingImagePath==''">
           <td>{{read.meterStatus}}</td>
           <td>{{read.issueName}}</td>
           <td>{{read.issueStatus}}</td>
@@ -138,24 +142,25 @@
           </td>
 
           <td>
-            <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.isRevised" [(ngModel)]="read.isRevised" />
+            <input [disabled]="read.lastPosted" matTooltip="{{read.isRevised?'':'تحديد للمراجعة'}}"
+              class="form-check-input me-3" name="user_role" type="checkbox" id="kt_modal_update_role_option_0"
+              [checked]="read.isRevised" [(ngModel)]="read.isRevised" />
           </td>
 
           <td>
-            <input [disabled]="read.lastPosted" class="form-check-input me-3" name="user_role" type="checkbox"
-              id="kt_modal_update_role_option_0" [checked]="read.isPosted" [(ngModel)]="read.isPosted" 
-              (change)="changeIsPost(read,rowIndex)" />
+            <input [disabled]="read.lastPosted" matTooltip="تحديد للارسال" class="form-check-input me-3"
+              name="user_role" type="checkbox" id="kt_modal_update_role_option_0" [checked]="read.isPosted"
+              [(ngModel)]="read.isPosted" (change)="changeIsPost(read,rowIndex)" />
           </td>
 
           <td>
-            <a mat-mini-fab color="primary" *ngIf="!read.lastPosted" (click)="ActivePostOrRevise(read)" id="search"
-              type="submit" class="mx-10">
+            <a mat-mini-fab color="primary" matTooltip="لم يتم الارسال" *ngIf="!read.lastPosted"
+              (click)="ActivePostOrRevise(read)" id="search" type="submit">
               <mat-icon style="font-size: 22px;">visibility</mat-icon>
             </a>
             <div *ngIf="read.lastPosted">
-              <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-success"
-                style="cursor: auto;"></button>
+              <button pButton pRipple type="button" pTooltip="تم الارسال" icon="pi pi-check"
+                class="p-button-rounded p-button-success" style="cursor: auto;"></button>
             </div>
           </td>
         </tr>
@@ -180,8 +185,8 @@
 
     </p-table>
     <div>
-        <p-paginator [rows]="10" [totalRecords]="totalRecords"
-          (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
+      <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="changePage($event)"
+        [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
     </div>
   </div>
 
