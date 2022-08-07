@@ -50,7 +50,7 @@ export class RegionListContentComponent {
 			else {
 				this.currentStateId = data.Id;
 				this.currentState = data;
-				console.log(this.currentStateId);
+				// console.log(this.currentStateId);
 				this.getallData(this.currentStateId);
 			}
 
@@ -73,7 +73,7 @@ export class RegionListContentComponent {
 
 	Submit(model: IRegion) {
 
-		console.log(model);
+		// console.log(model);
 
 		model.state_Id = this.currentStateId;
 

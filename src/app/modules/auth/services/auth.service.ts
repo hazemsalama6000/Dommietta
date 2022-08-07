@@ -66,7 +66,7 @@ export class AuthService implements OnDestroy {
     return this.CommonHttp.CommonPostRequests(LoginData, `${url}${this.API_USERS_URL}`).pipe(
 
       map((LoginResponse: ILoginResponseInterface) => {
-        console.log(LoginResponse)
+        // console.log(LoginResponse)
         return LoginResponse;
       }), catchError((err) => {
         let LoginResponse: ILoginResponseInterface = { success: "false", token: '' };
@@ -94,14 +94,11 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token).pipe(
       map((user: any) => {
-        console.log(user)
         if (user) {
           this.userData.next(user.data);
         } else {
           this.logout();
         }
-        console.log(user);
-
         return user;
       }), catchError(err => {
         this.logout();

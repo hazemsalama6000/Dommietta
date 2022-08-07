@@ -26,7 +26,6 @@ companyName:string;
 
 			this.service.getDailyStatic(model).subscribe((dataa: IDailyStatics[]) => {
 				this.companyName = dataa[0].companyName;
-			console.log(dataa[0]);
 				this.chartOptions = getChartOptions(this.chartHeight, this.chartColor, dataa );
 			});
 		});

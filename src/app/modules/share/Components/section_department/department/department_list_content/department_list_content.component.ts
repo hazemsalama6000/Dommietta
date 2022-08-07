@@ -161,7 +161,7 @@ export class DepartmentListContentComponent {
 			(data: LookUpModel[]) => {
 				this.dataSource = new MatTableDataSource<LookUpModel>(data);
 				this.dataSource.paginator = this.paginator;
-				console.log(data);
+				// console.log(data);
 				setTimeout(() => {
 					this.service.addFlag.subscribe((data) => {
 						if (data == true) {

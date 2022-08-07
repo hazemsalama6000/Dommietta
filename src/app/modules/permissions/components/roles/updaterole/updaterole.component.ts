@@ -58,7 +58,7 @@ export class UpdateroleComponent implements OnInit {
 
   updateRole() {
     if (this.roleForm.valid && this.saveButtonClickedFlag) {
-      console.log(this.roleForm.value)
+      // console.log(this.roleForm.value)
       this.rolesService.UpdateRole(this.roleForm.value).subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {
@@ -89,7 +89,7 @@ export class UpdateroleComponent implements OnInit {
     this.removeParent(this.treePermissions)
     let permissions: IManagePermission = { roleId: roleId, roleName: roleName, roleTree: this.treePermissions };
     if (permissions.roleId != null) {
-      console.log(this.treePermissions,JSON.stringify(permissions))
+      // console.log(this.treePermissions,JSON.stringify(permissions))
       this.rolesService.PostManagePermission(permissions).subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {

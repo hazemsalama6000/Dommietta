@@ -50,7 +50,7 @@ export class updateCustomerManageComponent {
 				switchMap(() => {
 					this.isLoadingResults = true;
 					this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
-					console.log(this.currentSearchParameter);
+					// console.log(this.currentSearchParameter);
 					return this.service.searchCustomerUpdate(this.currentSearchParameter);
 				}),
 				map((data:ItemsWithPages) => {
@@ -94,7 +94,7 @@ export class updateCustomerManageComponent {
 
 
 	openDialogDisplayImages(imagePath: string) {
-		console.log(imagePath);
+		// console.log(imagePath);
 		// const dialogPosition: DialogPosition = {
 		// 	top: '0px',
 		// 	right: '0px'

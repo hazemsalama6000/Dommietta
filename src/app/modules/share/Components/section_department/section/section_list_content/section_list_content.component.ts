@@ -47,7 +47,7 @@ export class SectionListContentComponent {
 				this.dataSource.data = [];
 			} else {
 				this.currentDepartmentId = data.Id;
-				console.log(this.currentDepartmentId);
+				// console.log(this.currentDepartmentId);
 				this.getallData(this.currentDepartmentId);
 			}
 

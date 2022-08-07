@@ -139,7 +139,7 @@ export class CutomersComponent implements OnInit {
 				(data: ICustomer) => {
 					this.employeeDisplay = data;
 					this.service.currentEmployeeSelected = data;
-					console.log(this.employeeDisplay);
+					// console.log(this.employeeDisplay);
 				}
 				, (error: any) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
@@ -160,7 +160,7 @@ export class CutomersComponent implements OnInit {
 					this.dropdownAreaData = [];
 					this.dropdownBlockData = [];
 
-					console.log(this.employeeDisplay);
+					// console.log(this.employeeDisplay);
 				}
 				, (error: any) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));

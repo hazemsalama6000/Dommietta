@@ -245,7 +245,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 	mapFormGroupsToModel(companyDataForm: any): ICompany {
 
-		console.log(companyDataForm);
+		// console.log(companyDataForm);
 		let model: any = {};
 
 		model.id = companyDataForm.id;
@@ -334,7 +334,7 @@ export class CompanyUpsertComponent implements OnInit {
 
 							if (data.isSuccess) {
 								this.toaster.openSuccessSnackBar(data.message);
-								console.log(data.message);
+								// console.log(data.message);
 								this.service.bSubject.next(true);
 							}
 							else if (data.isExists) {

@@ -73,7 +73,7 @@ export class AdminrolesComponent implements OnInit {
             this.roleForm.reset();
             this.saveButtonClickedFlag = false;
             this.treePermissions = [];
-            console.log(this.treePermissions)
+            // console.log(this.treePermissions)
           }
           else if (data.isExists) {
             this.toaster.openWarningSnackBar(data.message);
