@@ -90,6 +90,7 @@ export class AuthService implements OnDestroy {
     if (!auth || !auth.userId) {
       return of(undefined);
     }
+    console.log(auth)
 
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token).pipe(

@@ -154,7 +154,7 @@
           </td>
 
           <td>
-            <a mat-mini-fab color="primary" matTooltip="لم يتم الارسال" *ngIf="!read.lastPosted"
+            <a mat-mini-fab [disabled]="read.lastPosted==read.isPosted&&read.isRevised==read.lastRevised" color="primary" matTooltip="لم يتم الارسال" *ngIf="!read.lastPosted"
               (click)="ActivePostOrRevise(read)" id="search" type="submit">
               <mat-icon style="font-size: 22px;">visibility</mat-icon>
             </a>
