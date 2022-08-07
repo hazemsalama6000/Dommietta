@@ -26,7 +26,7 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
 
   constructor(private auth: AuthService, private translationService: TranslationService, private router: Router) {
-    auth.getUserByToken1().subscribe(res => this.userdata = res);
+    auth.userData.subscribe(res => this.userdata = res);
 
   }
 

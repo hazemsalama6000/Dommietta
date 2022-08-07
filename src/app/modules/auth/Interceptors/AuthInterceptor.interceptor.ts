@@ -13,13 +13,15 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.loadService.isLoading.next(true);
 
-        return next.handle(this.AddAuthToHeader(req)).pipe(
-            catchError(
-                (error: any) => {
-                    return throwError(() => new Error(error)) as Observable<HttpEvent<any>>;
-                }
-            ), finalize(() => { this.loadService.isLoading.next(false); })
-        );
+        return next.handle(this.AddAuthToHeader(req))
+        // .pipe(
+        //     catchError(
+        //         (error: any) => {
+        //             console.log(req)
+        //             return throwError(() => new Error(error)) as Observable<HttpEvent<any>>;
+        //         }
+        //     ), finalize(() => { this.loadService.isLoading.next(false); })
+        // );
     }
 
     AddAuthToHeader(request: HttpRequest<any>) {
