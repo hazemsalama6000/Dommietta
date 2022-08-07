@@ -52,24 +52,24 @@ export class CutomersComponent implements OnInit {
 		});
 	}
 
-	clearBranches(){
+	clearBranches() {
 		this.dropdownEmployeeData = [];
 		this.dropdownAreaData = [];
 		this.dropdownBlockData = [];
-		this.dropdownCustomerData=[];
+		this.dropdownCustomerData = [];
 	}
-	clearArea(){
+	clearArea() {
 		this.dropdownEmployeeData = [];
 		this.dropdownBlockData = [];
-		this.dropdownCustomerData=[];
+		this.dropdownCustomerData = [];
 	}
-	clearBlocks(){
+	clearBlocks() {
 		this.dropdownEmployeeData = [];
-		this.dropdownCustomerData=[];
+		this.dropdownCustomerData = [];
 	}
-	clearEmployee(){
-		this.dropdownCustomerData=[];
-		}
+	clearEmployee() {
+		this.dropdownCustomerData = [];
+	}
 
 	branchSelectListOnChange(selectedItem: LookUpModel) {
 		this.areaService.getLookupAreaData(selectedItem.Id)
@@ -200,27 +200,38 @@ export class CutomersComponent implements OnInit {
 	}
 	currentLocation(x: number, y: number) {
 
-		const dialogPosition: DialogPosition = {
-			top: '0px',
-			right: '0px'
-		};
+		if (x == null || y == null) {
+			this.toaster.openWarningSnackBar("لايوجد موقع");
+			return;
+		}
+		else {
 
-		const dialogRef = this.dialog.open(UserLocationComponent,
-			{
-				/*maxWidth: '50vw',
-				maxHeight: '100vh',*/
-				maxHeight: '100vh',
-				height: '100%',
+			const dialogPosition: DialogPosition = {
+				top: '0px',
+				right: '0px'
+			};
 
-				//panelClass: 'full-screen-modal',*/
-				position: dialogPosition,
-				data: { x: x, y: y }
+			const dialogRef = this.dialog.open(UserLocationComponent,
+				{
+					/*maxWidth: '50vw',
+					maxHeight: '100vh',*/
+					maxHeight: '100vh',
+					height: '100%',
+
+					//panelClass: 'full-screen-modal',*/
+					position: dialogPosition,
+					data: { x: x, y: y }
+				});
+
+			dialogRef.afterClosed().subscribe(result => {
+				console.log(`Dialog result: ${result}`);
 			});
 
-		dialogRef.afterClosed().subscribe(result => {
-			console.log(`Dialog result: ${result}`);
-		});
+		}
+
 	}
+
+
 	editActiveProp(value: boolean) {
 		this.employeeDisplay.isDataComplete = value;
 	}

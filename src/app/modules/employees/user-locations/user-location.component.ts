@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google } from "google-maps";
 import { Subscription } from "rxjs";
+import { toasterService } from "src/app/core-module/UIServices/toaster.service";
 import { ILocationXY } from "src/app/modules/permissions/models/ILocationXY.interface";
 import { OnlineUsersService } from "src/app/modules/permissions/services/onlineUsers.service";
 
@@ -252,7 +253,7 @@ export class UserLocationComponent implements OnDestroy {
 
 	message = "";
 
-	constructor(private route: ActivatedRoute, private service: OnlineUsersService) {
+	constructor(private route: ActivatedRoute, private service: OnlineUsersService, private toaster: toasterService) {
 		this.route.paramMap.subscribe((data: ParamMap) => {
 			this.employeeId = +data.get('employeeId')!;
 			// console.log(this.employeeId);
@@ -289,7 +290,7 @@ export class UserLocationComponent implements OnDestroy {
 	InitializeMap() {
 		this.subscribe = this.service.getOnlineUsersCurrentLocationData(this.employeeId).subscribe((data: ILocationXY[]) => {
 			this.message = "";
-
+			console.log(data.length);
 			if (data.length < 1) {
 				this.message = "لايوجد بيانات";
 			}
@@ -308,6 +309,14 @@ export class UserLocationComponent implements OnDestroy {
 				});
 			}
 
+		},(err)=>{
+			this.toaster.openWarningSnackBar("لايوجد مواقع");
+			if (this.subscribe) {
+				this.subscribe.unsubscribe();
+				if (this.idInterval) {
+					clearInterval(this.idInterval);
+				}
+			}
 		});
 	}
 
