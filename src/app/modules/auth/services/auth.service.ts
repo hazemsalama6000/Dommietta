@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, BehaviorSubject, of, Subscription, EMPTY, ReplaySubject } from 'rxjs';
+import { Observable, BehaviorSubject, of, Subscription, EMPTY, ReplaySubject, throwError } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
@@ -77,8 +77,8 @@ export class AuthService implements OnDestroy {
   }
 
   logout() {
-    localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {queryParams: {}});
+    localStorage.removeItem('token');
+    this.router.navigate(['/auth/login'], { queryParams: {} });
   }
 
   logoutByUserId(userId: number) {
@@ -87,44 +87,46 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
-
-
     if (!auth || !auth.userId) {
       return of(undefined);
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.token, auth.userId).pipe(
+    return this.authHttpService.getUserByToken(auth.token).pipe(
       map((user: any) => {
+        console.log(user)
         if (user) {
-
+          this.userData.next(user.data);
         } else {
           this.logout();
         }
         console.log(user);
 
         return user;
+      }), catchError(err => {
+        this.logout();
+        return throwError(err)
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  getUserByToken1(): Observable<any> {
+  // getUserByToken1(): Observable<any> {
 
-    this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken1(localStorage.getItem("companyLink") as string).pipe(
-      map((user: any) => {
-        if (user) {
-          this.userData.next(user.data);
-        } else {
-          this.logout();
-        }
+  //   this.isLoadingSubject.next(true);
+  //   return this.authHttpService.getUserByToken1(localStorage.getItem("companyLink") as string).pipe(
+  //     map((user: any) => {
+  //       if (user) {
+  //         this.userData.next(user.data);
+  //       } else {
+  //         this.logout();
+  //       }
 
-        return user.data;
-      }),
-      finalize(() => this.isLoadingSubject.next(false))
-    );
-  }
+  //       return user.data;
+  //     }),
+  //     finalize(() => this.isLoadingSubject.next(false))
+  //   );
+  // }
 
   forgotPassword(email: string): Observable<boolean> {
     this.isLoadingSubject.next(true);
@@ -145,12 +147,15 @@ export class AuthService implements OnDestroy {
 
   private getAuthFromLocalStorage(): AuthModel | undefined {
     try {
-      const lsValue = localStorage.getItem(this.authLocalStorageToken);
-      if (!lsValue) {
+      const IsValue = localStorage.getItem('token') //localStorage.getItem(this.authLocalStorageToken);
+      if (!IsValue)
         return undefined;
-      }
 
-      const authData = JSON.parse(lsValue);
+      let data = JSON.parse(atob(IsValue.split('.')[1]));
+      let authData: AuthModel = {
+        token: IsValue, userId: data.uid, expiresOn: new Date(data.exp), refreshToken: '',
+        setAuth: function (auth: AuthModel): void { }
+      };
       return authData;
     } catch (error) {
       console.error(error);
