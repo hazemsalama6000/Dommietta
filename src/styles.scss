@@ -338,12 +338,7 @@ p-paginator button {
 			color-stop(0.86, rgb(28, 58, 148)));
 }
 
-@media only screen and (max-width: 991.98px) {
-	.mcontainer {
-		margin-inline-end: 21px !important;
-		margin-inline-start: 40px !important;
-	}
-}
+
 
 .stylingHeader {
 	background-color: #b4b3b3;
@@ -396,12 +391,19 @@ mat-nested-tree-node[aria-level="2"]>li>div[class='mat-tree-node'] .mat-checkbox
 	display: flex !important;
 }
 
+@media only screen and (max-width: 991.98px) {
+	.mcontainer {
+		margin-inline-end: 21px !important;
+		margin-inline-start: 40px !important;
+	}
+}
+
 @media (min-width: 992px) {
 	.aside .aside-logo {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		height: 95px !important;
+		height: 45px !important;
 		padding: 0 25px;
 	}
 }
