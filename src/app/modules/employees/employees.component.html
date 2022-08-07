@@ -2,10 +2,11 @@
 	<div class="d-flex align-items-center justify-content-between">
 
 		<div class="d-flex align-items-center">
+			<mat-icon class="text-primary mx-5" style="font-size:30px ;">assignment_ind</mat-icon>
+
 			<span class="fontsection"> بيانات الموظف
 			</span>
 
-			<mat-icon class="text-primary mx-5" style="font-size:30px ;">assignment_ind</mat-icon>
 		</div>
 
 		<div class="row align-items-center mx-5">
@@ -13,26 +14,28 @@
 		</div>
 
 		<div class="row align-items-center mx-5">
-			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
-				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
-				(change) = "branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();"
-				(clear) = "clearBranches();blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();clearBranches()"
-				>
-			</ng-select>
-			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
-				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
-				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();"
-				(clear) = "clearArea();blockselect.handleClearClick();employeeselect.handleClearClick();">
-			</ng-select>
-			<ng-select #blockselect class="customized" style="width:250px ;" [items]="dropdownBlockData"
-				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المربع"
-				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();"
-				(clear) ="clearBlocks();employeeselect.handleClearClick();">
-			</ng-select>
+
 			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
 				(change)="employeeSelectListOnChange($event)">
 			</ng-select>
+
+			<ng-select class="customized" style="width:250px ;" [items]="dropdownBranchData" bindLabel="Name"
+				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الفرع"
+				(change)="branchSelectListOnChange($event);blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();"
+				(clear)="clearBranches();blockselect.handleClearClick();areaselect.handleClearClick();employeeselect.handleClearClick();clearBranches()">
+			</ng-select>
+			<ng-select #areaselect class="customized" style="width:250px ;" [items]="dropdownAreaData" bindLabel="Name"
+				bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المنطقة"
+				(change)="areaSelectListOnChange($event);blockselect.handleClearClick();employeeselect.handleClearClick();"
+				(clear)="clearArea();blockselect.handleClearClick();employeeselect.handleClearClick();">
+			</ng-select>
+			<ng-select #blockselect class="customized" style="width:250px ;" [items]="dropdownBlockData"
+				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر المربع"
+				(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();"
+				(clear)="clearBlocks();employeeselect.handleClearClick();">
+			</ng-select>
+
 		</div>
 
 	</div>
@@ -56,28 +59,29 @@
 					</div>
 					<!--end::Avatar-->
 					<!--begin::Name-->
-					<a
+					<a *ngIf="employeeDisplay.id > 0"
 						title="get data from endpoint:/api/v1/hr/getemployeeprofileinfo , when click name open edit employee profile"
 						class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1">{{employeeDisplay.employeeName}}</a>
 					<!--end::Name-->
 
-					<a *ngIf="employeeDisplay.userIsActive == true; else inActive"
-						class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
-						data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-						{{'HR.TITLES.COMPANYACTIVE'|translate}}
-					</a>
-
-					<ng-template #inActive>
-						<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+					<span *ngIf="employeeDisplay.id > 0">
+						<a *ngIf="employeeDisplay.userIsActive == true; else inActive"
+							class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 							data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-							{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+							{{'HR.TITLES.COMPANYACTIVE'|translate}}
 						</a>
-					</ng-template>
 
+						<ng-template #inActive>
+							<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
+								{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+							</a>
+						</ng-template>
+					</span>
 
 
 				</div>
-				<div class="d-flex flex-start flex-column">
+				<div class="d-flex flex-start flex-column" *ngIf="employeeDisplay.id > 0">
 
 					<div class="d-flex flex-stack fw-bold fs-6 mb-2 pe-2">
 						<a class="
@@ -100,24 +104,16 @@
 
 				</div>
 				<!--end::Summary-->
-				<!--begin::Details toggle-->
-				<div class="d-flex flex-stack fs-4 py-3">
-					<div class="fw-bolder"> بيانات الموظف </div>
-					<!--begin::Badge-->
 
-
-					<!--begin::Badge-->
-				</div>
-				<!--end::Details toggle-->
-				<div class="separator separator-dashed my-3"></div>
+				<div class="separator separator-dashed my-3" *ngIf="employeeDisplay.id > 0"></div>
 				<!--begin::Details content-->
-				<div class="pb-5 fs-6">
+				<div class="pb-5 fs-6" *ngIf="employeeDisplay.id > 0">
 					<!--begin::Details item-->
 
 					<!--begin::Details item-->
 					<div class="fw-bolder mt-5"> تفاصيل الوظيفة </div>
 					<div class="text-gray-600">
-						<a  class="text-gray-600 text-hover-primary">{{employeeDisplay.employeeJob}} ,
+						<a class="text-gray-600 text-hover-primary">{{employeeDisplay.employeeJob}} ,
 							{{employeeDisplay.branchName}} </a>
 					</div>
 
@@ -126,15 +122,15 @@
 					<!--begin::Details item-->
 					<!--begin::Details item-->
 				</div>
-				<div *ngIf="employeeDisplay.isTechnician">
+				<div *ngIf="employeeDisplay.isTechnician && employeeDisplay.id > 0">
 
 					<div class="d-flex flex-stack fs-4 py-3">
 						<div class="fw-bolder"> فنى </div>
 						<!--begin::Badge-->
 						<div class="badge badge-light-info d-inline"><a id="" data-bs-toggle="modal"
 								title="/v1/tech/getlastrecordtechnician" data-bs-target="#kt_modal_offer_a_deal"
-								class="btn btn-sm btn-primary cursor-pointer" (click)="openDialog()"> اضافة بيان
-								جديد</a></div>
+								class="btn btn-sm btn-primary cursor-pointer" (click)="openDialog()"> تعديل بيانات الفنى
+							</a></div>
 						<!--begin::Badge-->
 					</div>
 					<!--end::Details toggle-->
@@ -146,13 +142,13 @@
 							<a *ngIf="employeeDisplay.technician.canCollect == true; else inActiveForCanCollect"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
+								 مفعل
 							</a>
 
 							<ng-template #inActiveForCanCollect>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -165,13 +161,13 @@
 							<a *ngIf="employeeDisplay.technician.canRead == true; else inActiveForCanRead"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
+								 مفعل
 							</a>
 
 							<ng-template #inActiveForCanRead>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -184,13 +180,13 @@
 							<a *ngIf="employeeDisplay.technician.canComplain == true; else inActiveForCanComplain"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
+								 مفعل
 							</a>
 
 							<ng-template #inActiveForCanComplain>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -204,13 +200,13 @@
 							<a *ngIf="employeeDisplay.technician.canEditCustomer == true; else inActiveForCanEditCustomer"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
+								 مفعل
 							</a>
 
 							<ng-template #inActiveForCanEditCustomer>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -222,13 +218,13 @@
 							<a *ngIf="employeeDisplay.technician.attachImageRead == true; else inActiveForAttachImageRead"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
-							</a>
+								مفعل
+														</a>
 
 							<ng-template #inActiveForAttachImageRead>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -241,13 +237,13 @@
 							<a *ngIf="employeeDisplay.technician.attachImageEditCustomer == true; else inActiveForAttachImageEditCustomer"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								{{'HR.TITLES.COMPANYACTIVE'|translate}}
+								مفعل
 							</a>
 
 							<ng-template #inActiveForAttachImageEditCustomer>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 									data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-									{{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
+									غير مفعل
 								</a>
 							</ng-template>
 						</div>
@@ -288,96 +284,110 @@
 
 
 	<div class="flex-lg-row-fluid justify-content-between ms-lg-5">
+		<div class="alert fontForInputs alert-danger" *ngIf="!employeeDisplay.id"> برجاء اختيار الموظف </div>
 		<!--begin:::Tabs-->
-			<mat-tab-group>
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<a class="nav-link text-active-primary me-6 fontForInputs" id="blocksdisplay"
-							[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
-							[state]="employeeDisplay.blocks" routerLinkActive="">
-							 المربعات
-							<mat-icon> person_pin_circle</mat-icon>
-						</a>
-					</ng-template>
-				</mat-tab>
+		<mat-tab-group *ngIf="employeeDisplay.id > 0">
 
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<a class="nav-link text-success me-6 fontForInputs" 
-							[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
-							routerLinkActive="">
-							البيانات الفنية 
-							<mat-icon> local_dining</mat-icon>
-						</a>
-					</ng-template>
-				</mat-tab>
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;"
+						[routerLink]="['/employee/employeeprofile/customercomplains/', employeeDisplay.id ]"
+						routerLinkActive="text-primary">
+						<mat-icon>receipt</mat-icon>
 
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<a class="nav-link text-active-primary me-6 fontForInputs" 
-							[routerLink]="['/employee/employeeprofile/customercomplains/', employeeDisplay.id ]"
-							routerLinkActive="">
-							الشكاوى
-							<mat-icon>receipt</mat-icon>
-						</a>
-					</ng-template>
-				</mat-tab>
-				
-				<mat-tab>
-					<ng-template mat-tab-label>
-						<a class="nav-link text-success me-6 fontForInputs" 
-							[routerLink]="['/employee/employeeprofile/customerReading/', employeeDisplay.id ]"
-							routerLinkActive="">
-							القراءات
-							<mat-icon>visibility</mat-icon>
-						</a>
-					</ng-template>
-				</mat-tab>
+						الشكاوى
+					</a>
+				</ng-template>
+			</mat-tab>
 
-				<mat-tab style="width:250px !important;">
-					<ng-template mat-tab-label >
-						<a  class="nav-link text-primary me-6 fontForInputs" 
-							[routerLink]="['/employee/employeeprofile/updateRequest/', employeeDisplay.id ]"
-							routerLinkActive="">
-							 <span >طلب التعديل</span>
-							<mat-icon>format_list_numbered</mat-icon>
-						</a>
-					</ng-template>
-				</mat-tab>
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;"
+						[routerLink]="['/employee/employeeprofile/customerReading/', employeeDisplay.id ]"
+						routerLinkActive="text-primary">
+						<mat-icon>visibility</mat-icon>
 
-				<mat-tab style="width:250px !important;">
-					<ng-template mat-tab-label >
-						<a  class="nav-link text-primary me-6 fontForInputs" 
-							[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
-							routerLinkActive="">
-							 <span> الموقع </span>
-							 <mat-icon>location_on</mat-icon>
-							</a>
-					</ng-template>
-				</mat-tab>
+						القراءات
+					</a>
+				</ng-template>
+			</mat-tab>
 
-			</mat-tab-group>
+			<mat-tab style="width:250px !important;">
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;"
+						[routerLink]="['/employee/employeeprofile/updateRequest/', employeeDisplay.id ]"
+						routerLinkActive="text-primary">
+						<mat-icon>format_list_numbered</mat-icon>
+
+						<span>طلب التعديل</span>
+					</a>
+				</ng-template>
+			</mat-tab>
+
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;"
+						[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
+						routerLinkActive="text-primary">
+						<mat-icon> local_dining</mat-icon>
+
+						البيانات الفنية
+					</a>
+				</ng-template>
+			</mat-tab>
+
+			<mat-tab>
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;" id="blocksdisplay"
+						[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
+						[state]="employeeDisplay.blocks" routerLinkActive="text-primary">
+						<mat-icon> person_pin_circle</mat-icon>
+
+						المربعات
+					</a>
+				</ng-template>
+			</mat-tab>
+
+			<mat-tab style="width:250px !important;">
+				<ng-template mat-tab-label>
+					<a class="nav-link text-hover-primary me-6 fontForInputs"
+						style="color:rgb(71, 71, 71); font-weight: bold;"
+						[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
+						routerLinkActive="text-primary">
+						<mat-icon>location_on</mat-icon>
+
+						<span> الموقع </span>
+					</a>
+				</ng-template>
+			</mat-tab>
+
+		</mat-tab-group>
 
 
-			<div class="mt-5">
-				<a data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">
+		<div class="mt-5" *ngIf="employeeDisplay.id > 0">
+			<a data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">
 
-				</a>
-				<a class="btn btn-sm btn-primary me-3 cursor-pointer" data-kt-menu-trigger="click"
-					data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-					اعدادات الملف
-					<i class="bi bi-gear-fill fs-3"></i>
-				</a>
-				<app-setting (emitForActiveProp)="editActiveProp($event)"
-					(emitter)="editEmployeeTechnicialData($event)" [_Employee]="employeeDisplay">
-				</app-setting>
-			</div>
-	
-			<br>
+			</a>
+			<a class="btn btn-sm btn-primary me-3 cursor-pointer" data-kt-menu-trigger="click"
+				data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+				اعدادات الملف
+				<i class="bi bi-gear-fill fs-3"></i>
+			</a>
+			<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter)="editEmployeeTechnicialData($event)"
+				[_Employee]="employeeDisplay">
+			</app-setting>
+		</div>
+
+		<br>
 
 		<!--end:::Tabs-->
 		<!--begin:::Tab content-->
-		<router-outlet class="col-md-6"></router-outlet>
+		<router-outlet class="col-md-6" *ngIf="employeeDisplay.id > 0"></router-outlet>
 		<!--end:::Tab content-->
 	</div>
 
