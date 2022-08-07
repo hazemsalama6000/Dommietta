@@ -61,7 +61,6 @@ export class AuthService implements OnDestroy {
     );
   }
 
-
   Login(LoginData: ILoginData, url: string) {
 
     return this.CommonHttp.CommonPostRequests(LoginData, `${url}${this.API_USERS_URL}`).pipe(
@@ -76,8 +75,6 @@ export class AuthService implements OnDestroy {
 
     );
   }
-
-
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
