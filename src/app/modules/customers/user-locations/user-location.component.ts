@@ -254,7 +254,6 @@ export class UserLocationComponent implements OnDestroy {
 	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private service: OnlineUsersService) {
 		this.x = data.x;
 		this.y = data.y;
-		console.log(this.x+' '+this.y);
 	}
 
 	ngOnDestroy(): void {

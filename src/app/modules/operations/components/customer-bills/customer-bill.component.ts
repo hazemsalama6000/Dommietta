@@ -81,7 +81,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 		model.StartDate = this.datePipe.transform(model.StartDate, 'MM/dd/yyyy')!;
 		model.EndDate = this.datePipe.transform(model.EndDate, 'MM/dd/yyyy')!;
 		
-		console.log(model);
+		// console.log(model);
 
 		this.customerEditManageService.searchParameterAction.next(model);
 		this.customerEditManageService.searchUpdateUserManageAction.next(true);
@@ -139,7 +139,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 		this.customerService.getLookupCustomerDataByParam(searchCustomer)
 			.subscribe(
 				(data: LookUpModel[]) => {
-					console.log(data);
+					// console.log(data);
 					this.dropdownCustomerData = data;
 				}
 			);

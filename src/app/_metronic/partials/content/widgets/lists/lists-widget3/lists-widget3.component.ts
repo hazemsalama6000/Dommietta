@@ -20,7 +20,6 @@ export class ListsWidget3Component implements OnInit{
 
 			this.service.getIssuesTweleveStatic(data.companyId).subscribe((data: IIssueDisplayStatics[]) => {
 				this.dailyStatics = data;
-				console.log(this.dailyStatics);
 			});
 		});
 

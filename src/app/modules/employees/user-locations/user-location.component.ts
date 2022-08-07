@@ -255,7 +255,7 @@ export class UserLocationComponent implements OnDestroy {
 	constructor(private route: ActivatedRoute, private service: OnlineUsersService) {
 		this.route.paramMap.subscribe((data: ParamMap) => {
 			this.employeeId = +data.get('employeeId')!;
-			console.log(this.employeeId);
+			// console.log(this.employeeId);
 		});
 	}
 
@@ -313,7 +313,6 @@ export class UserLocationComponent implements OnDestroy {
 
 	ngOnDestroy(): void {
 		if (this.subscribe) {
-			console.log('asdasd');
 			this.subscribe.unsubscribe();
 			if (this.idInterval) {
 				clearInterval(this.idInterval);

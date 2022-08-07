@@ -21,7 +21,7 @@ export class AssignrolestousersComponent implements OnInit {
     let data = usersService.userid.subscribe((res) => {
       if (res)
         usersService.getRolesByUserData(res).subscribe(
-          (res) =>{ this.roleData = res;console.log(this.roleData)},
+          (res) =>{ this.roleData = res;},
           (err) => console.log(err),
           () => { })
     });
@@ -36,7 +36,7 @@ export class AssignrolestousersComponent implements OnInit {
     this.usersService.putUserRoles(this.roleData).subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          console.log(data);
+          // console.log(data);
           this.roleData = { userId: '', userRoles: [] }
           this.toaster.openSuccessSnackBar(data.message);
           this.btnClose.nativeElement.click();

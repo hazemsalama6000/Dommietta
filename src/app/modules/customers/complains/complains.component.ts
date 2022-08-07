@@ -64,7 +64,7 @@ export class ComplainsComponent {
 					return data.data;
 				}),
 			)
-			.subscribe((data) => { this.dataSource = data; console.log(this.dataSource);});
+			.subscribe((data) => { this.dataSource = data;});
 
 			this.service.searchUpdateAction.next(true);
 	}

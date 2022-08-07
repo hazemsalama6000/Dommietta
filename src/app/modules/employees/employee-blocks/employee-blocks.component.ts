@@ -51,7 +51,7 @@ export class EmployeeBlocksComponent {
 	// getting data and initialize data Source and Paginator
 	getallData(data: IBlock[]) {
 		
-				console.log(data);
+				// console.log(data);
 				this.dataSource = new MatTableDataSource<IBlock>(data);
 				this.dataSource.paginator = this.paginator;
 		

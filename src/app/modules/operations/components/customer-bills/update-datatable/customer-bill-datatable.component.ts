@@ -66,8 +66,7 @@ export class BillDatatableComponent {
 				switchMap(() => {
 					this.isLoadingResults = true;
 					this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
-					console.log('sssss');
-					console.log(this.currentSearchParameter);
+					// console.log(this.currentSearchParameter);
 
 					return this.service.searchCustomerBills(this.currentSearchParameter);
 				}),
