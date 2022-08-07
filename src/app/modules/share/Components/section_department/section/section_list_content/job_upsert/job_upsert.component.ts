@@ -28,7 +28,7 @@ export class Job_upsertComponent implements OnInit {
     this.jobService.postLookUpData(this.jobData).subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          console.log(data);
+          // console.log(data);
           this.jobData = { sectionId: 0, jobs: [] }
           this.toaster.openSuccessSnackBar(data.message);
           this.dialogRef.close();

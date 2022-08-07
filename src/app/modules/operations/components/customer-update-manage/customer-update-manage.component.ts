@@ -131,7 +131,7 @@ export class CustomerUpdateManageComponent implements OnInit {
 		this.customerService.getLookupCustomerDataByParam(searchCustomer)
 			.subscribe(
 				(data: LookUpModel[]) => {
-					console.log(data);
+					// console.log(data);
 					this.dropdownCustomerData = data;
 				}
 			);

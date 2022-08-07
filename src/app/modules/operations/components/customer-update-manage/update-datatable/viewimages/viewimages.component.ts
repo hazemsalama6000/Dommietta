@@ -15,7 +15,7 @@ export class ViewimagesForCustomerComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.data)
+		// console.log(this.data)
 	}
 
 }

@@ -74,12 +74,12 @@ export class UpdateRequestComponent {
 					return data.data;
 				}),
 			)
-			.subscribe((data) => { this.dataSource = data; console.log(this.dataSource);});
+			.subscribe((data) => { this.dataSource = data; });
 
 			this.service.searchUpdateUserManageAction.next(true);
 	}
 	openDialogDisplayImages(imagePath: string) {
-		console.log(imagePath);
+		// console.log(imagePath);
 				// const dialogPosition: DialogPosition = {
 				// 	top: '0px',
 				// 	right: '0px'

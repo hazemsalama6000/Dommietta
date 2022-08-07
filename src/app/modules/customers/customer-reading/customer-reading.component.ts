@@ -115,7 +115,7 @@ export class CustomerReadingComponent {
 				}
 			)).subscribe(
 				(data: any) => {
-					console.log(data.data);
+					// console.log(data.data);
 					this.dataSource = new MatTableDataSource<IReadingList>(data.data);
 					this.dataSource.paginator = this.paginator;
 				}

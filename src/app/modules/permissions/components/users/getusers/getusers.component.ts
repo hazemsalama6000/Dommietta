@@ -46,7 +46,7 @@ export class GetusersComponent implements OnInit, OnDestroy {
 
   getUserData(search: string = '') {
     this.userservice.GetCompanyUsers(this.userData.companyId, search).subscribe(
-      (res: IUsers[]) => { this.usersList = res; console.log(res) },
+      (res: IUsers[]) => { this.usersList = res; },
       (err) => console.log(err),
       () => { }
     )

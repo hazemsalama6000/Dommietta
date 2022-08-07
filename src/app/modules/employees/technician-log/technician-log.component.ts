@@ -44,7 +44,7 @@ export class technicianLogComponent {
 	getallData(employeeId: number) {
 		this.service.getTechnicianLogByEmpId(employeeId).subscribe(
 			(data: ITechnitianLog[]) => {
-				console.log(data);
+				// console.log(data);
 				this.dataSource = new MatTableDataSource<ITechnitianLog>(data);
 				this.dataSource.paginator = this.paginator;
 			}

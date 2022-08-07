@@ -14,6 +14,15 @@ export class AuthInterceptor implements HttpInterceptor {
         this.loadService.isLoading.next(true);
 
         return next.handle(this.AddAuthToHeader(req))
+
+            .pipe(
+                catchError(
+                    (error: any) => {
+                        return throwError(() => error);
+                    }
+                ), finalize(() => { this.loadService.isLoading.next(false); })
+            );
+//last version from code
         // .pipe(
         //     catchError(
         //         (error: any) => {
@@ -22,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
         //         }
         //     ), finalize(() => { this.loadService.isLoading.next(false); })
         // );
+
     }
 
     AddAuthToHeader(request: HttpRequest<any>) {
