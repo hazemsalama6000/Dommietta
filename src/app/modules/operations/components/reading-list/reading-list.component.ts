@@ -179,11 +179,17 @@ export class ReadingListComponent implements OnInit {
   }
 
   ActivePostOrRevise(read: IReadingList) {
+    if(read.isPosted==read.lastPosted&&read.isRevised==read.lastRevised){
+     // this.toaster.openWarningSnackBar('لايوجد تعديلات للحفظ');
+        return;
+    }
+  
     let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPosted: read.isPosted }];
     this.postReviseOrPost(reading)
   }
 
   postReviseOrPost(reading: IUpdateReading[]) {
+    
     this.confirmationDialogService.confirm('تأكيد المراجعة أو الارسال', `هل تريد تأكيد المراجعة أو الارسال ? `)
       .then((confirmed) => {
         if (confirmed) {
