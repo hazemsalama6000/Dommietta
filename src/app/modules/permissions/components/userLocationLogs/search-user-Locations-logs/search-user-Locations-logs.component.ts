@@ -60,7 +60,6 @@ export class SearchUserLocationLogsComponent implements OnInit {
 			.subscribe(
 				(data: ILocationXY[]) => {
 					this.service.Locations.next(data);
-					console.log(data)
 				}, (error) => {
 					this.toaster.openWarningSnackBar('لايوجد مواقع');
 				}
