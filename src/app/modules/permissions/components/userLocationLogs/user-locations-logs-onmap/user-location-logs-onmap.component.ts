@@ -283,7 +283,7 @@ export class UserLocationLogsOnMapComponent implements OnDestroy {
 					});
 
 					_.forEach(data, (location: ILocationXY) => {
-
+						
 						let icon = this.service.checkIconBasedLocation(location.status);
 
 						const marker = new google.maps.Marker({
@@ -292,6 +292,15 @@ export class UserLocationLogsOnMapComponent implements OnDestroy {
 							title: location.empName + "\n" + location.date,
 							icon: icon
 						});
+
+						if (location.status == true || location.status==false) {
+							marker.setAnimation(google.maps.Animation.BOUNCE)
+							console.log(location.x + ' ' + location.y)
+						}
+						
+
+
+
 					});
 
 
