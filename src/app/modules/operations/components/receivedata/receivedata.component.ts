@@ -25,8 +25,8 @@ export class ReceivedataComponent implements OnInit {
     this.receiveData.syncGeographicData().subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          this.toaster.openSuccessSnackBar(data.message);
-          this.buttons.btnGeographic=true
+          this.toaster.openSuccessSnackBar('تم سحب البيانات بنجاح');
+          // this.buttons.btnGeographic=true
           this.buttons.btnEmployee = false;
         }
         else if (data.isExists)
@@ -43,9 +43,9 @@ export class ReceivedataComponent implements OnInit {
     this.receiveData.syncEmployeeData().subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          this.buttons.btnEmployee=true;
+          // this.buttons.btnEmployee=true;
           this.buttons.btnCustomer = false;
-          this.toaster.openSuccessSnackBar(data.message);
+          this.toaster.openSuccessSnackBar('تم سحب البيانات بنجاح');
         }
         else if (data.isExists)
           this.toaster.openWarningSnackBar(data.message);
@@ -61,9 +61,9 @@ export class ReceivedataComponent implements OnInit {
     this.receiveData.syncCustomerData().subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          this.buttons.btnCustomer=true;
+          // this.buttons.btnCustomer=true;
           this.buttons.btnIssue = false;
-          this.toaster.openSuccessSnackBar(data.message);
+          this.toaster.openSuccessSnackBar('تم سحب البيانات بنجاح');
         }
         else if (data.isExists)
           this.toaster.openWarningSnackBar(data.message);
@@ -79,8 +79,7 @@ export class ReceivedataComponent implements OnInit {
     this.receiveData.syncIssueData().subscribe(
       (data: HttpReponseModel) => {
         if (data.isSuccess) {
-          this.buttons.btnIssue=true;
-          this.toaster.openSuccessSnackBar(data.message);
+          this.toaster.openSuccessSnackBar('تم سحب البيانات بنجاح');
         }
         else if (data.isExists)
           this.toaster.openWarningSnackBar(data.message);
