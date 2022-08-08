@@ -10,5 +10,6 @@ export interface ICustomerEditManageSearch
 	StartDate?:string,
 	EndDate?:string,
     UpdatingTypeId?:number,
-	PageNumber?:number
+	PageNumber?:number,
+	PageSize?:number
 }
