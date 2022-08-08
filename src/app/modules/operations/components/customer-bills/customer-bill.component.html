@@ -4,7 +4,7 @@
 		<div class="d-flex align-items-center justify-content-between">
 
 			<div class="d-flex align-items-center">
-				<span class="fontsection"> فواتير العملاء</span>
+				<span class="fontsection"> تحصيلات الفواتير </span>
 
 				<mat-icon class="text-primary mx-5" style="font-size:30px ;">assignment_ind</mat-icon>
 
@@ -29,11 +29,6 @@
 
 		<div class="row ">
 
-			<div class="col-md-2">
-				<ng-select class="customized" [items]="dropdownUpdateTypeData" formControlName="UpdatingTypeId"
-					bindLabel="Name" bindValue="Id" name="UpdatingTypeId" placeholder="اختر نوع التعديل">
-				</ng-select>
-			</div>
 			<div class="col-md-2">
 				<ng-select class="customized" [items]="dropdownBranchData" formControlName="BranchId" bindLabel="Name"
 					bindValue="Id" name="region_Id" id="BranchId" placeholder="اختر الفرع"
