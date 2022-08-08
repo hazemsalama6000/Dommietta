@@ -1,5 +1,5 @@
 <mat-card class="col-md-12">
-	<div class="d-flex align-items-center justify-content-between">
+	<div class="d-flex align-items-center">
 
 		<div class="d-flex align-items-center">
 			<mat-icon class="text-primary mx-5" style="font-size:30px ;">assignment_ind</mat-icon>
@@ -9,11 +9,8 @@
 
 		</div>
 
-		<div class="row align-items-center mx-5">
 
-		</div>
-
-		<div class="row align-items-center mx-5">
+		<div class="row" style="margin-right: 160px;">
 
 			<ng-select #employeeselect class="customized" style="width:250px ;" [items]="dropdownEmployeeData"
 				bindLabel="Name" bindValue="Id" name="region_Id" id="region_Id" placeholder="اختر الموظف"
@@ -286,102 +283,115 @@
 	<div class="flex-lg-row-fluid justify-content-between ms-lg-5">
 		<div class="alert fontForInputs alert-danger" *ngIf="!employeeDisplay.id"> برجاء اختيار الموظف </div>
 		<!--begin:::Tabs-->
-		<mat-tab-group *ngIf="employeeDisplay.id > 0">
+		<div class="row">
 
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;"
-						[routerLink]="['/employee/employeeprofile/customercomplains/', employeeDisplay.id ]"
-						routerLinkActive="text-primary">
-						<mat-icon>receipt</mat-icon>
+			<div class="col-md-10">
+				<mat-tab-group *ngIf="employeeDisplay.id > 0">
 
-						الشكاوى
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/customercomplains/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon>receipt</mat-icon>
+		
+								الشكاوى
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/customerReading/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon>visibility</mat-icon>
+		
+								القراءات
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+					<mat-tab style="width:250px !important;">
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/updateRequest/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon>format_list_numbered</mat-icon>
+		
+								<span>طلب التعديل</span>
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon> local_dining</mat-icon>
+		
+								البيانات الفنية
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;" id="blocksdisplay"
+								[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
+								[state]="employeeDisplay.blocks" routerLinkActive="text-primary">
+								<mat-icon> person_pin_circle</mat-icon>
+		
+								المربعات
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+					<mat-tab style="width:250px !important;">
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon>location_on</mat-icon>
+		
+								<span> الموقع </span>
+							</a>
+						</ng-template>
+					</mat-tab>
+		
+				</mat-tab-group>
+			</div>
+
+
+			<div class="col-md-2 mt-5">
+				<span *ngIf="employeeDisplay.id > 0">
+					<a data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">
+		
 					</a>
-				</ng-template>
-			</mat-tab>
-
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;"
-						[routerLink]="['/employee/employeeprofile/customerReading/', employeeDisplay.id ]"
-						routerLinkActive="text-primary">
-						<mat-icon>visibility</mat-icon>
-
-						القراءات
+					<a class="btn btn-sm btn-primary me-3 cursor-pointer" data-kt-menu-trigger="click"
+						data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+						اعدادات الملف
+						<i class="bi bi-gear-fill fs-3"></i>
 					</a>
-				</ng-template>
-			</mat-tab>
+					<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter)="editEmployeeTechnicialData($event)"
+						[_Employee]="employeeDisplay">
+					</app-setting>
+				</span>
+			</div>
 
-			<mat-tab style="width:250px !important;">
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;"
-						[routerLink]="['/employee/employeeprofile/updateRequest/', employeeDisplay.id ]"
-						routerLinkActive="text-primary">
-						<mat-icon>format_list_numbered</mat-icon>
-
-						<span>طلب التعديل</span>
-					</a>
-				</ng-template>
-			</mat-tab>
-
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;"
-						[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
-						routerLinkActive="text-primary">
-						<mat-icon> local_dining</mat-icon>
-
-						البيانات الفنية
-					</a>
-				</ng-template>
-			</mat-tab>
-
-			<mat-tab>
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;" id="blocksdisplay"
-						[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
-						[state]="employeeDisplay.blocks" routerLinkActive="text-primary">
-						<mat-icon> person_pin_circle</mat-icon>
-
-						المربعات
-					</a>
-				</ng-template>
-			</mat-tab>
-
-			<mat-tab style="width:250px !important;">
-				<ng-template mat-tab-label>
-					<a class="nav-link text-hover-primary me-6 fontForInputs"
-						style="color:rgb(71, 71, 71); font-weight: bold;"
-						[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
-						routerLinkActive="text-primary">
-						<mat-icon>location_on</mat-icon>
-
-						<span> الموقع </span>
-					</a>
-				</ng-template>
-			</mat-tab>
-
-		</mat-tab-group>
-
-
-		<div class="mt-5" *ngIf="employeeDisplay.id > 0">
-			<a data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">
-
-			</a>
-			<a class="btn btn-sm btn-primary me-3 cursor-pointer" data-kt-menu-trigger="click"
-				data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-				اعدادات الملف
-				<i class="bi bi-gear-fill fs-3"></i>
-			</a>
-			<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter)="editEmployeeTechnicialData($event)"
-				[_Employee]="employeeDisplay">
-			</app-setting>
 		</div>
+		
+	
+
+
+	
 
 		<br>
 

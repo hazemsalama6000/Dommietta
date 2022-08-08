@@ -16,8 +16,8 @@ import { ITechnitianLog } from "../models/ITechnitianLog.interface";
 export class technicianLogComponent {
 
 
-	displayedColumns: string[] = ['canCollect', 'canRead','canComplain','canEditCustomer' , 'attachImageRead'
-	 , 'attachImageEditCustomer', 'maxOfflineWorkingHours','maxOfflineWorkingBills','insertDate','updateDate'];
+	displayedColumns: string[] = ['insertDate','updateDate','canCollect', 'canRead','canComplain','canEditCustomer' , 'attachImageRead'
+	 , 'attachImageEditCustomer', 'maxOfflineWorkingHours','maxOfflineWorkingBills'];
 
 	dataSource: any;
 

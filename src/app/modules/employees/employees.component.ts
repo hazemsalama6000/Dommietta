@@ -114,7 +114,10 @@ export class EmployeesComponent implements OnInit {
 					this.employeeDisplay = data;
 					this.service.currentEmployeeSelected = data;
 					this.service.subjectEmployeeChanged.next(true);
-					document.getElementById("blocksdisplay")?.click();		
+					
+					setTimeout(() => {
+						document.getElementById("blocksdisplay")?.click();		
+					}, 1000);
 
 					console.log(this.employeeDisplay);
 				}

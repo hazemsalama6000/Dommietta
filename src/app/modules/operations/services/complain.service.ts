@@ -26,12 +26,12 @@ export class ComplainService {
 			.pipe(map(Items => Items.data as IComplain));
 	}
 
-	getComplainsByCustomerId(customerId: number , pageNumber:number) {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}&PageNumber=${pageNumber}`)
+	getComplainsByCustomerId(customerId: number , pageNumber:number,PageSize:number) {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}CustomerId=${customerId}&PageNumber=${pageNumber}&PageSize=${PageSize}`)
 			.pipe(map((Items: HttpReponseModel) => Items.data as IComplain));
 	}
-	getComplainsByEmployeeId(employeeId: number , pageNumber:number) {
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}Employee_id=${employeeId}&PageNumber=${pageNumber}`)
+	getComplainsByEmployeeId(employeeId: number , pageNumber:number,PageSize:number) {
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_COMPLAINTS_BY_CUSTOMERID}Employee_id=${employeeId}&PageNumber=${pageNumber}&PageSize=${PageSize}`)
 			.pipe(map((Items: HttpReponseModel) => Items.data as IComplain));
 	}
 	getLookupCustomerData(search: any): Observable<LookUpModel[]> {

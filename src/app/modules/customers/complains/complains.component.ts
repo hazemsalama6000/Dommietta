@@ -52,7 +52,7 @@ export class ComplainsComponent {
 			.pipe(
 				switchMap(() => {
 					this.isLoadingResults = true;
-					return this.service.getComplainsByCustomerId(this.customerId,this.paginator.pageIndex + 1);
+					return this.service.getComplainsByCustomerId(this.customerId,this.paginator.pageIndex + 1,this.paginator.pageSize);
 				}),
 				map((data: IComplain) => {
 					this.isLoadingResults = false;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
-import { map } from 'rxjs';
+import { map, timeout } from 'rxjs';
 import { AreaService } from 'src/app/core-module/LookupsServices/area.service';
 import { BlockService } from 'src/app/core-module/LookupsServices/block.service';
 import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
@@ -120,6 +120,10 @@ export class CutomersComponent implements OnInit {
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownCustomerData = data;
+
+					setTimeout(() => {
+						document.getElementById('complainsLink')?.click();
+					}, 1000);
 				}
 			);
 	}
@@ -129,6 +133,10 @@ export class CutomersComponent implements OnInit {
 			.subscribe(
 				(data: LookUpModel[]) => {
 					this.dropdownCustomerData = data;
+					
+					setTimeout(() => {
+						document.getElementById('complainsLink')?.click();
+					}, 1000);
 				}
 			);
 	}
@@ -140,6 +148,11 @@ export class CutomersComponent implements OnInit {
 					this.employeeDisplay = data;
 					this.service.currentEmployeeSelected = data;
 					// console.log(this.employeeDisplay);
+					document.getElementById('reads')?.click();
+
+					setTimeout(() => {
+						document.getElementById('complainsLink')?.click();
+					}, 500);
 				}
 				, (error: any) => {
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
@@ -159,7 +172,9 @@ export class CutomersComponent implements OnInit {
 					this.dropdownCustomerData = [];
 					this.dropdownAreaData = [];
 					this.dropdownBlockData = [];
-
+					setTimeout(() => {
+						document.getElementById('complainsLink')?.click();
+					}, 1000);
 					// console.log(this.employeeDisplay);
 				}
 				, (error: any) => {
