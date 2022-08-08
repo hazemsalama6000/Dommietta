@@ -45,6 +45,7 @@ export class EmployeesComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getUserDataAndLoadBranchesList();
+		this.searchEmployee();
 	}
 
 	getUserDataAndLoadBranchesList() {
