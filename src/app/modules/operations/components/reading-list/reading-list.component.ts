@@ -165,6 +165,7 @@ export class ReadingListComponent implements OnInit {
       for (let index = 0; index < this.readingData.length; index++) {
         if (!this.readingData[index].lastPosted) {
           this.readingData[index].isPosted = this.btnIsPost;
+          this.readingData[index].isRevised = this.btnIsPost;
         }
       }
     }
@@ -179,17 +180,14 @@ export class ReadingListComponent implements OnInit {
   }
 
   ActivePostOrRevise(read: IReadingList) {
-    if(read.isPosted==read.lastPosted&&read.isRevised==read.lastRevised){
-     // this.toaster.openWarningSnackBar('لايوجد تعديلات للحفظ');
-        return;
-    }
-  
+    if (read.isPosted == read.lastPosted && read.isRevised == read.lastRevised) return;
+
     let reading: IUpdateReading[] = [{ id: read.id, isRevised: read.isRevised, isPosted: read.isPosted }];
     this.postReviseOrPost(reading)
   }
 
   postReviseOrPost(reading: IUpdateReading[]) {
-    
+
     this.confirmationDialogService.confirm('تأكيد المراجعة أو الارسال', `هل تريد تأكيد المراجعة أو الارسال ? `)
       .then((confirmed) => {
         if (confirmed) {
