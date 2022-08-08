@@ -1,7 +1,7 @@
 <div class="example-container mat-elevation-z8">
 	<div class="example-loading-shade"
 		 *ngIf="isLoadingResults || isRateLimitReached">
-	  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+	  <mat-spinner [diameter]="50" *ngIf="isLoadingResults"></mat-spinner>
 	  <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
 		GitHub's API rate limit has been reached. It will be reset in one minute.
 	  </div>
@@ -144,6 +144,7 @@
 	  </table>
 	</div>
   
-	<mat-paginator [length]="resultsLength" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>
+	<mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 20,100]" 
+	aria-label="Select page of GitHub search results"></mat-paginator>
   </div>
   

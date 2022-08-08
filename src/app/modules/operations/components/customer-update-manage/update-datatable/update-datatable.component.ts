@@ -50,6 +50,8 @@ export class updateCustomerManageComponent {
 				switchMap(() => {
 					this.isLoadingResults = true;
 					this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
+					this.currentSearchParameter.PageSize = this.paginator.pageSize;
+
 					// console.log(this.currentSearchParameter);
 					return this.service.searchCustomerUpdate(this.currentSearchParameter);
 				}),
