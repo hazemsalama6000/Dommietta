@@ -129,7 +129,7 @@ export class ReadingListComponent implements OnInit {
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
 
-    columnname != 'branch' ? this.getReadingData() : null;
+   this.getReadingData();
   }
 
   //this function to fill dropdowns data
