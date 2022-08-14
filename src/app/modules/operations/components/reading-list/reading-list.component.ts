@@ -62,7 +62,6 @@ export class ReadingListComponent implements OnInit {
     private datePipe: DatePipe,
     private confirmationDialogService: ConfirmationDialogService,
     public dialog: MatDialog,
-    private elementRef: ElementRef
   ) {
 
     this.searchObject = {
@@ -128,7 +127,6 @@ export class ReadingListComponent implements OnInit {
     }
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-
    this.getReadingData();
   }
 

@@ -377,6 +377,16 @@ mat-nested-tree-node[aria-level="2"]>li>div[class='mat-tree-node'] .mat-checkbox
 	font-weight: bold !important;
 }
 
+app-managesidemenu mat-tree-node[aria-level="4"] {
+	display: unset;
+	margin-inline-start: 40px !important;
+}
+
+app-treepermission mat-tree-node[aria-level="4"] {
+	display: inline-flex;
+	margin-inline-start: 40px !important;
+}
+
 .mat-checkbox-label {
 	font-family: 'cairo';
 }

@@ -7,6 +7,8 @@ export interface IReadingSearch {
     Employee_id?: number;
     StartDate?: string;
     EndDate?: string;
+    IsPosted?:boolean;
+    IsRevised?:boolean;
     PageNumber?: number;
     PageSize?: number;
 }

@@ -164,6 +164,14 @@ export enum HttpPaths {
 	API_GET_TWELVE_ISSUES_STATICS = "/api/v1/bill/gettoptwelveissues/",
 	API_GET_DAILY_STATICS = "/api/v1/shared/getdailystatistics",
 
+	//Menu
+	API_GET_ALL_MENU="/api/v1/permissions/getadminmenu",
+	API_GET_USER_MENU="/api/v1/permissions/getmenu",
+	API_GET_PERMISSIONS_MENU="/api/v1/permissions/getmenupermissions",
+	API_ADD_MENU="/api/v1/permissions/addpermissionmenuitem",
+	API_UPDATE_MENU="/api/v1/permissions/updatepermissionmenuitem",
+	API_DELETE_MENU="/api/v1/permissions/removepermissionmenuitem/",
+
 
 
 }
