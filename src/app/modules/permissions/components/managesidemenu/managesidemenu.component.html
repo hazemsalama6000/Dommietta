@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-title class="d-flex align-items-center p-2 fontsection">
+    القائمة
+    <mat-icon class="text-primary mx-5" style="font-size:30px;">list</mat-icon>
+  </mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="mt-10">
+
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+      <!-- This is the tree node template for leaf nodes (this last child)-->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle style="display: block;">
+        <li class="mat-tree-node">
+          <!-- <mat-checkbox class="checklist-leaf-node" (change)="itemToggle($event.checked,node)" [checked]="node.isSelected"> -->
+
+          <button mat-icon-button [matMenuTriggerFor]="menu"> {{node.name }} </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="addItem(node)" *ngIf="node.isLast==false" class="align-items-center d-flex justify-content-between px-2">
+              <mat-icon class="m-0">add</mat-icon><span>اضافة</span>
+            </button>
+            <button mat-menu-item (click)="updateItem(node)" class="align-items-center d-flex justify-content-between px-2">
+              <mat-icon class="m-0">edit</mat-icon><span>تعديل</span>
+            </button>
+            <button mat-menu-item (click)="deleteItem(node)" class="align-items-center d-flex justify-content-between px-2">
+              <mat-icon class="m-0">delete</mat-icon><span>حذف</span>
+            </button>
+          </mat-menu>
+
+          <!-- </mat-checkbox> -->
+        </li>
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+        <li>
+          <div class="mat-tree-node">
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <!-- <mat-checkbox [checked]="node.isSelected" [indeterminate]="node.indeterminate && !node.isSelected" (change)="itemToggle($event.checked,node)"> -->
+
+            <button mat-icon-button [matMenuTriggerFor]="menu"> {{node.name}} </button>
+            <mat-menu #menu="matMenu">
+              
+              <button mat-menu-item (click)="addItem(node)" class="align-items-center d-flex justify-content-between px-2">
+                <mat-icon class="m-0">add</mat-icon><span>اضافة</span>
+              </button>
+              <button mat-menu-item (click)="updateItem(node)" *ngIf="node.level!=1" class="align-items-center d-flex justify-content-between px-2">
+                <mat-icon class="m-0">edit</mat-icon><span>تعديل</span>
+              </button>
+              <button mat-menu-item (click)="deleteItem(node)" *ngIf="node.level!=1" class="align-items-center d-flex justify-content-between px-2">
+                <mat-icon class="m-0">delete</mat-icon><span>حذف</span>
+              </button>
+            </mat-menu>
+
+            <!-- </mat-checkbox> -->
+          </div>
+          <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </ul>
+        </li>
+      </mat-nested-tree-node>
+    </mat-tree>
+
+  </mat-card-content>
+
+</mat-card>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ManagesidemenuComponent } from './components/managesidemenu/managesidemenu.component';
 import { OnlineUsersComponent } from './components/onlineUsers/onlineUsers.component';
 import { PermissionsComponent } from './components/permissions.component';
 import { AdminrolesComponent } from './components/roles/adminroles/adminroles.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
 	{ path: 'userconnectionlogs', component: UserConnectionLogsComponent },
 	{ path: 'superadminroles', component: AdminrolesComponent },
 	{ path: 'userLocationLogs', component: UserLocationLogsComponent },
+	{ path: 'managemenu', component: ManagesidemenuComponent },
 	{
 		path: '',
 		component: PermissionsComponent,

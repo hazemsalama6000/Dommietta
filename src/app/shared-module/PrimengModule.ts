@@ -18,7 +18,8 @@ import {PasswordModule} from 'primeng/password';
 import {BadgeModule} from 'primeng/badge';
 import {ImageModule} from 'primeng/image';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
-
+import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
+import {RadioButtonModule} from 'primeng/radiobutton';
 export const PrimengModule = [
   ConfirmDialogModule,
   ButtonModule,
@@ -39,5 +40,7 @@ export const PrimengModule = [
   PasswordModule,
   BadgeModule,
   ImageModule,
-  ConfirmPopupModule
+  ConfirmPopupModule,
+  TriStateCheckboxModule,
+  RadioButtonModule
 ]
