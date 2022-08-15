@@ -6,7 +6,8 @@ export interface ITreeMenu {
     isLast?: boolean;
     route?: string;
     parentId?: number;
-    order?:number;
+    orderBy?:number;
+    isDeleted?:boolean;
     permission?: string;
     level?: number
     id: number;

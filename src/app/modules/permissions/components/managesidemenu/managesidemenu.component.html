@@ -11,19 +11,45 @@
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle style="display: block;">
         <li class="mat-tree-node">
           <!-- <mat-checkbox class="checklist-leaf-node" (change)="itemToggle($event.checked,node)" [checked]="node.isSelected"> -->
+          <label [matMenuTriggerFor]="menu" class="d-flex justify-content-center align-items-end fontForInput fs-2" style="user-select: none;">
+            <mat-icon class="me-1" style="font-size:30px;" *ngIf="node.icon!=''">{{node.icon}}</mat-icon>
+            {{node.name }}
+          </label>
 
-          <button mat-icon-button [matMenuTriggerFor]="menu"> {{node.name }} </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="addItem(node)" *ngIf="node.isLast==false" class="align-items-center d-flex justify-content-between px-2">
               <mat-icon class="m-0">add</mat-icon><span>اضافة</span>
             </button>
-            <button mat-menu-item (click)="updateItem(node)" class="align-items-center d-flex justify-content-between px-2">
+            <button mat-menu-item (click)="updateItem(node)"  class="align-items-center d-flex justify-content-between px-2">
               <mat-icon class="m-0">edit</mat-icon><span>تعديل</span>
             </button>
             <button mat-menu-item (click)="deleteItem(node)" class="align-items-center d-flex justify-content-between px-2">
               <mat-icon class="m-0">delete</mat-icon><span>حذف</span>
             </button>
+            <div class="d-flex justify-content-center align-items-center">
+              <span class="mx-2">
+                <section matTooltip="{{node.isDeleted === false? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
+                  class="example-section">
+                  <mat-slide-toggle name="isActive" class="example-margin" [color]="'red'" (change)="toggleActiveDeactive(node)"
+                    [checked]="node.isDeleted">
+                  </mat-slide-toggle>
+                </section>
+              </span>
+
+              <label *ngIf="node.isDeleted == false" class="badge badge-primary"> {{"HR.TITLES.ACTIVE" |translate}}</label>
+              <label *ngIf="node.isDeleted == true" class="badge badge-danger">{{"HR.TITLES.NOTACTIVE"|translate}}</label>
+            </div>
           </mat-menu>
+
+
+          <span class="mx-2" *ngIf="node.level!=1">
+            <section class="example-section">
+              <mat-slide-toggle name="isDeleted" class="example-margin" [color]="'red'" [(ngModel)]="node.isDeleted" [checked]="node.isDeleted"
+                (change)="toggleActiveDeactive(node)">
+              </mat-slide-toggle>
+            </section>
+          </span>
+
 
           <!-- </mat-checkbox> -->
         </li>
@@ -37,11 +63,14 @@
               </mat-icon>
             </button>
             <!-- <mat-checkbox [checked]="node.isSelected" [indeterminate]="node.indeterminate && !node.isSelected" (change)="itemToggle($event.checked,node)"> -->
+            <label [matMenuTriggerFor]="menu" disabled="true" class="d-flex justify-content-center align-items-end fontForInput fs-2"
+              style="user-select: none;">
+              <mat-icon class="me-1" style="font-size:30px;" *ngIf="node.icon!=''">{{node.icon}}</mat-icon>
+              {{node.name }}
+            </label>
 
-            <button mat-icon-button [matMenuTriggerFor]="menu"> {{node.name}} </button>
             <mat-menu #menu="matMenu">
-              
-              <button mat-menu-item (click)="addItem(node)" class="align-items-center d-flex justify-content-between px-2">
+              <button mat-menu-item (click)="addItem(node)" *ngIf="node.isLast==false" class="align-items-center d-flex justify-content-between px-2">
                 <mat-icon class="m-0">add</mat-icon><span>اضافة</span>
               </button>
               <button mat-menu-item (click)="updateItem(node)" *ngIf="node.level!=1" class="align-items-center d-flex justify-content-between px-2">
@@ -50,8 +79,29 @@
               <button mat-menu-item (click)="deleteItem(node)" *ngIf="node.level!=1" class="align-items-center d-flex justify-content-between px-2">
                 <mat-icon class="m-0">delete</mat-icon><span>حذف</span>
               </button>
+              <div *ngIf="node.level!=1" class="d-flex justify-content-center align-items-center">
+                <span class="mx-2">
+                  <section matTooltip="{{node.isDeleted === false? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
+                    class="example-section">
+                    <mat-slide-toggle name="isActive" class="example-margin" [color]="'red'" (change)="toggleActiveDeactive(node)"
+                      [checked]="node.isDeleted">
+                    </mat-slide-toggle>
+                  </section>
+                </span>
+  
+                <label *ngIf="node.isDeleted == false" class="badge badge-primary"> {{"HR.TITLES.ACTIVE" |translate}}</label>
+                <label *ngIf="node.isDeleted == true" class="badge badge-danger">{{"HR.TITLES.NOTACTIVE"|translate}}</label>
+              </div>
             </mat-menu>
 
+
+            <span class="mx-2" *ngIf="node.level!=1">
+              <section class="example-section">
+                <mat-slide-toggle name="isActive" class="example-margin" [color]="'red'" [(ngModel)]="node.isDeleted"
+                  (change)="toggleActiveDeactive(node)">
+                </mat-slide-toggle>
+              </section>
+            </span>
             <!-- </mat-checkbox> -->
           </div>
           <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">

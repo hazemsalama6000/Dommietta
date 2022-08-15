@@ -27,7 +27,7 @@ export class AddmenuComponent {
     Route: [''],
     Permission: [''],
     Icon: [''],
-    Order:[0],
+    OrderBy:[0],
     type: ['list']
   });
 
@@ -56,7 +56,7 @@ export class AddmenuComponent {
         Name: this.data.node.name,
         ParentId: this.data.node.parentId,
         Icon: this.data.node.icon,
-        Order:this.data.node.order
+        Order:this.data.node.orderBy
       });
     }
     else if (this.data.node.isLast && (this.data.node.level == 4 || this.data.node.level == 3 || this.data.node.level == 2)) {
@@ -69,7 +69,7 @@ export class AddmenuComponent {
         ParentId: this.data.node.parentId,
         Permission: this.data.node.permission,
         Icon: this.data.node.icon,
-        Order:this.data.node.order
+        Order:this.data.node.orderBy
       });
     }
     else {
@@ -77,7 +77,7 @@ export class AddmenuComponent {
         Id: this.data.node.id,
         Name: this.data.node.name,
         ParentId: this.data.node.parentId,
-        Order:this.data.node.order
+        Order:this.data.node.orderBy
       });
     }
 
