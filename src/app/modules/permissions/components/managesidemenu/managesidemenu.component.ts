@@ -86,6 +86,43 @@ export class ManagesidemenuComponent implements OnInit {
   //   this.checkAllParents(node);
   // }
 
+  getNodesIds(node: ITreeMenu, Ids: number[]) {
+    Ids.push(node.id)
+    if (node.childNode) {
+      node.childNode.forEach((child: any) => {
+        this.getNodesIds(child, Ids);
+      });
+    }
+  }
+
+  toggleActiveDeactive(node: ITreeMenu) {
+console.log(this.menuTree)
+    let ids: number[] = [];
+    if (node.isDeleted) {
+      if (!node.parent?.isDeleted) {
+       this.getMenu();
+        this.toaster.openWarningSnackBar('لا يمكن تفعيل هذا العنصر قبل تفعيل العنصر الاعلى له');
+        return;
+      } else
+        ids.push(node.id);
+    } else {
+      this.getNodesIds(node, ids);
+    }
+    console.log(node.isDeleted, ids)
+    if (ids.length > 0) {
+      // this.menuService.toggleItemsActiveDeactive(ids).subscribe(
+      //   (data: HttpReponseModel) => {
+      this.toaster.openSuccessSnackBar('Done');
+      // this.toaster.openSuccessSnackBar(data.message);
+      //     this.getMenu();
+      //   },
+      //   (error: any) => console.log(error)
+      // );
+    }
+
+  }
+
+
   ngOnDestroy() {
     this.menuService.menuTree.next([]);
     this.unsubscribe.forEach((sb) => sb.unsubscribe());

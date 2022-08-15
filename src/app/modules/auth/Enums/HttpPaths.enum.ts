@@ -171,6 +171,7 @@ export enum HttpPaths {
 	API_ADD_MENU="/api/v1/permissions/addpermissionmenuitem",
 	API_UPDATE_MENU="/api/v1/permissions/updatepermissionmenuitem",
 	API_DELETE_MENU="/api/v1/permissions/removepermissionmenuitem/",
+	API_ActiveDeactive_MENU="/api/v1/permissions/changenodeactivation"
 
 
 

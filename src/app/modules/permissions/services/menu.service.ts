@@ -38,4 +38,8 @@ export class MenuService {
     return this.http.CommonDeleteRequest(`${localStorage.getItem("companyLink")}${HttpPaths.API_DELETE_MENU}${nodeId}`)
   }
 
+  toggleItemsActiveDeactive(ids:number[]): Observable<any>{
+    return this.http.CommonPutRequests(ids, `${localStorage.getItem("companyLink")}${HttpPaths.API_ActiveDeactive_MENU}`);
+  }
+
 }

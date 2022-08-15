@@ -143,26 +143,26 @@
       </div>
       <div class="col-6 mb-4">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">الترتيب</span></label>
-        <input class="form-control form-control-solid" placeholder="" name="Order" formControlName="Order"
-          [ngClass]="{'border-danger':menuForm.controls['Order'].errors&&(menuForm.controls['Order'].touched||saveButtonClickedFlag)}" />
+        <input class="form-control form-control-solid" placeholder="" name="OrderBy" formControlName="OrderBy"
+          [ngClass]="{'border-danger':menuForm.controls['OrderBy'].errors&&(menuForm.controls['OrderBy'].touched||saveButtonClickedFlag)}" />
         <mat-hint>
 
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                                     validation: 'required',
                                     message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'PERMISSIONS.TITLES.ROLENAME' | translate},
-                                    control: menuForm.controls['Order']
+                                    control: menuForm.controls['OrderBy']
                                   }"></ng-container>
 
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                                     validation: 'minlength',
                                     message: 'AUTH.VALIDATION.MIN_LENGTH' | translate : {name:'PERMISSIONS.TITLES.ROLENAME' | translate , min:3},
-                                    control: menuForm.controls['Order']
+                                    control: menuForm.controls['OrderBy']
                                   }"></ng-container>
 
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                                       validation: 'maxlength',
                                       message: 'AUTH.VALIDATION.MAX_LENGTH' | translate : {name:'PERMISSIONS.TITLES.ROLENAME' | translate , max:100},
-                                      control: menuForm.controls['Order']
+                                      control: menuForm.controls['OrderBy']
                                    }"></ng-container>
 
         </mat-hint>
