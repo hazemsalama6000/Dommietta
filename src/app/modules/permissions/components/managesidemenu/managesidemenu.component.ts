@@ -97,10 +97,10 @@ export class ManagesidemenuComponent implements OnInit {
 
   toggleActiveDeactive(node: ITreeMenu) {
 console.log(this.menuTree)
+
     let ids: number[] = [];
     if (node.isDeleted) {
-      if (!node.parent?.isDeleted) {
-       this.getMenu();
+      if (node.parent?.isDeleted) {
         this.toaster.openWarningSnackBar('لا يمكن تفعيل هذا العنصر قبل تفعيل العنصر الاعلى له');
         return;
       } else
@@ -110,14 +110,13 @@ console.log(this.menuTree)
     }
     console.log(node.isDeleted, ids)
     if (ids.length > 0) {
-      // this.menuService.toggleItemsActiveDeactive(ids).subscribe(
-      //   (data: HttpReponseModel) => {
-      this.toaster.openSuccessSnackBar('Done');
-      // this.toaster.openSuccessSnackBar(data.message);
-      //     this.getMenu();
-      //   },
-      //   (error: any) => console.log(error)
-      // );
+      this.menuService.toggleItemsActiveDeactive(ids).subscribe(
+        (data: HttpReponseModel) => {
+      this.toaster.openSuccessSnackBar(data.message);
+          this.getMenu();
+        },
+        (error: any) => console.log(error)
+      );
     }
 
   }
