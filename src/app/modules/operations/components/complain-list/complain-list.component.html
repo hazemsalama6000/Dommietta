@@ -22,56 +22,49 @@
               <p-divider layout="vertical" class="mx-2"></p-divider>
               <span class="p-input-icon-left">
                 <button class="buttonsearch" (click)="myfilter('CustomerCode');"><i class="pi pi-search"></i></button>
-                <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}"
-                  [(ngModel)]="searchObject.CustomerCode">
+                <input type="text" pInputText placeholder="{{'OPERATION.INPUTS.CUSTOMERCODE'|translate}}" [(ngModel)]="searchObject.CustomerCode">
               </span>
             </div>
 
           </div>
           <div class="col justify-content-end d-flex">
-            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mx-1"
-              (click)="exportExcel()" pTooltip="XLS" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success mx-1" (click)="exportExcel()" pTooltip="XLS"
+              tooltipPosition="bottom"></button>
           </div>
         </div>
         <p-divider></p-divider>
         <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
             <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];"
-              placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.BranchId"></p-dropdown>
+              (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}"
+              [showClear]="true" [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('area')" placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.AreaId">
+            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
+              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId">
             </p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.BlockId"></p-dropdown>
+            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
+              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.CustomerId"></p-dropdown>
+            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
+              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
-              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true"
-              [(ngModel)]="searchObject.Employee_id" [filter]="true" filterBy="Name"></p-dropdown>
+            <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
+              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.Employee_id" [filter]="true"
+              filterBy="Name"></p-dropdown>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('startDate')" placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}"
-              [(ngModel)]="startDate">
+            <p-calendar [showIcon]="true" inputId="icon" #start [maxDate]="end.value" appendTo="body" dir="ltr" (onSelect)="myfilter('startDate')"
+              placeholder="{{'OPERATION.INPUTS.STARTDATE'|translate}}" [(ngModel)]="startDate">
             </p-calendar>
           </div>
           <div class="col">
-            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr"
-              (onSelect)="myfilter('endDate')" placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}"
-              [(ngModel)]="endDate">
+            <p-calendar [showIcon]="true" inputId="icon" #end [minDate]="start.value" appendTo="body" dir="ltr" (onSelect)="myfilter('endDate')"
+              placeholder="{{'OPERATION.INPUTS.ENDDATE'|translate}}" [(ngModel)]="endDate">
             </p-calendar>
           </div>
         </div>
@@ -92,13 +85,25 @@
           <th class="text-center">{{'OPERATION.TITLES.IMAGE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.LOCATION'|translate}} </th>
           <th class="text-center">
-            <button pButton pRipple type="button" [disabled]="showBtnIsRevise"
-              label="{{'OPERATION.BUTTONS.REVISED'|translate}}" (click)="postAllDataToChecked()"
-              class="p-button-rounded p-button-info p-1 mb-2 d-block" styleClass="p-button-sm"></button>
+            <button pButton pRipple type="button" [disabled]="showBtnIsRevise" label="{{'OPERATION.BUTTONS.REVISED'|translate}}"
+              (click)="postAllDataToChecked()" class="p-button-rounded p-button-info p-1 mb-2 d-block" styleClass="p-button-sm"></button>
             <input class="form-check-input" name="user_role" type="checkbox" [(ngModel)]="btnIsRevise"
               (change)="setAllIsRevise('revise');showBtnIsRevise=false;" />
           </th>
-          <th class="text-center"></th>
+          <th class="text-center">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>search</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <p-radioButton name="isRevised" value="true" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')"
+                label="تم المراجعة" class="d-block m-2"></p-radioButton>
+              <p-radioButton name="isRevised" value="false" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')"
+                label="لم يتم المراجعة" class="d-block m-2"></p-radioButton>
+              <p-radioButton name="isRevised" [value]="null" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')" label="الكل"
+                class="d-block m-2">
+              </p-radioButton>
+            </mat-menu>
+          </th>
         </tr>
       </ng-template>
 
@@ -120,15 +125,14 @@
             </button>
           </td>
           <td>
-            <button (click)="currentLocation(complain.x,complain.y)" matTooltip="موقع المستخدم" mat-mini-fab
-              color="primary" class="justify-content-center align-items-center"
-              aria-label="Example icon button with a filter list icon">
+            <button (click)="currentLocation(complain.x,complain.y)" matTooltip="موقع المستخدم" mat-mini-fab color="primary"
+              class="justify-content-center align-items-center" aria-label="Example icon button with a filter list icon">
               <mat-icon style="font-size:20px ;"> location_on</mat-icon>
             </button>
           </td>
           <td>
-            <input class="form-check-input me-3" matTooltip="{{complain.isRevised?'':'تحديد للمراجعة'}}" name="user_role" type="checkbox" id="kt_modal_update_role_option_0"
-              [checked]="complain.IsRevised" [(ngModel)]="complain.isRevised" />
+            <input class="form-check-input me-3" matTooltip="{{complain.isRevised?'':'تحديد للمراجعة'}}" name="user_role" type="checkbox"
+              id="kt_modal_update_role_option_0" [checked]="complain.IsRevised" [(ngModel)]="complain.isRevised" />
           </td>
 
           <td>
@@ -158,8 +162,7 @@
 
     </p-table>
     <div>
-      <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="changePage($event)"
-        [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
+      <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="changePage($event)" [rowsPerPageOptions]="[10,30,50,100]"></p-paginator>
     </div>
   </div>
 

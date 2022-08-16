@@ -125,7 +125,7 @@ export class ComplainListComponent implements OnInit {
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
 
-   this.getComplainData();
+    this.getComplainData();
   }
 
   //this function to fill dropdowns data

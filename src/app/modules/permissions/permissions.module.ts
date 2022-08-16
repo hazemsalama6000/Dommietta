@@ -28,6 +28,8 @@ import { PermissionsComponent } from './components/permissions.component';
 import { OverviewComponent } from './components/users/overview/overview.component';
 import { TreepermissionComponent } from './components/roles/treepermission/treepermission.component';
 import { AdminrolesComponent } from './components/roles/adminroles/adminroles.component';
+import { ManagesidemenuComponent } from './components/managesidemenu/managesidemenu.component';
+import { AddmenuComponent } from './components/managesidemenu/addmenu/addmenu.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AdminrolesComponent } from './components/roles/adminroles/adminroles.co
 	UpdateroleComponent,
 	OverviewComponent,
 	TreepermissionComponent,
-	AdminrolesComponent
+	AdminrolesComponent,
+	ManagesidemenuComponent,
+	AddmenuComponent
   ],
   imports: [
     CommonModule,

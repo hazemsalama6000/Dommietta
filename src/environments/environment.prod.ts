@@ -7,10 +7,7 @@ export const environment = {
   appVersion: 'v8.0.38',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
- // apiUrl: 'https://alingtrail.com',
-  apiUrl: 'http://localhost:8085',
-
-  
+  apiUrl: 'https://alingtrail.com',
   appThemeName: 'Metronic',
   appPurchaseUrl: 'https://1.envato.market/EA4JP',
   appHTMLIntegration: 'https://preview.keenthemes.com/metronic8/demo1/documentation/base/helpers/flex-layouts.html',
