@@ -9,6 +9,7 @@ import { ComplainsComponent } from './complains/complains.component';
 import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
 import { UpdateRequestComponent } from './updates-request/updates-request.component';
 import { UserLocationComponent } from './user-locations/user-location.component';
+import { BillDatatableComponent } from './employee-bills/customer-bill-datatable.component';
 
 const routes: Routes = [
 	{ path: 'employeelist', component: Employee_listComponent, pathMatch: 'full' },
@@ -43,6 +44,10 @@ const routes: Routes = [
 			{
 				path: 'userlocation/:employeeId',
 				component: UserLocationComponent
+			}, 
+			{
+				path: 'bills/:employeeId',
+				component:BillDatatableComponent
 			},
 
 			{ path: '', redirectTo: 'overview', pathMatch: 'full' },

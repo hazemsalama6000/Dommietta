@@ -155,6 +155,7 @@ export class CutomersComponent implements OnInit {
 					}, 500);
 				}
 				, (error: any) => {
+					alert();
 					this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
 				}
 			);

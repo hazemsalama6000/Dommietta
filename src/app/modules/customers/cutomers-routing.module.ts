@@ -5,6 +5,7 @@ import { CutomersComponent } from './cutomers.component';
 import { ComplainsComponent } from './complains/complains.component';
 import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
 import { UpdateRequestComponent } from './updates-request/updates-request.component';
+import { BillDatatableComponent } from './customer-bills/customer-bill-datatable.component';
 
 const routes: Routes = [
 	{
@@ -30,6 +31,10 @@ const routes: Routes = [
 			{
 				path: 'updatelog/:customerId',
 				component: UpdateRequestComponent
+			},
+			{
+				path: 'bills/:customerId',
+				component: BillDatatableComponent
 			},
 			
 			/*	{

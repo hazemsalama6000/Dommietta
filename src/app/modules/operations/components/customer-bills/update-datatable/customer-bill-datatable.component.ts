@@ -83,6 +83,8 @@ export class BillDatatableComponent {
 				}),
 			)
 			.subscribe((data) => {this.data = data;  });
+
+			this.service.searchUpdateUserManageAction.next(true);
 	}
 
 

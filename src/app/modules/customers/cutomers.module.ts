@@ -14,6 +14,7 @@ import { UserLocationComponent } from './user-locations/user-location.component'
 import { ComplainsComponent } from './complains/complains.component';
 import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
 import { UpdateRequestComponent } from './updates-request/updates-request.component';
+import { BillDatatableComponent } from './customer-bills/customer-bill-datatable.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UpdateRequestComponent } from './updates-request/updates-request.compon
 	UserLocationComponent,
 	ComplainsComponent,
 	CustomerReadingComponent,
-	UpdateRequestComponent
+	UpdateRequestComponent,
+	BillDatatableComponent
   ],
   imports: [
     CommonModule,

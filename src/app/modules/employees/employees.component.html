@@ -139,7 +139,7 @@
 							<a *ngIf="employeeDisplay.technician.canCollect == true; else inActiveForCanCollect"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								 مفعل
+								مفعل
 							</a>
 
 							<ng-template #inActiveForCanCollect>
@@ -158,7 +158,7 @@
 							<a *ngIf="employeeDisplay.technician.canRead == true; else inActiveForCanRead"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								 مفعل
+								مفعل
 							</a>
 
 							<ng-template #inActiveForCanRead>
@@ -177,7 +177,7 @@
 							<a *ngIf="employeeDisplay.technician.canComplain == true; else inActiveForCanComplain"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								 مفعل
+								مفعل
 							</a>
 
 							<ng-template #inActiveForCanComplain>
@@ -197,7 +197,7 @@
 							<a *ngIf="employeeDisplay.technician.canEditCustomer == true; else inActiveForCanEditCustomer"
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
-								 مفعل
+								مفعل
 							</a>
 
 							<ng-template #inActiveForCanEditCustomer>
@@ -216,7 +216,7 @@
 								class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
 								data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
 								مفعل
-														</a>
+							</a>
 
 							<ng-template #inActiveForAttachImageRead>
 								<a class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
@@ -295,12 +295,12 @@
 								[routerLink]="['/employee/employeeprofile/customercomplains/', employeeDisplay.id ]"
 								routerLinkActive="text-primary">
 								<mat-icon>receipt</mat-icon>
-		
+
 								الشكاوى
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
 					<mat-tab>
 						<ng-template mat-tab-label>
 							<a class="nav-link text-hover-primary me-6 fontForInputs"
@@ -308,12 +308,12 @@
 								[routerLink]="['/employee/employeeprofile/customerReading/', employeeDisplay.id ]"
 								routerLinkActive="text-primary">
 								<mat-icon>visibility</mat-icon>
-		
+
 								القراءات
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
 					<mat-tab style="width:250px !important;">
 						<ng-template mat-tab-label>
 							<a class="nav-link text-hover-primary me-6 fontForInputs"
@@ -321,12 +321,12 @@
 								[routerLink]="['/employee/employeeprofile/updateRequest/', employeeDisplay.id ]"
 								routerLinkActive="text-primary">
 								<mat-icon>format_list_numbered</mat-icon>
-		
+
 								<span>طلب التعديل</span>
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
 					<mat-tab>
 						<ng-template mat-tab-label>
 							<a class="nav-link text-hover-primary me-6 fontForInputs"
@@ -334,12 +334,24 @@
 								[routerLink]="['/employee/employeeprofile/technicianlog/', employeeDisplay.id ]"
 								routerLinkActive="text-primary">
 								<mat-icon> local_dining</mat-icon>
-		
+
 								البيانات الفنية
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
+					<mat-tab>
+						<ng-template mat-tab-label>
+							<a class="nav-link text-hover-primary me-6 fontForInputs"
+								style="color:rgb(71, 71, 71); font-weight: bold;"
+								[routerLink]="['/employee/employeeprofile/bills/', employeeDisplay.id ]"
+								routerLinkActive="text-primary">
+								<mat-icon> local_dining</mat-icon>
+								التحصيلات
+							</a>
+						</ng-template>
+					</mat-tab>
+
 					<mat-tab>
 						<ng-template mat-tab-label>
 							<a class="nav-link text-hover-primary me-6 fontForInputs"
@@ -347,12 +359,12 @@
 								[routerLink]="['/employee/employeeprofile/employeeblocks',employeeDisplay.blocks]"
 								[state]="employeeDisplay.blocks" routerLinkActive="text-primary">
 								<mat-icon> person_pin_circle</mat-icon>
-		
+
 								المربعات
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
 					<mat-tab style="width:250px !important;">
 						<ng-template mat-tab-label>
 							<a class="nav-link text-hover-primary me-6 fontForInputs"
@@ -360,12 +372,12 @@
 								[routerLink]="['/employee/employeeprofile/userlocation/', employeeDisplay.id ]"
 								routerLinkActive="text-primary">
 								<mat-icon>location_on</mat-icon>
-		
+
 								<span> الموقع </span>
 							</a>
 						</ng-template>
 					</mat-tab>
-		
+
 				</mat-tab-group>
 			</div>
 
@@ -373,25 +385,25 @@
 			<div class="col-md-2 mt-5">
 				<span *ngIf="employeeDisplay.id > 0">
 					<a data-bs-toggle="modal" data-bs-target="#kt_modal_offer_a_deal">
-		
+
 					</a>
 					<a class="btn btn-sm btn-primary me-3 cursor-pointer" data-kt-menu-trigger="click"
 						data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
 						اعدادات الملف
 						<i class="bi bi-gear-fill fs-3"></i>
 					</a>
-					<app-setting (emitForActiveProp)="editActiveProp($event)" (emitter)="editEmployeeTechnicialData($event)"
-						[_Employee]="employeeDisplay">
+					<app-setting (emitForActiveProp)="editActiveProp($event)"
+						(emitter)="editEmployeeTechnicialData($event)" [_Employee]="employeeDisplay">
 					</app-setting>
 				</span>
 			</div>
 
 		</div>
-		
-	
 
 
-	
+
+
+
 
 		<br>
 

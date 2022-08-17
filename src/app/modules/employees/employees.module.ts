@@ -21,6 +21,7 @@ import { ComplainsComponent } from './complains/complains.component';
 import { CustomerReadingComponent } from './customer-reading/customer-reading.component';
 import { UserLocationXYComponent } from './user-locationsxy/user-locationxy.component';
 import { UpdateRequestComponent } from './updates-request/updates-request.component';
+import { BillDatatableComponent } from './employee-bills/customer-bill-datatable.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UpdateRequestComponent } from './updates-request/updates-request.compon
 	ComplainsComponent,
 	CustomerReadingComponent,
 	UserLocationXYComponent,
-	UpdateRequestComponent
+	UpdateRequestComponent,
+	BillDatatableComponent
   ],
   imports: [
     CommonModule,
