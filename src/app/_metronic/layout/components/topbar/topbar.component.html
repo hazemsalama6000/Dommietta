@@ -49,17 +49,14 @@
 <!-- begin::User -->
 <div class="d-flex align-items-center p-2" [ngClass]="toolbarButtonMarginClass" id="kt_header_user_menu_toggle">
 
-
-  <!-- begin::Toggle -->
-  <div class="cursor-pointer symbol" [ngClass]="toolbarUserAvatarHeightClass" data-kt-menu-trigger="click"
-    data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+  <div class="cursor-pointer symbol" [ngClass]="toolbarUserAvatarHeightClass" data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+    data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
     <img *ngIf="!userdata" [src]="'./assets/media/svg/avatars/001-boy.svg'" alt="" />
 
-    <img *ngIf="userdata" [src]="url+(userdata?.imgPath)"
-      alt="{{userdata.fullName}}" (error)="img.src = '../../../assets/media/svg/avatars/001-boy.svg'" #img/>
+    <img *ngIf="userdata" [src]="url+(userdata?.imgPath)" alt="{{userdata.fullName}}"
+      (error)="img.src = '../../../assets/media/svg/avatars/001-boy.svg'" #img />
   </div>
-  <!-- end::Toggle <img src="../../../assets/media/svg/avatars/001-boy.svg" alt="image" /> -->
-  <app-user-inner></app-user-inner>
+   <app-user-inner></app-user-inner>
 </div>
 <!-- end::User -->
 
