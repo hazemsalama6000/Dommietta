@@ -13,7 +13,8 @@ import { MenuService } from '../../../services/menu.service';
   styleUrls: ['./addmenu.component.scss']
 })
 export class AddmenuComponent {
-  labelPosition: string;
+  disabledBtn: boolean = false;
+
   saveButtonClickedFlag = false;
   permission: LookUpModel[] = [];
 
@@ -27,7 +28,7 @@ export class AddmenuComponent {
     Route: [''],
     Permission: [''],
     Icon: [''],
-    OrderBy:[0],
+    OrderBy: [0, [Validators.required]],
     type: ['list']
   });
 
@@ -49,37 +50,23 @@ export class AddmenuComponent {
 
 
   setValueToUpdate() {
-    if (this.data.node.level == 3 && !this.data.node.isLast) {
+    if ((this.data.node.level == 2 || this.data.node.level == 3) && this.data.node.isLast)
+      this.addValidator(['Icon', 'Route', 'Permission']);
+    else if (this.data.node.level == 3 && !this.data.node.isLast)
       this.addValidator(['Icon']);
-      this.menuForm.patchValue({
-        Id: this.data.node.id,
-        Name: this.data.node.name,
-        ParentId: this.data.node.parentId,
-        Icon: this.data.node.icon,
-        OrderBy:this.data.node.orderBy
-      });
-    }
-    else if (this.data.node.isLast && (this.data.node.level == 4 || this.data.node.level == 3 || this.data.node.level == 2)) {
+    else if (this.data.node.level == 4 && this.data.node.isLast)
       this.addValidator(['Route', 'Permission']);
-      this.menuForm.patchValue({
-        Id: this.data.node.id,
-        Name: this.data.node.name,
-        Route: this.data.node.route,
-        IsLast: this.data.node.isLast,
-        ParentId: this.data.node.parentId,
-        Permission: this.data.node.permission,
-        Icon: this.data.node.icon,
-        OrderBy:this.data.node.orderBy
-      });
-    }
-    else {
-      this.menuForm.patchValue({
-        Id: this.data.node.id,
-        Name: this.data.node.name,
-        ParentId: this.data.node.parentId,
-        OrderBy:this.data.node.orderBy
-      });
-    }
+
+    this.menuForm.patchValue({
+      Id: this.data.node.id,
+      Name: this.data.node.name,
+      Route: this.data.node.route,
+      IsLast: this.data.node.isLast,
+      ParentId: this.data.node.parentId,
+      Permission: this.data.node.permission,
+      Icon: this.data.node.icon,
+      OrderBy: this.data.node.orderBy
+    });
 
   }
 
@@ -94,7 +81,9 @@ export class AddmenuComponent {
   }
 
   addmenu() {
+    console.log(this.menuForm.valid)
     if (this.menuForm.valid && this.saveButtonClickedFlag) {
+      this.disabledBtn = true;
       if (this.data.type == 'add') {
         this.menuForm.patchValue({ IsLast: this.type == 'child' || this.data.node.level == 3 ? true : false, ParentId: this.data.node.id });
         this.menuService.AddMenu(this.menuForm.value).subscribe(
@@ -110,6 +99,8 @@ export class AddmenuComponent {
           (error: any) => {
             console.log(error);
             this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+          }, () => {
+            this.disabledBtn = false;
           });
 
       } else if (this.data.type == 'edit') {
@@ -127,8 +118,9 @@ export class AddmenuComponent {
           (error: any) => {
             console.log(error);
             this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+          }, () => {
+            this.disabledBtn = false;
           });
-
       }
 
     }
@@ -145,20 +137,14 @@ export class AddmenuComponent {
   changeMode() {
     this.type = this.menuForm.get('type')?.value;
 
-    this.menuForm.reset();
-    this.menuForm.updateValueAndValidity();
+    this.removeValidator(['Icon', 'Route', 'Permission']);
 
-    if ((this.data.node.level == 2 || this.data.node.level == 3) && this.data.type == 'add' && this.type == 'child') {
-      this.addValidator(['Route', 'Permission']);
-      this.removeValidator(['Icon'])
-    } else if ((this.data.node.level == 2 || this.data.node.level == 3) && this.data.type == 'add' && this.type == 'list') {
+    if ((this.data.node.level == 2 || this.data.node.level == 1) && this.data.type == 'add' && this.type == 'child')
+      this.addValidator(['Icon', 'Route', 'Permission']);
+    else if (this.data.node.level == 2 && this.data.type == 'add' && this.type == 'list')
       this.addValidator(['Icon']);
-      this.removeValidator(['Route', 'Permission'])
-    } else if (this.data.node.level == 1 && this.data.type == 'add' && this.type == 'child') {
-      this.addValidator(['Route', 'Permission', 'Icon']);
-    } else {
-      this.removeValidator(['Route', 'Permission', 'Icon']);
-    }
+    else if (this.data.node.level == 3 && this.data.type == 'add')
+      this.addValidator(['Route', 'Permission']);
   }
 
 
