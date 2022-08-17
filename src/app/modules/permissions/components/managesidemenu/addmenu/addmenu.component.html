@@ -22,7 +22,7 @@
     </section>
 
     <div class="row mx-0">
-      <!-- {{'PERMISSIONS.TITLES.ROLENAME'|translate}} {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
+      <!-- {{'PERMISSIONS.TITLES.NAME'|translate}} {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
       <div class="col-6 mb-4">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">الاسم</span></label>
         <input class="form-control form-control-solid" placeholder="" name="Name" formControlName="Name"
@@ -49,9 +49,10 @@
 
         </mat-hint>
       </div>
-      <!--{{'PERMISSIONS.TITLES.ROLENAME'|translate}}  {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
+
+      <!--{{'PERMISSIONS.TITLES.Icon'|translate}}  {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
       <div class="col-6 mb-4" *ngIf="(data.node.level==2&&data.type=='add')||(data.node.level==1&&data.type=='add'&&type=='child')||
-      (data.node.level==3&&data.type=='edit'&&!data.node.isLast)">
+      (data.node.level==3&&data.type=='edit')||(data.node.level==2&&data.type=='edit'&&data.node.isLast)">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">الأيقونة</span> </label>
 
         <span class="d-block position-relative">
@@ -82,9 +83,10 @@
 
         </mat-hint>
       </div>
-      <!--{{'PERMISSIONS.TITLES.ROLENAME'|translate}}  {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
+
+      <!--{{'PERMISSIONS.TITLES.route'|translate}}  {{'PERMISSIONS.PLACEHOLDER.ROLENAMEPLACEHOLDER'|translate}}-->
       <div class="col-6 mb-4" *ngIf="(data.node.level==2&&data.type=='add'&&type=='child')||(data.node.level==1&&data.type=='add'&&type=='child')||(data.node.level==3&&data.type=='add')||
-        (data.node.level==4&&data.type=='edit')||(data.node.level==3&&data.type=='edit'&&data.node.isLast)">
+        ((data.node.level==2||data.node.level==3||data.node.level==4)&&data.type=='edit'&&data.node.isLast)">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">اللينك</span></label>
         <input class="form-control form-control-solid" placeholder="" name="Route" formControlName="Route"
           [ngClass]="{'border-danger':menuForm.controls['Route'].errors&&(menuForm.controls['Route'].touched||saveButtonClickedFlag)}" />
@@ -110,9 +112,10 @@
 
         </mat-hint>
       </div>
-      <!--{{'PERMISSIONS.TITLES.ROLENAME'|translate}}  -->
-      <div class="col-6 mb-4" *ngIf="(data.node.level==2&&data.type=='add'&&type=='child')||(data.node.level==1&&data.type=='add'&&type=='child')||
-      (data.node.level==3&&data.type=='add')||(data.node.level==4&&data.type=='edit')||(data.node.level==3&&data.type=='edit'&&data.node.isLast)">
+
+      <!--{{'PERMISSIONS.TITLES.permission'|translate}}  -->
+      <div class="col-6 mb-4" *ngIf="(data.node.level==3&&data.type=='add')||((data.node.level==2||data.node.level==1)&&data.type=='add'&&type=='child')||
+      ((data.node.level==2||data.node.level==3||data.node.level==4)&&data.type=='edit'&&data.node.isLast)">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">الصلاحية</span></label>
         <ng-select class="customized" [items]="permission" formControlName="Permission" bindLabel="Name" bindValue="Name" name="Permission"
           placeholder="اختر الصلاحية" appendTo="body"
@@ -141,6 +144,8 @@
 
         </mat-hint>
       </div>
+
+      <!--{{'PERMISSIONS.TITLES.order'|translate}}  -->
       <div class="col-6 mb-4">
         <label class="fs-5 fw-bolder form-label mb-2"><span class="required">الترتيب</span></label>
         <input class="form-control form-control-solid" placeholder="" name="OrderBy" formControlName="OrderBy"
@@ -174,8 +179,8 @@
   <mat-dialog-actions class="row justify-content-end">
 
     <button mat-button mat-dialog-close class="w-125px p-0 bg-gray-100">{{'PERMISSIONS.BUTTONS.CANCEL'|translate}}</button>
-    <button mat-button cdkFocusInitial class="btn btn-primary w-125px p-0" type="submit"
-      (click)="saveButtonClickedFlag = true">{{'PERMISSIONS.BUTTONS.SAVE'|translate}}</button>
+    <button mat-button cdkFocusInitial class="btn btn-primary w-125px p-0" type="submit" (click)="saveButtonClickedFlag = true"
+      [disabled]="disabledBtn">{{'PERMISSIONS.BUTTONS.SAVE'|translate}}</button>
 
   </mat-dialog-actions>
 
