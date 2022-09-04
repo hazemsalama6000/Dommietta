@@ -320,48 +320,6 @@ export class AsideMenuComponent implements OnInit {
           ]
         }
       ]
-    },
-    {
-      "id": 6,
-      "name": "Report",
-      "isLast": false,"isDeleted":false,
-      "route": "",
-      "permission": "",
-      "icon": "",
-      "childNode": [
-        {
-          "id": 10,
-          "name": "Child_L3-1",
-          "parentId": 6,
-          "isLast": false,"isDeleted":false,
-          "route": "",
-          "permission": "",
-          "icon": "",
-          "childNode": [
-            {
-              "id": 13,
-              "name": "Child_L6_2",
-              "parentId": 10,
-              "isLast": false,"isDeleted":false,
-              "route": "",
-              "permission": "",
-              "icon": "",
-              "childNode": [
-                {
-                  "id": 14,
-                  "name": "Child_L6_3",
-                  "parentId": 13,
-                  "isLast": true,"isDeleted":false,
-                  "route": "Module/Test",
-                  "permission": "Screen.Technician.Technician.View",
-                  "icon": "Icon",
-                  "childNode": []
-                }
-              ]
-            }
-          ]
-        }
-      ]
     }
   ];
 
