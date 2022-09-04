@@ -135,14 +135,15 @@
           <td>{{read.customerName}}</td>
           <td>{{read.customerCode}}</td>
           <td>{{read.branchName}}</td>
-          <td (dblclick)="(IsEdit = false)">
-            <span *ngIf="!IsEdit">{{read.value}}</span>
-  
-            <div class="grid p-fluid" style="direction: initial;" *ngIf="IsEdit">
+          <td (dblclick)="read.IsEdit=true">
+            <span *ngIf="!read.IsEdit">{{read.value}}</span>
+
+            <div class="grid p-fluid" style="direction: initial;" *ngIf="read.IsEdit">
               <div class="col-12 md:col-4">
                 <div class="p-inputgroup">
-                  <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}" (click)="updateReading(read)"></button>
-                  <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value">
+                  <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}"
+                    (click)="updateReading(read)"></button>
+                  <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value" style="min-width: 120px;">
                 </div>
               </div>
             </div>

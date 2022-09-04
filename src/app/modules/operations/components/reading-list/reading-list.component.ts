@@ -26,7 +26,6 @@ import { UserLocationComponent } from '../customer-update-manage/update-datatabl
   styleUrls: ['./reading-list.component.scss']
 })
 export class ReadingListComponent implements OnInit {
-  IsEdit: boolean = false;
   btnIsPost: boolean = false;
   showBtnIsPost: boolean = true;
   btnIsRevise: boolean = false;
@@ -145,6 +144,7 @@ export class ReadingListComponent implements OnInit {
         data.map(x => {
           x.lastPosted = x.isPosted;
           x.lastRevised = x.isRevised
+          x.isEdit = false;
         });
         this.readingData = res.data;
         this.totalRecords = res.totalRecords;
@@ -219,10 +219,14 @@ export class ReadingListComponent implements OnInit {
 
   updateReading(read: IReadingList) {
     if (read.value != null) {
+      if ( read.value<=0) {
+        this.toaster.openWarningSnackBar('يجب ان تكون القراءة اكبر من صفر')
+        return;
+      }
       this.readingService.updatemeterreadingvalue({ meterReadings_Id: read.id, newValue: read.value }).subscribe(
         (data: HttpReponseModel) => {
           if (data.isSuccess) {
-            this.IsEdit=false;
+            this.getReadingData();
             this.toaster.openSuccessSnackBar(data.message);
           }
           else if (data.isExists)
