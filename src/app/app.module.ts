@@ -19,7 +19,7 @@ import { SharedModule } from './shared-module/shared-module.module';
 
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './core-module/custom-route-reuse-strategy';
-import {HashLocationStrategy,LocationStrategy} from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -81,7 +81,7 @@ function appInitializer(authService: AuthService) {
 			useClass: RetryInterceptor,
 			multi: true
 		}*/,
-		{provide:LocationStrategy,useClass:HashLocationStrategy}
+		{ provide: LocationStrategy, useClass: HashLocationStrategy }
 	],
 	bootstrap: [AppComponent],
 })
