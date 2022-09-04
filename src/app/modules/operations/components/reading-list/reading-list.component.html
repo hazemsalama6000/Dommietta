@@ -118,8 +118,8 @@
 
               <p-radioButton name="IsPosted" value="true" [(ngModel)]="searchObject.IsPosted" (onClick)="myfilter('isPosted')" label="تم الارسال"
                 class="d-block m-2"></p-radioButton>
-              <p-radioButton name="IsPosted" value="false" [(ngModel)]="searchObject.IsPosted" (onClick)="myfilter('isPosted')"
-                label="لم يتم الارسال" class="d-block m-2"></p-radioButton>
+              <p-radioButton name="IsPosted" value="false" [(ngModel)]="searchObject.IsPosted" (onClick)="myfilter('isPosted')" label="لم يتم الارسال"
+                class="d-block m-2"></p-radioButton>
               <p-radioButton name="isPosted" [value]="null" [(ngModel)]="searchObject.IsPosted" (onClick)="myfilter('isPosted')" label="الكل"
                 class="d-block m-2">
               </p-radioButton>
@@ -135,7 +135,18 @@
           <td>{{read.customerName}}</td>
           <td>{{read.customerCode}}</td>
           <td>{{read.branchName}}</td>
-          <td>{{read.value}}</td>
+          <td (dblclick)="(IsEdit = false)">
+            <span *ngIf="!IsEdit">{{read.value}}</span>
+  
+            <div class="grid p-fluid" style="direction: initial;" *ngIf="IsEdit">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}" (click)="updateReading(read)"></button>
+                  <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value">
+                </div>
+              </div>
+            </div>
+          </td>
           <td>{{read.lastReading }}</td>
           <td>
 

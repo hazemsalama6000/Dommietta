@@ -373,7 +373,8 @@ export const locale = {
       },
       BUTTONS: {
         REVISED: "Revised",
-        POSTED: "Post"
+        POSTED: "Post",
+        SAVE:"Save"
       },
       TITLES: {
         COLLECTORNAME: "Collector Name",

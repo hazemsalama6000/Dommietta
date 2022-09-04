@@ -383,7 +383,8 @@ export const locale = {
       },
       BUTTONS: {
         REVISED: "مراجعة",
-        POSTED: "ارسال"
+        POSTED: "ارسال",
+        SAVE: "حفظ"
       },
       TITLES: {
         COLLECTORNAME: "اسم المحصل",

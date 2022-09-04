@@ -26,6 +26,7 @@ import { UserLocationComponent } from '../customer-update-manage/update-datatabl
   styleUrls: ['./reading-list.component.scss']
 })
 export class ReadingListComponent implements OnInit {
+  IsEdit: boolean = false;
   btnIsPost: boolean = false;
   showBtnIsPost: boolean = true;
   btnIsRevise: boolean = false;
@@ -127,7 +128,7 @@ export class ReadingListComponent implements OnInit {
     }
 
     if (columnname != 'CustomerCode') delete this.searchObject.CustomerCode
-   this.getReadingData();
+    this.getReadingData();
   }
 
   //this function to fill dropdowns data
@@ -213,6 +214,28 @@ export class ReadingListComponent implements OnInit {
         }
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+
+  }
+
+  updateReading(read: IReadingList) {
+    if (read.value != null) {
+      this.readingService.updatemeterreadingvalue({ meterReadings_Id: read.id, newValue: read.value }).subscribe(
+        (data: HttpReponseModel) => {
+          if (data.isSuccess) {
+            this.IsEdit=false;
+            this.toaster.openSuccessSnackBar(data.message);
+          }
+          else if (data.isExists)
+            this.toaster.openWarningSnackBar(data.message);
+        },
+        (error: any) => {
+          console.log(error);
+          this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
+        }
+      )
+    } else {
+      this.toaster.openWarningSnackBar('برجاء أدخال قراءة الجديدة');
+    }
 
   }
 
