@@ -47,6 +47,7 @@ export class UsersService {
 
   //Update User Roles
   putUserRoles(model: any) {
+    console.log(model)
     return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_UPDATE_USER_ROLES}`);
   }
 

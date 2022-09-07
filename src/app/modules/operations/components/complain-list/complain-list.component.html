@@ -35,22 +35,22 @@
         <p-divider></p-divider>
         <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" filterBy="name" [filter]="true" 
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}"
               [showClear]="true" [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
-              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId">
+              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId"  filterBy="name" [filter]="true" >
             </p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
-              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId"></p-dropdown>
+              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId"  filterBy="name" [filter]="true" ></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId"></p-dropdown>
+              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId"  filterBy="name" [filter]="true" ></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"

@@ -400,6 +400,13 @@ app-treepermission mat-tree-node[aria-level="4"] {
 	display: flex !important;
 }
 
+.mat-tab-group.mat-primary{
+direction: ltr;
+}
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    width: 7%;
+}
+
 @media only screen and (max-width: 991.98px) {
 	.mcontainer {
 		margin-inline-end: 21px !important;

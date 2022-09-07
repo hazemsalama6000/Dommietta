@@ -153,6 +153,7 @@ export enum HttpPaths {
 
 	//Bills API
 	API_GET_BILLS = "/api/v1/shared/getpaymentdata?",
+	API_CHANGE_REPRINT = "/api/v1/bill/changereprint",
 
 	//Pull Data
 	API_PULL_GEOGRAPHIC_DATA = "/api/v1/shared/Managedata",
