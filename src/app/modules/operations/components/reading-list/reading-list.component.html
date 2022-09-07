@@ -37,22 +37,24 @@
         <p-divider></p-divider>
         <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+            <p-dropdown filterBy="name" [filter]="true" [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}"
               [showClear]="true" [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
-              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId">
+            <p-dropdown filterBy="name" [filter]="true" [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('area')" placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId">
             </p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
-              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId"></p-dropdown>
+            <p-dropdown filterBy="name" [filter]="true" [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('block')" placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.BlockId"></p-dropdown>
           </div>
           <div class="col">
-            <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId"></p-dropdown>
+            <p-dropdown filterBy="name" [filter]="true" [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name"
+              (onChange)="myfilter('')" placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true"
+              [(ngModel)]="searchObject.CustomerId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
@@ -135,17 +137,13 @@
           <td>{{read.customerName}}</td>
           <td>{{read.customerCode}}</td>
           <td>{{read.branchName}}</td>
-          <td (dblclick)="read.IsEdit=true">
+          <td (dblclick)="!read.isPosted?read.IsEdit=true:null">
             <span *ngIf="!read.IsEdit">{{read.value}}</span>
-
-            <div class="grid p-fluid" style="direction: initial;" *ngIf="read.IsEdit">
-              <div class="col-12 md:col-4">
-                <div class="p-inputgroup">
-                  <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}"
-                    (click)="updateReading(read)"></button>
-                  <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value" style="min-width: 120px;">
-                </div>
-              </div>
+            <div class="p-inputgroup" style="direction: initial; height: 30px !important;" *ngIf="read.IsEdit&&!read.isPosted">
+              <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}" (click)="updateReading(read)"
+                style="padding: 0;width: 40px;"></button>
+              <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value"
+                style="min-width: 97px;padding: 0 5px !important;">
             </div>
           </td>
           <td>{{read.lastReading }}</td>

@@ -6,13 +6,16 @@ import { MatTableDataSource } from "@angular/material/table";
 import { DialogPosition, MatDialog } from "@angular/material/dialog";
 
 import { MatSort } from "@angular/material/sort";
-import { map, merge, switchMap } from "rxjs";
+import { map, merge, Subscription, switchMap } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { ICustomerBIllsReponse } from "../../operations/models/bills/ICustomerBillsReponse.interface";
 import { ICustomerEditManageSearch } from "../../operations/models/cutomer-editmanage/ICustomerEditManageSearch.interface";
 import { CustomerBillsService } from "../../operations/services/customer-bills.service";
 import { ICustomerEditResponse } from "../../operations/models/cutomer-editmanage/ICustomerEditResponse.interface";
 import { ActivatedRoute, Params } from "@angular/router";
+import { toasterService } from "src/app/core-module/UIServices/toaster.service";
+import { IUserData } from "../../auth/models/IUserData.interface";
+import { AuthService } from "../../auth";
 
 export interface PeriodicElement {
 	name: string;
@@ -45,7 +48,7 @@ export class BillDatatableComponent {
 		'customerCode',
 		'customerName',
 		'collectorName',
-		'notes'];
+		'notes', 'action'];
 	columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
 	expandedElement: PeriodicElement | null;
 
@@ -55,12 +58,20 @@ export class BillDatatableComponent {
 	isLoadingResults = true;
 	isRateLimitReached = false;
 	employeeId: number;
+	userData: IUserData;
+	unsubscribe: Subscription[] = [];
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
-	constructor(private service: CustomerBillsService, public dialog: MatDialog,
-		private route: ActivatedRoute) { }
+	constructor(private service: CustomerBillsService,
+		private toaster: toasterService,
+		private auth: AuthService,
+		public dialog: MatDialog,
+		private route: ActivatedRoute) {
+		let data = auth.userData.subscribe(res => this.userData = res);
+		this.unsubscribe.push(data)
+	}
 
 	ngAfterViewInit() {
 		// If the user changes the sort order, reset back to the first page.
@@ -91,7 +102,7 @@ export class BillDatatableComponent {
 				)
 				.subscribe((data) => { this.data = data; });
 
-				this.service.searchUpdateUserManageAction.next(true);
+			this.service.searchUpdateUserManageAction.next(true);
 
 		});
 
@@ -111,6 +122,22 @@ export class BillDatatableComponent {
 
 	}
 
+	changeIsActiveReprint(model: ICustomerBIllsReponse) {
+		let obj = { billPaymentId: model.id, userId: this.userData.userId };
+		console.log(obj)
+		this.service.toggleIsActiveReprintBill(obj).subscribe(res => {
+			if (res.isSuccess) {
+				this.toaster.openSuccessSnackBar(res.message);
+				this.service.searchUpdateUserManageAction.next(true);
+			}
+			else
+				this.toaster.openErrorSnackBar(res.message);
+		}, err => console.log(err))
+	}
+
+	ngOnDestroy() {
+		this.unsubscribe.forEach((sb) => sb.unsubscribe());
+	}
 }
 
 export interface ItemsWithPagesCustomeBills {
