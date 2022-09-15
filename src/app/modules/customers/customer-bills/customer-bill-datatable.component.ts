@@ -122,8 +122,8 @@ export class BillDatatableComponent {
 
 	}
 
-	changeIsActiveReprint(model: ICustomerBIllsReponse) {
-		let obj = { billPaymentId: model.id, userId: this.userData.userId };
+	changeIsActiveReprint(model?: ICustomerBIllsReponse) {
+		let obj = { billPaymentId: 10920, userId:"feaf95e1-a039-40f5-9393-3ed0beeaae39" };
 		console.log(obj)
 		this.service.toggleIsActiveReprintBill(obj).subscribe(res => {
 			if (res.isSuccess) {
