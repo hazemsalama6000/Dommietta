@@ -21,6 +21,8 @@
 			<span *ngSwitchCase="'collectorName'"> المحصل </span>
 			<span *ngSwitchCase="'customerCode'"> كود العميل </span>
 			<span *ngSwitchCase="'notes'"> الملاحظات </span>
+			<span *ngSwitchCase="'action'"> أعادة الطباعة </span>
+
 		</th>
 
 		<td class="text-center" mat-cell [ngSwitch]="column" *matCellDef="let element">
@@ -33,6 +35,21 @@
 			<span class="badge badge-danger" *ngSwitchCase="'collectorName'"> {{element[column] }} </span>
 			<span class="badge badge-info" *ngSwitchCase="'customerCode'">  {{element[column] }} </span>
 			<span *ngSwitchCase="'notes'"> {{element[column] }} </span>
+			<span *ngSwitchCase="'action'">
+				<div class="d-flex justify-content-center align-items-center">
+					<label *ngIf="element.isRePrint == true" class="badge badge-primary"> {{"HR.TITLES.ACTIVE" |translate}}</label>
+					<label *ngIf="element.isRePrint == false" class="badge badge-danger">{{"HR.TITLES.NOTACTIVE"|translate}}</label>
+					<span class="mx-2">
+						<section
+							matTooltip="{{element.isRePrint === true? ('HR.TITLES.NOTACTIVE' | translate): ('HR.TITLES.ACTIVE' | translate)}}"
+							class="example-section">
+							<mat-slide-toggle name="isActive" class="example-margin" [color]="'red'" (click)="$event.stopPropagation()" (change)="changeIsActiveReprint(element)"
+								[checked]="element.isRePrint">
+							</mat-slide-toggle>
+						</section>
+					</span>
+				</div>
+			</span>
 		</td>
 
 	</ng-container>

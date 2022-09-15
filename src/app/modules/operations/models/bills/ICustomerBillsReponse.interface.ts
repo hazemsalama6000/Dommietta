@@ -13,5 +13,6 @@ export interface ICustomerBIllsReponse {
 	notes: string,
 	payDate: Date,
 	totalAmount:number,
+	isRePrint:boolean,
 	billTransactions:IBillTransactions[]
 }

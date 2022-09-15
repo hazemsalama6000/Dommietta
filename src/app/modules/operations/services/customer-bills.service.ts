@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, of, Subject } from "rxjs";
+import { BehaviorSubject, map, Observable, of, Subject } from "rxjs";
 import { CommonHttpService } from "src/app/core-module/httpServices/CommonHttpService.service";
+import { HttpReponseModel } from "src/app/core-module/models/ResponseHttp";
 import { HttpPaths } from "../../auth/Enums/HttpPaths.enum";
 import { ItemsWithPagesCustomeBills } from "../components/customer-bills/update-datatable/customer-bill-datatable.component";
 import { ICustomerBIllsReponse } from "../models/bills/ICustomerBillsReponse.interface";
@@ -15,7 +16,7 @@ export class CustomerBillsService {
 
 	searchUpdateUserManageAction: Subject<boolean> = new Subject<boolean>();
 	searchUpdateUserManageStream$ = this.searchUpdateUserManageAction.asObservable();
-	
+
 	searchParameterAction: Subject<ICustomerEditManageSearch> = new Subject<ICustomerEditManageSearch>();
 	searchParameterStream$ = this.searchParameterAction.asObservable();
 
@@ -23,15 +24,20 @@ export class CustomerBillsService {
 
 
 	searchCustomerBills(model: any) {
-		
 		let queryString = Object.keys(model).map((key: string) =>
-		model[key] != null && model[key] != ''&& model[key] != 0 && model[key] != undefined ? key + '=' + model[key] : null
+			model[key] != null && model[key] != '' && model[key] != 0 && model[key] != undefined ? key + '=' + model[key] : null
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_BILLS}${queryString}`)
-			.pipe(map(Items => Items.data as ItemsWithPagesCustomeBills));
-		
+			.pipe(map(Items => Items as ItemsWithPagesCustomeBills));
+
 	}
 
+	toggleIsActiveReprintBill(model:any):Observable<HttpReponseModel>{
+		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_REPRINT}`);
+	}
 
+/*
+URL: /api/v1/bill/changereprint      ---- Request {billPaymentId : int  ,  userId : string}   ------ Method Put
+*/
 }
