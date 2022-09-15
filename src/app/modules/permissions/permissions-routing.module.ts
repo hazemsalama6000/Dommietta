@@ -17,6 +17,7 @@ const routes: Routes = [
 	{ path: 'superadminroles', component: AdminrolesComponent },
 	{ path: 'userLocationLogs', component: UserLocationLogsComponent },
 	{ path: 'managemenu', component: ManagesidemenuComponent },
+	//
 	{
 		path: '',
 		component: PermissionsComponent,

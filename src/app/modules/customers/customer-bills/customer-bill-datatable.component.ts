@@ -96,7 +96,7 @@ export class BillDatatableComponent {
 						if (data === null) {
 							return [];
 						}
-						this.resultsLength = data.totalPages;
+						this.resultsLength = data.totalCount;
 						return data.data;
 					}),
 				)
@@ -142,5 +142,5 @@ export class BillDatatableComponent {
 
 export interface ItemsWithPagesCustomeBills {
 	data: ICustomerBIllsReponse[];
-	totalPages: number;
+	totalCount: number;
 }

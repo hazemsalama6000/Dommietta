@@ -29,7 +29,7 @@ export class CustomerBillsService {
 		).filter(x => x != null).join('&');
 
 		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_BILLS}${queryString}`)
-			.pipe(map(Items => Items as ItemsWithPagesCustomeBills));
+			.pipe(map(Items => Items.data as ItemsWithPagesCustomeBills));
 
 	}
 
