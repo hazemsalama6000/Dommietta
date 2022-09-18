@@ -91,6 +91,11 @@ export class AuthService implements OnDestroy {
       return of(undefined);
     }
 
+    // let obj: any = {
+     
+    // };
+    // this.userData.next(obj);
+    // return of(obj);
 
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token).pipe(

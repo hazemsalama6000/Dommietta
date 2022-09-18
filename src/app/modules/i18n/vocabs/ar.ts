@@ -394,7 +394,7 @@ export const locale = {
         AREANAME: "اسم المنطقة",
         BLOCKNAME: "اسم المربع",
         VALUE: "القراءة",
-        LASTREADING: "اخر قراءة",
+        LASTREADING: "القراءة السابقة",
         IMAGE: "صور الشكوى",
         METERSTATUS: "حالة العداد",
         ISSUENAME: "اسم الاصدار",

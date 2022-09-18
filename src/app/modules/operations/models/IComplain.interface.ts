@@ -13,6 +13,8 @@ export interface IComplainList {
     areaName: string;
     blockName: string;
     issueName: string;
+    publicAddress:string;
+    isPublic:boolean;
     x: number;
     y: number;
     details: string;

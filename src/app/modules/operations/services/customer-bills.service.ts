@@ -33,11 +33,11 @@ export class CustomerBillsService {
 
 	}
 
-	toggleIsActiveReprintBill(model:any):Observable<HttpReponseModel>{
-		return this.http.CommonPutRequests(model,`${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_REPRINT}`);
+	toggleIsActiveReprintBill(model: any): Observable<HttpReponseModel> {
+		return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_CHANGE_REPRINT}`);
 	}
 
-/*
-URL: /api/v1/bill/changereprint      ---- Request {billPaymentId : int  ,  userId : string}   ------ Method Put
-*/
+	/*
+	URL: /api/v1/bill/changereprint      ---- Request {billPaymentId : int  ,  userId : string}   ------ Method Put
+	*/
 }

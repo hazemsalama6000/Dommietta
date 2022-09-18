@@ -75,7 +75,7 @@ export class BillDatatableComponent {
 						this.isLoadingResults = true;
 						this.currentSearchParameter.PageNumber = this.paginator.pageIndex + 1;
 						this.currentSearchParameter.PageSize = this.paginator.pageSize;
-						this.currentSearchParameter.Employee_id = this.employeeId;
+						this.currentSearchParameter.EmployeeId = this.employeeId;
 
 						return this.service.searchCustomerBills(this.currentSearchParameter);
 					}),

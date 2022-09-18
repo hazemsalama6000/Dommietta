@@ -4,8 +4,9 @@ export interface IComplainSearch{
     AreaId?: number;
     BlockId?: number;
     CustomerId?: number;
-    Employee_id?: number;
+    EmployeeId?: number;
     IsRevised?:boolean;
+    IsPublic?:boolean;
     StartDate?: string;
     EndDate?: string;
     PageNumber: number;

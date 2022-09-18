@@ -35,26 +35,29 @@
         <p-divider></p-divider>
         <div class="row mx-0 justify-content-center align-items-center">
           <div class="col">
-            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" filterBy="name" [filter]="true" 
+            <p-dropdown [options]="branchDropdown" appendTo="body" optionValue="Id" optionLabel="Name" filterBy="name" [filter]="true"
               (onChange)="myfilter('branch');blockDropdown = [];customerDropdown = [];" placeholder="{{'OPERATION.INPUTS.BRANCH'|translate}}"
               [showClear]="true" [(ngModel)]="searchObject.BranchId"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="areaDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('area')"
-              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId"  filterBy="name" [filter]="true" >
+              placeholder="{{'OPERATION.INPUTS.AREA'|translate}}" [showClear]="true" [(ngModel)]="searchObject.AreaId" filterBy="name"
+              [filter]="true">
             </p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="blockDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('block')"
-              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId"  filterBy="name" [filter]="true" ></p-dropdown>
+              placeholder="{{'OPERATION.INPUTS.BLOCK'|translate}}" [showClear]="true" [(ngModel)]="searchObject.BlockId" filterBy="name"
+              [filter]="true"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="customerDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId"  filterBy="name" [filter]="true" ></p-dropdown>
+              placeholder="{{'OPERATION.INPUTS.CUSTOMET'|translate}}" [showClear]="true" [(ngModel)]="searchObject.CustomerId" filterBy="name"
+              [filter]="true"></p-dropdown>
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.Employee_id" [filter]="true"
+              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.EmployeeId" [filter]="true"
               filterBy="Name"></p-dropdown>
           </div>
           <div class="col">
@@ -91,15 +94,26 @@
               (change)="setAllIsRevise('revise');showBtnIsRevise=false;" />
           </th>
           <th class="text-center">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="المزيد من خيارات البحث">
               <mat-icon>search</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <p-radioButton name="isRevised" value="true" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')"
-                label="تم المراجعة" class="d-block m-2"></p-radioButton>
+              <label class="justify-content-center d-flex bg-gray-300 py-2">الحالة</label>
+              <p-radioButton name="isRevised" value="true" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')" label="تم المراجعة"
+                class="d-block m-2"></p-radioButton>
               <p-radioButton name="isRevised" value="false" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')"
                 label="لم يتم المراجعة" class="d-block m-2"></p-radioButton>
               <p-radioButton name="isRevised" [value]="null" [(ngModel)]="searchObject.IsRevised" (onClick)="myfilter('isRevised')" label="الكل"
+                class="d-block m-2">
+              </p-radioButton>
+
+              <p-divider></p-divider>
+              <label class="justify-content-center d-flex bg-gray-300 py-2">نوع الشكوى</label>
+              <p-radioButton name="IsPosted" value="true" [(ngModel)]="searchObject.IsPublic" (onClick)="myfilter('complain')" label="شكوى عامة"
+                class="d-block m-2"></p-radioButton>
+              <p-radioButton name="IsPosted" value="false" [(ngModel)]="searchObject.IsPublic" (onClick)="myfilter('isPosted')" label="شكوى عملاء"
+                class="d-block m-2"></p-radioButton>
+              <p-radioButton name="isPosted" [value]="null" [(ngModel)]="searchObject.IsPublic" (onClick)="myfilter('isPosted')" label="الكل"
                 class="d-block m-2">
               </p-radioButton>
             </mat-menu>
@@ -111,9 +125,16 @@
         <tr>
           <td>{{complain.branchName}}</td>
           <td>{{complain.areaName}}</td>
-          <td>{{complain.blockName}}</td>
+          <td>{{complain.blockName}}
+            <ng-container *ngIf="complain.isPublic">/
+              {{complain.publicAddress}}
+            </ng-container>
+          </td>
           <td>{{complain.collectorName}}</td>
-          <td>{{complain.customerName}}</td>
+          <td>
+            <label *ngIf="!complain.isPublic">{{complain.customerName}}</label>
+            <label *ngIf="complain.isPublic" class="text-danger">شكوى عامة</label>
+          </td>
           <td>{{complain.customerCode}}</td>
           <td>{{complain.date|date:'dd/MM/yyyy'}}</td>
           <td>{{complain.issueName}}</td>

@@ -40,7 +40,7 @@
 					(change)="blockSelectListOnChange($event);employeeselect.handleClearClick();customerselect.handleClearClick();">
 				</ng-select>
 
-				<ng-select style="width:250px ;" #employeeselect class="customized" formControlName="Employee_id"
+				<ng-select style="width:250px ;" #employeeselect class="customized" formControlName="EmployeeId"
 					[items]="dropdownEmployeeData" bindLabel="Name" bindValue="Id" name="Employee_id" id="Employee_id"
 					placeholder="اختر الموظف"
 					(change)="employeeSelectListOnChange($event);customerselect.handleClearClick();">

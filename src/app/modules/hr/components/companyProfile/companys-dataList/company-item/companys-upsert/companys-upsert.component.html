@@ -133,27 +133,19 @@
 
 				</div>
 
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 
 					<div class="row mt-2">
 						<div class="col-md-3">
 							<label class="fontForInputs mt-5"> {{'HR.INPUTS.STATE' | translate}} </label>
 						</div>
-
 						<div class="col-md-9">
-
-							<!--		<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings" name="state_Id"
-								formControlName="state_Id" [data]="dropdownListDataForState"
-								(onSelect)="onItemSelectState($event)">
-							</ng-multiselect-dropdown>
--->
 							<ng-select [items]="dropdownListDataForState" bindLabel="Name" bindValue="Id"
 								name="state_Id" formControlName="state_Id" (change)="onItemSelectState($event)">
 							</ng-select>
-
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 
 			</div>
@@ -211,7 +203,7 @@
 					</mat-form-field>
 				</div>
 
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 
 					<div class="row mt-2">
 						<div class="col-md-3">
@@ -220,9 +212,6 @@
 
 						<div class="col-md-9">
 
-							<!--	<ng-multiselect-dropdown class="mt-5" [settings]="dropdownSettings"
-								[data]="dropdownListDataForRegion" name="region_Id" formControlName="region_Id">
-							</ng-multiselect-dropdown>-->
 
 
 							<ng-select [items]="dropdownListDataForRegion" bindLabel="Name" bindValue="Id"
@@ -240,7 +229,7 @@
 
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 
