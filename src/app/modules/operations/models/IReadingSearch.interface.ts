@@ -4,7 +4,7 @@ export interface IReadingSearch {
     AreaId?: number;
     BlockId?: number;
     CustomerId?: number;
-    Employee_id?: number;
+    EmployeeId?: number;
     StartDate?: string;
     EndDate?: string;
     IsPosted?:boolean;

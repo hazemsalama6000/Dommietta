@@ -138,6 +138,7 @@ export class ComplainListComponent implements OnInit {
     this.loading = true;
     this.complainService.getComplainsData(this.searchObject).subscribe(
       (res: IComplain) => {
+        console.log(res)
         this.complainData = res.data;
         this.totalRecords = res.totalRecords;
       },

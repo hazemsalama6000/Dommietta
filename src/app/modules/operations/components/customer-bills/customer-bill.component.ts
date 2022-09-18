@@ -59,7 +59,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 			AreaId: [],
 			BlockId: [],
 			CustomerId: [],
-			Employee_id: [],
+			EmployeeId: [],
 			StartDate: [new Date().toISOString()],
 			EndDate: [new Date().toISOString()],
 			UpdatingTypeId: [],
@@ -90,7 +90,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 
 	getCustomerDataByCode(customerCode: string) {
 
-		let model: ICustomerEditManageSearch = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: customerCode, CustomerId: 0, Employee_id: 0 } as ICustomerEditManageSearch;
+		let model: ICustomerEditManageSearch = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: customerCode, CustomerId: 0, EmployeeId: 0 } as ICustomerEditManageSearch;
 
 		this.customerEditManageService.searchParameterAction.next(model);
 		this.customerEditManageService.searchUpdateUserManageAction.next(true);
@@ -127,7 +127,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 
 	searchEmployeeAndCustomer() {
 		let search: ISearch = { branchId: this.searchModel.BranchId, AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId };
-		let searchCustomer: any = { AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId: this.searchModel.Employee_id }
+		let searchCustomer: any = { AreaId: this.searchModel.AreaId, Block: this.searchModel.BlockId, branchId: this.searchModel.BranchId, employeeId: this.searchModel.EmployeeId }
 
 		this.service.getLookupEmployeeDataByParam(search)
 			.subscribe(

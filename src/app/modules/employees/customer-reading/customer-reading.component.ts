@@ -52,7 +52,7 @@ export class CustomerReadingComponent {
 		merge(this.paginator.page, this.service.searchUpdate$)
 			.pipe(
 				switchMap(() => {
-					let search: IReadingSearch = { Employee_id: this.employeeId, PageNumber: this.paginator.pageIndex + 1 };
+					let search: IReadingSearch = { EmployeeId: this.employeeId, PageNumber: this.paginator.pageIndex + 1 };
 					this.isLoadingResults = true;
 					return this.service.getReadingsData(search);
 				}),

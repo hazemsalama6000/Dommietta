@@ -55,7 +55,7 @@ export class UpdateRequestComponent {
 
 	ngAfterViewInit() {
 
-		let modelSearch: ICustomerEditManageSearch = { CustomerId: this.customerId, AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', Employee_id: 0 , EndDate: '', StartDate: '', UpdatingTypeId: 0 };
+		let modelSearch: ICustomerEditManageSearch = { CustomerId: this.customerId, AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', EmployeeId: 0 , EndDate: '', StartDate: '', UpdatingTypeId: 0 };
 
 		merge(this.paginator.page, this.service.searchUpdateUserManageStream$)
 			.pipe(
