@@ -39,14 +39,12 @@
                 </span>
 
 
-                <a *ngIf="company.isActive== true"
-                  class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+                <a *ngIf="company.isActive== true" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
                   data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
                   {{'HR.TITLES.COMPANYACTIVE'|translate}}
                 </a>
 
-                <a *ngIf="company.isActive== false"
-                  class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+                <a *ngIf="company.isActive== false" class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
                   data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
                   {{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
                 </a>
@@ -64,21 +62,19 @@
 
               <div class="row">
 
-                <div class="col-md-2">
+                <div class="col-md-3">
 
-                  <div class="row text-center">
+                  <div class="d-flex text-center">
 
                     <div class="d-flex justify-content-center align-items-center gap-1">
-                      <div class="container">
-                        <img class="card-img-top" [src]="company.logoWeb" style="width:80px;height:80px;"
-                          alt="Card image">
+                      <div class="container" style="padding: 0 10px;">
+                        <img class="card-img-top" [src]="company.logoWeb" style="width:80px;height:80px;" alt="Card image">
                         <div class="centered badge badge-dark HintsStyles"> {{"HR.INPUTS.LOGOWEB" | translate}}
                         </div>
                         <span class="top-right">
-                          <input id="file-logoWeb" type="file" class="mx-2 btn btn-danger"
-                            (change)="logoWebChange($event)" placeholder="" name="logoWeb">
-                          <label
-                            style="align-content:center;background-color: #c5c5c5;cursor: pointer;padding: 2px;border-radius: 20px;"
+                          <input id="file-logoWeb" type="file" class="mx-2 btn btn-danger" (change)="logoWebChange($event)" placeholder=""
+                            name="logoWeb">
+                          <label style="align-content:center;background-color: #c5c5c5;cursor: pointer;padding: 2px;border-radius: 20px;"
                             for="file-logoWeb">
                             <mat-icon style="font-size:18px ;display: inline;">edit
                             </mat-icon>
@@ -87,20 +83,14 @@
                       </div>
                     </div>
 
-                  </div>
-
-
-                  <div class="row text-center mt-2">
-
                     <div class="d-flex justify-content-center align-items-center gap-1">
-                      <div class="container">
-                        <img class="card-img-top" [src]="company.logoPrint" style="width:80px;height:80px ;"
-                          alt="Card image">
+                      <div class="container" style="padding: 0 10px;">
+                        <img class="card-img-top" [src]="company.logoPrint" style="width:80px;height:80px ;" alt="Card image">
                         <div class="centered badge badge-dark HintsStyles"> {{"HR.INPUTS.LOGOPRINT" | translate}}
                         </div>
                         <span class="top-right">
-                          <input id="file-logoPrint" type="file" class="mx-2" (change)="logoPrintChange($event)"
-                            placeholder="Placeholder" name="logoPrint">
+                          <input id="file-logoPrint" type="file" class="mx-2" (change)="logoPrintChange($event)" placeholder="Placeholder"
+                            name="logoPrint">
                           <label for="file-logoPrint"
                             style="align-content:center ;background-color: #c5c5c5;cursor: pointer;padding: 2px;border-radius: 20px;">
                             <mat-icon style="font-size:18px ;display: inline;">edit
@@ -110,32 +100,27 @@
                       </div>
                     </div>
 
-
-
                   </div>
 
                 </div>
 
-                <div class="col-md-10 fontForInputs">
+                <div class="col-md-9 fontForInputs">
 
                   <div class="row">
 
                     <div class="col-md-8">
 
                       <div class="d-flex align-items-center mb-2">
-                        <a
-                          class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">{{company.companyName}}</a>
+                        <a class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">{{company.companyName}}</a>
 
                         <a class="cursor-pointer"><span class="svg-icon svg-icon-1 svg-icon-primary"></span></a>
 
-                        <a *ngIf="company.isActive== true"
-                          class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+                        <a *ngIf="company.isActive== true" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
                           data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
                           {{'HR.TITLES.COMPANYACTIVE'|translate}}
                         </a>
 
-                        <a *ngIf="company.isActive== false"
-                          class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
+                        <a *ngIf="company.isActive== false" class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3 cursor-pointer"
                           data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">
                           {{'HR.TITLES.COMPANYNOTACTIVE'|translate}}
                         </a>
@@ -143,8 +128,8 @@
                         <span class="mx-2">
                           <section matTooltip="{{company.isActive==true?('HR.TITLES.SETNOTACTIVE'|translate):('HR.TITLES.SETACTIVE'|translate)}}"
                             class="example-section">
-                            <mat-slide-toggle name="isValTaxActive" class="example-margin" [color]="'primary'"
-                              (click)="activeCompany()" [checked]="company.isActive">
+                            <mat-slide-toggle name="isValTaxActive" class="example-margin" [color]="'primary'" (click)="activeCompany()"
+                              [checked]="company.isActive">
                             </mat-slide-toggle>
                           </section>
                         </span>
@@ -155,62 +140,33 @@
 
                       <div class="d-flex flex-wrap mt-4">
 
-                        <a class="
-													d-flex
-													align-items-center
-													text-gray-400 text-hover-primary
-													HintsStyles
-													cursor-pointer
-												  ">
+                        <a class=" d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
                           <mat-icon class="fs-1">account_circle</mat-icon>
                           {{company.managerName}}
                         </a>
 
-                        <a class="mx-2
-												d-flex
-												align-items-center
-												text-gray-400 text-hover-primary
-												HintsStyles
-												cursor-pointer
-											  ">
+                        <a class="mx-2 d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
                           {{company.managerPosition}}
                         </a>
 
-                        <a class="mx-2
-												d-flex
-												align-items-center
-												text-gray-400 text-hover-primary
-												HintsStyles
-												cursor-pointer
-											  ">
+                        <a class="mx-2 d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
                           <mat-icon class="fs-1">settings_phone</mat-icon>
-
                           {{company.phoneNumber}}
                         </a>
 
-
-                        <a class="mx-2
-												  d-flex
-												  align-items-center
-												  text-gray-400 text-hover-primary
-												  HintsStyles
-												  cursor-pointer
-												">
+                        <a class="mx-2 d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
                           <mat-icon class="fs-1"> location_on</mat-icon>
-
                           {{company.address}}
                         </a>
 
-
-                        <a class="mx-2
-												  d-flex
-												  align-items-center
-												  text-gray-400 text-hover-primary
-												  HintsStyles
-												  cursor-pointer
-												">
+                        <a class="mx-2 d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
                           <mat-icon class="fs-1"> email</mat-icon>
                           {{company.email}}
+                        </a>
+
+                        <a class="mx-2 d-flex align-items-center text-gray-400 text-hover-primary HintsStyles cursor-pointer ">
+                          <mat-icon class="fs-1"> task</mat-icon>
+                          {{company.activity}}
                         </a>
 
                       </div>
@@ -237,45 +193,6 @@
                     </div>
 
                   </div>
-
-                  <div class="row mt-5">
-                    <div class="col-md-8">
-                      <table class="table" style="width:100% ;">
-
-                        <tr style="border-bottom:1px dotted #5a5a5a ;">
-                          <th style="padding: 10px;font-weight: bold;">{{'HR.TITLES.GOVERNORATE'|translate}}</th>
-                          <td style="padding: 10px;">{{company.state}}</td>
-                          <th style="padding: 10px;font-weight: bold;">{{'HR.TITLES.REGION'|translate}}</th>
-                          <td style="padding: 10px;">{{company.region}} </td>
-                        </tr>
-
-                        <tr style="border-bottom:1px dotted #5a5a5a ;">
-                          <th style="padding: 10px;font-weight: bold;"> {{'HR.TITLES.COMMERCIALRECORD'|translate}} </th>
-                          <td style="padding: 10px;">{{company.commercialRecord}} </td>
-                          <th style="padding: 10px;font-weight: bold;">{{'HR.TITLES.TAXCARDNUMBER'|translate}}</th>
-                          <td style="padding: 10px;">{{company.taxCardNo}}</td>
-                        </tr>
-                      </table>
-                    </div>
-
-                    <div class="col-md-4">
-
-                      <table class="table" style="width:100% ;">
-                        <tr style="border-bottom:1px dotted #5a5a5a ;">
-                          <th style="padding: 10px;font-weight: bold;">{{'HR.TITLES.WTAX'|translate}}</th>
-                          <td style="padding: 10px;">{{company.wTax}}</td>
-                          <th style="padding: 10px;font-weight: bold;">{{'HR.TITLES.ACTIVITY'|translate}}</th>
-                          <td style="padding: 10px;">{{company.activity}}</td>
-                        </tr>
-
-                        <tr style="border-bottom:1px dotted #5a5a5a ;">
-                          <th style="padding: 10px;font-weight: bold;">{{'STAX'|translate}}</th>
-                          <td style="padding: 10px;">{{company.vatTax}}</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-
 
                 </div>
 
