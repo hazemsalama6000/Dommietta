@@ -27,13 +27,15 @@ export class UpdateroleComponent implements OnInit {
     roleId: [0],
     roleNameNew: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
   });
+
   constructor(
     private rolesService: RolesService,
     private toaster: toasterService,
     private fb: FormBuilder,
   ) {
     let getdata = this.rolesService.roleid.subscribe(res => {
-      this.getRoleWithPermission(res);
+      if (res)
+        this.getRoleWithPermission(res);
     });
     this.unsubscribe.push(getdata);
 
@@ -97,7 +99,7 @@ export class UpdateroleComponent implements OnInit {
             this.rolesService.bSubject.next(true);
             this.roleForm.reset();
             this.btnClose.nativeElement.click();
-            this.saveButtonClickedFlag=false;
+            this.saveButtonClickedFlag = false;
           }
           else if (data.isExists) {
             this.toaster.openWarningSnackBar(data.message);

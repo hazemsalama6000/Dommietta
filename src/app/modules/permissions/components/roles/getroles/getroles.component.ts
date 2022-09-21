@@ -25,17 +25,16 @@ export class GetrolesComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private toaster: toasterService
   ) {
-    let getdata = this.authService.userData.subscribe(
-      res => {
-        this.userData = res;
-        this.getRolesData();
-      });
+    let getdata = this.authService.userData.subscribe(res => {
+      this.userData = res;
+      this.getRolesData();
+    });
 
     this.unsubscribe.push(getdata);
   }
 
   ngOnInit(): void {
-    let changeData = this.rolesService.bSubject.subscribe(res => {this.getRolesData();});
+    let changeData = this.rolesService.bSubject.subscribe(res => { this.getRolesData(); });
     this.unsubscribe.push(changeData);
   }
 
