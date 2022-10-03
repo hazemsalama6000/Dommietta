@@ -1,0 +1,22 @@
+<div class="card  boxShadow-10 border-0 rounded p-3 mb-2">
+  <div class="row">
+
+    <div class="col-4">
+      <ng-select #branch [items]="dropdownBranch" bindLabel="Name" bindValue="Id" placeholder="أختر الفرع" [(ngModel)]="branchId" (change)="onSelectBranch($event)"
+      [searchable]="false" [clearable]="false">
+      </ng-select>
+    </div>
+  </div>
+</div>
+
+<div class="row mx-0 mb-5">
+  <app-columnchart></app-columnchart>
+</div>
+
+<div class="row mx-0 mb-5">
+  <app-linechart></app-linechart>
+</div>
+
+<div class="row mx-0 mb-5">
+  <app-linebarchart></app-linebarchart>
+</div>

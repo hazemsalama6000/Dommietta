@@ -13,16 +13,14 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.loadService.isLoading.next(true);
 
-        return next.handle(this.AddAuthToHeader(req))
-
-            .pipe(
-                catchError(
-                    (error: any) => {
-                        return throwError(() => error);
-                    }
-                ), finalize(() => { this.loadService.isLoading.next(false); })
-            );
-//last version from code
+        return next.handle(this.AddAuthToHeader(req)).pipe(
+            catchError(
+                (error: any) => {
+                    return throwError(() => error);
+                }
+            ), finalize(() => { this.loadService.isLoading.next(false); })
+        );
+        //last version from code
         // .pipe(
         //     catchError(
         //         (error: any) => {
@@ -36,13 +34,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     AddAuthToHeader(request: HttpRequest<any>) {
         let lang = this.translateService.currentLang;
+        //  request.clone({ headers: request.headers.set('Accept-Language', "ar") });
 
-        return request.clone({
+        let req = request.clone({
             setHeaders: {
-                //	'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                //'Content-Type': 'application/json',
                 "Accept-Language": lang == 'ar' ? "ar-EG" : "en-US",
-
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                // lang == 'ar' ? "ar-EG" : "en-US"
                 //		"Platform": "api",
                 //		"sequence":"123",
                 //		"Cache-Control":"no-cache",
@@ -59,6 +58,7 @@ export class AuthInterceptor implements HttpInterceptor {
                  'lang':'ar' */
             }
         });
+        return req;
     }
 
 

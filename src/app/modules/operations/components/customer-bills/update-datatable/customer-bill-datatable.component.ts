@@ -56,13 +56,13 @@ export class BillDatatableComponent {
 	resultsLength = 0;
 	isLoadingResults = true;
 	isRateLimitReached = false;
-	userData:IUserData;
-	unsubscribe:Subscription[]=[];
+	userData: IUserData;
+	unsubscribe: Subscription[] = [];
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 
-	constructor(private service: CustomerBillsService,private auth:AuthService, public dialog: MatDialog,private toaster:toasterService) { 
-		let data=auth.userData.subscribe(res=>this.userData=res);
+	constructor(private service: CustomerBillsService, private auth: AuthService, public dialog: MatDialog, private toaster: toasterService) {
+		let data = auth.userData.subscribe(res => this.userData = res);
 		this.unsubscribe.push(data)
 	}
 
@@ -90,7 +90,7 @@ export class BillDatatableComponent {
 					return data.data;
 				}),
 			)
-			.subscribe((data) => { this.data = data; });
+			.subscribe((data) => { this.data = data });
 
 		this.service.searchUpdateUserManageAction.next(true);
 	}
@@ -109,14 +109,15 @@ export class BillDatatableComponent {
 
 	}
 
-	
-	changeIsActiveReprint(model:ICustomerBIllsReponse) {
+
+	changeIsActiveReprint(model: ICustomerBIllsReponse) {
 		let obj = { billPaymentId: model.id, userId: this.userData.userId };
 		console.log(obj)
 		this.service.toggleIsActiveReprintBill(obj).subscribe(res => {
-			if (res.isSuccess){
+			if (res.isSuccess) {
 				this.toaster.openSuccessSnackBar(res.message);
-				this.service.searchUpdateUserManageAction.next(true);}
+				this.service.searchUpdateUserManageAction.next(true);
+			}
 			else
 				this.toaster.openErrorSnackBar(res.message);
 		}, err => console.log(err))

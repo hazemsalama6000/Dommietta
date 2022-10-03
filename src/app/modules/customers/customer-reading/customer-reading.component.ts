@@ -104,7 +104,7 @@ export class CustomerReadingComponent {
 	// getting data and initialize data Source and Paginator
 	getallData(employeeId: number) {
 
-		let search: IReadingSearch = { Employee_id: employeeId };
+		let search: IReadingSearch = { EmployeeId: employeeId };
 
 		this.service.getReadingsData(search).pipe(
 			map(

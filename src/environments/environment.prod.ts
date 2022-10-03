@@ -7,8 +7,8 @@ export const environment = {
   appVersion: 'v8.0.38',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  // apiUrl: 'https://alingtrail.com',
-  apiUrl: 'http://41.179.255.204:8085',
+  // apiUrl: 'http://41.179.255.204:8085',
+  apiUrl: 'http://aligntech2022-001-site5.ctempurl.com',
   appThemeName: 'Metronic',
   appPurchaseUrl: 'https://1.envato.market/EA4JP',
   appHTMLIntegration: 'https://preview.keenthemes.com/metronic8/demo1/documentation/base/helpers/flex-layouts.html',
@@ -167,3 +167,8 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+
+
+

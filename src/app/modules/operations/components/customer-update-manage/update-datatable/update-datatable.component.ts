@@ -38,7 +38,7 @@ export class updateCustomerManageComponent {
 	@ViewChild(MatSort) sort: MatSort;
 
 	constructor(private _httpClient: HttpClient, private service: customerUpdateManageService, public dialog: MatDialog) {
-		this.currentSearchParameter = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', CustomerId: 0, Employee_id: 0, PageNumber: 0, UpdatingTypeId: 0, EndDate: '', StartDate: '' };
+		this.currentSearchParameter = { AreaId: 0, BlockId: 0, BranchId: 0, CustomerCode: '', CustomerId: 0, EmployeeId: 0, PageNumber: 0, UpdatingTypeId: 0, EndDate: '', StartDate: '' };
 	}
 
 	ngAfterViewInit() {

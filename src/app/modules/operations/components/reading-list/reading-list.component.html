@@ -58,7 +58,7 @@
           </div>
           <div class="col">
             <p-dropdown [options]="collectorDropdown" appendTo="body" optionValue="Id" optionLabel="Name" (onChange)="myfilter('')"
-              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.Employee_id" [filter]="true"
+              placeholder="{{'OPERATION.INPUTS.EMPLOYEE'|translate}}" [showClear]="true" [(ngModel)]="searchObject.EmployeeId" [filter]="true"
               filterBy="name"></p-dropdown>
           </div>
           <div class="col">
@@ -80,8 +80,8 @@
           <th class="text-center">{{'OPERATION.TITLES.CUSTOMERNAME'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.CUSTOMERCODE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.BRANCHNAME'|translate}}</th>
-          <th class="text-center">{{'OPERATION.TITLES.VALUE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.LASTREADING'|translate}} </th>
+          <th class="text-center">{{'OPERATION.TITLES.VALUE'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.IMAGERERADING'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.METERSTATUS'|translate}}</th>
           <th class="text-center">{{'OPERATION.TITLES.ISSUENAME'|translate}}</th>
@@ -136,17 +136,19 @@
           <td>{{read.collectorName}}</td>
           <td>{{read.customerName}}</td>
           <td>{{read.customerCode}}</td>
-          <td>{{read.branchName}}</td>
-          <td (dblclick)="!read.isPosted?read.IsEdit=true:null">
-            <span *ngIf="!read.IsEdit">{{read.value}}</span>
-            <div class="p-inputgroup" style="direction: initial; height: 30px !important;" *ngIf="read.IsEdit&&!read.isPosted">
-              <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}" (click)="updateReading(read)"
-                style="padding: 0;width: 40px;"></button>
-              <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value"
-                style="min-width: 97px;padding: 0 5px !important;">
-            </div>
-          </td>
+          <td>{{read.branchName}}</td> 
           <td>{{read.lastReading }}</td>
+          <td (dblclick)="!read.isPosted?read.IsEdit=true:null">
+            <span *ngIf="!read.IsEdit" class="{{read.lastReading>read.value?'badge badge-danger':''}}">{{read.value}}</span>
+
+            <div class="p-inputgroup" style="direction: initial; height: 30px !important;" *ngIf="read.IsEdit&&!read.isPosted">
+              <button type="button" pButton pRipple  (click)="read.IsEdit=false" class="p-button-danger" icon="pi pi-times" style="padding: 0;width: 40px;" ></button>
+              <button type="button" pButton pRipple label="{{'OPERATION.BUTTONS.SAVE'|translate}}" class="p-button-success" (click)="updateReading(read)"style="padding: 0;width: 40px;"></button>
+              <input type="number" pInputText placeholder="القراءة الجديدة" [(ngModel)]="read.value" style="min-width: 97px;padding: 0 5px !important;">
+            </div>
+
+          </td>
+         
           <td>
 
             <p-image *ngIf="read.readingImagePath!=null&&read.readingImagePath!=''" [src]="url+read.readingImagePath" width="75" height="50"

@@ -50,7 +50,7 @@ export class AuthHTTPService {
 
   getUserByToken(token: string): Observable<any> {
 
-    const httpHeaders = new HttpHeaders({ Authorization: `Bearer ${token}`, });
+    const httpHeaders = new HttpHeaders({ 'Accept-Language': "ar-EG",Authorization: `Bearer ${token}`});
     // const params = new HttpParams().append('userId', userId);
     return this.http.get<any>(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_USER_DATA}`, { headers: httpHeaders });
   
