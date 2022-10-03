@@ -86,6 +86,8 @@ export enum HttpPaths {
 	API_TOGGLE_EMPLOYEE_ACTIVE = "/api/v1/hr/changeactiveornot",
 	API_TOGGLE_EMPLOYEE_TECHNICIAN = "/api/v1/tech/stoptechnician",
 	API_CHANGE_EMP_IMAGE = "/api/v1/hr/changeimage",
+	API_LIST_OF_USER_EMPLOYEE = "/api/v1/hr/listofusersemployees?BranchId=",
+
 
 
 	// Online Users
@@ -167,6 +169,11 @@ export enum HttpPaths {
 	API_GET_TWELVE_ISSUES_STATICS = "/api/v1/bill/gettoptwelveissues/",
 	API_GET_DAILY_STATICS = "/api/v1/shared/getdailystatistics",
 
+	API_GET_BILL_STATISTIC = "/api/v1/dashboard/GetBillsStatistics",
+	API_GET_MONTHLY_EMPLOYEE_STATISTIC = "/api/v1/dashboard/totalmonthlystatisticsforemployee",
+	API_GET_DIALY_EMPLOYEE_STATISTIC = "/api/v1/dashboard/totaldailystatisticsforemployee",
+
+
 	//Menu
 	API_GET_ALL_MENU="/api/v1/permissions/getadminmenu",
 	API_GET_USER_MENU="/api/v1/permissions/getmenu",
@@ -175,6 +182,7 @@ export enum HttpPaths {
 	API_UPDATE_MENU="/api/v1/permissions/updatepermissionmenuitem",
 	API_DELETE_MENU="/api/v1/permissions/removepermissionmenuitem/",
 	API_ActiveDeactive_MENU="/api/v1/permissions/changenodeactivation"
+
 
 
 

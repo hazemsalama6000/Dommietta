@@ -412,6 +412,14 @@ direction: ltr;
     padding-bottom: 8px;
 }
 
+app-columnchart > .mat-radio-button{
+    margin-inline-end: 12px !important;
+}
+
+mat-datepicker-content{
+	direction: rtl;
+}
+
 @media only screen and (max-width: 991.98px) {
 	.mcontainer {
 		margin-inline-end: 21px !important;

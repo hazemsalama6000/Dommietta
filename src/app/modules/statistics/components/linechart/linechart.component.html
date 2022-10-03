@@ -1,0 +1,42 @@
+<div class="card  boxShadow-10 border-0 rounded p-3 mb-2">
+  <div class="row">
+
+    <div class="col">
+      <ng-select #employee [items]="dropdownEmployee" bindLabel="Name" bindValue="Id" placeholder="اختر الموظف" [(ngModel)]="searchModel.EmployeeId"
+        (change)="onSelectEmployee($event)"  (clear)="getData()">
+      </ng-select>
+    </div>
+
+    <div class="col">
+      <mat-form-field color="accent" appearance="fill" style="direction: rtl;">
+        <mat-label>من تاريخ</mat-label>
+        <input matInput [matDatepicker]="startD" [max]="endDate" [(ngModel)]="startDate" (dateChange)="getTransactionByDate()">
+        <mat-datepicker-toggle matSuffix [for]="startD"></mat-datepicker-toggle>
+        <mat-datepicker #startD></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>إلى تاريخ</mat-label>
+        <input matInput [matDatepicker]="endD" [min]="startDate" [(ngModel)]="endDate" (dateChange)="getTransactionByDate()">
+        <mat-datepicker-toggle matSuffix [for]="endD"></mat-datepicker-toggle>
+        <mat-datepicker #endD></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col d-flex align-items-center">
+      <mat-radio-group [(ngModel)]="isMonthly" (change)="changeCheck()">
+        <mat-radio-button [value]="true">شهرى</mat-radio-button>
+        <mat-radio-button [value]="false">يومى</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </div>
+</div>
+
+<div class="card  boxShadow-10 border-0 rounded p-3">
+  <div class="card-body px-0 pb-0">
+    <canvas id="lineChart">{{ chart }}</canvas>
+  </div>
+</div>
