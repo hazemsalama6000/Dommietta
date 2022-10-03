@@ -26,10 +26,14 @@ const Routing: Routes = [
     loadChildren: () =>
       import('../modules/permissions/permissions.module').then(m => m.PermissionsModule)
   },
-   {
+  {
     path: 'operation',
     loadChildren: () =>
       import('../modules/operations/operations.module').then(m => m.OperationsModule)
+  }, {
+    path: 'statistic',
+    loadChildren: () =>
+      import('../modules/statistics/statistics.module').then(m => m.StatisticsModule)
   },
   {
     path: 'share',

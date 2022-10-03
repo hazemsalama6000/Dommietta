@@ -58,7 +58,6 @@ export class AuthInterceptor implements HttpInterceptor {
                  'lang':'ar' */
             }
         });
-        console.log(req.headers)
         return req;
     }
 
