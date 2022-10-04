@@ -30,6 +30,8 @@ import { TreepermissionComponent } from './components/roles/treepermission/treep
 import { AdminrolesComponent } from './components/roles/adminroles/adminroles.component';
 import { ManagesidemenuComponent } from './components/managesidemenu/managesidemenu.component';
 import { AddmenuComponent } from './components/managesidemenu/addmenu/addmenu.component';
+import { ChangepasswordComponent } from 'src/app/_metronic/partials/layout/extras/dropdown-inner/user-inner/changepassword/changepassword.component';
+import { EdituserComponent } from './components/users/edituser/edituser.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { AddmenuComponent } from './components/managesidemenu/addmenu/addmenu.co
 	TreepermissionComponent,
 	AdminrolesComponent,
 	ManagesidemenuComponent,
-	AddmenuComponent
+	AddmenuComponent,
+	ChangepasswordComponent,
+	EdituserComponent
   ],
   imports: [
     CommonModule,

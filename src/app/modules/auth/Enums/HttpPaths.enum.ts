@@ -101,6 +101,7 @@ export enum HttpPaths {
 	//Users
 	API_GET_COMPANY_USERS = "/api/v1/auth/getCompanyUsers/",
 	API_USER_REGISTER = "/api/v1/auth/userregister",
+	API_EDIT_USER = "/api/v1/auth/updateuser/",
 	API_GET_COMPANY_ROLES = "/api/v1/permissions/getrulesforcompany?CompanyId=",
 	API_GET_USER_TYPE = "/api/v1/auth/getAllUserTypes",
 
@@ -181,9 +182,9 @@ export enum HttpPaths {
 	API_ADD_MENU="/api/v1/permissions/addpermissionmenuitem",
 	API_UPDATE_MENU="/api/v1/permissions/updatepermissionmenuitem",
 	API_DELETE_MENU="/api/v1/permissions/removepermissionmenuitem/",
-	API_ActiveDeactive_MENU="/api/v1/permissions/changenodeactivation"
+	API_ActiveDeactive_MENU="/api/v1/permissions/changenodeactivation",
 
 
-
+	API_CHANGE_PASSWORD="/api/v1/auth/ChangePassword",
 
 }

@@ -18,6 +18,8 @@ export interface IUsers {
     job: string;
     code: string;
     email: string;
+    phoneNumber:string;
+    userTypeId:number;
     section: string;
     isActive: boolean;
     insertDate: Date;

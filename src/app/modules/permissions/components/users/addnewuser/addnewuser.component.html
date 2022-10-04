@@ -5,7 +5,9 @@
         <form [formGroup]="userDataForm" (ngSubmit)="Submit()">
             <!-- Begin Header -->
             <div class="card-header" id="kt_addnewuser_header">
-                <h3 class="card-title fw-bolder text-dark fontsection fs-2">{{'PERMISSIONS.TITLES.ADDNEWUSER'|translate}} </h3>
+                <h3 class="card-title fw-bolder text-dark fontsection fs-2">
+                    {{'PERMISSIONS.TITLES.ADDNEWUSER'|translate}}
+                </h3>
 
                 <div class="card-toolbar">
                     <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_addnewuser_close">
@@ -25,8 +27,8 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">{{'PERMISSIONS.TITLES.EMPLOYEE'|translate}}</label>
 
-                                    <ng-select  class="customized"  [items]="employeeDropdown" bindLabel="Name"
-                                        bindValue="Id" name="employeeId" id="employeeId" placeholder="اختر الموظف" formControlName="employeeId">
+                                    <ng-select class="customized" [items]="employeeDropdown" bindLabel="Name" bindValue="Id" name="employeeId"
+                                        id="employeeId" placeholder="اختر الموظف" formControlName="employeeId">
                                     </ng-select>
 
                                     <mat-hint>
@@ -144,8 +146,8 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-bold fs-6 mb-2">{{'PERMISSIONS.TITLES.USERTYPE'|translate}}</label>
 
-                                    <ng-select  class="customized" [searchable]="false" [items]="userTypeDropdown" bindLabel="Name"
-                                        bindValue="Id" name="userType_Id" id="userType_Id" placeholder="اختر نوع المستخدم" formControlName="userType_Id">
+                                    <ng-select class="customized" [searchable]="false" [items]="userTypeDropdown" bindLabel="Name" bindValue="Id"
+                                        name="userType_Id" id="userType_Id" placeholder="اختر نوع المستخدم" formControlName="userType_Id">
                                     </ng-select>
                                     <mat-hint>
                                         <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{

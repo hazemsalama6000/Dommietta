@@ -4,6 +4,8 @@ import { TranslationService } from '../../../../../../modules/i18n';
 import { AuthService } from '../../../../../../modules/auth';
 import { Router } from '@angular/router';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 @Component({
   selector: 'app-user-inner',
@@ -25,7 +27,11 @@ export class UserInnerComponent implements OnInit, OnDestroy {
   langs = languages;
   private unsubscribe: Subscription[] = [];
 
-  constructor(private auth: AuthService, private translationService: TranslationService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private translationService: TranslationService,
+    private router: Router,
+    private dialog: MatDialog) {
     auth.userData.subscribe(res => this.userdata = res);
 
   }
@@ -63,6 +69,15 @@ export class UserInnerComponent implements OnInit, OnDestroy {
     this.CurrentLangImage = CurrentLangInfoObject.CurrentLangImage;
     this.setDirection();
   }
+
+  openDialog() {
+    this.dialog.open(ChangepasswordComponent, {
+      minHeight: "30vh",
+      minWidth: "20vw",
+      data: { userId: this.userdata.userId }
+    })
+  }
+
   // selectLanguage(lang: string) {
   //   this.translationService.setLanguage(lang);
   //   this.setLanguage(lang);

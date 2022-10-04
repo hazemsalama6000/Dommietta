@@ -9,6 +9,8 @@ import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { IUsers } from '../../../models/IRolesProfile.interface';
 import { IUserList } from '../../../models/IUserLList.interface';
 import { UsersService } from '../../../services/users.service';
+import { AddnewuserComponent } from '../addnewuser/addnewuser.component';
+import { EdituserComponent } from '../edituser/edituser.component';
 
 @Component({
   selector: 'app-getusers',
@@ -18,9 +20,10 @@ import { UsersService } from '../../../services/users.service';
 export class GetusersComponent implements OnInit, OnDestroy {
   usersList: IUsers[];
   userData: IUserData;
+
   private unsubscribe: Subscription[] = [];
 
-  url:string=localStorage.getItem("companyLink")??""
+  url: string = localStorage.getItem("companyLink") ?? ""
 
 
   constructor(
@@ -34,7 +37,7 @@ export class GetusersComponent implements OnInit, OnDestroy {
     let getdata = this.authservice.userData.subscribe(
       res => {
         this.userData = res;
-       let user= userservice.bSubject.subscribe(res=>this.getUserData());
+        let user = userservice.bSubject.subscribe(res => this.getUserData());
         this.unsubscribe.push(user)
       });
 
@@ -90,6 +93,15 @@ export class GetusersComponent implements OnInit, OnDestroy {
 
   assignUserIdToRole(user: IUsers) {
     this.userservice.userid.next(user.id);
+  }
+
+  editUser(user: IUsers) {
+    this.dialog.open(EdituserComponent,{
+      height:'100vh',
+      minWidth:'50vw',
+      position:{right:'0'},
+      data:{user:user}
+    })
   }
 
   ngOnDestroy() {
