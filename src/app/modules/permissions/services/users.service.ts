@@ -14,6 +14,7 @@ import { IUserRole } from '../models/IUserRole.interface';
 export class UsersService {
   bSubject = new BehaviorSubject<boolean>(false);
   userid = new BehaviorSubject<string>('');
+  userEdit = new BehaviorSubject<IUsers>({}as IUsers);
 
   constructor(private http: CommonHttpService) { }
 
@@ -26,6 +27,11 @@ export class UsersService {
   //Add New User
   PostUserData(model: any): Observable<any> {
     return this.http.CommonPostRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_USER_REGISTER}`);
+  }
+  
+  //Edit New User
+  EditUserData(model: any): Observable<any> {
+    return this.http.CommonPutRequests(model, `${localStorage.getItem("companyLink")}${HttpPaths.API_EDIT_USER}${model.user_Id}`);
   }
 
   //Get User Type

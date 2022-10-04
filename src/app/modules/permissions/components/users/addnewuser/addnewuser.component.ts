@@ -44,7 +44,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
     private employeeService: EmployeeService
 
   ) {
-    const data = this.authservice.userData.subscribe(res => {
+    let data = this.authservice.userData.subscribe(res => {
       this.userData = res;
       this.fillDropdowns();
       this.userDataForm.patchValue({ company_Id: res.companyId });
