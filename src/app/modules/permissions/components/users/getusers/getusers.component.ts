@@ -99,6 +99,7 @@ export class GetusersComponent implements OnInit, OnDestroy {
     this.dialog.open(EdituserComponent,{
       height:'100vh',
       minWidth:'50vw',
+      width:"60vw",
       position:{right:'0'},
       data:{user:user}
     })

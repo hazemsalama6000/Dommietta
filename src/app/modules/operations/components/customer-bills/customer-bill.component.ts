@@ -66,7 +66,7 @@ export class BillComponent implements OnInit , AfterViewInit {
 		});
 
 		this.auth.userData.subscribe((data: IUserData) => {
-			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
+			this.branchService.getLookupBranchData(data.companyId,true).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
 

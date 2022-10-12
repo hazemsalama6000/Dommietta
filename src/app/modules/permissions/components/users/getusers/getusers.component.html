@@ -64,12 +64,12 @@
             <thead>
 
                 <tr class="text-end text-gray-400 fs-7 text-uppercase gs-0">
-                    <th class="min-w-250px">{{'PERMISSIONS.TITLES.USERNAME'|translate}}</th>
+                    <th class="min-w-100px">أسم الموظف</th>
+                    <th class="min-w-50px">{{'PERMISSIONS.TITLES.USERNAME'|translate}}</th>
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.USERTYPE'|translate}}</th>
-                    <!-- <th class="min-w-70px">{{'PERMISSIONS.TITLES.JOB'|translate}}</th> -->
                     <th class="min-w-70px">{{'PERMISSIONS.TITLES.STATUS'|translate}}</th>
                     <th class="min-w-200px">{{'PERMISSIONS.TITLES.LASTLOGINTIME'|translate}}</th>
-                    <th class="min-w-300px">{{'PERMISSIONS.TITLES.ASSIGNEDROLES'|translate}}</th>
+                    <th class="min-w-250px">{{'PERMISSIONS.TITLES.ASSIGNEDROLES'|translate}}</th>
                     <th class="text-end min-w-100px"></th>
                 </tr>
 
@@ -98,6 +98,10 @@
 
                     </td>
 
+                    <td>
+                        <a href="javascript:;" class="fs-7 m-1">{{user.userName}}</a>
+                    </td> 
+                    
                     <td>
                         <a href="javascript:;" class="badge badge-light-primary fs-7 m-1">{{user.userType}}</a>
                     </td>

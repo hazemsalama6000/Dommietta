@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
@@ -21,6 +22,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
 
   employeeDropdown: LookUpModel[];
   userTypeDropdown: LookUpModel[];
+  branchDropdown: LookUpModel[];
   rolesData: any[];
   userData: IUserData;
 
@@ -31,6 +33,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
     email: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")])],
     phoneNumber: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(11)])],
     company_Id: [null, [Validators.required]],
+    branch_Ids: [null, Validators.compose([Validators.required])],
     userType_Id: [null, [Validators.required]],
     addingRoles: this.fb.array([])
   });
@@ -39,6 +42,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
   constructor(
     private userservice: UsersService,
     private authservice: AuthService,
+    private branchService: BranchService,
     private toaster: toasterService,
     private fb: FormBuilder,
     private employeeService: EmployeeService
@@ -75,11 +79,12 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
       () => { }
     );
 
+    this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
+
   }
 
   Submit() {
     if (this.userDataForm.valid && this.saveButtonClickedFlag) {
-
       this.userservice.PostUserData(this.userDataForm.value).
         subscribe(
           (data: HttpReponseModel) => {

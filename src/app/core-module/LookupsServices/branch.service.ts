@@ -10,9 +10,9 @@ export class BranchService {
 
 	constructor(private http:CommonHttpService) {}
 
-	getLookupBranchData(companyId: number): Observable<LookUpModel[]> {
+	getLookupBranchData(companyId: number,assignedUserOnly:boolean=false): Observable<LookUpModel[]> {
 
-		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BRANCH_URL}?companyId=${companyId}`)
+		return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_BRANCH_URL}?companyId=${companyId}&assignedUserOnly=${assignedUserOnly}`)
 			.pipe(map(Items => Items.data.map((Item: any) => ({ Id: Item.id, Name: Item.name }) as LookUpModel)));
 	}
 
