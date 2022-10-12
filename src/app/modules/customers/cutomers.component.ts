@@ -46,7 +46,7 @@ export class CutomersComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.auth.userData.subscribe((data: IUserData) => {
-			this.branchService.getLookupBranchData(data.companyId).subscribe((data: LookUpModel[]) => {
+			this.branchService.getLookupBranchData(data.companyId,true).subscribe((data: LookUpModel[]) => {
 				this.dropdownBranchData = data;
 			});
 		});

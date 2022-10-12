@@ -66,4 +66,9 @@ export class UsersService {
     return this.http.CommonPostRequests(null, `${localStorage.getItem("companyLink")}${HttpPaths.API_ACTIVE_USER_OR_NOT}${UserId}`);
   }
 
+  getRUserBranches(userId: string): Observable<LookUpModel[]> {
+    return this.http.CommonGetRequests(`${localStorage.getItem("companyLink")}${HttpPaths.API_GET_USER_BRANCHES}${userId}`)
+      .pipe(map((Items: any) => Items.data.map((x:any)=>({Id:x.id,Name:x.name})as LookUpModel)  ));
+  }
+
 }

@@ -22,6 +22,7 @@ export interface IUsers {
     userTypeId:number;
     section: string;
     isActive: boolean;
+    userName:string;
     insertDate: Date;
     userType: string;
     onlineOrNot: false;

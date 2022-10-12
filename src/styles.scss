@@ -420,6 +420,10 @@ mat-datepicker-content{
 	direction: rtl;
 }
 
+mat-hint{
+	color:rgb(247 123 123) !important;
+}
+
 @media only screen and (max-width: 991.98px) {
 	.mcontainer {
 		margin-inline-end: 21px !important;

@@ -69,6 +69,25 @@
 
             <div class="col-md-6 col-sm-12">
               <div class="fv-row mb-7">
+                  <label class="required fw-bold fs-6 mb-2">الفروع</label>
+
+                  <ng-select #areaselect [multiple]="true" appendTo="body" class="customized" [items]="branchDropdown"
+                      bindLabel="Name" bindValue="Id" name="branches_Ids" id="branches_Ids" placeholder="أختر الفروع"
+                      formControlName="branches_Ids">
+                  </ng-select>
+                  <mat-hint>
+                      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+                        validation: 'required',
+                        message: 'AUTH.VALIDATION.REQUIRED' | translate : {name:'الفروع' },
+                        control: userForm.controls['branches_Ids']
+                      }"></ng-container>
+
+                  </mat-hint>
+              </div>
+          </div>
+
+            <div class="col-md-6 col-sm-12">
+              <div class="fv-row mb-7">
                 <label class="required fw-bold fs-6 mb-2">{{'PERMISSIONS.TITLES.USERTYPE'|translate}}</label>
 
                 <ng-select class="customized" [searchable]="false" [items]="userTypeDropdown" bindLabel="Name" bindValue="Id" name="userType_Id"

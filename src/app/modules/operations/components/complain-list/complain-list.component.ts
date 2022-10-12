@@ -130,7 +130,7 @@ export class ComplainListComponent implements OnInit {
 
   //this function to fill dropdowns data
   fillDropdowns() {
-    this.branchService.getLookupBranchData(this.userData.companyId).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
+    this.branchService.getLookupBranchData(this.userData.companyId,true).subscribe((data: LookUpModel[]) => { this.branchDropdown = data; });
   }
 
   //this function to get data from employee 
