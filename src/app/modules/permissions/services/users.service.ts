@@ -15,6 +15,7 @@ export class UsersService {
   bSubject = new BehaviorSubject<boolean>(false);
   userid = new BehaviorSubject<string>('');
   userEdit = new BehaviorSubject<IUsers>({}as IUsers);
+  usersList=new BehaviorSubject<IUsers[]>({}as IUsers[]);
 
   constructor(private http: CommonHttpService) { }
 

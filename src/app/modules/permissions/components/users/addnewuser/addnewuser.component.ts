@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { BranchService } from 'src/app/core-module/LookupsServices/branch.service';
 import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
@@ -17,9 +18,8 @@ import { UsersService } from '../../../services/users.service';
   styleUrls: ['./addnewuser.component.scss']
 })
 export class AddnewuserComponent implements OnInit, OnDestroy {
-  @ViewChild('btnClose') btnClose: ElementRef<HTMLElement>;
   saveButtonClickedFlag = false;
-
+  loading = false;
   employeeDropdown: LookUpModel[];
   userTypeDropdown: LookUpModel[];
   branchDropdown: LookUpModel[];
@@ -45,7 +45,8 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
     private branchService: BranchService,
     private toaster: toasterService,
     private fb: FormBuilder,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    public dialogRef: MatDialogRef<AddnewuserComponent>,
 
   ) {
     let data = this.authservice.userData.subscribe(res => {
@@ -85,6 +86,7 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
 
   Submit() {
     if (this.userDataForm.valid && this.saveButtonClickedFlag) {
+      this.loading = true;
       this.userservice.PostUserData(this.userDataForm.value).
         subscribe(
           (data: HttpReponseModel) => {
@@ -92,13 +94,15 @@ export class AddnewuserComponent implements OnInit, OnDestroy {
             if (data.isSuccess) {
               this.toaster.openSuccessSnackBar(data.message);
               this.userservice.bSubject.next(true);
-              this.btnClose.nativeElement.click();
+              this.dialogRef.close();
             }
             else if (data.isExists) {
               this.toaster.openWarningSnackBar(data.message);
             }
+            this.loading = false;
           },
           (error: any) => {
+            this.loading = false;
             console.log(error);
             this.toaster.openWarningSnackBar(error.toString().replace("Error:", ""));
           }
