@@ -87,7 +87,7 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.userId) {
+    if (!auth) {
       return of(undefined);
     }
 
@@ -172,9 +172,9 @@ export class AuthService implements OnDestroy {
       if (!IsValue)
         return undefined;
 
-      let data = JSON.parse(atob(IsValue.split('.')[1]));
+      
       let authData: AuthModel = {
-        token: IsValue, userId: data.uid, expiresOn: new Date(data.exp), refreshToken: '',
+        token: IsValue, userId: '', expiresOn: new Date(), refreshToken: '',
         setAuth: function (auth: AuthModel): void { }
       };
       return authData;

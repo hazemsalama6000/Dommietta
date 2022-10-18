@@ -29,34 +29,36 @@ export class AsideComponent implements OnInit, OnDestroy {
   @ViewChild('ktAsideScroll', { static: true }) ktAsideScroll: ElementRef;
   private unsubscribe: Subscription[] = [];
 
-  constructor(private layout: LayoutService, private router: Router) {}
+  constructor(private layout: LayoutService, private router: Router) { }
 
   ngOnInit(): void {
     this.asideTheme = this.layout.getProp('aside.theme') as string;
     this.asideMinimize = this.layout.getProp('aside.minimize') as boolean;
     this.asideMenuCSSClasses = this.layout.getStringCSSClasses('asideMenu');
     this.routingChanges();
+    this.menuReinitialization()
+    // MenuComponent.initGlobalHandlers();
   }
 
   routingChanges() {
     const routerSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
-        this.menuReinitialization();
-      }
+       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
+      this.menuReinitialization();
+       }
     });
     this.unsubscribe.push(routerSubscription);
   }
 
   menuReinitialization() {
-    setTimeout(() => {
-      MenuComponent.reinitialization();
+    // setTimeout(() => {
+      MenuComponent.reinitialization();console.log('ddddddd')
       DrawerComponent.reinitialization();
       ToggleComponent.reinitialization();
       ScrollComponent.reinitialization();
       if (this.ktAsideScroll && this.ktAsideScroll.nativeElement) {
         this.ktAsideScroll.nativeElement.scrollTop = 0;
       }
-    }, 50);
+    // }, 100);
   }
 
   ngOnDestroy() {

@@ -100,8 +100,8 @@
 
                     <td>
                         <a href="javascript:;" class="fs-7 m-1">{{user.userName}}</a>
-                    </td> 
-                    
+                    </td>
+
                     <td>
                         <a href="javascript:;" class="badge badge-light-primary fs-7 m-1">{{user.userType}}</a>
                     </td>
@@ -154,14 +154,13 @@
                         <div class="text-end d-flex">
 
                             <button class="btn btn-icon btn-active-light-primary 4-30px h-40px me-1 align-items-center d-flex"
-                            (click)="editUser(user)" matTooltip="{{'PERMISSIONS.BUTTONS.EDIT'|translate}}">
-                            <span class="material-icons">edit</span>
-                        </button>
+                                (click)="editUser(user)" matTooltip="{{'PERMISSIONS.BUTTONS.EDIT'|translate}}">
+                                <span class="material-icons">edit</span>
+                            </button>
 
 
-                            <button class="btn btn-icon btn-active-light-primary w-40px h-40px me-1 align-items-center d-flex" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_update_permission" id="kt_assignrolestouser_toggle" (click)="assignUserIdToRole(user)"
-                                matTooltip="{{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}">
+                            <button class="btn btn-icon btn-active-light-primary 4-30px h-40px me-1 align-items-center d-flex"
+                                (click)="assignUserIdToRole(user)" matTooltip="{{'PERMISSIONS.BUTTONS.EDITROLE'|translate}}">
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path

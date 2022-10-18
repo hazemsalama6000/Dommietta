@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -7,7 +7,6 @@ import { HttpReponseModel } from 'src/app/core-module/models/ResponseHttp';
 import { toasterService } from 'src/app/core-module/UIServices/toaster.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
-import { EmployeeService } from 'src/app/modules/employees/services/employee.service';
 import { LookUpModel } from 'src/app/shared-module/models/lookup';
 import { IUsers } from '../../../models/IRolesProfile.interface';
 import { UsersService } from '../../../services/users.service';
@@ -102,7 +101,6 @@ export class EdituserComponent implements OnInit {
     this.userService.getRUserBranches(this.data.user.id).subscribe(res => {
       let branches: number[] = [];
       res.map(x => branches.push(x.Id));
-      console.log(branches)
       this.userForm.patchValue({ branches_Ids: branches });
     })
 

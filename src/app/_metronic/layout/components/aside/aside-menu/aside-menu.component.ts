@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CommonHttpService } from 'src/app/core-module/httpServices/CommonHttpService.service';
 import { AuthService } from 'src/app/modules/auth';
 import { IUserData } from 'src/app/modules/auth/models/IUserData.interface';
 import { ITreeMenu } from 'src/app/modules/permissions/models/ITreeMenu.interface';
@@ -16,12 +17,21 @@ export class AsideMenuComponent implements OnInit {
 
   userData: IUserData;
   private unsubcribe: Subscription[] = [];
-  constructor(private authService: AuthService) {
-    let getdata = authService.userData.subscribe(res => this.userData = res);
+  constructor(private authService: AuthService, private http: CommonHttpService) {
+    let getdata = authService.userData.subscribe(res => { this.userData = res; console.log(this.userData.menu)});
     this.unsubcribe.push(getdata);
   }
 
   ngOnInit(): void { }
+
+  hasChild(item: ITreeMenu) {
+    return (item.childNode?.filter(x => !x.isDeleted).length ?? 0) > 0
+  }
+
+  // test() {
+  //   let data=[{"customer_Id":293232,"employee_Id":18,"idLocal":2,"PayDataLogDetails":[{"amount":11.5,"bill_Id":15526835}],"payDate":"2022-10-13T10:59:54"},{"customer_Id":293232,"employee_Id":18,"idLocal":3,"PayDataLogDetails":[{"amount":21.5,"bill_Id":15561933}],"payDate":"2022-10-13T11:00:10"}]
+  //   this.http.CommonPostRequests(data, 'http://aligntech2022-001-site5.ctempurl.com/api/v1/bill/addpaymentlogs').subscribe(res => console.log(res), (err) => console.log(err));
+  // }
 
   ngOnDestroy() {
     this.unsubcribe.forEach((sb) => sb.unsubscribe());
@@ -35,7 +45,7 @@ export class AsideMenuComponent implements OnInit {
       "isLast": false,
       "route": "",
       "permission": "",
-      "isDeleted":false,
+      "isDeleted": false,
       "icon": "",
       "childNode": [
         {
@@ -45,7 +55,7 @@ export class AsideMenuComponent implements OnInit {
           "isLast": true,
           "route": "/",
           "permission": "Screen.Bills.Issues.View",
-          "isDeleted":false,
+          "isDeleted": false,
           "icon": "home",
           "childNode": []
         },
@@ -56,7 +66,7 @@ export class AsideMenuComponent implements OnInit {
           "isLast": false,
           "route": "",
           "permission": "",
-          "isDeleted":false,
+          "isDeleted": false,
           "icon": "",
           "childNode": [
             {
@@ -64,14 +74,14 @@ export class AsideMenuComponent implements OnInit {
               "name": "إعدادات",
               "parentId": 31,
               "isLast": false,
-              "icon": "manage_accounts","isDeleted":false,
+              "icon": "manage_accounts", "isDeleted": false,
               "childNode": [
                 {
                   "id": 34,
                   "name": "الشركات",
                   "parentId": 32,
                   "isLast": true,
-                  "route": "/hr/company","isDeleted":false,
+                  "route": "/hr/company", "isDeleted": false,
                   "permission": "Screen.Shared.Company.View",
                   "icon": "",
                   "childNode": []
@@ -80,7 +90,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 35,
                   "name": "صلاحيات المدير",
                   "parentId": 32,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/permissions/superadminroles",
                   "permission": "Screen.Shared.Geographic.View",
                   "icon": "",
@@ -90,7 +100,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 36,
                   "name": "المستخدمين المتصلين",
                   "parentId": 32,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/permissions/onlineUsers",
                   "permission": "Screen.Shared.Company.View",
                   "icon": "",
@@ -104,14 +114,14 @@ export class AsideMenuComponent implements OnInit {
               "parentId": 31,
               "isLast": false,
               "route": "",
-              "permission": "","isDeleted":false,
+              "permission": "", "isDeleted": false,
               "icon": "people_outline",
               "childNode": [
                 {
                   "id": 37,
                   "name": "بيانات الدخول للمستخدمين ",
                   "parentId": 33,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/permissions/userconnectionlog",
                   "permission": "Screen.Shared.Company.View",
                   "icon": "",
@@ -127,14 +137,14 @@ export class AsideMenuComponent implements OnInit {
           "parentId": 1,
           "isLast": false,
           "route": "",
-          "permission": "","isDeleted":false,
+          "permission": "", "isDeleted": false,
           "icon": "",
           "childNode": [
             {
               "id": 41,
               "name": " بيانات الموظف ",
               "parentId": 39,
-              "isLast": true,"isDeleted":false,
+              "isLast": true, "isDeleted": false,
               "route": "/employee/employeeprofile",
               "permission": "Screen.Shared.Company.View",
               "icon": "perm_identity",
@@ -146,7 +156,7 @@ export class AsideMenuComponent implements OnInit {
           "id": 42,
           "name": "إعدادات العملاء",
           "parentId": 1,
-          "isLast": false,"isDeleted":false,
+          "isLast": false, "isDeleted": false,
           "route": "",
           "permission": "",
           "icon": "",
@@ -155,7 +165,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 43,
               "name": " بيانات العملاء ",
               "parentId": 42,
-              "isLast": true,"isDeleted":false,
+              "isLast": true, "isDeleted": false,
               "route": "/customer/cutomerprofile",
               "permission": "Screen.Customer.Customers.View",
               "icon": "supervisor_account",
@@ -167,7 +177,7 @@ export class AsideMenuComponent implements OnInit {
           "id": 44,
           "name": "الفواتير",
           "parentId": 1,
-          "isLast": false,"isDeleted":false,
+          "isLast": false, "isDeleted": false,
           "route": "",
           "permission": "",
           "icon": "",
@@ -176,7 +186,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 45,
               "name": "الفواتير",
               "parentId": 44,
-              "isLast": false,"isDeleted":false,
+              "isLast": false, "isDeleted": false,
               "route": "",
               "permission": "",
               "icon": "receipt_long",
@@ -185,7 +195,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 46,
                   "name": " فواتير العملاء ",
                   "parentId": 45,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/operation/customerbills",
                   "permission": "Screen.Shared.Company.View",
                   "icon": "",
@@ -195,7 +205,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 47,
                   "name": " الأصدارات ",
                   "parentId": 45,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/operation/issue",
                   "permission": "Screen.Technician.Technician.View",
                   "icon": "",
@@ -209,7 +219,7 @@ export class AsideMenuComponent implements OnInit {
           "id": 48,
           "name": "العمليات",
           "parentId": 1,
-          "isLast": false,"isDeleted":false,
+          "isLast": false, "isDeleted": false,
           "route": "",
           "permission": "",
           "icon": "",
@@ -218,7 +228,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 49,
               "name": "الشكاوى",
               "parentId": 48,
-              "isLast": false,"isDeleted":false,
+              "isLast": false, "isDeleted": false,
               "route": "",
               "permission": "",
               "icon": "support_agent",
@@ -227,7 +237,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 50,
                   "name": " انواع الشكاوى ",
                   "parentId": 49,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/operation/compainType",
                   "permission": "Screen.Customer.Customers.View",
                   "icon": "",
@@ -237,7 +247,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 51,
                   "name": " الشكاوى ",
                   "parentId": 49,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/operation/complainlist",
                   "permission": "Screen.Operation.Complaints.View",
                   "icon": "",
@@ -249,7 +259,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 52,
               "name": " القراءات ",
               "parentId": 48,
-              "isLast": true,"isDeleted":false,
+              "isLast": true, "isDeleted": false,
               "route": "/operation/readinglist",
               "permission": "Screen.Operation.MeterReading.View",
               "icon": "checklist",
@@ -259,7 +269,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 53,
               "name": " سحب البيانات ",
               "parentId": 48,
-              "isLast": true,"isDeleted":false,
+              "isLast": true, "isDeleted": false,
               "route": "/operation/receivedata",
               "permission": "Screen.Technician.Technician.View",
               "icon": "download",
@@ -269,7 +279,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 54,
               "name": " ادارة تعديلات العملاء ",
               "parentId": 48,
-              "isLast": true,"isDeleted":false,
+              "isLast": true, "isDeleted": false,
               "route": "/operation/cutomerupdatemanage",
               "permission": "Screen.Customer.Customers.View",
               "icon": "manage_accounts",
@@ -281,7 +291,7 @@ export class AsideMenuComponent implements OnInit {
           "id": 55,
           "name": "إدارة المستخدمين",
           "parentId": 1,
-          "isLast": false,"isDeleted":false,
+          "isLast": false, "isDeleted": false,
           "route": "",
           "permission": "",
           "icon": "",
@@ -290,7 +300,7 @@ export class AsideMenuComponent implements OnInit {
               "id": 56,
               "name": "صلاحيات المستخدمين",
               "parentId": 55,
-              "isLast": false,"isDeleted":false,
+              "isLast": false, "isDeleted": false,
               "route": "",
               "permission": "",
               "icon": "admin_panel_settings",
@@ -299,7 +309,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 57,
                   "name": "المستخدمين ",
                   "parentId": 56,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/permissions/users",
                   "permission": "Screen.Customer.Customers.View",
                   "icon": "",
@@ -309,7 +319,7 @@ export class AsideMenuComponent implements OnInit {
                   "id": 58,
                   "name": "الأدوار",
                   "parentId": 56,
-                  "isLast": true,"isDeleted":false,
+                  "isLast": true, "isDeleted": false,
                   "route": "/permissions/roles",
                   "permission": "Screen.Technician.Technician.View",
                   "icon": "",
